@@ -1,0 +1,39 @@
+*
+  box-sizing: border-box
+  margin: 0
+  padding: 0
+
+html, body
+  font:
+    size: large
+    family: "Open Sans", Roboto, sans-serif
+
+.contenedor
+  width: 97%
+  max-width: 1400px
+  margin: 0 auto
+
+::-webkit-scrollbar
+  width: 5px
+
+::-webkit-scrollbar-thumb
+  border-radius: 5px 0 0 5px
+  background: #fe0f49
+
+::-webkit-scrollbar-thumb:hover
+  background: #ff0044
+
+
+// Responsividad
+.row::after
+  content: ""
+  clear: both
+  display: table
+
+.col
+  float: left
+
+$ancho-col: 8.33%
+@for $i from 1 through 12
+  .l#{$i}
+    width: $ancho-col * $i
