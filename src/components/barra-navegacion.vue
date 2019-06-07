@@ -1,18 +1,17 @@
 <template lang="pug">
-    header
-        nav.navegacion
-            div.contenedor
-                div.izq
-                    img.logo( src="https://i0.wp.com/acechanime.com/wp-content/uploads/2019/01/cropped-Acecha-EDIT5-1.png?fit=1280%2C400&ssl=1"
-                         alt="Logo AcechaAnime")
-                div.der
-                    ul.items
-                        li Calendario
-                        li Ver anime
-                        li Acecha tips
-                        li Acecha premium
-                        li Acecha tv
-                        li Comunidad
+    nav.navegacion(:class="barraMinClase")
+        div.contenedor
+            div.izq
+                img.logo( src="https://acechanime.com/wp-content/themes/anime/img/logo.png"
+                     alt="Logo AcechaAnime")
+            div.der
+                ul.items
+                    li
+                        router-link(to="/anime") Anime
+                    li Acecha tips
+                    li Acecha premium
+                    li Acecha tv
+                    li Comunidad
     //
 </template>
 
@@ -20,11 +19,24 @@
 
     export default
         name: "barra-navegacion"
+        data: ->
+            barraMin: no
+        computed:
+            barraMinClase: ->
+                if @barraMin && @$route.path is "/" then "navegacion--min" else ""
+        created: ->
+            vm = this
+            window.addEventListener "scroll", () ->
+                if window.pageYOffset > 50
+                    vm.barraMin = yes
+                else
+                    vm.barraMin = no
 
     #
 </script>
 
 <style scoped lang="sass">
+
     .navegacion
         color: white
         background-color: transparent
@@ -32,16 +44,23 @@
         top: 0
         left: 0
         z-index: 1030
-        height: 70px
+        // Padding: 25 -> 10
+        padding: 25px 0
         width: 100%
-        transition: height 250ms
-        &:before
-            content: " "
-            display: table
+        transition: padding 300ms ease-in-out, background-color 300ms ease-in-out
+
+    .navegacion--min
+        padding: 10px 0
+        background-color: white
+        color: #4e565b
+        box-shadow: 0 1px 10px -6px rgba(0, 0, 0, 0.42), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 4px 5px -2px rgba(0, 0, 0, 0.1)
 
     .izq
         display: inline-block
         float: left
+        height: 50px
+        .logo
+            height: 50px
         &:after
             content: ""
             clear: both
@@ -50,7 +69,7 @@
     .der
         display: inline-block
         float: right
-        height: 70px
+        height: 50px
         &:after
             content: ""
             clear: both
@@ -59,17 +78,17 @@
     .items
         list-style: none
         display: inline-table
-        margin: 10px
+        margin: 0 10px
         height: 50px
         li
             display: table-cell
             vertical-align: middle
             padding: 0 10px
             height: 50px
-
-    .logo
-        padding: 10px 0
-        height: 70px
+            font:
+                size: 12px
+                family: Roboto, sans-serif
+            text-transform: uppercase
 
     //
 </style>

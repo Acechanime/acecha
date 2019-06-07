@@ -1,8 +1,12 @@
 <template lang="pug">
     div.comentarios
         div.contenedor
-            div.titulo Comentarios
+            img(src="https://image.flaticon.com/icons/svg/179/179319.svg" height="60px")
             br
+            br
+            p.txt.
+                Reporta errores y pregunta todo lo que quieras, tus preguntas serán respondidas
+                antes de 24h.
             br
             div.simular-com
     //
@@ -20,13 +24,13 @@
 <style scoped lang="sass">
     .comentarios
         padding: 40px 0
-
-    .titulo
         text-align: center
-        font-size: x-large
+
+    .txt
+        font-size: 14px
 
     .simular-com
-        height: 400px
+        height: 600px
         background-color: #ececec
 
     //

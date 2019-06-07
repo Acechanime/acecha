@@ -1,0 +1,5 @@
+[*.sass]
+indent_size = 4
+
+[*.coffee]
+indent_size = 4

@@ -1,8 +1,8 @@
 <template lang="pug">
-    div.col.l3.ep
-        img.imagen(:src="ep.img" :alt="'Img de ' + ep.nombre")
+    article.col.l3.ep
+        img.imagen(:src="ep.img" :alt="'Episodio ' + ep.num + ' de ' + ep.nombre")
         br
-        span.nombre {{ ep.nombre }}
+        span.nombre {{ ep.nombre }} {{ ep.num }}
 </template>
 
 <script lang="coffee">
@@ -14,6 +14,7 @@
                 type: Object
                 required: true
     #
+
 </script>
 
 <style scoped lang="sass">

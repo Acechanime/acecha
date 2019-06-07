@@ -3,7 +3,7 @@
         div.row
             div.col.l6.pad
                 div.cont-img
-                    img.img( src="https://i2.wp.com/acechanime.com/wp-content/uploads/2019/02/DyFPH7tUwAIsD8n.jpg?w=724&ssl=1"
+                    img.img( src="https://acechanime.com/wp-content/uploads/2019/02/Zombieland_Portada.jpg"
                          alt="Img anime" )
                 div.temporizador.row
                     div.col.l3
@@ -30,6 +30,7 @@
     //
 </template>
 
+<!-- TODO: Hacer la transición hacia arriba y abajo con js -->
 <script lang="coffee">
     # Todo: Optimizar el comportamiento del temporizador. Campos separados y que sec llame a min, min a hora etc
 
@@ -60,23 +61,20 @@
         max-width: 1068px
 
     .rec
-        padding: 30px 0
+        padding: 48px 0
         text-align: center
 
     .pad
         padding: 20px
 
-    .cont-img
-        cursor: pointer
-        &:hover
-            .img
-                opacity: 0.75
-
     .img
+        cursor: pointer
         transition: opacity 250ms
-        border-radius: 10px
+        border-radius: 5px
         max-width: 50%
         box-shadow: 0 0 10px 0 rgba(0,0,0,.5)
+        &:hover
+            opacity: 0.75
 
     .temporizador
         padding: 20px 0

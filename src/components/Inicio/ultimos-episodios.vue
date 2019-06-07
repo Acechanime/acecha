@@ -1,22 +1,46 @@
 <template lang="pug">
     div.ultimos-eps.contenedor.contenedor-rec
-        div.row
+        div.row(v-if="ep.nombre")
             div.col.l6.leyenda
                 div.titulo acechanime
-                div.txt Últimos episodios
+                h2.txt Últimos episodios
                 hr.divisor
                 div.boton ¡Activa las notificaciones abajo a la izquierda!
             div.col.l6
-                img.img( src="https://i1.wp.com/acechanime.com/wp-content/uploads/2019/02/dororo-anime-del-2019-trailer-1.jpg?resize=768%2C432&ssl=1"
-                     alt="Ultimo episodio" )
+                img.img(:src="ep.img" :alt="'Episodio ' + ep.num + ' de ' + ep.nombre" )
                 br
-                span.nombre Dororo 9
+                span.nombre {{ ep.nombre }} {{ ep.num }}
+        div.err(v-if="cargaFallida")
+            span.
+                Hubo un error al cargar este último episodio.<br>
+                Vuelve en unos minutos, o escribenos en Discord.<br>
+            p.tech Código de error: 0x{{ codigoDeError }}
+    //
 </template>
 
 <script lang="coffee">
+    import YAML from "yaml"
+    import { manejarError } from "./manejo-errores.coffee"
 
     export default
         name: "ultimos-episodios"
+        data: ->
+            ep: {}
+            cargaFallida: no
+            codigoDeError: ""
+        created: ->
+            vm = this
+
+            try
+                xhr = await fetch "/static/ultimo-ep-principal.yaml"
+                resTxt = await xhr.text()
+                res = YAML.parse resTxt
+                if typeof res is "object"
+                    vm.ep = res
+                else manejarError "No se recibió un objeto YAML desde el servidor.", "F3", vm
+            catch e
+                manejarError e, "F4", vm
+
     #
 </script>
 
@@ -26,6 +50,7 @@
 
     .ultimos-eps
         text-align: center
+        padding: 48px 0
 
     .leyenda
         text-transform: uppercase
@@ -64,14 +89,14 @@
                 color: #e20000
 
     .img
-        width: 70%
+        width: 90%
         box-shadow: 0 0 10px 0 rgba(0,0,0,.5)
         border-radius: 5px
 
     .nombre
         font-size: 17px
         font-weight: 700
-        line-height: .9em
+        line-height: .9rem
         letter-spacing: 0
         color: #4e565b
 

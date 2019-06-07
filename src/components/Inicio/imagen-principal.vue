@@ -55,10 +55,10 @@
     right: 0
     z-index: -1
     background-size: cover !important
-    background: url(https://acechanime.com/wp-content/uploads/2019/02/thumb-1920-862158.png) center center
+    background: url("https://acechanime.com/wp-content/uploads/2019/05/subheader.jpg") center center
     height: 862px
     &::before
-        background-color: rgba(0, 0, 0, .5)
+        background-color: rgba(0, 0, 0, 0.6)
     &:before
         z-index: -1
         display: block

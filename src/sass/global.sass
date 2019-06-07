@@ -1,39 +1,84 @@
 *
-  box-sizing: border-box
-  margin: 0
-  padding: 0
+    box-sizing: border-box
+    margin: 0
+    padding: 0
 
 html, body
-  font:
-    size: large
-    family: "Open Sans", Roboto, sans-serif
+    font:
+        size: large
+        family: Roboto, sans-serif
+    color: #3A3A3A
 
 .contenedor
-  width: 97%
-  max-width: 1400px
-  margin: 0 auto
+    width: 90%
+    max-width: 1170px
+    margin: 0 auto
 
 ::-webkit-scrollbar
-  width: 5px
+    width: 5px
 
 ::-webkit-scrollbar-thumb
-  border-radius: 5px 0 0 5px
-  background: #fe0f49
+    border-radius: 5px 0 0 5px
+    background: #fe0f49
 
 ::-webkit-scrollbar-thumb:hover
-  background: #ff0044
+    background: #ff0044
 
 
 // Responsividad
 .row::after
-  content: ""
-  clear: both
-  display: table
+    content: ""
+    clear: both
+    display: table
 
 .col
-  float: left
+    float: left
 
 $ancho-col: 8.33%
 @for $i from 1 through 12
-  .l#{$i}
-    width: $ancho-col * $i
+    .l#{$i}
+        width: $ancho-col * $i
+
+
+// Muestra mensajes de error.
+.err
+    background-color: #e53935
+    color: white
+    padding: 20px
+    border-radius: 5px
+
+    .tech
+        font-size: small
+        opacity: 0.6
+
+/* Responsividad */
+
+@media only screen and (max-width: 500px)
+    .ocultarBajo500
+        display: none !important
+
+@media only screen and (max-width: 700px)
+    .ocultarBajo630
+        display: none !important
+
+    .completo-bajo630
+        width: 100% !important
+
+
+@media only screen and (max-width: 600px)
+    .ocultarBajo600
+        display: none !important
+
+
+@media only screen and (max-width: 450px)
+    .ocultarBajo450
+        display: none
+
+@media only screen and (max-width: 400px)
+    .ocultarBajo400
+        display: none
+
+@media only screen and (min-width: 500px)
+    .mostrarBajo500
+        display: none !important
+
