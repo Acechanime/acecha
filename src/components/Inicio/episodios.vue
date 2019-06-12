@@ -1,5 +1,5 @@
 <template lang="pug">
-    div.contenedor.row.eps
+    div.contenedor.grid.eps
         episodio(v-if="episodios.length > 0" v-for="(ep, i) in episodios" :ep="ep" :key="i")
         div.err(v-if="cargaFallida")
             span.
@@ -45,6 +45,11 @@
 
     .eps
         padding: 48px 0
+
+    .grid
+        display: grid
+        grid-template-columns: repeat(4, 1fr)
+        grid-gap: 1rem
 
     //
 

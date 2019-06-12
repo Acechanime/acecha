@@ -45,6 +45,8 @@
 </script>
 
 <style scoped lang="sass">
+    @import "../../sass/variables"
+
     .contenedor--rec
         max-width: 1068px
 
@@ -76,7 +78,7 @@
             font-size: 14px
             font-weight: 600
             letter-spacing: 1px
-            color: #e22914
+            color: #e91e63
             background-color: white
             border-radius: 30px
             padding: 15px 40px
@@ -86,7 +88,7 @@
             transition: all 300ms
             &:hover
                 transform: scale(1.1)
-                color: #e20000
+                color: #e91e63
 
     .img
         width: 90%
@@ -94,8 +96,10 @@
         border-radius: 5px
 
     .nombre
-        font-size: 17px
-        font-weight: 700
+        font:
+            size: 18px
+            weight: 700
+            family: $titulos
         line-height: .9rem
         letter-spacing: 0
         color: #4e565b

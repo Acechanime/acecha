@@ -4,6 +4,9 @@
             div.row
                 div.col.l3.logo
                     h3.titulo Sobre Nosotros
+                    img(src="https://acechanime.com/wp-content/uploads/2019/05/logo-e1559927675414.png"
+                        alt="" width="180")
+                    br
                     span.txt.
                         AcechaAnime es una página web segura para descargar y ver anime online gratis.
                         Soporte 24/7.
@@ -42,7 +45,6 @@
     .pie
         color: white
         position: relative
-        height: 275px
         font-family: $titulos
         background-color: #4c4c4c
         padding: 64px 0

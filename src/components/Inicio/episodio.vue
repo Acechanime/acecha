@@ -1,8 +1,9 @@
 <template lang="pug">
-    article.col.l3.ep
-        img.imagen(:src="ep.img" :alt="'Episodio ' + ep.num + ' de ' + ep.nombre")
-        br
-        span.nombre {{ ep.nombre }} {{ ep.num }}
+    article.ep
+        router-link.link(:to="ep.link")
+            img.imagen(:src="ep.img" :alt="'Episodio ' + ep.num + ' de ' + ep.nombre")
+            br
+            span.nombre {{ ep.nombre }} {{ ep.num }}
 </template>
 
 <script lang="coffee">
@@ -18,19 +19,21 @@
 </script>
 
 <style scoped lang="sass">
+    @import "../../sass/variables"
+
     .ep
         text-align: center
         margin: 10px 0
 
+    .link
+        text-decoration: none
+
     .imagen
+        @extend  %imgFlotantes
         width: 94%
         border-radius: 5px
         box-shadow: 0 0 10px 0 rgba(0,0,0,.5)
         cursor: pointer
-        transition: opacity 250ms, transform 400ms
-        &:hover
-            opacity: 0.7
-            transform: translateY(-8px)
 
     .nombre
         color: #4e565b
