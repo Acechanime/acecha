@@ -1,10 +1,10 @@
 <template lang="pug">
     div
         imagen-principal
-        ultimos-episodios
-        episodios
-        recomendacion-semanal
-        video-recomendado
+        ultimos-episodios(:terminarCarga="terminarCarga")
+        episodios(:terminarCarga="terminarCarga")
+        recomendacion-semanal(:terminarCarga="terminarCarga")
+        video-recomendado(:terminarCarga="terminarCarga")
         comentarios
 </template>
 
@@ -25,6 +25,15 @@
             "recomendacion-semanal": RecomendacionSemanal
             "video-recomendado": VideoRecomendado
             "comentarios": Comentarios
+        data: ->
+            componentesCargando: 4
+        methods:
+            terminarCarga: () ->
+                @componentesCargando--
+                console.log "Ahora hay #{@componentesCargando} cargando."
+                if @componentesCargando is 0 then @$store.commit "terminarCargaPagina"
+        created: ->
+
     #
 
 </script>

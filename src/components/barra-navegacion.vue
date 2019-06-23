@@ -69,7 +69,7 @@
         position: fixed
         top: 0
         left: 0
-        z-index: 1030
+        z-index: 10
         // Padding: 25 -> 10
         padding: 25px 0
         width: 100%

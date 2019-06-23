@@ -28,6 +28,10 @@
             ep: {}
             cargaFallida: no
             codigoDeError: ""
+        props:
+            terminarCarga:
+                type: Function
+                required: true
         created: ->
             vm = this
 
@@ -40,6 +44,7 @@
                 else manejarError "No se recibió un objeto YAML desde el servidor.", "F3", vm
             catch e
                 manejarError e, "F4", vm
+            @terminarCarga()
 
     #
 </script>
@@ -57,18 +62,18 @@
     .leyenda
         text-transform: uppercase
         .titulo
-            padding: 30px 0
+            padding-top: 40px
             font:
                 size: 12px
                 weight: bold
             letter-spacing: 12px
         .txt
             font:
-                weight: bold
+                weight: 900
                 size: 43px
             line-height: 1.2em
             color: #3a3a3a
-            padding: 30px 0
+            padding: 40px 0
         .divisor
             margin: 0 auto
             width: 50%

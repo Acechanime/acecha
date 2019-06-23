@@ -1,24 +1,18 @@
 <template lang="pug">
-    div.busc Acecha Buscador
+    div 
     //
 </template>
 
 <script lang="coffee">
 
     export default
-        name: "buscador"
+        name: "lista-de-capitulos"
     #
     
 </script>
 
 <style scoped lang="sass">
     @import "../../sass/variables"
-
-    .busc
-        padding: 2rem 15px
-        margin: 1rem 15px
-        background-color: #4e565b
-        color: white
-
+    
     //
 </style>

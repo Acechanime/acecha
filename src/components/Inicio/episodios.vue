@@ -25,6 +25,10 @@
             episodios: []
             cargaFallida: no
             codigoDeError: ""
+        props:
+            terminarCarga:
+                type: Function
+                required: true
         created: ->
             vm = this
 
@@ -37,6 +41,7 @@
                 else vm.manejarError "No se recibió un objeto YAML desde el servidor.", "F1", vm
             catch e
                 vm.manejarError e, "F0", vm
+            @terminarCarga()
     #
 
 </script>

@@ -23,6 +23,10 @@
             linkVideo: ""
             cargaFallida: no
             codigoDeError: ""
+        props:
+            terminarCarga:
+                type: Function
+                required: true
         created: ->
             vm = this
 
@@ -36,6 +40,7 @@
                     manejarError "Se cargó el link del video recomendado, pero es inválido.", "F2", vm
             catch e
                 manejarError e, "F3", vm
+            @terminarCarga()
     #
     
 </script>

@@ -1,5 +1,6 @@
 <template lang="pug">
     div.contenedor
+        div.separador
         div.grid
             div.cont
                 buscador
@@ -21,6 +22,8 @@
             publicidad: publicidad
             buscador: buscador
             animes: animes
+        created: ->
+            @$store.commit "terminarCargaPagina"
 
     #
 </script>

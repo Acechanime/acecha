@@ -1,6 +1,6 @@
 <template lang="pug">
-    article
-        router-link.link(:to="anime.ruta")
+    article.link
+        a.link(:href="anime.ruta" @click.prevent="irAPagAnime(anime)")
             div.img
                 img(:src="anime.imagenes.portada"
                     sizes="(max-width: 247px) 100vw, 247px"
@@ -17,6 +17,14 @@
         props:
             anime: Object
             required: true
+        methods:
+            irAPagAnime: (anime) ->
+                console.log "Trancisión hacia #{anime.ruta}"
+                @$router.push
+                    path: anime.ruta
+                    params:
+                        animeObj: anime
+
     #
     
 </script>

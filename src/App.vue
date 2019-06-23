@@ -1,16 +1,17 @@
-<template>
-    <div id="app">
-        <barra-navegacion />
-        <div :class="separadorClase"></div>
-        <router-view/>
-        <pie-pagina />
-    </div>
+<template lang="pug">
+    div#app
+        pantalla-carga
+        barra-navegacion
+        router-view
+        pie-pagina
+    //
 </template>
 
 <script lang="coffee">
     import BarraNavegacion from "./components/barra-navegacion.vue"
     import PiePagina from "./components/pie-pagina.vue"
     import YAML from "yaml"
+    import pantallaCarga from "./components/App/pantalla-carga.vue"
 
     impr = console.log
 
@@ -18,11 +19,10 @@
         components:
             "pie-pagina": PiePagina
             "barra-navegacion": BarraNavegacion
+            "pantalla-carga": pantallaCarga
         computed:
             esPagPrin: ->
                 this.$route.path is "/"
-            separadorClase: ->
-                if this.esPagPrin then "" else "separador"
         methods:
             obtenerListaAnimes: ->
                 try
@@ -42,15 +42,16 @@
                 else
                     console.error err
         created: ->
-            @inicializarListaAnimes()
+            console.log @$store.state.listaAnimes.length
+            if @$store.state.listaAnimes.length == 0
+                @inicializarListaAnimes()
+                console.log "Inicializado"
+
 
     #
 </script>
 
 <style lang="sass">
-    .separador
-        height: 70px
-        width: 100%
 
     //
 </style>

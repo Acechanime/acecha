@@ -1,8 +1,21 @@
 $titulos: "Open Sans", Roboto, sans-serif
 $texto: Roboto, sans-serif
 
+$colorPrincipal: #E91E63
+
 %imgFlotantes
     transition: opacity 250ms, transform 400ms
     &:hover
         opacity: 0.7
         transform: translateY(-8px)
+
+%textosGris
+    color: #999999
+    font:
+        family: $titulos
+        size: 14px
+
+%caja-textos
+    padding: 1.7rem
+    border-radius: 10px
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.12)

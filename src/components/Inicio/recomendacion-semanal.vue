@@ -1,10 +1,11 @@
 <template lang="pug">
     div.rec.contenedor.contenedor--rec
-        div.row
+        div.row(v-if="cargado && !error")
             div.col.l6.pad
                 div.cont-img
-                    img.img( src="https://acechanime.com/wp-content/uploads/2019/02/Zombieland_Portada.jpg"
-                         alt="Img anime" )
+                    router-link(:to="recomendacion.ruta")
+                        img.img( :src="recomendacion.imagenes.portada"
+                             alt="Img anime" )
                 div.temporizador.row
                     div.col.l3
                         span.num {{ dias }}
@@ -27,23 +28,56 @@
                 div.txt Recomendación Semanal
                 hr.divisor
                 div.boton Click para verlo
+        div.err(v-if="error")
+            span.
+                Hubo un error al cargar la recomendación semanal.<br>
+                Vuelve en unos minutos, o escribenos en Discord.<br>
+            p.tech Código de error: 0x{{ codigoDeError }}
     //
 </template>
 
-<!-- TODO: Hacer la transición hacia arriba y abajo con js -->
 <script lang="coffee">
     # Todo: Optimizar el comportamiento del temporizador. Campos separados y que sec llame a min, min a hora etc
 
     export default
         name: "recomendacion-semanal"
         data: ->
-            segundos: 99999,
+            segundos: 0,
             intervaloSegundos: ''
+            recomendacion: {}
+            error: no
+            cargado: no
+            codigoDeError: "00"
         computed:
             dias: -> Math.floor(this.segundos / 60 / 60 / 24)
             horas: -> Math.floor(this.segundos / 60 / 60) % 24
             minutos: -> Math.floor(this.segundos / 60) % 60
             segundosF: -> this.segundos % 60
+        props:
+            terminarCarga:
+                type: Function
+                required: true
+        methods:
+            cargarRecomendacion: ->
+                recRaw = await fetch "/static/recomendacion-semanal"
+                rec = await recRaw.text()
+                ruta = rec.substring 0, rec.search "\n"
+                hora = parseInt rec.substr (rec.search "\n" + 1)
+                [ruta, hora]
+            inicializarRecomendacion: (ruta) ->
+                res = @$store.state.listaAnimes.filter (n) -> n.ruta == ruta
+                if res[0]?
+                    @recomendacion = res[0]
+                else
+                    @error = yes
+                    @codigoDeError = "01"
+                    console.error "Error. No existe este anime en la recomendacion semanal."
+                @cargado = yes
+            inicializarTemporizador: (hora) ->
+                horaLimite = Math.floor (hora / 1000)
+                horaActual = Math.floor (new Date().getTime() / 1000)
+                @segundos = horaLimite - horaActual
+
         created: ->
             vm = this
             vm.intervaloSegundos = setInterval (() =>
@@ -51,12 +85,24 @@
                     vm.segundos--
             ), 1000
 
+            try
+                [ruta, hora] = await @cargarRecomendacion()
+                @inicializarRecomendacion ruta
+                @inicializarTemporizador hora
+            catch e
+                @cargado = yes
+                @error = yes
+                @codigoDeError = "02"
+            @terminarCarga()
+
         beforeDestroy: ->
             clearInterval(this.intervaloSegundos)
     #
 </script>
 
 <style scoped lang="sass">
+    @import "../../sass/variables"
+
     .contenedor--rec
         max-width: 1068px
 
@@ -68,13 +114,11 @@
         padding: 20px
 
     .img
+        @extend %imgFlotantes
         cursor: pointer
-        transition: opacity 250ms
         border-radius: 5px
         max-width: 50%
         box-shadow: 0 0 10px 0 rgba(0,0,0,.5)
-        &:hover
-            opacity: 0.75
 
     .temporizador
         padding: 20px 0
