@@ -10,10 +10,7 @@
 <script lang="coffee">
     import BarraNavegacion from "./components/barra-navegacion.vue"
     import PiePagina from "./components/pie-pagina.vue"
-    import YAML from "yaml"
     import pantallaCarga from "./components/App/pantalla-carga.vue"
-
-    impr = console.log
 
     export default
         components:
@@ -26,13 +23,12 @@
         methods:
             obtenerListaAnimes: ->
                 try
-                    resRaw = await fetch "/static/animes.yaml"
-                    resTxt = await resRaw.text()
-                    res = YAML.parse resTxt
-                    if typeof res isnt "object"
-                        throw new Error "No se recibió un objeto."
+                    resRaw = await fetch "/api/animes"
+                    res = await resRaw.json()
 
-                    [undefined, res]
+                    if res.exito
+                        [undefined, res.payload]
+                    else throw new Error res.error.razon
                 catch e
                     [e, undefined]
             inicializarListaAnimes: ->
@@ -41,17 +37,26 @@
                     @$store.commit "cambiarListaAnimes", res
                 else
                     console.error err
+            inicializarListaGeneros: ->
+                resRaw = await fetch "/api/generos"
+                res = await resRaw.json()
+                if res?.exito
+                    @$store.commit "cambiarListaGeneros", res.payload
+                else
+                    console.error err
         created: ->
-            console.log @$store.state.listaAnimes.length
             if @$store.state.listaAnimes.length == 0
                 @inicializarListaAnimes()
-                console.log "Inicializado"
-
+            if @$store.state.listaGeneros.length == 0
+                @inicializarListaGeneros()
 
     #
 </script>
 
 <style lang="sass">
+
+    #app
+        background-color: var(--fondo1)
 
     //
 </style>

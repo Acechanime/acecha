@@ -67,12 +67,13 @@
                 size: 12px
                 weight: bold
             letter-spacing: 12px
+            color: var(--texto1)
         .txt
             font:
                 weight: 900
                 size: 43px
             line-height: 1.2em
-            color: #3a3a3a
+            color: var(--texto1)
             padding: 40px 0
         .divisor
             margin: 0 auto
@@ -84,7 +85,7 @@
             font-weight: 600
             letter-spacing: 1px
             color: #e91e63
-            background-color: white
+            background-color: var(--fondo1)
             border-radius: 30px
             padding: 15px 40px
             margin: 30px 0
@@ -96,6 +97,7 @@
                 color: #e91e63
 
     .img
+        @extend %imgFlotantes
         width: 90%
         box-shadow: 0 0 10px 0 rgba(0,0,0,.5)
         border-radius: 5px
@@ -107,7 +109,7 @@
             family: $titulos
         line-height: .9rem
         letter-spacing: 0
-        color: #4e565b
+        color: var(--texto1)
 
     //
 </style>

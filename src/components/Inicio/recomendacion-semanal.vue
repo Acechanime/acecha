@@ -4,7 +4,7 @@
             div.col.l6.pad
                 div.cont-img
                     router-link(:to="recomendacion.ruta")
-                        img.img( :src="recomendacion.imagenes.portada"
+                        img.img( :src="recomendacion.img_portada"
                              alt="Img anime" )
                 div.temporizador.row
                     div.col.l3
@@ -37,7 +37,6 @@
 </template>
 
 <script lang="coffee">
-    # Todo: Optimizar el comportamiento del temporizador. Campos separados y que sec llame a min, min a hora etc
 
     export default
         name: "recomendacion-semanal"
@@ -59,13 +58,16 @@
                 required: true
         methods:
             cargarRecomendacion: ->
-                recRaw = await fetch "/static/recomendacion-semanal"
-                rec = await recRaw.text()
-                ruta = rec.substring 0, rec.search "\n"
-                hora = parseInt rec.substr (rec.search "\n" + 1)
-                [ruta, hora]
-            inicializarRecomendacion: (ruta) ->
-                res = @$store.state.listaAnimes.filter (n) -> n.ruta == ruta
+                recRaw = await fetch "/api/recomendacionSemanal/"
+                rec = await recRaw.json()
+                if rec.exito
+                    animeId = rec.payload["anime_id"]
+                    hora = rec.payload["hora"]
+                    [animeId, hora]
+                else
+                    throw new Error rec.error.razon
+            inicializarRecomendacion: (animeId) ->
+                res = @$store.state.listaAnimes.filter (n) => n.anime_id == animeId
                 if res[0]?
                     @recomendacion = res[0]
                 else
@@ -124,6 +126,7 @@
         padding: 20px 0
         font-family: 'Roboto Slab', sans-serif
         font-size: 10px
+        color: var(--texto2)
         .num
             line-height: 1
             font-size: 54px
@@ -134,6 +137,7 @@
     .leyenda
         text-transform: uppercase
         .titulo
+            color: var(--texto2)
             padding: 30px 0
             font:
                 size: 12px
@@ -144,7 +148,7 @@
                 weight: bold
                 size: 43px
             line-height: 1.2em
-            color: #3a3a3a
+            color: var(--texto1)
             padding: 30px 0
         .divisor
             margin: 0 auto
@@ -156,7 +160,7 @@
             font-weight: 600
             letter-spacing: 1px
             color: #54b760
-            background-color: white
+            background-color: var(--fondo1)
             border-radius: 30px
             padding: 15px 40px
             margin: 30px 0

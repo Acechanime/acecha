@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Inicio from './views/Inicio.vue'
 import Animes from "./views/Animes.vue"
 import Anime from "./views/Anime.vue"
+import Premium from "./views/Premium.vue"
 
 Vue.use(Router);
 
@@ -29,6 +30,13 @@ export default new Router({
             path: '/',
             name: 'Inicio',
             component: Inicio
+        },
+        { path: "/acecha-premium/", redirect: "/premium/" },
+        { path: "/comprar-acecha-premium/", redirect: "/premium/" },
+        {
+            path: "/premium/",
+            name: "Premium",
+            component: Premium
         },
         {
             path: '/animes/',

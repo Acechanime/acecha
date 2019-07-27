@@ -2,7 +2,7 @@
     article.link
         a.link(:href="anime.ruta" @click.prevent="irAPagAnime(anime)")
             div.img
-                img(:src="anime.imagenes.portada"
+                img(:src="anime.img_portada"
                     sizes="(max-width: 247px) 100vw, 247px"
                     width="247" height="350"
                 )
@@ -19,7 +19,6 @@
             required: true
         methods:
             irAPagAnime: (anime) ->
-                console.log "Trancisión hacia #{anime.ruta}"
                 @$router.push
                     path: anime.ruta
                     params:
@@ -50,7 +49,7 @@
             border-radius: 5px
 
     .nombre
-        color: #4e565b
+        color: var(--texto2)
         font:
             size: 1rem
             family: $titulos

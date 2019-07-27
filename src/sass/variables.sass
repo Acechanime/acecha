@@ -4,13 +4,14 @@ $texto: Roboto, sans-serif
 $colorPrincipal: #E91E63
 
 %imgFlotantes
+    opacity: var(--opacidad1)
     transition: opacity 250ms, transform 400ms
     &:hover
-        opacity: 0.7
+        opacity: var(--opacidad2)
         transform: translateY(-8px)
 
 %textosGris
-    color: #999999
+    color: var(--texto2)
     font:
         family: $titulos
         size: 14px
@@ -18,4 +19,4 @@ $colorPrincipal: #E91E63
 %caja-textos
     padding: 1.7rem
     border-radius: 10px
-    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.12)
+    box-shadow: 0 0 30px 0 var(--sombra1)

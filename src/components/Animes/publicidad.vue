@@ -20,7 +20,7 @@
             family: $titulos
             size: 24px
             weight: 600
-        color: #4e565b
+        color: var(--texto2)
 
     //
 </style>

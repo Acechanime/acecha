@@ -28,10 +28,12 @@
 
     .txt
         font-size: 14px
+        color: var(--texto1)
 
     .simular-com
         height: 600px
-        background-color: #ececec
+        background-color: var(--texto1)
+        opacity: 0.1
 
     //
 </style>

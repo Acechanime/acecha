@@ -1,5 +1,5 @@
 <template lang="pug">
-    div
+    div.inicio
         imagen-principal
         ultimos-episodios(:terminarCarga="terminarCarga")
         episodios(:terminarCarga="terminarCarga")
@@ -27,10 +27,12 @@
             "comentarios": Comentarios
         data: ->
             componentesCargando: 4
+            fecha_recomendacion: 0
+            recomendacion: ""
+            video_recomendado: ""
         methods:
             terminarCarga: () ->
                 @componentesCargando--
-                console.log "Ahora hay #{@componentesCargando} cargando."
                 if @componentesCargando is 0 then @$store.commit "terminarCargaPagina"
         created: ->
 
@@ -39,6 +41,10 @@
 </script>
 
 <style scoped lang="sass">
+    @import "../sass/variables"
+
+    .inicio
+        background-color: var(--fondo1)
 
     //
 

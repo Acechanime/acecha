@@ -21,7 +21,7 @@
                 vm = this
                 setTimeout (->
                     vm.mostrar = false
-                ), 150
+                ), 1150
     #
     
 </script>
@@ -34,11 +34,11 @@
         width: 100%
         height: 100%
         display: table
-        background: url("https://vignette.wikia.nocookie.net/youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e/images/9/9c/Episode_005_End_Card.jpg")
+        background: url("../../assets/img/you-kei.jpg")
         background-size: cover
         opacity: 1
         z-index: 100
-        transition: opacity 150ms ease-out
+        transition: opacity 150ms ease-out 1s
 
     //
 </style>

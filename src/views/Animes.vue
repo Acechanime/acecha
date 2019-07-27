@@ -1,10 +1,10 @@
 <template lang="pug">
-    div.contenedor
+    div.contenedor.animes
         div.separador
         div.grid
             div.cont
-                buscador
-                animes
+                buscador(:filtrosFn="filtrosFn")
+                animes(:filtros="filtros")
             div.publicidad
                 publicidad
     //
@@ -18,17 +18,29 @@
 
     export default
         name: "Animes"
+        data: ->
+            filtros:
+                nombre: ""
+            filtrosFn:
+                nombre: @aplicarFiltroNombre
         components:
             publicidad: publicidad
             buscador: buscador
             animes: animes
-        created: ->
+        methods:
+            aplicarFiltroNombre: (nombre) ->
+                console.log "anuma v:"
+                @filtros.nombre = nombre
+        mounted: ->
             @$store.commit "terminarCargaPagina"
 
     #
 </script>
 
 <style scoped lang="sass">
+
+    .animes
+        background-color: var(--fondo1)
 
     .grid
         margin: 48px 0

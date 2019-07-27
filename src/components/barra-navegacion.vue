@@ -62,9 +62,10 @@
 </script>
 
 <style scoped lang="sass">
+    @import "../sass/variables"
 
     .navegacion
-        color: white
+        color: var(--texto1)
         background-color: transparent
         position: fixed
         top: 0
@@ -77,8 +78,8 @@
 
     .navegacion--min
         padding: 10px 0
-        background-color: white
-        color: #4e565b
+        background-color: var(--fondo1)
+        color: var(--texto2)
         box-shadow: 0 1px 10px -6px rgba(0, 0, 0, 0.42), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 4px 5px -2px rgba(0, 0, 0, 0.1)
 
     .izq

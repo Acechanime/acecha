@@ -2,7 +2,7 @@
     div.info
         h3.tit Información
         div.eps Numero de episodios
-        p {{ animeObj.episodios }}
+        p {{ animeObj.episodios === -1? "??": animeObj.episodios }}
         div.temp Temporada
         p {{ animeObj.temporada }} {{ animeObj.anio }}
         div.estudio Estudio
@@ -34,10 +34,9 @@
     @import "../../sass/variables"
 
     .info
-        background-color: white
+        @extend %caja-textos
+        background-color: var(--fondo1)
         padding: 1rem
-        border-radius: 10px
-        box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.12)
         .tit
             font:
                 family: $titulos

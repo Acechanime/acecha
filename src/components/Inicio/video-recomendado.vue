@@ -5,7 +5,7 @@
             div.video(v-if="linkVideo !== ''")
                 iframe(:src="linkVideo" frameborder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen="")
+                    allowfullscreen="" style="opacity: var(--opacidad1)")
             div.err(v-if="cargaFallida")
                 span.
                     Hubo un error al cargar el video recomendado.<br>
@@ -31,13 +31,16 @@
             vm = this
 
             try
-                xhr = await fetch "/static/video-recomendado"
-                res = await xhr.text()
-
-                if res.length <= 50
-                    vm.linkVideo = res
+                xhr = await fetch "/api/videoRecomendado/"
+                resJ = await xhr.json()
+                if resJ.exito
+                    res = resJ.payload["url"]
+                    if res.length <= 50
+                        vm.linkVideo = res
+                    else
+                        manejarError "Se cargó el link del video recomendado, pero es inválido.", "F2", vm
                 else
-                    manejarError "Se cargó el link del video recomendado, pero es inválido.", "F2", vm
+                    throw new Error resJ.error.razon
             catch e
                 manejarError e, "F3", vm
             @terminarCarga()
@@ -59,7 +62,7 @@
             weight: 900
             size: 43px
             family: $texto
-
+        color: var(--texto1)
         margin: 32px 0
         text-transform: uppercase
         text-align: center

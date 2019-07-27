@@ -1,3 +1,5 @@
+const iniciarRutas = require("./srv/index").iniciarRutas;
+
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 
@@ -20,30 +22,7 @@ if (cluster.isMaster) {
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
 
-    const extraerPrimer = url => {
-        const p1 = url.substr(1);
-        const sigSlash = p1.search("/");
-        return (() => {
-            if (sigSlash === -1) return p1;
-            else return p1.substring(0, sigSlash);
-        })();
-        // const p2 = p1.charAt(p1.length - 1) === "/"? p1.substring(0, p1.search("/")): p1;
-
-    };
-
-    app.use((req, res, next) => {
-        const path = req.path;
-        const pathFixed = extraerPrimer(path);
-
-        const urls = ["api", "css", "img", "js", "static"];
-
-        const resultado = urls.filter(x => x === pathFixed);
-        if (resultado.length > 0) {
-            next();
-        } else {
-            res.sendFile(__dirname + "/dist/index.html");
-        }
-    });
+    iniciarRutas(app, __dirname);
 
     app.listen(3000);
 

@@ -1,19 +1,49 @@
 <template lang="pug">
     div.temporadas
         h2.titulo Temporadas
-        p.label Todas las temporadas de {{ animeObj.nombre }}
-        div.temps // TODO
+        p.label Todas las temporadas de {{ anime.nombre }}
+        div.temps
+            temporada(v-for="animeAnt in obtTempAnteriores()" :anime="animeAnt"
+                :key="animeAnt.anime_id")
+            temporada(:anime="anime")
+            temporada(v-for="animeSig in obtTempSiguientes()" :anime="animeSig"
+                :key="animeSig.anime_id")
     //
 </template>
 
 <script lang="coffee">
+    import temporada from "./temporada.vue"
 
     export default
         name: "temporadas"
+        components:
+            temporada: temporada
         props:
-            animeObj:
+            anime:
                 type: Object
                 required: true
+        methods:
+            obtTempAnteriores: ->
+                anterior = []
+                animeActual = @anime
+                while animeActual.id_temporada_ant?
+                    animeAnt = @$store.state.listaAnimes.filter (a) ->
+                        a.anime_id == animeActual.id_temporada_ant
+                    if animeAnt[0]?
+                        anterior.unshift animeAnt[0]
+                    animeActual = animeAnt[0]
+                anterior
+            obtTempSiguientes: ->
+                siguiente = []
+                animeActual = @anime
+                while animeActual.id_temporada_sig?
+                    animeSig = @$store.state.listaAnimes.filter (a) ->
+                        a.anime_id == animeActual.id_temporada_sig
+                    if animeSig[0]?
+                        siguiente.push animeSig[0]
+                    animeActual = animeSig[0]
+                siguiente
+
     #
     
 </script>
@@ -22,13 +52,14 @@
     @import "../../sass/variables"
 
     .temporadas
-        margin: 100px 0
+        margin: 50px 0
         text-align: center
 
     .titulo
-        color: black
+        color: var(--texto1)
         font:
             family: $titulos
+            size: 1.75rem
 
     .label
         @extend %textosGris
@@ -36,6 +67,7 @@
 
     .temps
         @extend %caja-textos
+        background-color: var(--fondo1)
 
 
     //

@@ -7,7 +7,57 @@ html, body
     font:
         size: large
         family: Roboto, sans-serif
-    color: #3A3A3A
+    background-color: var(--fondo1)
+    &:root
+        --spacing-presentation: 2rem
+        --spacing-big: 2rem
+        --spacing-section: 1.5rem
+        --spacing-section-header: 1rem
+        --spacing-section-content: 1rem
+        --spacing-full-page: 1.5rem
+        --margin-section-header: 1.5rem
+        --gutter: 2rem
+        --grid-gap: 1rem
+        --wrap: 1170px
+        --first-color: #E91E63
+        --second-color: #6e25b2
+        --second-color-alt: #230051
+        --green-color: #01bc59
+        --red-color: #FF003F
+        --red-color-alt: #c91a46
+        --blue-color: #006CAF
+        --yellow-color: #F0AD4E
+        --lightblue-color: #6EC1E4
+        --gray-color: #999999
+        --gray-color-alt: #7A7A7A
+        --gray-light-color: #DADADA
+        --dark-color: #4e565b
+        --dark-color-alt: #3a3a3a
+        --black-color: #0C0C0C
+        --white-color: #FFFFFF
+        --semi-white-color: #efefef
+        --info-color: #5cbce0
+        --fb-color: #3B5998
+        --tw-color: #55ACEE
+        --yt-color: #BB0000
+        --wsp-color: #0DC143
+        --dc-color: #0005AD
+
+        --fondo1: #0a0909
+        --fondo2: #040303
+
+        // rgba(0, 0, 0, 0.12)
+        --sombra1: rgba(0, 0, 0, 0.12)
+
+        // #3A3A3A
+        --texto1: #e8e8e1
+        // #4e565b
+        --texto2: #BFC1B6
+
+        // 1
+        --opacidad1: 0.6
+        // 0.7
+        --opacidad2: 0.9
 
 .contenedor
     width: 90%
@@ -85,4 +135,46 @@ $ancho-col: 8.33%
 @media only screen and (min-width: 500px)
     .mostrarBajo500
         display: none !important
+
+@font-face
+    font-family: icomoon
+    src: url("../assets/fonts/icomoon.ttf")
+
+.icon-check-box
+    font-family: icomoon !important
+    padding-left: 10px
+    &:before
+        content: "\e918"
+
+[data-bgcolor=facebook]
+    background: var(--fb-color)
+
+[data-bgcolor=twitter]
+    background: var(--tw-color)
+
+[data-bgcolor=whatsapp]
+    background: var(--wsp-color)
+
+
+
+[class*=" icon-"], [class^=icon-]
+    font-family: 'icomoon'!important
+    speak: none
+    font-style: normal
+    font-weight: normal
+    font-variant: normal
+    text-transform: none
+    line-height: 1
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+
+.icon-facebook:before
+    content: "\ea90"
+
+.icon-twitter:before
+    content: "\ea96"
+
+.icon-whatsapp:before
+    content: "\ea93"
+
 

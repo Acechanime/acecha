@@ -36,7 +36,7 @@
         cursor: pointer
 
     .nombre
-        color: #4e565b
+        color: var(--texto1)
         font-size: 17px
         font-weight: 700
         line-height: .9em
