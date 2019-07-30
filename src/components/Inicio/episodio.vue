@@ -1,9 +1,11 @@
 <template lang="pug">
     article.ep
-        router-link.link(:to="ep.link")
-            img.imagen(:src="ep.img" :alt="'Episodio ' + ep.num + ' de ' + ep.nombre")
+        router-link.link(:to="obtenerLink(anime, ep)")
+            img.imagen(:src="anime.img_nuevo_ep" :alt="'Episodio ' + ep.num_ep + ' de ' + anime.nombre")
             br
-            span.nombre {{ ep.nombre }} {{ ep.num }}
+            span.nombre {{ anime.nombre }} {{ ep.num_ep }}
+
+    //
 </template>
 
 <script lang="coffee">
@@ -14,6 +16,16 @@
             ep:
                 type: Object
                 required: true
+        computed:
+            anime: ->
+                if @ep?
+                    anime = @$store.state.listaAnimes.filter (x) => x.anime_id == @ep.anime_id
+                    anime[0]
+                else {}
+        methods:
+            obtenerLink: (anime, ep) ->
+                anime.ruta + (if ep.es_ova then "ova" else "ep") + ep.num_ep
+
     #
 
 </script>

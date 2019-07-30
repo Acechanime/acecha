@@ -37,6 +37,7 @@
     "pug-plain-loader": "^1.0.0",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
+    "supertest": "^4.0.2",
     "vue-cli-plugin-express": "^1.0.1",
     "vue-template-compiler": "^2.6.10"
   },
@@ -70,13 +71,6 @@
     "snapshotSerializers": [
       "jest-serializer-vue"
     ],
-    "testMatch": [
-      "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"
-    ],
-    "testURL": "http://localhost/",
-    "watchPlugins": [
-      "jest-watch-typeahead/filename",
-      "jest-watch-typeahead/testname"
-    ]
+    "testURL": "http://localhost/"
   }
 }

@@ -1,8 +1,10 @@
 <template lang="pug">
     div.inicio
         imagen-principal
-        ultimos-episodios(:terminarCarga="terminarCarga")
-        episodios(:terminarCarga="terminarCarga")
+        ultimos-episodios(:terminarCarga="terminarCarga"
+            :epRecientePrincipal="epRecientePrincipal" :cargaTerminada="cargaTerminada")
+        episodios(:terminarCarga="terminarCarga" :ultimosEpisodios="epsRecientes"
+            :cargaTerminada="cargaTerminada")
         recomendacion-semanal(:terminarCarga="terminarCarga")
         video-recomendado(:terminarCarga="terminarCarga")
         comentarios
@@ -30,12 +32,26 @@
             fecha_recomendacion: 0
             recomendacion: ""
             video_recomendado: ""
+            epRecientePrincipal: {}
+            epsRecientes: []
+            cargaTerminada: no
         methods:
             terminarCarga: () ->
                 @componentesCargando--
                 if @componentesCargando is 0 then @$store.commit "terminarCargaPagina"
         created: ->
+            # Carga los datos
+            epsRecientesRaw = await fetch "/api/episodiosRecientes"
+            epsRecientes = await epsRecientesRaw.json()
 
+            if epsRecientes.exito? && epsRecientes.exito
+                epRecientePrincipal = epsRecientes.payload.reduce (acc, nuevo) =>
+                    if nuevo["nivel_prioridad"] > acc["nivel_prioridad"] then nuevo else acc
+                @epRecientePrincipal = epRecientePrincipal
+                @epsRecientes = epsRecientes.payload.filter (x) =>
+                    x["link_id"] != epRecientePrincipal["link_id"]
+
+            @cargaTerminada = yes
     #
 
 </script>

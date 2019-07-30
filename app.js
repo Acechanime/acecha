@@ -5,6 +5,7 @@ const numCPUs = require('os').cpus().length;
 
 const express = require("express");
 
+
 if (cluster.isMaster) {
     console.log(`Master ${process.pid} is running`);
 
@@ -24,7 +25,7 @@ if (cluster.isMaster) {
 
     iniciarRutas(app, __dirname);
 
-    app.listen(3000);
+    app.listen(80);
 
     console.log(`Worker ${process.pid} started`);
 }

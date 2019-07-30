@@ -32,10 +32,16 @@ const iniciarRutas = (app, ruta) => {
     app.get("/api/animes", require("./animes/get").fun);
     app.post("/api/animes", require("./animes/create").fun);
 
+    app.get("/api/episodios", require("./episodios/get").fun);
+
+    app.get("/api/episodiosRecientes", require("./episodiosRecientes/get").fun);
+
     app.get("/api/generos", require("./generos/get").fun);
 
     app.get("/api/videoRecomendado/", require("./videoRecomendado/get").fun);
     app.get("/api/recomendacionSemanal/", require("./recomendacionSemanal/get").fun);
+
+    app.get("/api/cafe", (req, res) => res.status(418));
 
 };
 

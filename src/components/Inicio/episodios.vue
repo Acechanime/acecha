@@ -11,37 +11,37 @@
 
 <script lang="coffee">
     import Episodio from "../../components/Inicio/episodio";
-    import YAML from "yaml"
-    import { manejarError } from "../../mixins/manejar-error.coffee"
+    import { manejarError } from "./manejo-errores.coffee"
 
     export default
         name: "episodios"
-        mixins: [
-            manejarError
-        ]
         components:
             episodio: Episodio
         data: ->
-            episodios: []
             cargaFallida: no
             codigoDeError: ""
         props:
             terminarCarga:
                 type: Function
-                required: true
-        created: ->
-            vm = this
+                required: yes
+            ultimosEpisodios:
+                type: Array
+                required: yes
+            cargaTerminada:
+                type: Boolean
+                required: yes
+        computed:
+            episodios: ->
+                if @ultimosEpisodios.length isnt 0 then @ultimosEpisodios
+                else []
+        watch:
+            cargaTerminada: (estado) ->
+                vm = this
+                if estado
+                    if @ultimosEpisodios.length is 0
+                        manejarError "No se recibió un objeto con los episodios.", "F1", vm
+                    @terminarCarga()
 
-            try
-                xhr = await fetch "/static/ultimos-eps.yaml"
-                resTxt = await xhr.text()
-                res = YAML.parse resTxt
-                if typeof res is "object"
-                    vm.episodios = res
-                else vm.manejarError "No se recibió un objeto YAML desde el servidor.", "F1", vm
-            catch e
-                vm.manejarError e, "F0", vm
-            @terminarCarga()
     #
 
 </script>

@@ -1,15 +1,13 @@
 <template lang="pug">
     div.ultimos-eps.contenedor.contenedor-rec
-        div.row(v-if="ep.nombre")
+        div.row(v-if="anime !== undefined")
             div.col.l6.leyenda
                 div.titulo acechanime
                 h2.txt Últimos episodios
                 hr.divisor
                 div.boton ¡Activa las notificaciones abajo a la izquierda!
             div.col.l6
-                img.img(:src="ep.img" :alt="'Episodio ' + ep.num + ' de ' + ep.nombre" )
-                br
-                span.nombre {{ ep.nombre }} {{ ep.num }}
+                episodio(:ep="ep")
         div.err(v-if="cargaFallida")
             span.
                 Hubo un error al cargar este último episodio.<br>
@@ -19,32 +17,42 @@
 </template>
 
 <script lang="coffee">
-    import YAML from "yaml"
     import { manejarError } from "./manejo-errores.coffee"
+    import episodio from "./episodio.vue"
 
     export default
         name: "ultimos-episodios"
         data: ->
-            ep: {}
             cargaFallida: no
             codigoDeError: ""
+        components: { episodio }
         props:
             terminarCarga:
                 type: Function
                 required: true
-        created: ->
-            vm = this
-
-            try
-                xhr = await fetch "/static/ultimo-ep-principal.yaml"
-                resTxt = await xhr.text()
-                res = YAML.parse resTxt
-                if typeof res is "object"
-                    vm.ep = res
-                else manejarError "No se recibió un objeto YAML desde el servidor.", "F3", vm
-            catch e
-                manejarError e, "F4", vm
-            @terminarCarga()
+            epRecientePrincipal:
+                type: Object
+                required: true
+            cargaTerminada:
+                type: Boolean
+                required: true
+        computed:
+            ep: -> @epRecientePrincipal
+            anime: ->
+                ep = @ep
+                if ep != {}
+                    animes = @$store.state.listaAnimes.filter (x) =>
+                        x.anime_id == ep.anime_id
+                    animes[0]
+                else {}
+        watch:
+            cargaTerminada: (estado) ->
+                vm = this
+                if estado
+                    console.log @epRecientePrincipal
+                    if @epRecientePrincipal == {}
+                        manejarError "No se recibió un objeto con el episodio.", "F3", vm
+                    @terminarCarga()
 
     #
 </script>

@@ -18,7 +18,7 @@
                     span.generos(v-for="g in animeObj.generos")  {{ $store.state.listaGeneros.find(x => x.genero_id === g).nombre }}
 
                 temporadas(:anime="animeObj")
-                lista-de-capitulos(:anime="animeObj")
+                lista-de-episodios(:anime="animeObj")
                 comentarios
     //
 </template>
@@ -29,7 +29,7 @@
     import mal from "../components/Anime/mal.vue"
     import twitter from "../components/Anime/twitter.vue"
     import temporadas from "../components/Anime/temporadas.vue"
-    import listaDeCapitulos from "../components/Anime/lista-de-capitulos.vue"
+    import listaDeEpisodios from "../components/Anime/lista-de-episodios.vue"
     import comentarios from "../components/Anime/comentarios.vue"
     import redesSociales from "../components/Anime/redes-sociales.vue"
     import store from "../store.coffee"
@@ -43,7 +43,7 @@
             "mal": mal
             "twitter": twitter
             "temporadas": temporadas
-            "lista-de-capitulos": listaDeCapitulos
+            "lista-de-episodios": listaDeEpisodios
             "comentarios": comentarios
         data: ->
             animeObj: {imagenes: {}}
