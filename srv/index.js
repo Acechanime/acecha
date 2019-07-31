@@ -39,9 +39,15 @@ const iniciarRutas = (app, ruta) => {
     app.get("/api/generos", require("./generos/get").fun);
 
     app.get("/api/videoRecomendado/", require("./videoRecomendado/get").fun);
-    app.get("/api/recomendacionSemanal/", require("./recomendacionSemanal/get").fun);
+    app.post("/api/videoRecomendado/", require("./videoRecomendado/set").fun);
 
-    app.get("/api/cafe", (req, res) => res.status(418));
+    app.get("/api/recomendacionSemanal/", require("./recomendacionSemanal/get").fun);
+    app.post("/api/recomendacionSemanal/", require("./recomendacionSemanal/set").fun);
+
+    app.get("/api/cafe", (req, res) => {
+        res.status(418);
+        res.end();
+    });
 
 };
 

@@ -67,7 +67,10 @@ CREATE TABLE IF NOT EXISTS links (
     mp4upload TEXT,
     mp4upload_acortado TEXT,
     okru TEXT,
-    okru_acortado TEXT
+    okru_acortado TEXT,
+
+    mostrar_en_inicio BOOLEAN NOT NULL DEFAULT FALSE,
+    nivel_prioridad SMALLINT NOT NULL DEFAULT 0
 );
 
 

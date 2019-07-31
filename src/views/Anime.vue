@@ -127,6 +127,8 @@
 
     .contImg
         position: relative
+        .imagen
+            width: 100%
 
     .estado
         color: white

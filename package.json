@@ -39,7 +39,8 @@
     "sass-loader": "^7.1.0",
     "supertest": "^4.0.2",
     "vue-cli-plugin-express": "^1.0.1",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "vuejs-datepicker": "^1.6.2"
   },
   "postcss": {
     "plugins": {

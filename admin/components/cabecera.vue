@@ -31,7 +31,7 @@
         transition: box-shadow 250ms
         position: sticky
         top: 0
-        background-color: var(--colorFondo)
+        background-color: var(--fondo1)
 
     .cab--sombra
         box-shadow: 0 1px 10px 1px #37474F

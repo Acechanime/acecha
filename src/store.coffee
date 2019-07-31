@@ -27,7 +27,7 @@ export default new Vuex.Store
             culminacion: "30/03/2019"
             mal: "https://myanimelist.net/"
             en_emision: yes
-            img_portada: "ejm"
+            img_portada: "https://cdn.myanimelist.net/images/anime/5/86830l.jpg"
             img_fondo: "/img/you-kei.jpg"
             img_nuevoEp: "nuevo ep"
             id_temporada_ant: null
