@@ -3,7 +3,7 @@
         img.portadaMini(:src="anime.img_portada" alt="img")
         span.nombre {{ anime.nombre }}
         router-link.season_link(:to="esRutaActual()? '.': anime.ruta" :style="obtColorFondo" )
-            span.icon-chevron-right >
+            span.icon-chevron-right
     //
 </template>
 
@@ -70,5 +70,7 @@
         align-items: center
         text-decoration: none
 
+    .icon-chevron-right::before
+        content: "\e940"
     //
 </style>

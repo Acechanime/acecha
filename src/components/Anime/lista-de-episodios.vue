@@ -2,14 +2,17 @@
     div.capitulos
         h2.titulo Lista de Capítulos
         p.label Todas las temporadas de {{ anime.nombre }}
-        div.eps olol {{ estadoCarga }} {{ episodios }}
+        div.eps
+            episodio(v-for="(ep, i) in episodios" :key="i" :episodio="ep" :nombre="anime.nombre")
     //
 </template>
 
 <script lang="coffee">
+    import episodio from "./episodio.vue"
 
     export default
         name: "lista-de-episodios"
+        components: { episodio }
         props:
             anime:
                 type: Object
@@ -50,6 +53,7 @@
 
     .eps
         @extend %caja-textos
+        padding: 0
         background-color: var(--fondo1)
         color: var(--texto1)
 
