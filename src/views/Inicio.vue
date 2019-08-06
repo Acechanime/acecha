@@ -61,6 +61,7 @@
 
     .inicio
         background-color: var(--fondo1)
+        width: 100%
 
     //
 

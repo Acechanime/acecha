@@ -48,5 +48,13 @@
         grid-template-columns: 1fr 250px
         grid-gap: 2rem
 
+    @media only screen and (max-width: 500px)
+        .publicidad
+            display: none
+
+        .grid
+            display: block
+            // grid-template-columns: repeat(1, 1fr)
+
     //
 </style>

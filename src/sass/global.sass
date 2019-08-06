@@ -43,6 +43,7 @@ html, body
         --wsp-color: #0DC143
         --dc-color: #0005AD
 
+        --fondo0: black
         --fondo1: #0a0909
         --fondo2: #040303
         --fondo3: #0f0d0d
@@ -59,6 +60,11 @@ html, body
         --opacidad1: 0.6
         // 0.7
         --opacidad2: 0.9
+
+        // Textos en pantallas pequeñas
+        --tamano-titulos-grande: 36px
+        --tamano-titulos: 24px
+        --tamano-textos: 12px
 
 .contenedor
     width: 90%
@@ -89,6 +95,11 @@ $ancho-col: 8.33%
 @for $i from 1 through 12
     .l#{$i}
         width: $ancho-col * $i
+
+@media only screen and (max-width: 500px)
+    @for $i from 1 through 12
+        .s#{$i}
+            width: $ancho-col * $i
 
 
 // Muestra mensajes de error.

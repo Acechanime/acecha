@@ -35,7 +35,8 @@
 
     #nombre
         background-color: var(--fondo1)
-
+        display: inline-block
+        width: 100%
         font:
             family: $titulos
             size: 21px

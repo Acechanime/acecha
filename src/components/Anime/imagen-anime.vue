@@ -62,5 +62,10 @@
             height: 100%
             background: rgba(0, 0, 0, 0.6)
 
+    @media only screen and (max-width: 500px)
+        .nombre
+            font-size: var(--tamano-titulos-grande)
+            padding: 55px 0
+
     //
 </style>

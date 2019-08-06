@@ -1,13 +1,25 @@
 <template lang="pug">
     div.temporada
         img.portadaMini(:src="anime.img_portada" alt="img")
-        span.nombre {{ anime.nombre }}
+        span.nombre {{ nombreArreglado }}
         router-link.season_link(:to="esRutaActual()? '.': anime.ruta" :style="obtColorFondo" )
             span.icon-chevron-right
     //
 </template>
 
 <script lang="coffee">
+
+    extraerNombreCorto = (nombre, largo) =>
+        str = ""
+        buffer = ""
+        for i in [0..largo - 1]
+            c = nombre.charAt i
+            if c is " "
+                str += buffer + " "
+                buffer = ""
+            else
+                buffer += c
+        str + "..."
 
     export default
         name: "temporada"
@@ -20,6 +32,11 @@
                 if @esRutaActual()
                     "background: #ff0241"
                 else "background: #01bc59"
+            nombreArreglado: ->
+                nombre = @anime.nombre
+                if nombre?.length > 40 and window.innerWidth < 500
+                    extraerNombreCorto nombre, 40
+                else nombre
         methods:
             esRutaActual: () ->
                 if @$store.state.modoAdmin
@@ -47,10 +64,11 @@
         margin-bottom: .5rem
         padding-right: .5rem
 
-
     .portadaMini
         width: 42px
         height: 60px
+        min-width: 42px
+        min-height: 60px
 
     .nombre
         color: var(--texto1)
@@ -60,6 +78,8 @@
         font-size: 1.25rem
         width: 44px
         height: 44px
+        min-width: 44px
+        min-height: 44px
         border-radius: 50%
         display: flex
         -webkit-box-pack: center
@@ -72,5 +92,6 @@
 
     .icon-chevron-right::before
         content: "\e940"
+
     //
 </style>

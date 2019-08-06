@@ -1,12 +1,12 @@
 <template lang="pug">
     div.ultimos-eps.contenedor.contenedor-rec
         div.row(v-if="anime !== undefined")
-            div.col.l6.leyenda
+            div.col.l6.s12.leyenda
                 div.titulo acechanime
                 h2.txt Últimos episodios
                 hr.divisor
                 div.boton ¡Activa las notificaciones abajo a la izquierda!
-            div.col.l6
+            div.col.l6.s12
                 episodio(:ep="ep")
         div.err(v-if="cargaFallida")
             span.
@@ -118,6 +118,10 @@
         line-height: .9rem
         letter-spacing: 0
         color: var(--texto1)
+
+    @media only screen and (max-width: 500px)
+        .leyenda .txt
+            font-size: var(--tamano-titulos)
 
     //
 </style>

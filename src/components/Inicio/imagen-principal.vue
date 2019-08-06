@@ -78,5 +78,9 @@
             height: 100%
             content: ""
 
+    @media only screen and (max-width: 500px)
+        .titulo
+            font-size: 47px !important
+
     //
 </style>

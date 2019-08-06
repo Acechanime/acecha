@@ -3,7 +3,7 @@
         pantalla-carga
         barra-navegacion
         router-view
-        pie-pagina
+        // pie-pagina
     //
 </template>
 

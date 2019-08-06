@@ -85,7 +85,9 @@
                 width: 100%
                 height: 100%
 
-
+    @media only screen and (max-width: 500px)
+        .fullvideo__title
+            font-size: 33px
 
     //
 </style>

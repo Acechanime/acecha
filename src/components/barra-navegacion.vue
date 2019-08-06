@@ -143,5 +143,17 @@
                 .material-icons
                     transform: translateY(7px) rotate(180deg)
 
+    @media only screen and (max-width: 1023px)
+        .der
+            display: none !important
+
+    @media only screen and (max-width: 500px)
+        .izq
+            height: 51px !important
+
+        //.logo
+            height: 75px !important
+
+
     //
 </style>

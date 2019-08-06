@@ -175,7 +175,10 @@
         .generos
             color: var(--texto1)
 
-
+    @media only screen and (max-width: 500px)
+        .cont
+            grid-template-columns: initial
+            grid-gap: 0
 
     //
 </style>

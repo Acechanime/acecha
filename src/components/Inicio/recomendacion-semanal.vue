@@ -1,29 +1,26 @@
 <template lang="pug">
     div.rec.contenedor.contenedor--rec
         div.row(v-if="cargado && !error")
-            div.col.l6.pad
+            div.col.l6.s12.pad
                 div.cont-img
                     router-link(:to="recomendacion.ruta")
                         img.img( :src="recomendacion.img_portada"
                              alt="Img anime" )
-                div.temporizador.row
-                    div.col.l3
-                        span.num {{ dias }}
-                        br
-                        span.desc Dias
-                    div.col.l3
-                        span.num {{ horas }}
-                        br
-                        span.desc Horas
-                    div.col.l3
-                        span.num {{ minutos }}
-                        br
-                        span.desc Minutos
-                    div.col.l3
-                        span.num {{ segundosF }}
-                        br
-                        span.desc Segundos
-            div.col.l6.pad.leyenda
+                div.temporizador2.countdown
+                    div.countdown__block
+                        div.countdown__digits {{ dias }}
+                        label.countdown__label Días
+                    div.countdown__block
+                        div.countdown__digits {{ horas }}
+                        label.countdown__label Horas
+                    div.countdown__block
+                        div.countdown__digits {{ minutos }}
+                        label.countdown__label Minutos
+                    div.countdown__block
+                        div.countdown__digits {{ segundosF }}
+                        label.countdown__label Segundos
+
+            div.col.l6.s12.pad.leyenda
                 div.titulo acechanime
                 div.txt Recomendación Semanal
                 hr.divisor
@@ -122,17 +119,19 @@
         max-width: 50%
         box-shadow: 0 0 10px 0 rgba(0,0,0,.5)
 
-    .temporizador
-        padding: 20px 0
-        font-family: 'Roboto Slab', sans-serif
-        font-size: 10px
+    .temporizador2
         color: var(--texto2)
-        .num
-            line-height: 1
-            font-size: 54px
-            padding: 20px
-        .desc
-            font-size: small
+        display: grid
+        grid-template-columns: repeat(4, 1fr)
+        margin-top: 1rem
+        .countdown__block
+            justify-self: center
+            text-align: center
+            .countdown__digits
+                font-size: var(--tamano-titulos)
+                line-height: 1
+            .countdown__label
+                font-size: var(--tamano-textos)
 
     .leyenda
         text-transform: uppercase
@@ -170,6 +169,19 @@
             &:hover
                 transform: scale(1.1)
                 color: #0cbc00
+
+    @media only screen and (max-width: 500px)
+        .leyenda .txt
+            font-size: var(--tamano-titulos)
+
+        .img
+            max-width: 100%
+
+        .temporizador
+            .num
+                font-size: var(--tamano-titulos)
+            .desc
+                font-size: var(--tamano-textos)
 
     //
 
