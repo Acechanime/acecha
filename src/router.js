@@ -6,6 +6,8 @@ import Animes from "./views/Animes.vue"
 import Anime from "./views/Anime.vue"
 import Premium from "./views/Premium.vue"
 
+import store from "./store.coffee"
+
 Vue.use(Router);
 
 const rutasNormales = [
@@ -23,7 +25,7 @@ const rutasNormales = [
     "/comprar-acecha-premium/"
 ];
 
-export default new Router({
+const router = new Router({
     mode: "history",
     routes: [
         {
@@ -54,4 +56,40 @@ export default new Router({
         return { x: 0, y: 0 };
     }
 });
+
+const extraerUrls = url => url.split("/").filter(x =>  x !== "");
+
+const esperar = new Promise(((resolve) => {
+    setInterval(() => {
+        if (store.state.listaAnimes.length !== 0) resolve();
+    }, 500);
+}));
+
+router.beforeEach(async (to, from, next) => {
+    const ruta = extraerUrls(to.path);
+
+    if (ruta.length === 2) {
+
+        if (rutasNormales.find(x => x === `/${ruta[0]}/`)) next();
+        else {
+            await esperar;
+            if (store.state.listaAnimes.find(x => x.ruta === `/${ruta[0]}/`)) {
+
+                store.commit("cambiarEstadoVerAnime");
+                const rutaNueva = (from.name === null)? `/${ruta[0]}/`: false;
+
+                next(rutaNueva);
+                store.commit("cambiarRutaVerAnime", to.path);
+
+            } else {
+                // TODO: Redidigir a 404
+                next("/");
+            }
+        }
+    } else {
+        next();
+    }
+});
+
+export default router;
 

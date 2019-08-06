@@ -5,6 +5,12 @@ Vue.use Vuex
 
 export default new Vuex.Store
     state:
+        verAnime:
+            activo: no
+            anime: {}
+            esOva: no
+            ep: 0
+            ruta: ""
         listaAnimes: []
         listaGeneros: []
         recomendacionSemanal: ""
@@ -46,5 +52,9 @@ export default new Vuex.Store
             state.animeAdmin.alternativo = arr
         cambiarListaGeneros: (state, nuevo) ->
             state.listaGeneros = nuevo
+        cambiarEstadoVerAnime: (state) ->
+            state.verAnime.activo = !state.verAnime.activo
+        cambiarRutaVerAnime: (state, ruta) ->
+            state.verAnime.ruta = ruta
     actions: {}
 

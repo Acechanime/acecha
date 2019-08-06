@@ -4,6 +4,7 @@
         barra-navegacion
         router-view
         // pie-pagina
+        ver-anime
     //
 </template>
 
@@ -11,12 +12,14 @@
     import BarraNavegacion from "./components/barra-navegacion.vue"
     import PiePagina from "./components/pie-pagina.vue"
     import pantallaCarga from "./components/App/pantalla-carga.vue"
+    import VerAnime from "./views/VerAnime.vue"
 
     export default
         components:
             "pie-pagina": PiePagina
             "barra-navegacion": BarraNavegacion
             "pantalla-carga": pantallaCarga
+            "ver-anime": VerAnime
         computed:
             esPagPrin: ->
                 this.$route.path is "/"

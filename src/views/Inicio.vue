@@ -8,6 +8,8 @@
         recomendacion-semanal(:terminarCarga="terminarCarga")
         video-recomendado(:terminarCarga="terminarCarga")
         comentarios
+
+    //
 </template>
 
 <script lang="coffee">
