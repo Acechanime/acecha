@@ -16,6 +16,7 @@
             vm = this
             window.onpopstate = (e) =>
                 if vm.$store.state.verAnime.activo
+                    document.body.style.overflow = ""
                     vm.$store.commit "cambiarEstadoVerAnime"
     #
 
@@ -39,7 +40,7 @@
         vertical-align: middle
 
     .cerrar
-        background-color: var(--fondo1)
+        // background-color: var(--fondo1)
         display: table
         width: 100%
         user-select: none

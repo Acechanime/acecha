@@ -1,6 +1,6 @@
 <template lang="pug">
     article.ep
-        router-link.link(:to="obtenerLink(anime, ep)")
+        a.link(:href="obtenerLink" @click.prevent="irAlAnime")
             img.imagen(:src="anime.img_nuevo_ep" :alt="'Episodio ' + ep.num_ep + ' de ' + anime.nombre")
             br
             span.nombre {{ anime.nombre }} {{ ep.num_ep }}
@@ -22,9 +22,20 @@
                     anime = @$store.state.listaAnimes.filter (x) => x.anime_id == @ep.anime_id
                     anime[0]
                 else {}
-        methods:
-            obtenerLink: (anime, ep) ->
+            obtenerLink: ->
+                anime = @anime
+                ep = @ep
                 anime.ruta + (if ep.es_ova then "ova" else "ep") + ep.num_ep
+        methods:
+            irAlAnime: ->
+                ep = @ep
+                @$store.commit "cambiarAnimeVerAnime",
+                    mega: ep.mega
+                    rapidvideo: ep.rapidvideo
+                    mango: ep.mango
+                    mp4upload: ep.mp4upload
+                    okru: ep.okru
+                @$router.push @obtenerLink
 
     #
 

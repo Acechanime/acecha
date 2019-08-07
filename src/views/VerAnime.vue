@@ -1,30 +1,40 @@
 <template lang="pug">
     div.ver(:class="activo? 'activo': ''")
-        // div.separador
         cerrar
-        div Ver Anime
-        p {{ $store.state.verAnime.ruta }}
+        div.contenedor
+            div.grid
+                div
+                    reproductor(:links="data.anime")
+                    p khe?
+                div.publicidad
+                    publicidad
     //
 </template>
 
 <script lang="coffee">
     import cerrar from "../components/VerAnime/cerrar.vue"
+    import publicidad from "../components/Animes/publicidad.vue"
+    import reproductor from "../components/VerAnime/reproductor.vue"
 
     export default
         name: "ver-anime"
-        components: { cerrar }
+        components: { cerrar, publicidad, reproductor }
         computed:
             activo: -> @$store.state.verAnime.activo
-            data: -> @$store.state.verAnime
+            data: ->
+                console.log "Se cambió el anime a ver..."
+                @$store.state.verAnime
         watch:
-            activo: (nuevo, viejo) ->
+            activo: (nuevo) ->
                 vm = this
                 if nuevo
                     intervalo = setInterval((() =>
                         if vm.$store.state.paginaLista
                             history.pushState({}, null, @data.ruta);
+                            document.body.style.overflow = "hidden"
                             clearInterval intervalo
                     ), 250)
+
 
     #
 </script>
@@ -33,7 +43,8 @@
 
     .ver
         color: var(--texto1)
-        background-color: var(--fondo3)
+        // background-color: var(--fondo3)
+        background: linear-gradient(to bottom, #924066, var(--fondo3) 500px)
         position: fixed
         z-index: 19
         top: 0
@@ -45,6 +56,15 @@
 
     .activo
         transform: translateY(0)
+
+    .grid
+        margin: 25px 0 !important
+        display: grid
+        grid-template-columns: 1fr 250px
+        grid-gap: 2rem
+
+    .publicidad
+        background-color: var(--fondo1)
 
     //
 </style>

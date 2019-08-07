@@ -7,7 +7,12 @@ export default new Vuex.Store
     state:
         verAnime:
             activo: no
-            anime: {}
+            anime:
+                mega: null
+                rapidvideo: null
+                mango: null
+                mp4upload: null
+                okru: null
             esOva: no
             ep: 0
             ruta: ""
@@ -56,5 +61,9 @@ export default new Vuex.Store
             state.verAnime.activo = !state.verAnime.activo
         cambiarRutaVerAnime: (state, ruta) ->
             state.verAnime.ruta = ruta
+        cambiarAnimeVerAnime: (state, datos) ->
+            if state.verAnime.anime.mega isnt datos.mega
+                state.verAnime.anime = datos
+
     actions: {}
 

@@ -24,7 +24,7 @@
                 div.titulo acechanime
                 div.txt Recomendación Semanal
                 hr.divisor
-                div.boton Click para verlo
+                router-link.boton(to="/") Click para verlo
         div.err(v-if="error")
             span.
                 Hubo un error al cargar la recomendación semanal.<br>
@@ -166,6 +166,7 @@
             border: solid 1px
             box-shadow: 0 0 10px 0 rgba(0,0,0,.5)
             transition: all 300ms
+            text-decoration: none
             &:hover
                 transform: scale(1.1)
                 color: #0cbc00

@@ -5,7 +5,7 @@ export fun = (req, res) =>
     anime_id = req.query.anime_id
     if anime_id?
 
-        sql = "SELECT link_id, es_ova, anime_id, num_ep FROM links WHERE anime_id=$1"
+        sql = "SELECT link_id, es_ova, anime_id, num_ep FROM links WHERE anime_id=$1 ORDER BY num_ep DESC"
         datos = [anime_id]
 
         con.query sql, datos
