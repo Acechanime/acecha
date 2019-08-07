@@ -1,6 +1,6 @@
 <template lang="pug">
     article.ep
-        a.link(:href="obtenerLink" @click.prevent="irAlAnime")
+        a.link(:href="obtenerLink" @click.prevent="irAlEp")
             img.imagen(:src="anime.img_nuevo_ep" :alt="'Episodio ' + ep.num_ep + ' de ' + anime.nombre")
             br
             span.nombre {{ anime.nombre }} {{ ep.num_ep }}
@@ -27,7 +27,7 @@
                 ep = @ep
                 anime.ruta + (if ep.es_ova then "ova" else "ep") + ep.num_ep
         methods:
-            irAlAnime: ->
+            irAlEp: ->
                 ep = @ep
                 @$store.commit "cambiarAnimeVerAnime",
                     mega: ep.mega

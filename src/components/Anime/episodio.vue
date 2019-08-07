@@ -1,5 +1,5 @@
 <template lang="pug">
-    router-link.ep(:to="link")
+    a.ep(:href="link" @click.prevent="irAlEp")
         | Ver {{ nombre }} {{ episodio.es_ova? "ova": "capítulo" }} {{ episodio.num_ep }}
     //
 </template>
@@ -17,6 +17,17 @@
                 required: true
         computed:
             link: -> "./" + (if @episodio.es_ova then "ova" else "ep") + @episodio.num_ep
+        methods:
+            irAlEp: ->
+                ep = @episodio
+                @$store.commit "cambiarAnimeVerAnime",
+                    mega: ep.mega
+                    rapidvideo: ep.rapidvideo
+                    mango: ep.mango
+                    mp4upload: ep.mp4upload
+                    okru: ep.okru
+                @$router.push @link
+
     #
     
 </script>

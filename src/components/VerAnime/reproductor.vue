@@ -27,6 +27,7 @@
                 ifr.contentWindow.location.replace @linkActivo
             links: ->
                 vm = this
+                @posActiva = 0
                 intervalo = setInterval((() =>
                     if (document.getElementById "contenedor-anime")?
                         cont = document.getElementById "contenedor-anime"
@@ -35,6 +36,7 @@
                         ifr = document.createElement "iframe"
                         ifr.className = "video"
                         ifr.id = "iframe-anime"
+                        console.log "El link activo es #{@linkActivo}"
                         ifr.src = @linkActivo
                         ifr.allowFullscreen = yes
                         ifr.marginWidth = "0"
@@ -46,13 +48,19 @@
         computed:
             opciones: ->
                 opciones = []
-                if @links?.mega?        then opciones.push [ "mega", @links.mega ]
-                if @links?.rapidvideo?  then opciones.push [ "rapidvideo", @links.rapidvideo ]
-                if @links?.mango?       then opciones.push [ "mango", @links.mango ]
-                if @links?.mp4upload?   then opciones.push [ "mp4upload", @links.mp4upload ]
-                if @links?.okru?        then opciones.push [ "okru", @links.okru ]
+                if @links?.mega? and @links.mega isnt ""
+                    opciones.push ["Mega", @links.mega]
+                if @links?.rapidvideo? and @links.rapidvideo isnt ""
+                    opciones.push ["RapidVideo", @links.rapidvideo]
+                if @links?.mango? and @links.mango isnt ""
+                    opciones.push ["Mango", @links.mango]
+                if @links?.mp4upload? and @links.mp4upload isnt ""
+                    opciones.push ["MP4Upload", @links.mp4upload]
+                if @links?.okru? and @links.okru isnt ""
+                    opciones.push ["Okru", @links.okru]
                 opciones
             linkActivo: -> @opciones?[@posActiva]?[1]?.replace "mega.nz/", "mega.nz/embed"
+
         methods:
             cambiarOpcion: (num) ->
                 @posActiva = num
@@ -68,6 +76,7 @@
         padding-bottom: 56.25%
         height: 0
         overflow: hidden
+        background-color: black
 
         .video
             position: absolute
