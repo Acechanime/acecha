@@ -3,7 +3,7 @@
         div.separador
         div.grid
             div.cont
-                buscador(:filtrosFn="filtrosFn")
+                buscador(:cambiarFiltros="cambiarFiltros")
                 animes(:filtros="filtros")
             div.publicidad
                 publicidad
@@ -19,18 +19,13 @@
     export default
         name: "Animes"
         data: ->
-            filtros:
-                nombre: ""
-            filtrosFn:
-                nombre: @aplicarFiltroNombre
+            filtros: []
         components:
             publicidad: publicidad
             buscador: buscador
             animes: animes
         methods:
-            aplicarFiltroNombre: (nombre) ->
-                console.log "anuma v:"
-                @filtros.nombre = nombre
+            cambiarFiltros: (f) -> @filtros = f
         mounted: ->
             @$store.commit "terminarCargaPagina"
 

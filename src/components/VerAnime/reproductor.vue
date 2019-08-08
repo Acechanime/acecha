@@ -36,14 +36,17 @@
                         ifr = document.createElement "iframe"
                         ifr.className = "video"
                         ifr.id = "iframe-anime"
-                        console.log "El link activo es #{@linkActivo}"
                         ifr.src = @linkActivo
                         ifr.allowFullscreen = yes
                         ifr.marginWidth = "0"
                         ifr.frameBorder = "0"
                         cont.appendChild ifr
+                        ifr.style.opacity = "0"
+                        setInterval (=>
+                            ifr.style.opacity = "1"
+                        ), 150
                         clearInterval intervalo
-                ), 250)
+                ), 50)
 
         computed:
             opciones: ->

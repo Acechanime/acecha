@@ -14,10 +14,7 @@
                 history.back()
         created: ->
             vm = this
-            window.onpopstate = (e) =>
-                if vm.$store.state.verAnime.activo
-                    document.body.style.overflow = ""
-                    vm.$store.commit "cambiarEstadoVerAnime"
+
     #
 
 </script>

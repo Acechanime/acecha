@@ -59,6 +59,10 @@ export default new Vuex.Store
             state.listaGeneros = nuevo
         cambiarEstadoVerAnime: (state) ->
             state.verAnime.activo = !state.verAnime.activo
+        activarVerAnime: (state) ->
+            state.verAnime.activo = true
+        desactivarVerAnime: (state) ->
+            state.verAnime.activo = false
         cambiarRutaVerAnime: (state, ruta) ->
             state.verAnime.ruta = ruta
         cambiarAnimeVerAnime: (state, datos) ->

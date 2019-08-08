@@ -21,20 +21,25 @@
         components: { cerrar, publicidad, reproductor }
         computed:
             activo: -> @$store.state.verAnime.activo
-            data: ->
-                console.log "Se cambió el anime a ver..."
-                @$store.state.verAnime
+            data: -> @$store.state.verAnime
         watch:
             activo: (nuevo) ->
                 vm = this
+                evento = (e) =>
+                    if vm.$store.state.verAnime.activo
+                        document.body.style.overflow = ""
+                        vm.$store.commit "desactivarVerAnime"
+
                 if nuevo
+                    document.body.style.overflow = "hidden"
                     intervalo = setInterval((() =>
                         if vm.$store.state.paginaLista
                             history.pushState({}, null, @data.ruta);
-                            document.body.style.overflow = "hidden"
+                            window.onpopstate = evento
                             clearInterval intervalo
                     ), 250)
-
+                else
+                    window.onpopstate = null
 
     #
 </script>

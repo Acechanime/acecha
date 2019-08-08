@@ -73,9 +73,10 @@ router.beforeEach(async (to, from, next) => {
         if (rutasNormales.find(x => x === `/${ruta[0]}/`)) next();
         else {
             await esperar;
+
             if (store.state.listaAnimes.find(x => x.ruta === `/${ruta[0]}/`)) {
 
-                store.commit("cambiarEstadoVerAnime");
+                store.commit("activarVerAnime");
                 const rutaNueva = (from.name === null)? `/${ruta[0]}/`: false;
 
                 next(rutaNueva);

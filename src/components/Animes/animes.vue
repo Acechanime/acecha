@@ -1,18 +1,23 @@
 <template lang="pug">
     div.gridIn
-        anime(v-for="(anime, i) in listaAnimesFiltrada" :key="anime.anime_id" :anime="anime")
+        anime(v-for="anime in listaAnimesFiltrada" :key="anime.anime_id" :anime="anime")
     //
 </template>
 
 <script lang="coffee">
     import anime from "./anime.vue"
 
-    removerCaracteres = (str, strArr) =>
-        caracs = strArr.split ""
-        arr = (str.split "").map (c) =>
-            res = caracs.filter (c2) => c == c2
-            if res.length == 1 then " " else c
-        arr.join("").toLowerCase().split(" ")
+    # [(a -> Bool)] -> a -> Bool
+    comp = (fs) =>
+        (elem) =>
+            estado = true
+            fs.forEach (f) =>
+                estado =
+                    if estado
+                        f elem
+                    else
+                        false
+            estado
 
     export default
         name: "animes"
@@ -20,21 +25,12 @@
             anime: anime
         props:
             filtros:
-                type: Object
+                type: Array # [(a -> Bool)]
                 required: true
         computed:
             listaAnimes: -> @$store.state.listaAnimes
             listaAnimesFiltrada: ->
-                vm = this
-                @listaAnimes.filter (x) =>
-                    palabras = removerCaracteres x.nombre, "-:"
-                    nombre = removerCaracteres vm.filtros.nombre, "-:"
-                    if nombre.length is 0 then return true
-                    for p1 in palabras
-                        for p2 in nombre
-                            if (p1.search p2) != -1 then return true
-                    return false
-
+                @listaAnimes.filter comp @filtros
 
     #
     
