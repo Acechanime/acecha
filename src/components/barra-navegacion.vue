@@ -7,17 +7,16 @@
                          alt="Logo AcechaAnime")
             div.der
                 ul.items
-                    li
+                    li#navbar-anime
                         router-link(to="/animes/") Anime
                             img.emoji( draggable="false" alt="📂" width="12px"
                                 src="https://s.w.org/images/core/emoji/2.4/svg/1f4c2.svg")
-                            i.material-icons arrow_drop_down
-                    li
+                            // i.material-icons arrow_drop_down
+                    li#navbar-tips
                         a Acecha tips
                             img.emoji(draggable="false" alt=""
                             src="https://acechanime.com/wp-content/themes/anime/img/bicons/parchment.svg"
                             width="12px")
-                            i.material-icons arrow_drop_down
                     li
                         router-link(to="/acecha-premium/") Acecha premium
                             img.emoji(draggable="false"
@@ -28,11 +27,10 @@
                         router-link(to="/acecha-tv/") Acecha tv
                             img.emoji(draggable="false" alt="📺" width="12px"
                                 src="https://s.w.org/images/core/emoji/11/svg/1f4fa.svg")
-                    li
+                    li#navbar-comunidad
                         a Comunidad
                             img.emoji(draggable="false" alt="👨‍👨‍👧‍👧" width="12px"
                                 src="https://s.w.org/images/core/emoji/11/svg/1f468-200d-1f468-200d-1f467-200d-1f467.svg")
-                            i.material-icons arrow_drop_down
                     li
                         a
                             img.search(src="../assets/icons/search.svg")
@@ -63,6 +61,26 @@
 
 <style scoped lang="sass">
     @import "../sass/variables"
+
+    #navbar-anime, #navbar-comunidad, #navbar-tips
+        &::after
+            display: inline-block
+            color: var(--texto1)
+            content: "\e90b"
+            top: 17px
+            right: 14px
+            position: absolute
+            font-size: var(--normal-font-size)
+            pointer-events: none
+            font-family: 'icomoon'!important
+            speak: none
+            font-style: normal
+            font-weight: normal
+            font-variant: normal
+            text-transform: none
+            line-height: 1
+            -webkit-font-smoothing: antialiased
+            transition: transform 250ms ease-in-out, color 250ms ease-in-out
 
     .navegacion
         color: var(--texto1)
@@ -104,24 +122,26 @@
 
     .items
         list-style: none
-        // display: inline-table
+        display: inline-table
         margin: 0 10px
         height: 50px
         li
-            display: inline-block
-            margin: 0 18px
-            // vertical-align: middle
-            // height: 50px
+            position: relative
+            display: table-cell
+            vertical-align: middle
             font:
                 size: 12px
                 family: Roboto, sans-serif
             text-transform: uppercase
+            transition: color 250ms ease-in-out
             a
                 color: inherit
                 text-decoration: none
-                padding: 10px 0
-                display: table-cell
+                // padding: 10px 0
+                display: block
                 cursor: pointer
+                padding-right: 1.6875rem !important
+                padding-left: 10px
 
             img.emoji
                 //vertical-align: top
@@ -140,8 +160,9 @@
 
             &:hover
                 color: #E91E63
-                .material-icons
-                    transform: translateY(7px) rotate(180deg)
+                &:after
+                    transform: rotate(180deg)
+                    color: #E91E63 !important
 
     @media only screen and (max-width: 1023px)
         .der
