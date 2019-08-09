@@ -124,6 +124,7 @@
 
     .selector
         text-align: center
+        color: var(--texto1)
 
     .tit
         min-width: 200px

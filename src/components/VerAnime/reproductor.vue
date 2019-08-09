@@ -1,11 +1,20 @@
 <template lang="pug">
-    div
+    div.reproductor
         ul.opciones
             opcion(v-for="(opcion, i) in opciones" :opcion="opcion" :pos="i" :key="i"
                 :largo="opciones.length" :posActiva="posActiva"
                 :cambiarOpcion="cambiarOpcion")
         div#contenedor-anime.contenedor-video
-        p activo -> {{ linkActivo }}
+        div.controles
+            a.izq.boton.boton--eps
+                i.material-icons chevron_left
+                span Anterior
+            a.boton.boton--ir
+                span Ver capítulos
+            a.der.boton.boton--eps
+                span Siguiente
+                i.material-icons chevron_right
+
     //
 </template>
 
@@ -73,6 +82,52 @@
 
 <style scoped lang="sass">
     @import "../../sass/variables"
+
+    .reproductor
+        margin-top: -44px
+
+    #contenedor-anime
+        border-radius: 0 10px 10px 10px
+
+    .controles
+        margin: 10px 10px
+        text-align: center
+
+    .boton
+        display: inline-table
+        background-color: #2e3437
+        padding: 0 10px
+        color: #eaeaea
+        cursor: pointer
+        text-transform: uppercase
+        border-radius: 5px
+        height: 44px
+        transition: background-color 100ms linear
+
+        i
+            display: table-cell
+            vertical-align: middle
+        span
+            display: table-cell
+            vertical-align: middle
+            font-size: 15px
+
+    .boton--eps
+        background-color: #e46a69
+        &:hover
+            background-color: #c75857
+
+    .boton--ir
+        background-color: #d93e3c
+        &:hover
+            background-color: #b62f2d
+
+    .izq
+        float: left
+
+    .der
+        float: right
+
 
     .contenedor-video
         position: relative

@@ -9,7 +9,7 @@
                         span.icon-check-box
                 redes-sociales
                 info(:animeObj="animeObj")
-                mal(:url="animeObj.mal")
+                mal(:url="animeObj.mal? animeObj.mal: 'err'")
                 twitter
             div
                 article.sinopsis

@@ -1,7 +1,10 @@
 <template lang="pug">
     div.cerrar
         i.material-icons(@click="cerrarPanel") expand_more
-        span.txt Ocultar reproductor
+        span.txt
+            | {{ $store.state.verAnime.nombre }}
+            | {{ $store.state.verAnime.esOva? 'ova': 'episodio' }}
+            | {{ $store.state.verAnime.ep }}
     //
 </template>
 

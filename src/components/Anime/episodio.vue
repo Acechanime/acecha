@@ -20,6 +20,11 @@
         methods:
             irAlEp: ->
                 ep = @episodio
+                @$store.commit "cambiarDatosVerAnime",
+                    nombre: @nombre
+                    esOva: @episodio.es_ova
+                    ep: @episodio.num_ep
+                    ruta: null
                 @$store.commit "cambiarAnimeVerAnime",
                     mega: ep.mega
                     rapidvideo: ep.rapidvideo

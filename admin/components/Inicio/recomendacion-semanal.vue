@@ -5,7 +5,7 @@
         label Mostrar el anime
         select(v-model="animeEscogido")
             option(disabled value="-1" selected) Selecciona un anime
-            option(v-for="anime in $store.state.listaAnimes"
+            option(v-for="anime in listaAnimesOrd"
                 :value="anime.anime_id") {{ anime.nombre }}
         br
         label Mostrar hasta el
@@ -29,6 +29,9 @@
             cargando: 0
             textoBoton: "Cambiar"
             claseBoton: ""
+        computed:
+            listaAnimesOrd: ->
+                @$store.state.listaAnimes.sort (a, b) => a.nombre.localeCompare(b.nombre)
         watch:
             cargando: (n) ->
                 vm = this

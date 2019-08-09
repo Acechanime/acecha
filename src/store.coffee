@@ -13,6 +13,16 @@ export default new Vuex.Store
                 mango: null
                 mp4upload: null
                 okru: null
+            descarga:
+                carpeta_mega: null
+                # Solucion temporal. Cuando se implementen cuentas los links se obtendran tras
+                # una solicitud al servidor.
+                mega: null
+                rapidvideo: null
+                mango: null
+                mp4upload: null
+                okru: null
+            nombre: null
             esOva: no
             ep: 0
             ruta: ""
@@ -65,6 +75,12 @@ export default new Vuex.Store
             state.verAnime.activo = false
         cambiarRutaVerAnime: (state, ruta) ->
             state.verAnime.ruta = ruta
+        cambiarDatosVerAnime: (state, datos) ->
+            if state.verAnime.nombre isnt datos.nombre or state.verAnime.ep isnt datos.ep
+                state.verAnime.nombre = datos.nombre
+                state.verAnime.esOva = datos.esOva
+                state.verAnime.ep = datos.ep
+                state.verAnime.ruta = datos.ruta
         cambiarAnimeVerAnime: (state, datos) ->
             if state.verAnime.anime.mega isnt datos.mega
                 state.verAnime.anime = datos

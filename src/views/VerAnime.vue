@@ -3,9 +3,11 @@
         cerrar
         div.contenedor
             div.grid
-                div
+                div.fondo
                     reproductor(:links="data.anime")
-                    p khe?
+                    descarga(:links="data.descarga")
+                    hr
+                    comentarios
                 div.publicidad
                     publicidad
     //
@@ -15,10 +17,12 @@
     import cerrar from "../components/VerAnime/cerrar.vue"
     import publicidad from "../components/Animes/publicidad.vue"
     import reproductor from "../components/VerAnime/reproductor.vue"
+    import descarga from "../components/VerAnime/descarga.vue"
+    import comentarios from "../components/VerAnime/comentarios.vue"
 
     export default
         name: "ver-anime"
-        components: { cerrar, publicidad, reproductor }
+        components: { cerrar, publicidad, reproductor, descarga, comentarios }
         computed:
             activo: -> @$store.state.verAnime.activo
             data: -> @$store.state.verAnime
@@ -58,6 +62,7 @@
         height: 100%
         transform: translateY(100%)
         transition: transform 500ms ease-in-out
+        overflow-y: scroll
 
     .activo
         transform: translateY(0)
@@ -68,8 +73,10 @@
         grid-template-columns: 1fr 250px
         grid-gap: 2rem
 
-    .publicidad
+    .fondo, .publicidad
         background-color: var(--fondo1)
+        border-radius: 10px
+        margin-top: 44px
 
     //
 </style>

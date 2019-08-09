@@ -24,7 +24,7 @@
                 div.titulo acechanime
                 div.txt Recomendación Semanal
                 hr.divisor
-                router-link.boton(to="/") Click para verlo
+                router-link.boton(:to="recomendacion.ruta") Click para verlo
         div.err(v-if="error")
             span.
                 Hubo un error al cargar la recomendación semanal.<br>

@@ -1,5 +1,5 @@
 <template lang="pug">
-    div.mal
+    div.mal(v-if="url !== 'err'")
         a(:href="url" target="_blank")
             img(src="https://acechanime.com/wp-content/themes/anime/img/myanimelist.png"
                 alt="My Anime List")
