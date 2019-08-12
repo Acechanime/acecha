@@ -75,7 +75,12 @@
             inicializarTemporizador: (hora) ->
                 horaLimite = Math.floor (hora / 1000)
                 horaActual = Math.floor (new Date().getTime() / 1000)
-                @segundos = horaLimite - horaActual
+                segundos = horaLimite - horaActual
+                @segundos =
+                    if segundos < 0
+                        clearInterval @intervaloSegundos
+                        0
+                    else segundos
 
         created: ->
             vm = this
@@ -95,7 +100,7 @@
             @terminarCarga()
 
         beforeDestroy: ->
-            clearInterval(this.intervaloSegundos)
+            clearInterval @intervaloSegundos
     #
 </script>
 

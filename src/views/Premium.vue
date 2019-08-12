@@ -2,7 +2,6 @@
     div
         div.separador
         div.contenedor
-            p Esto es Premium
             selector
     //
 </template>

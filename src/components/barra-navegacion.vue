@@ -31,7 +31,7 @@
                         a Comunidad
                             img.emoji(draggable="false" alt="👨‍👨‍👧‍👧" width="12px"
                                 src="https://s.w.org/images/core/emoji/11/svg/1f468-200d-1f468-200d-1f467-200d-1f467.svg")
-                    li
+                    // li
                         a
                             img.search(src="../assets/icons/search.svg")
     //
@@ -140,8 +140,7 @@
                 // padding: 10px 0
                 display: block
                 cursor: pointer
-                padding-right: 1.6875rem !important
-                padding-left: 10px
+                padding: 15px 1.6875rem 15px 10px !important
 
             img.emoji
                 //vertical-align: top

@@ -5,6 +5,7 @@ import Inicio from './views/Inicio.vue'
 import Animes from "./views/Animes.vue"
 import Anime from "./views/Anime.vue"
 import Premium from "./views/Premium.vue"
+import EnConstruccion from "./views/EnConstruccion.vue"
 
 import store from "./store.coffee"
 
@@ -36,9 +37,19 @@ const router = new Router({
         { path: "/acecha-premium/", redirect: "/premium/" },
         { path: "/comprar-acecha-premium/", redirect: "/premium/" },
         {
+            path: "/en-construccion/",
+            name: "EnConstruccion",
+            component: EnConstruccion
+        },
+        {
             path: "/premium/",
             name: "Premium",
-            component: Premium
+            redirect: "/en-construccion/"
+        },
+        {
+            path: "/acecha-tv/",
+            name: "AcechaTV",
+            redirect: "/en-construccion/"
         },
         {
             path: '/animes/',

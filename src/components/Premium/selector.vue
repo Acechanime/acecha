@@ -26,14 +26,6 @@
                     td
                         i.material-icons.verde check
                 tr
-                    td Continua viendo donde lo dejaste
-                    td
-                        i.material-icons.rojo close
-                    td
-                        i.material-icons.verde check
-                    td
-                        i.material-icons.verde check
-                tr
                     td Notificaciones personalizadas
                     td
                         i.material-icons.rojo close

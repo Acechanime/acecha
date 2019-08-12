@@ -10,6 +10,8 @@
                 div
                     button.boton(@click="cambiarMostrarCrear" :class="claseBoton") Crear anime
                     crear-anime(v-if="mostrarCrear")
+                    br
+                    ver-anime
         div.preview(:style="clasePreview")
             vista-anime
 
@@ -23,7 +25,8 @@
     import VistaAnime from "../../src/views/Anime.vue"
     import Datepicker from "vuejs-datepicker"
     import recomendacionSemanal from "../components/Inicio/recomendacion-semanal.vue"
-    import videoRecomendad from "../components/Inicio/video-recomendado.vue"
+    import videoRecomendado from "../components/Inicio/video-recomendado.vue"
+    import verAnime from "../components/Inicio/ver-animes.vue"
 
     export default
         name: "Inicio"
@@ -32,7 +35,8 @@
             "vista-anime": VistaAnime
             datepicker: Datepicker
             "recomendacion-semanal": recomendacionSemanal
-            "video-recomendado": videoRecomendad
+            "video-recomendado": videoRecomendado
+            "ver-anime": verAnime
         data: ->
             items: [
                 nombre: "Animes"

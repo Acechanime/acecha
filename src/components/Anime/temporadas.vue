@@ -1,13 +1,13 @@
 <template lang="pug">
-    div.temporadas
+    div.temporadas(v-if="obtTempAnteriores.length > 0 || obtTempSiguientes.length > 0")
         h2.titulo Temporadas
         p.label Todas las temporadas de {{ anime.nombre }}
         div.temps
-            temporada(v-for="animeAnt in obtTempAnteriores()" :anime="animeAnt"
-                :key="animeAnt.anime_id")
-            temporada(:anime="anime")
-            temporada(v-for="animeSig in obtTempSiguientes()" :anime="animeSig"
+            temporada(v-for="animeSig in obtTempSiguientes" :anime="animeSig"
                 :key="animeSig.anime_id")
+            temporada(:anime="anime")
+            temporada(v-for="animeAnt in obtTempAnteriores" :anime="animeAnt"
+                :key="animeAnt.anime_id")
     //
 </template>
 
@@ -22,7 +22,7 @@
             anime:
                 type: Object
                 required: true
-        methods:
+        computed:
             obtTempAnteriores: ->
                 anterior = []
                 animeActual = @anime

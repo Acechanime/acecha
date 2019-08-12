@@ -1,9 +1,18 @@
 <template lang="pug">
     div.capitulos
+        template(v-if="tieneOvas")
+            h2.titulo Lista de Ovas
+            p.label Todas las OVAs de {{ anime.nombre }}
+            div.eps
+                episodio(v-for="(ep, i) in ovas_filtradas" :key="i"
+                    :episodio="ep" :nombre="anime.nombre")
+            br
+            br
         h2.titulo Lista de Capítulos
-        p.label Todas las temporadas de {{ anime.nombre }}
+        p.label Todos los capítulos de {{ anime.nombre }}
         div.eps
-            episodio(v-for="(ep, i) in episodios" :key="i" :episodio="ep" :nombre="anime.nombre")
+            episodio(v-for="(ep, i) in episodios_filtrados" :key="i"
+                :episodio="ep" :nombre="anime.nombre")
     //
 </template>
 
@@ -20,6 +29,10 @@
         data: ->
             episodios: []
             estadoCarga: 0
+        computed:
+            episodios_filtrados: -> @episodios.filter (x) -> x.es_ova is no
+            ovas_filtradas: -> @episodios.filter (x) -> x.es_ova is yes
+            tieneOvas: -> @ovas_filtradas.length > 0
         created: ->
             datosRaw = await fetch "/api/episodios?anime_id=#{@anime.anime_id}"
             datos = await datosRaw.json()

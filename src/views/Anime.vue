@@ -50,17 +50,24 @@
             "comentarios": comentarios
             "genero": genero
         data: ->
-            animeObj: {imagenes: {}}
+            animeProv: {imagenes: {}}
             animeExiste: true
         computed:
             colorEtiqueta: ->
                 if @animeObj.en_emision then "background: #01bc59" else "background: #ff0241"
+            animeAdmin: ->
+                console.log "anuma v: cambioa"
+                @$store.state.animeAdmin
+            animeObj:
+                get: ->
+                    if @$store.state.modoAdmin then @$store.state.animeAdmin
+                    else @animeProv
+                set: (a) -> @animeProv = a
         methods:
             inicializarAnimeObj: (err) ->
                 @$store.commit "terminarCargaPagina"
                 if err? then @animeExiste = false
             cambiarAnime: (obj) ->
-                console.log "Se deberia haber cambiado..."
                 @animeObj = obj
 
         beforeRouteEnter: (to, from, next) ->
@@ -100,7 +107,7 @@
 
         created: ->
             if @$store.state.modoAdmin
-                @animeObj = @$store.state.animeAdmin
+                @animeObj = @animeAdmin
             else
                 unless @$route?.params?.animeObj?
                     nombreRuta = @$route.path
@@ -109,7 +116,7 @@
                         console.log "existe #{nombreRuta}"
                     else
                         @animeExiste = no
-                        console.error "No existe#{nombreRuta}"
+                        console.error "No existe #{nombreRuta}"
                 else
                     @animeObj = @$route.params.animeObj
 
