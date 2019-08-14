@@ -1,7 +1,7 @@
 <template lang="pug">
     div.an
         imagen-anime(:nombre="animeObj.nombre" :img="animeObj.img_fondo")
-        main.cont.contenedor
+        main.cont.contenedor(v-show="!$store.state.verAnimeActivo")
             div
                 div.contImg
                     img.imagen(:src="animeObj.img_portada")
@@ -22,6 +22,7 @@
                 temporadas(:anime="animeObj")
                 lista-de-episodios(:anime="animeObj")
                 comentarios
+        router-view
     //
 </template>
 
@@ -103,7 +104,6 @@
                     console.error "No se encontró un anime con ruta #{nombreRuta}"
                     @inicializarAnimeObj true
                     next()
-
 
         created: ->
             if @$store.state.modoAdmin

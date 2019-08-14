@@ -31,6 +31,7 @@ const iniciarRutas = (app, ruta) => {
 
     app.get("/api/animes", require("./animes/get").fun);
     app.post("/api/animes", require("./animes/create").fun);
+    app.put("/api/animes/:anime_id", require("./animes/update").fun);
 
     app.get("/api/episodios", require("./episodios/get").fun);
 

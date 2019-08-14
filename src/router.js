@@ -6,6 +6,7 @@ import Animes from "./views/Animes.vue"
 import Anime from "./views/Anime.vue"
 import Premium from "./views/Premium.vue"
 import EnConstruccion from "./views/EnConstruccion.vue"
+import VerAnimeLegacy from "./views/VerAnimeLegacy.vue"
 
 import store from "./store.coffee"
 
@@ -60,7 +61,14 @@ const router = new Router({
             path: "/:anime/",
             name: "Anime",
             component: Anime,
-            props: true
+            props: true,
+            children: [
+                {
+                    path: "ep:ep(\\d+)",
+                    alias: "ova:ep(\\d+)",
+                    component: VerAnimeLegacy
+                }
+            ]
         }
     ],
     scrollBehavior (to, from, savedPosition) {
@@ -73,10 +81,11 @@ const extraerUrls = url => url.split("/").filter(x =>  x !== "");
 const esperar = new Promise(((resolve) => {
     setInterval(() => {
         if (store.state.listaAnimes.length !== 0) resolve();
-    }, 500);
+    }, 250);
 }));
 
 router.beforeEach(async (to, from, next) => {
+    /*
     const ruta = extraerUrls(to.path);
 
     if (ruta.length === 2) {
@@ -101,6 +110,9 @@ router.beforeEach(async (to, from, next) => {
     } else {
         next();
     }
+
+     */
+    next();
 });
 
 export default router;

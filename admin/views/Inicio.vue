@@ -9,7 +9,7 @@
                 h2 Animes
                 div
                     button.boton(@click="cambiarMostrarCrear" :class="claseBoton") Crear anime
-                    crear-anime(v-if="mostrarCrear")
+                    crear-anime(v-if="panelAbierto")
                     br
                     ver-anime
         div.preview(:style="clasePreview")
@@ -42,18 +42,23 @@
                 nombre: "Animes"
                 nombre: "o"
             ]
-            mostrarCrear: no
             fecha: new Date()
+            panelAbierto: no
         computed:
+            mostrarCrear: -> @$store.state.mostrarAnimeAdmin
             clasePreview: ->
                 if @mostrarCrear then "width: 40%"
             claseAdm: ->
                 if @mostrarCrear then "width: 59%"
             claseBoton: ->
-                if @mostrarCrear then "boton--activo"
+                if @panelAbierto then "boton--activo"
         methods:
             cambiarMostrarCrear: ->
-                @mostrarCrear = !@mostrarCrear
+                if @panelAbierto
+                    @$store.commit "ocultarAnimeAdmin"
+                else
+                    @$store.commit "mostrarAnimeAdmin"
+                @panelAbierto = !@panelAbierto
         created: ->
             @$store.commit "cambiarAModoAdmin"
 

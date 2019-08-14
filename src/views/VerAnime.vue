@@ -4,7 +4,7 @@
         div.contenedor
             div.grid
                 div.fondo
-                    reproductor(:links="data.anime")
+                    reproductor(:links="data.anime" :linkss="linksVer")
                     descarga(:links="data.descarga")
                     hr
                     comentarios
@@ -20,12 +20,43 @@
     import descarga from "../components/VerAnime/descarga.vue"
     import comentarios from "../components/VerAnime/comentarios.vue"
 
+    obtenerParams = (url) =>
+        console.log "La url es #{url}"
+        if /\/ep(\d+)$/.test url
+            [false, parseInt (/\/ep(\d+)$/.exec url)[1]]
+        else if /\/ova(\d+)$/.test url
+            [true, parseInt (/\/ova(\d+)$/.exec url)[1]]
+        else
+            [false, -1]
+
     export default
         name: "ver-anime"
         components: { cerrar, publicidad, reproductor, descarga, comentarios }
         computed:
             activo: -> @$store.state.verAnime.activo
-            data: -> @$store.state.verAnime
+            data: ->
+                vm = this
+                a = @$store.state.verAnime
+                unless a.mega? and a.rapidvideo? and a.mango? and a.mp4upload and a.okru
+                    a
+                else
+                    a
+            listaEpisodios: -> @$store.state.verAnime.listaEpisodios
+            linksVer: ->
+                l = @listaEpisodios
+                numEp = @$store.state.verAnime.ep
+                esOva = @$store.state.verAnime.esOva
+                res =
+                    if numEp isnt -1
+                        l.find (a) => a.num_ep is numEp and a.es_ova is esOva
+                    else
+                        url = window.location.href
+                        [esOva, numEp] = obtenerParams url
+                        console.log "obtener -> #{esOva} - #{numEp}"
+                        l.find (a) => a.num_ep is numEp and a.es_ova is esOva
+                console.log res
+                res
+
         watch:
             activo: (nuevo) ->
                 vm = this

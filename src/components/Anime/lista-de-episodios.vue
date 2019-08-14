@@ -39,6 +39,7 @@
             @estadoCarga =
                 if datos.exito? && datos.exito
                     @episodios = datos.payload
+                    @$store.commit "cambiarListaEpisodios", datos.payload
                     1
                 else -1
 

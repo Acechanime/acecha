@@ -14,7 +14,7 @@
         div.culminacion Fecha de culminacion
         p {{ animeObj.culminacion }}
         div.otrosNombres Otros nombres
-        p(v-for="n in animeObj.alternativo") {{ n }}
+            p(v-for="n in animeObj.otros_nombres") {{ n }}
     //
 </template>
 
@@ -53,6 +53,10 @@
             padding-top: 3px
             color: $colorPrincipal
             font-size: 14px
+
+        .otrosNombres p
+            padding-top: 5px
+            padding-bottom: 0
 
     //
 </style>

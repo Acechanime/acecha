@@ -7,8 +7,10 @@ export fun = (req, res) =>
     sql = "INSERT INTO animes
         (nombre, ruta, sinopsis, generos, episodios, temporada, anio, estudio, fuente, emision,
         culminacion, mal, en_emision, img_portada, img_fondo, img_nuevo_ep, num_temporada,
-        id_temporada_sig, id_temporada_ant) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12,
-        $13, $14, $15, $16, $17, $18, $19)"
+        id_temporada_sig, id_temporada_ant, otros_nombres) VALUES
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19,
+        $20)"
+
     datos = [
         anime.nombre
         anime.ruta
@@ -29,10 +31,11 @@ export fun = (req, res) =>
         anime.num_temporada
         anime.id_temporada_sig
         anime.id_temporada_ant
+        anime.otros_nombres
     ]
 
     con.query sql, datos
-        .then (_) =>
+        .then () =>
             res.status(200).json crearRespuesta {}
         .catch (err) =>
             res.status(500).json (

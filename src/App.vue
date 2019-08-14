@@ -3,8 +3,8 @@
         pantalla-carga
         barra-navegacion
         router-view
-        // pie-pagina
-        ver-anime
+        pie-pagina
+        // ver-anime
     //
 </template>
 

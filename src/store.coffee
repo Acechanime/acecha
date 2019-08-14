@@ -3,9 +3,17 @@ import Vuex from 'vuex'
 
 Vue.use Vuex
 
-export default new Vuex.Store
+moduloVerAnime =
+    state:
+        listaEpisodios: []
+    mutations:
+        cambiarListaEps: (state, data) ->
+            state.listaEpisodios = data
+
+store = new Vuex.Store
     state:
         verAnime:
+            listaEpisodios: []
             activo: no
             anime:
                 mega: null
@@ -24,14 +32,16 @@ export default new Vuex.Store
                 okru: null
             nombre: null
             esOva: no
-            ep: 0
+            ep: -1
             ruta: ""
+        verAnimeActivo: no
         listaAnimes: []
         listaGeneros: []
         recomendacionSemanal: ""
         paginaLista: no
         modoAdmin: no
         animeAdmin: {}
+        mostrarAnimeAdmin: no
     mutations:
         cambiarListaAnimes: (state, data) ->
             state.listaAnimes = data
@@ -44,7 +54,12 @@ export default new Vuex.Store
         cambiarAModoAdmin: (state) ->
             state.modoAdmin = yes
         cambiarAnimeAdmin_alternativo: (state, arr) ->
-            state.animeAdmin.alternativo = arr
+            state.animeAdmin.otros_nombres = arr
+        agregarAnimeAdmin_alternativo: (state) ->
+            unless Array.isArray state.animeAdmin.otros_nombres
+                state.animeAdmin.otros_nombres = []
+            else
+                state.animeAdmin.otros_nombres = state.animeAdmin.otros_nombres.concat ""
         cambiarListaGeneros: (state, nuevo) ->
             state.listaGeneros = nuevo
         cambiarEstadoVerAnime: (state) ->
@@ -65,5 +80,19 @@ export default new Vuex.Store
             if state.verAnime.anime.mega isnt datos.mega
                 state.verAnime.anime = datos
 
+        mostrarAnimeAdmin: (state) ->
+            state.mostrarAnimeAdmin = yes
+        ocultarAnimeAdmin: (state) ->
+            state.mostrarAnimeAdmin = no
+
+        cambiarListaEpisodios: (state, data) ->
+            state.verAnime.listaEpisodios = data
+
+        activarVerAnime: (state) ->
+            state.verAnimeActivo = yes
+        desactivarVerAnime: (state) ->
+            state.verAnimeActivo = no
+
     actions: {}
 
+export default store

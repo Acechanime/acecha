@@ -28,6 +28,9 @@
             links:
                 type: Object
                 required: true
+            linkss:
+                type: Object
+                required: true
         data: ->
             posActiva: 0
         watch:
@@ -77,7 +80,6 @@
             cambiarOpcion: (num) ->
                 @posActiva = num
     #
-    
 </script>
 
 <style scoped lang="sass">

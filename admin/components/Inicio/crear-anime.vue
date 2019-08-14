@@ -18,7 +18,7 @@
             error: no
             animeVacio:
                 nombre: "Nombre"
-                alternativo: [
+                otros_nombres: [
                     "Otros nombres"
                 ]
                 ruta: "/ruta-del-anime/"

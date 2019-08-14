@@ -8,8 +8,8 @@
         br
         label Otros nombres
         br
-        template(v-for="(n, i) in otrosNombres")
-            input.otroNombre(v-model="otrosNombres[i]")
+        template(v-for="(n, i) in anime.otros_nombres")
+            input.otroNombre(v-model="anime.otros_nombres[i]")
             br
         button.agregar(@click="agregarOtroNombre") Agregar
         br
@@ -75,12 +75,13 @@
     export default
         name: "editar-anime"
         data: ->
-            otrosNombres: ["Nombre alternativo"]
+            otrosNombres: @otrosNombresAlt ? ["Nombre alternativo"]
             generos: []
         computed:
             anime: ->
                 console.log "eh?"
                 @$store.state.animeAdmin
+            otrosNombresAlt: -> @$store.state.animeAdmin.otros_nombres
         props:
             texto:
                 type: String
@@ -99,7 +100,7 @@
                 @$store.commit "cambiarAnimeAdmin_alternativo", nuevo
         methods:
             agregarOtroNombre: ->
-                @otrosNombres = @otrosNombres.concat [""]
+                @$store.commit "agregarAnimeAdmin_alternativo"
         mounted: ->
             @$store.commit "cambiarAnimeAdmin", @config
 
@@ -132,7 +133,7 @@
         background-color: #e51400
         color: white
 
-    .entrada
+    .editar
         label
             display: inline-block
             min-width: 150px
