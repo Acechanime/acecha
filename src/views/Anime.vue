@@ -72,14 +72,20 @@
                 @animeObj = obj
 
         beforeRouteEnter: (to, from, next) ->
+            ruta =
+                if /\/(ep|ova)\d+$/.test to.path
+                    partes = to.path.split "/"
+                    if partes[0] is "" then partes[1]
+                    else partes[0]
+                else (to.path.split "/")[1]
             fun = ->
-                nombreRuta = to.path
+                nombreRuta = "/#{ruta}/"
                 animes = store.state.listaAnimes.filter (a) -> a.ruta == nombreRuta
                 if animes.length == 1
                     to.params.animeObj = animes[0]
                     next (vm) -> vm.inicializarAnimeObj()
                 else
-                    console.error "No se encontró un anime con ruta #{nombreRuta}"
+                    console.error "No se encontró un anime con ruta /#{nombreRuta}/"
                     next (vm) -> vm.inicializarAnimeObj(true)
 
             if to.params.animeObj?
@@ -91,7 +97,9 @@
                         fun()
                 ), 100
         beforeRouteUpdate: (to, from, next) ->
-            if to.params.animeObj?
+            if /\/(ep|ova)\d+$/.test to.path
+                next()
+            else if to.params.animeObj?
                 @cambiarAnime to.params.animeObj
                 next()
             else

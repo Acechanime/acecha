@@ -28,9 +28,6 @@
             links:
                 type: Object
                 required: true
-            linkss:
-                type: Object
-                required: true
         data: ->
             posActiva: 0
         watch:
@@ -79,6 +76,28 @@
         methods:
             cambiarOpcion: (num) ->
                 @posActiva = num
+
+        mounted: ->
+            intervalo = setInterval((() =>
+                if (document.getElementById "contenedor-anime")?
+                    cont = document.getElementById "contenedor-anime"
+                    try
+                        cont.removeChild cont.childNodes[0]
+                    ifr = document.createElement "iframe"
+                    ifr.className = "video"
+                    ifr.id = "iframe-anime"
+                    ifr.src = @linkActivo
+                    ifr.allowFullscreen = yes
+                    ifr.marginWidth = "0"
+                    ifr.frameBorder = "0"
+                    cont.appendChild ifr
+                    ifr.style.opacity = "0"
+                    setInterval (=>
+                        ifr.style.opacity = "1"
+                    ), 150
+                    clearInterval intervalo
+            ), 50)
+
     #
 </script>
 
@@ -86,7 +105,7 @@
     @import "../../sass/variables"
 
     .reproductor
-        margin-top: -44px
+        // margin-top: -44px
 
     #contenedor-anime
         border-radius: 0 10px 10px 10px

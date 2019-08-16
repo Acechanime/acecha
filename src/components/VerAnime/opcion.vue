@@ -46,6 +46,7 @@
         display: inline-block
         padding: 10px 15px
         background-color: #0f0d0d
+        color: #BFC1B6
         cursor: pointer
 
     .opcion--activa
