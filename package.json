@@ -8,7 +8,6 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "express": "vue-cli-service express:watch",
-    "express:run": "vue-cli-service express:run",
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
