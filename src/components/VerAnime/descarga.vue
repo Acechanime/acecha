@@ -141,6 +141,7 @@
     .panel
         border-radius: 5px
         background-color: var(--fondo1)
+        color: var(--texto1)
         display: table
         width: 100%
         border-collapse: collapse
