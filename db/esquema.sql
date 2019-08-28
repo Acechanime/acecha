@@ -74,3 +74,9 @@ CREATE TABLE IF NOT EXISTS links (
 );
 
 
+CREATE TABLE eps_en_carga
+    ( ep_en_carga_id SERIAL
+    , nombre_archivo TEXT
+    , num_ep INT
+    , anime_id INT
+    );

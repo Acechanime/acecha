@@ -18,6 +18,7 @@
 
 <script lang="coffee">
     import editarAnime from "../editar-anime.vue"
+    import {servidor} from "../../../src/variables";
 
     export default
         name: "ver-anime"
@@ -62,7 +63,7 @@
                 @edicionAbierta = !@edicionAbierta
             actualizarAnime: ->
                 vm = this
-                resRaw = await fetch "/api/animes/#{vm.anime.anime_id}",
+                resRaw = await fetch "#{servidor}/api/animes/#{vm.anime.anime_id}",
                     method: "PUT"
                     headers:
                         "Content-Type": "application/json"

@@ -8,6 +8,7 @@
 <script lang="coffee">
     import Inicio from "./views/Inicio.vue"
     import cabecera from "./components/cabecera.vue"
+    import {servidor} from "../src/variables";
 
     export default
         name: "App"
@@ -17,7 +18,7 @@
         methods:
             obtenerListaAnimes: ->
                 try
-                    resRaw = await fetch "/api/animes"
+                    resRaw = await fetch "#{servidor}/api/animes"
                     res = await resRaw.json()
 
                     if res.exito
@@ -32,7 +33,7 @@
                 else
                     console.error err
             inicializarListaGeneros: ->
-                resRaw = await fetch "/api/generos"
+                resRaw = await fetch "#{servidor}/api/generos"
                 res = await resRaw.json()
                 if res?.exito
                     @$store.commit "cambiarListaGeneros", res.payload

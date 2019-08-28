@@ -8,6 +8,7 @@
 
 <script lang="coffee">
     import editarAnime from "../editar-anime.vue"
+    import {servidor} from "../../../src/variables";
 
     export default
         name: "crear-anime"
@@ -44,7 +45,7 @@
                 vm = this
                 @texto = "Creando..."
 
-                respuestaRaw = await fetch "/api/animes",
+                respuestaRaw = await fetch "#{servidor}/api/animes",
                     method: "POST"
                     headers:
                         "Accept": "application/json"

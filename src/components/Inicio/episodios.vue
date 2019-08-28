@@ -56,6 +56,9 @@
         grid-template-columns: repeat(4, 1fr)
         grid-gap: 1rem
 
-    //
+    @media only screen and (max-width: 800px)
+        .grid
+            grid-template-columns: repeat(2, 1fr)
 
+    //
 </style>

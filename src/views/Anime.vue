@@ -61,7 +61,7 @@
                 @$store.state.animeAdmin
             animeObj:
                 get: ->
-                    if @$store.state.modoAdmin then @$store.state.animeAdmin
+                    if @$store.state?.modoAdmin then @$store.state.animeAdmin
                     else @animeProv
                 set: (a) -> @animeProv = a
         methods:

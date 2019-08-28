@@ -1,22 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="">
+    <link rel="icon" href="favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600|Roboto:400,700,900"
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        #pantalla-carga {
+            background-color: white;
+            color: black;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            display: table;
+            text-align: center;
+
+            transition: background-color 250ms ease-in-out, color 250ms ease-in-out;
+        }
+
+        .pantalla-carga--oscuro {
+            background-color: #0a0909 !important;
+            color: #e8e8e1 !important;
+        }
+
+        .pantalla-carga--claro {
+            background-color: white !important;
+            color: #0a0909 !important;
+        }
+
+        #contenido {
+            display: table-cell;
+            vertical-align: middle;
+            opacity: 0;
+            transition: opacity 250ms ease-in-out;
+        }
+
+        #bienvenida {
+            font-size: x-large;
+            font-weight: bold;
+            font-family: 'Open Sans', Roboto, sans-serif;
+        }
+
+        #bienvenida-label {
+            font-family: Roboto, sans-serif;
+        }
+
+    </style>
+    <style>
+
+        /* Spinner */
+        .spinner {
+            animation: rotator 1.4s linear infinite;
+        }
+
+        @keyframes rotator {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(270deg); }
+        }
+
+        .path {
+            stroke-dasharray: 187;
+            stroke-dashoffset: 0;
+            transform-origin: center;
+            animation:
+                    dash 1.4s ease-in-out infinite,
+                    colors 5.6s ease-in-out infinite;
+        }
+
+        @keyframes colors {
+            0% { stroke: #4285F4; }
+            25% { stroke: #DE3E35; }
+            50% { stroke: #F7C223; }
+            75% { stroke: #1B9A59; }
+            100% { stroke: #4285F4; }
+        }
+
+        @keyframes dash {
+            0% { stroke-dashoffset: 187; }
+            50% {
+                stroke-dashoffset: 47;
+                transform:rotate(135deg);
+            }
+            100% {
+                stroke-dashoffset: 187;
+                transform:rotate(450deg);
+            }
+        }
+    </style>
 </head>
-<body>
+<body style="overflow: hidden">
+
+<div id="pantalla-carga">
+    <div id="contenido">
+        <div id="bienvenida">
+            ¡Bienvenido a Acechanime!
+        </div>
+        <div id="bienvenida-label">
+            Estamos preparándolo todo...
+        </div>
+        <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66"
+             xmlns="http://www.w3.org/2000/svg">
+            <circle class="path" fill="none" stroke-width="6" stroke-linecap="round"
+                    cx="33" cy="33" r="30">
+            </circle>
+        </svg>
+    </div>
+</div>
+<script>
+    const modoColor = (() => {
+        const modo = localStorage.getItem("modo-color");
+        if (modo === null) {
+            localStorage.setItem("modo-color", "claro");
+            return "claro";
+        }
+        else return modo;
+    })();
+
+    const pantallaCarga = document.getElementById("pantalla-carga");
+    const contenido = document.getElementById("contenido");
+
+    setTimeout(() => {
+        pantallaCarga.className = "pantalla-carga--" + modoColor;
+        contenido.style.opacity = "1";
+    }, 100);
+
+</script>
+
 <noscript>
     <strong>
         Bienvenido a 2019. Activa JavaScript y actualiza tu navegador para entrar a AcechaAnime.
     </strong>
 </noscript>
-<div id="app"></div>
+<!--<div id="app"></div>-->
 <!-- built files will be auto injected -->
 </body>
 </html>

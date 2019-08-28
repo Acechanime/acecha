@@ -18,13 +18,12 @@ const iniciarRutas = (app, ruta) => {
         const path = req.path;
         const pathFixed = extraerPrimer(path);
 
-        const urls = ["api", "css", "img", "js", "static"];
+        const urls = ["api", "css", "img", "js", "static", ".well-known"];
 
         const resultado = urls.filter(x => x === pathFixed);
         if (resultado.length > 0) {
             next();
         } else {
-            console.log(ruta + "/dist/index.html");
             res.sendFile(ruta + "/dist/index.html");
         }
     });

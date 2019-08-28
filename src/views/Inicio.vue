@@ -19,6 +19,7 @@
     import UltimosEpisodios from "../components/Inicio/ultimos-episodios.vue";
     import ImagenPrincipal from "../components/Inicio/imagen-principal.vue";
     import VideoRecomendado from "../components/Inicio/video-recomendado.vue"
+    import {servidor} from "../variables";
 
     export default
         name: "Inicio"
@@ -43,7 +44,7 @@
                 if @componentesCargando is 0 then @$store.commit "terminarCargaPagina"
         created: ->
             # Carga los datos
-            epsRecientesRaw = await fetch "/api/episodiosRecientes"
+            epsRecientesRaw = await fetch "#{servidor}/api/episodiosRecientes"
             epsRecientes = await epsRecientesRaw.json()
 
             if epsRecientes.exito? && epsRecientes.exito

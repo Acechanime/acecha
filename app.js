@@ -1,14 +1,18 @@
 const iniciarRutas = require("./srv/index").iniciarRutas;
 
-const cluster = require('cluster');
-const numCPUs = require('os').cpus().length;
+const cluster = require('cluster'),
+      numCPUs = require('os').cpus().length,
+      fs = require("fs"),
+      // http = require("http"),
+      https = require("https"),
+      express = require("express");
 
-const express = require("express");
+const clavePrivada = fs.readFileSync("./ssl/private.key", "utf-8").toString();
+const certificado  = fs.readFileSync("./ssl/certificate.crt", "utf-8").toString();
 
+const credenciales = {key: clavePrivada, cert: certificado};
 
 if (cluster.isMaster) {
-    console.log(`Master ${process.pid} is running`);
-
     // Fork workers.
     for (let i = 0; i < numCPUs; i++) {
         cluster.fork();
@@ -25,7 +29,10 @@ if (cluster.isMaster) {
 
     iniciarRutas(app, __dirname);
 
-    app.listen(80);
+    // const serverHttp = http.createServer(app);
+    const serverHttps = https.createServer(credenciales, app);
 
-    console.log(`Worker ${process.pid} started`);
+    // Desactivado porque cloudflare redirige a https
+    // serverHttp.listen(8080);
+    serverHttps.listen(443);
 }

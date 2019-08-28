@@ -20,7 +20,7 @@
         data() {
             return {
                 cabecera: process.env.NODE_ENV === "production"
-                    ? "https://acechanime.com/wp-content/uploads/2019/05/subheader.jpg"
+                    ? "/wp-content/uploads/2019/05/subheader.jpg"
                     : "/img/you-kei.jpg"
             }
         }

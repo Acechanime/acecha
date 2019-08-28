@@ -16,6 +16,7 @@
 
 <script lang="coffee">
     import { manejarError } from "./manejo-errores.coffee"
+    import {servidor} from "../../variables";
 
     export default
         name: "video-recomendado"
@@ -31,7 +32,7 @@
             vm = this
 
             try
-                xhr = await fetch "/api/videoRecomendado/"
+                xhr = await fetch "#{servidor}/api/videoRecomendado/"
                 resJ = await xhr.json()
                 if resJ.exito
                     res = resJ.payload["url"]

@@ -9,7 +9,7 @@
             a.izq.boton.boton--eps
                 i.material-icons chevron_left
                 span Anterior
-            a.boton.boton--ir
+            router-link.boton.boton--ir(to="./")
                 span Ver capítulos
             a.der.boton.boton--eps
                 span Siguiente

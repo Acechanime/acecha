@@ -34,6 +34,7 @@
 </template>
 
 <script lang="coffee">
+    import {servidor} from "../../variables";
 
     export default
         name: "recomendacion-semanal"
@@ -55,7 +56,7 @@
                 required: true
         methods:
             cargarRecomendacion: ->
-                recRaw = await fetch "/api/recomendacionSemanal/"
+                recRaw = await fetch "#{servidor}/api/recomendacionSemanal/"
                 rec = await recRaw.json()
                 if rec.exito
                     animeId = rec.payload["anime_id"]
@@ -176,7 +177,17 @@
                 transform: scale(1.1)
                 color: #0cbc00
 
-    @media only screen and (max-width: 500px)
+    @media only screen and (max-width: 800px)
+        .leyenda .txt
+            font-size: 36px
+
+        .img
+            max-width: 100%
+
+        .pad
+            padding: 20px 0
+
+    @media only screen and (max-width: 650px)
         .leyenda .txt
             font-size: var(--tamano-titulos)
 

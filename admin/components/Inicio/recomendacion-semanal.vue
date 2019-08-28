@@ -19,6 +19,7 @@
 
 <script lang="coffee">
     import Datepicker from "vuejs-datepicker"
+    import {servidor} from "../../../src/variables";
 
     export default
         name: "recomendacion-semanal"
@@ -59,7 +60,7 @@
                     vm.cargando = -2
                 else
                     vm.cargando = 1
-                    resRaw = await fetch "/api/recomendacionSemanal",
+                    resRaw = await fetch "#{servidor}/api/recomendacionSemanal",
                         method: "POST"
                         headers:
                             "Content-Type": "application/json"

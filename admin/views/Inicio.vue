@@ -8,6 +8,7 @@
             section
                 h2 Animes
                 div
+                    carga-automatica
                     button.boton(@click="cambiarMostrarCrear" :class="claseBoton") Crear anime
                     crear-anime(v-if="panelAbierto")
                     br
@@ -27,6 +28,7 @@
     import recomendacionSemanal from "../components/Inicio/recomendacion-semanal.vue"
     import videoRecomendado from "../components/Inicio/video-recomendado.vue"
     import verAnime from "../components/Inicio/ver-animes.vue"
+    import CargaAutomatica from "../components/Inicio/carga-automatica";
 
     export default
         name: "Inicio"
@@ -37,6 +39,7 @@
             "recomendacion-semanal": recomendacionSemanal
             "video-recomendado": videoRecomendado
             "ver-anime": verAnime
+            "carga-automatica": CargaAutomatica
         data: ->
             items: [
                 nombre: "Animes"

@@ -8,6 +8,7 @@
 </template>
 
 <script lang="coffee">
+    import {servidor} from "../../../src/variables";
 
     export default
         name: "video-recomendado"
@@ -41,7 +42,7 @@
                 vm = this
                 if vm.url isnt ""
                     vm.cargando = 1
-                    resRaw = await fetch "/api/videoRecomendado",
+                    resRaw = await fetch "#{servidor}/api/videoRecomendado",
                         method: "POST"
                         headers:
                             "Content-Type": "application/json"

@@ -13,6 +13,7 @@
     import PiePagina from "./components/pie-pagina.vue"
     import pantallaCarga from "./components/App/pantalla-carga.vue"
     import VerAnime from "./views/VerAnime.vue"
+    import {servidor} from "./variables";
 
     export default
         components:
@@ -26,7 +27,7 @@
         methods:
             obtenerListaAnimes: ->
                 try
-                    resRaw = await fetch "/api/animes"
+                    resRaw = await fetch "#{servidor}/api/animes"
                     res = await resRaw.json()
 
                     if res.exito
@@ -41,7 +42,7 @@
                 else
                     console.error err
             inicializarListaGeneros: ->
-                resRaw = await fetch "/api/generos"
+                resRaw = await fetch "#{servidor}/api/generos"
                 res = await resRaw.json()
                 if res?.exito
                     @$store.commit "cambiarListaGeneros", res.payload

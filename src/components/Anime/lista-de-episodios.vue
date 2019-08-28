@@ -18,6 +18,7 @@
 
 <script lang="coffee">
     import episodio from "./episodio.vue"
+    import {servidor} from "../../variables";
 
     export default
         name: "lista-de-episodios"
@@ -34,7 +35,7 @@
             ovas_filtradas: -> @episodios.filter (x) -> x.es_ova is yes
             tieneOvas: -> @ovas_filtradas.length > 0
         created: ->
-            datosRaw = await fetch "/api/episodios?anime_id=#{@anime.anime_id}"
+            datosRaw = await fetch "#{servidor}/api/episodios?anime_id=#{@anime.anime_id}"
             datos = await datosRaw.json()
             @estadoCarga =
                 if datos.exito? && datos.exito
