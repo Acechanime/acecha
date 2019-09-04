@@ -40,7 +40,7 @@
             ep: -> @epRecientePrincipal
             anime: ->
                 ep = @ep
-                if ep != {}
+                unless ep.anime_id?
                     animes = @$store.state.listaAnimes.filter (x) =>
                         x.anime_id == ep.anime_id
                     animes[0]
@@ -49,8 +49,7 @@
             cargaTerminada: (estado) ->
                 vm = this
                 if estado
-                    console.log @epRecientePrincipal
-                    if @epRecientePrincipal == {}
+                    unless @ep.anime_id?
                         manejarError "No se recibió un objeto con el episodio.", "F3", vm
                     @terminarCarga()
 

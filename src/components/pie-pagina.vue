@@ -1,5 +1,5 @@
 <template lang="pug">
-    footer.pie
+    footer.pie(:style="mostrar")
         div.cont-foot
             div.logo
                 h3.titulo Sobre Nosotros
@@ -34,8 +34,11 @@
 
     export default
         name: "pie-pagina"
-    #
+        computed:
+            mostrar: ->
+                if @$route.path is "/en-construccion/" then "display: none"
 
+#
 </script>
 
 <style scoped lang="sass">

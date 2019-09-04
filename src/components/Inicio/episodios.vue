@@ -3,7 +3,7 @@
         episodio(v-if="episodios.length > 0" v-for="(ep, i) in episodios" :ep="ep" :key="i")
         div.err(v-if="cargaFallida")
             span.
-                Hubo un error al cargar los animes recientes :c<br>
+                Hubo un error al cargar los animes recientes.<br>
                 Vuelve en unos minutos, o escribenos en Discord.<br>
             p.tech Código de error: 0x{{ codigoDeError }}
     //

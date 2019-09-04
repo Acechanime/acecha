@@ -1,6 +1,5 @@
 <template lang="pug">
     div#app
-        pantalla-carga
         barra-navegacion
         router-view
         pie-pagina
@@ -15,6 +14,14 @@
     import VerAnime from "./views/VerAnime.vue"
     import {servidor} from "./variables";
 
+    quitarPantallaCarga = ->
+        elem = document.getElementById "pantalla-carga"
+        elem.style.opacity = "0"
+        setTimeout (=>
+            elem.style.display = "none"
+            document.body.style.overflow = "initial"
+        ), 250
+
     export default
         components:
             "pie-pagina": PiePagina
@@ -24,6 +31,10 @@
         computed:
             esPagPrin: ->
                 this.$route.path is "/"
+            cargaCompleta: -> @$store.state.paginaLista
+        watch:
+            cargaCompleta: (n, p) ->
+                if n is yes then quitarPantallaCarga()
         methods:
             obtenerListaAnimes: ->
                 try
@@ -40,14 +51,19 @@
                 unless err?
                     @$store.commit "cambiarListaAnimes", res
                 else
-                    console.error err
+                    console.log "Error al obtener la lista de animes desde el servidor.\n#{err}"
             inicializarListaGeneros: ->
-                resRaw = await fetch "#{servidor}/api/generos"
-                res = await resRaw.json()
+                res =
+                    try
+                        resRaw = await fetch "#{servidor}/api/generos"
+                        await resRaw.json()
+                    catch e
+                        {exito: false, err: e}
                 if res?.exito
                     @$store.commit "cambiarListaGeneros", res.payload
                 else
-                    console.error err
+                    console.log "Error al obtener la lista de " +
+                        "generos desde el servidor.\n#{res.err}"
         created: ->
             if @$store.state.listaAnimes.length == 0
                 @inicializarListaAnimes()
