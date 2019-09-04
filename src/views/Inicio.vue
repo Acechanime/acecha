@@ -44,15 +44,21 @@
                 if @componentesCargando is 0 then @$store.commit "terminarCargaPagina"
         created: ->
             # Carga los datos
-            epsRecientesRaw = await fetch "#{servidor}/api/episodiosRecientes"
-            epsRecientes = await epsRecientesRaw.json()
-
+            epsRecientes =
+                try
+                    epsRecientesRaw = await fetch "#{servidor}/api/episodiosRecientes"
+                    await epsRecientesRaw.json()
+                catch e
+                    { exito: no, err: e, status: epsRecientesRaw?.status }
             if epsRecientes.exito? && epsRecientes.exito
                 epRecientePrincipal = epsRecientes.payload.reduce (acc, nuevo) =>
                     if nuevo["nivel_prioridad"] > acc["nivel_prioridad"] then nuevo else acc
                 @epRecientePrincipal = epRecientePrincipal
                 @epsRecientes = epsRecientes.payload.filter (x) =>
                     x["link_id"] != epRecientePrincipal["link_id"]
+            else
+                console.log "Error al obtener los episodios recientes. " +
+                    "Código #{epsRecientes.status}.\n#{epsRecientes.err}"
 
             @cargaTerminada = yes
     #

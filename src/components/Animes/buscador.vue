@@ -8,6 +8,9 @@
             option(value="-1" selected) Cualquier estado
             option(value="0") Terminado
             option(value="1") En emisión
+        select(v-model.number="anyo")
+            option(value="-1" selected) Cualquier año
+
     //
 </template>
 
@@ -26,6 +29,7 @@
             nombre: ""
             genero: -1
             estado: -1
+            anyo: -1
         props:
             cambiarFiltros:
                 type: Function # [(a -> Bool)] -> ()
@@ -49,11 +53,11 @@
             filtroGenero = (a) ->
                 if vm.genero is -1 then true
                 else
-                    res = a.generos?.find (g) -> g?.genero_id == vm.genero
+                    res = a.generos?.find (g) -> g == vm.genero
                     res?
             vm.cambiarFiltros [filtroEstado, filtroGenero, filtroNombre]
-    #
-    
+
+#
 </script>
 
 <style scoped lang="sass">
@@ -88,12 +92,26 @@
     #generos
         display: table-cell
         vertical-align: middle
-        margin: 0 15px
+        margin-right: 15px
+        padding: 5px 10px
+        font:
+            family: $titulos
+        border-radius: 5px
+        box-shadow: none
+        &:focus
+            outline: none
 
     #emision
         display: inline-table
-        margin: 0 15px
+        margin-right: 15px
         vertical-align: middle
+        padding: 5px 10px
+        font:
+            family: $titulos
+        border-radius: 5px
+        box-shadow: none
+        &:focus
+            outline: none
 
     //
 </style>

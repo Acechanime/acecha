@@ -8,16 +8,15 @@
     import anime from "./anime.vue"
 
     # [(a -> Bool)] -> a -> Bool
-    comp = (fs) =>
-        (elem) =>
-            estado = true
-            fs.forEach (f) =>
-                estado =
-                    if estado
-                        f elem
-                    else
-                        false
-            estado
+    comp = (fs) => (elem) =>
+        estado = true
+        fs.forEach (f) =>
+            estado =
+                if estado
+                    f elem
+                else
+                    false
+        estado
 
     export default
         name: "animes"
