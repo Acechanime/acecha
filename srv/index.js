@@ -2,6 +2,7 @@ const express = require("express");
 
 const iniciarRutas = (app, ruta) => {
 
+    /*
     const extraerPrimer = url => {
         const p1 = url.substr(1);
         const sigSlash = p1.search("/");
@@ -10,10 +11,12 @@ const iniciarRutas = (app, ruta) => {
             else return p1.substring(0, sigSlash);
         })();
     };
+    */
 
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
 
+    /* El servidor serà exclusivo para usar la api.
     app.use((req, res, next) => {
         const path = req.path;
         const pathFixed = extraerPrimer(path);
@@ -27,6 +30,7 @@ const iniciarRutas = (app, ruta) => {
             res.sendFile(ruta + "/dist/index.html");
         }
     });
+    */
 
     app.get("/api/animes", require("./animes/get").fun);
     app.post("/api/animes", require("./animes/create").fun);
