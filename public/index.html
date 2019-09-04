@@ -22,7 +22,10 @@
             display: table;
             text-align: center;
 
-            transition: background-color 250ms ease-in-out, color 250ms ease-in-out;
+            transition:
+                background-color 250ms ease-in-out,
+                color 250ms ease-in-out,
+                opacity 250ms ease-in-out;
         }
 
         .pantalla-carga--oscuro {
@@ -105,6 +108,8 @@
         <div id="bienvenida-label">
             Estamos preparándolo todo...
         </div>
+        <br>
+
         <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66"
              xmlns="http://www.w3.org/2000/svg">
             <circle class="path" fill="none" stroke-width="6" stroke-linecap="round"
@@ -122,6 +127,18 @@
         }
         else return modo;
     })();
+    const textos = (() => {
+        const esPrimeraVez = localStorage.getItem("primera-vez");
+        if (esPrimeraVez === null) {
+            localStorage.setItem("primera-vez", "no");
+            return ["¡Bienvenido a Acechanime!", "Estamos preparandolo todo..."];
+        } else {
+            return ["Bienvenido de nuevo.", "Estamos buscando nuevos episodios."];
+        }
+    })();
+
+    document.getElementById("bienvenida").innerText = textos[0];
+    document.getElementById("bienvenida-label").innerText = textos[1];
 
     const pantallaCarga = document.getElementById("pantalla-carga");
     const contenido = document.getElementById("contenido");
@@ -133,12 +150,28 @@
 
 </script>
 
-<noscript>
-    <strong>
-        Bienvenido a 2019. Activa JavaScript y actualiza tu navegador para entrar a AcechaAnime.
-    </strong>
+<noscript style="font-family: Roboto, sans-serif">
+    <style>
+        #pantalla-carga {
+            display: none;
+        }
+    </style>
+    <h1>¡Hola!</h1>
+    <p>Parece que JavaScript está desactivado en tu navegador. Y lo necesitamos :c</p>
+    <p>Para entrar a Acechanime, activa JavaScript.</p>
+    <br>
+    <h2>Preguntas comunes.</h2>
+    <h3>¿JavaScript es un virus?</h3>
+    <p>No. Es una herramienta para crear páginas web.</p>
+    <h3>¿Para qué necesitan JavaScript?</h3>
+    <p>
+        Hemos construido Acechanime con lo último en tecnología (Vue.js), y
+        esta se basa completamente en JavaScript.
+    </p>
+    <h3></h3>
 </noscript>
-<!--<div id="app"></div>-->
+
+<div id="app"></div>
 <!-- built files will be auto injected -->
 </body>
 </html>
