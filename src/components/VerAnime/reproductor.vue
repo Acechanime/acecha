@@ -108,7 +108,7 @@
         // margin-top: -44px
 
     #contenedor-anime
-        border-radius: 0 10px 10px 10px
+        border-radius: 0 5px 5px 5px
 
     .controles
         margin: 10px 10px
