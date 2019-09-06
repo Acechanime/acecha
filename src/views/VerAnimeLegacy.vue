@@ -64,8 +64,13 @@
     .cont
         grid-template-columns: 1fr 250px
 
+
     .fondo
+        @extend %caja-textos
+        padding-left: 5px
+        padding-right: 5px
         background-color: var(--fondo1)
+
 
     //
 </style>

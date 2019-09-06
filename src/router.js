@@ -176,7 +176,6 @@ router.beforeEach(async (to, from, next) => {
                 store.commit("cambiarRutaVerAnime", to.path);
 
             } else {
-                // TODO: Redidigir a 404
                 next("/");
             }
         }

@@ -14,6 +14,7 @@
     //
 </template>
 
+<!-- TODO: Hacer que los filtros que se apliquen se vean en la url. -->
 <script lang="coffee">
 
     removerCaracteres = (str, strArr) =>

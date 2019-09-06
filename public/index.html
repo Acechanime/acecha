@@ -41,7 +41,6 @@
         #contenido {
             display: table-cell;
             vertical-align: middle;
-            opacity: 0;
             transition: opacity 250ms ease-in-out;
         }
 
@@ -141,12 +140,9 @@
     document.getElementById("bienvenida-label").innerText = textos[1];
 
     const pantallaCarga = document.getElementById("pantalla-carga");
-    const contenido = document.getElementById("contenido");
 
-    setTimeout(() => {
-        pantallaCarga.className = "pantalla-carga--" + modoColor;
-        contenido.style.opacity = "1";
-    }, 100);
+    pantallaCarga.className = "pantalla-carga--" + modoColor;
+
 
 </script>
 

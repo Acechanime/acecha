@@ -4,6 +4,7 @@
         router-view
         pie-pagina
         // ver-anime
+        modo-color
     //
 </template>
 
@@ -11,6 +12,7 @@
     import BarraNavegacion from "./components/barra-navegacion.vue"
     import PiePagina from "./components/pie-pagina.vue"
     import pantallaCarga from "./components/App/pantalla-carga.vue"
+    import modoColor from "./components/App/modo-color.vue"
     import VerAnime from "./views/VerAnime.vue"
     import {servidor} from "./variables";
 
@@ -28,6 +30,7 @@
             "barra-navegacion": BarraNavegacion
             "pantalla-carga": pantallaCarga
             "ver-anime": VerAnime
+            "modo-color": modoColor
         computed:
             esPagPrin: ->
                 this.$route.path is "/"

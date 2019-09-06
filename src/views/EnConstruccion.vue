@@ -40,10 +40,11 @@
         z-index: 8
         width: 100%
         height: 100%
-        opacity: 0.4
+        // opacity: 0.4
+        filter: brightness(40%)
 
     .construccion
-        color: var(--texto1)
+        color: #e8e8e1
         position: fixed
         top: 0
         left: 0
