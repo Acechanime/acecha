@@ -46,7 +46,6 @@
                 )
         mounted: ->
             esquema = (localStorage.getItem "modo-color" ? "claro")
-            console.log "El esquema actual es #{esquema}"
             @cambiarVariables esquema
 
 #
