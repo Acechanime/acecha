@@ -17,15 +17,30 @@
                 type: Object
                 required: true
         computed:
+            listaAnimes: -> @$store.state.listaAnimes
             anime: ->
-                if @ep?
-                    anime = @$store.state.listaAnimes.filter (x) => x.anime_id == @ep.anime_id
-                    anime[0]
-                else {}
+                lista = @listaAnimes
+                if lista isnt undefined and @ep?
+                    animes = lista.filter (x) => x.anime_id == @ep.anime_id
+                    if animes.length is 0
+                        console.log "El episodio con link_id #{@ep.link_id} no tiene anime."
+                        {}
+                    else
+                        animes[0]
+                else if lista isnt undefined
+                    console.log "Error. El objeto ep que se pasó no existe " +
+                        "(#{typeof @ep})."
+                    {}
+                else
+                    console.log "Lista vacia."
+                    {}
             obtenerLink: ->
                 anime = @anime
-                ep = @ep
-                anime.ruta + (if ep.es_ova then "ova" else "ep") + ep.num_ep
+                if anime.ruta?
+                    ep = @ep
+                    anime.ruta + (if ep.es_ova then "ova" else "ep") + ep.num_ep
+                else "./#"
+
         methods:
             irAlEp: ->
                 ep = @ep
@@ -42,8 +57,7 @@
                     okru: ep.okru
                 @$router.push @obtenerLink
 
-    #
-
+#
 </script>
 
 <style scoped lang="sass">

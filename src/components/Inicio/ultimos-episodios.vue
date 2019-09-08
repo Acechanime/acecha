@@ -7,7 +7,7 @@
                 hr.divisor
                 div.boton ¡Activa las notificaciones abajo a la izquierda!
             div.col.l6.s12
-                episodio(:ep="ep")
+                episodio(:ep="epRecientePrincipal")
         div.err(v-if="cargaFallida")
             span.
                 Hubo un error al cargar este último episodio.<br>
@@ -33,17 +33,17 @@
             epRecientePrincipal:
                 type: Object
                 required: true
-            cargaTerminada:
-                type: Boolean
-                required: true
         computed:
-            ep: -> @epRecientePrincipal
+            listaAnimes: -> @$store.state.listaAnimes
             anime: ->
-                ep = @ep
-                unless ep.anime_id?
-                    animes = @$store.state.listaAnimes.filter (x) =>
-                        x.anime_id == ep.anime_id
-                    animes[0]
+                lista = @listaAnimes
+                if lista isnt undefined
+                    ep = @epRecientePrincipal
+                    unless ep.anime_id?
+                        animes = @$store.state.listaAnimes.filter (x) =>
+                            x.anime_id == ep.anime_id
+                        animes[0]
+                    else {}
                 else {}
         watch:
             cargaTerminada: (estado) ->
@@ -53,7 +53,8 @@
                         manejarError "No se recibió un objeto con el episodio.", "F3", vm
                     @terminarCarga()
 
-    #
+
+#
 </script>
 
 <style scoped lang="sass">

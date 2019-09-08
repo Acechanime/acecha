@@ -55,6 +55,7 @@
                     @$store.commit "cambiarListaAnimes", res
                 else
                     console.log "Error al obtener la lista de animes desde el servidor.\n#{err}"
+                    @$store.commit "cambiarListaAnimes", []
             inicializarListaGeneros: ->
                 res =
                     try
@@ -68,7 +69,7 @@
                     console.log "Error al obtener la lista de " +
                         "generos desde el servidor.\n#{res.err}"
         created: ->
-            if @$store.state.listaAnimes.length == 0
+            if @$store.state.listaAnimes is undefined
                 @inicializarListaAnimes()
             if @$store.state.listaGeneros.length == 0
                 @inicializarListaGeneros()

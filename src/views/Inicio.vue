@@ -2,9 +2,8 @@
     div.inicio
         imagen-principal
         ultimos-episodios(:terminarCarga="terminarCarga"
-            :epRecientePrincipal="epRecientePrincipal" :cargaTerminada="cargaTerminada")
-        episodios(:terminarCarga="terminarCarga" :ultimosEpisodios="epsRecientes"
-            :cargaTerminada="cargaTerminada")
+            :epRecientePrincipal="epRecientePrincipal")
+        episodios(:terminarCarga="terminarCarga" :ultimosEpisodios="epsRecientes")
         recomendacion-semanal(:terminarCarga="terminarCarga")
         video-recomendado(:terminarCarga="terminarCarga")
         comentarios
@@ -31,13 +30,12 @@
             "video-recomendado": VideoRecomendado
             "comentarios": Comentarios
         data: ->
-            componentesCargando: 4
+            componentesCargando: 3
             fecha_recomendacion: 0
             recomendacion: ""
             video_recomendado: ""
             epRecientePrincipal: {}
             epsRecientes: []
-            cargaTerminada: no
         methods:
             terminarCarga: () ->
                 @componentesCargando--
@@ -49,6 +47,7 @@
                     epsRecientesRaw = await fetch "#{servidor}/api/episodiosRecientes"
                     await epsRecientesRaw.json()
                 catch e
+                    console.log "Error al recuperar los episodios recientes.\n#{e}"
                     { exito: no, err: e, status: epsRecientesRaw?.status }
             if epsRecientes.exito? && epsRecientes.exito
                 epRecientePrincipal = epsRecientes.payload.reduce (acc, nuevo) =>
@@ -60,7 +59,7 @@
                 console.log "Error al obtener los episodios recientes. " +
                     "Código #{epsRecientes.status}.\n#{epsRecientes.err}"
 
-            @cargaTerminada = yes
+            @terminarCarga()
     #
 
 </script>

@@ -27,9 +27,6 @@
             ultimosEpisodios:
                 type: Array
                 required: yes
-            cargaTerminada:
-                type: Boolean
-                required: yes
         computed:
             episodios: ->
                 if @ultimosEpisodios.length isnt 0 then @ultimosEpisodios

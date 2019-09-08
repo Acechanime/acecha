@@ -149,43 +149,5 @@ const router = new Router({
     }
 });
 
-const extraerUrls = url => url.split("/").filter(x =>  x !== "");
-
-const esperar = new Promise(((resolve) => {
-    setInterval(() => {
-        if (store.state.listaAnimes.length !== 0) resolve();
-    }, 250);
-}));
-
-router.beforeEach(async (to, from, next) => {
-    /*
-    const ruta = extraerUrls(to.path);
-
-    if (ruta.length === 2) {
-
-        if (rutasNormales.find(x => x === `/${ruta[0]}/`)) next();
-        else {
-            await esperar;
-
-            if (store.state.listaAnimes.find(x => x.ruta === `/${ruta[0]}/`)) {
-
-                store.commit("activarVerAnime");
-                const rutaNueva = (from.name === null)? `/${ruta[0]}/`: false;
-
-                next(rutaNueva);
-                store.commit("cambiarRutaVerAnime", to.path);
-
-            } else {
-                next("/");
-            }
-        }
-    } else {
-        next();
-    }
-
-     */
-    next();
-});
-
 export default router;
 

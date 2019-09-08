@@ -3,13 +3,6 @@ import Vuex from 'vuex'
 
 Vue.use Vuex
 
-moduloVerAnime =
-    state:
-        listaEpisodios: []
-    mutations:
-        cambiarListaEps: (state, data) ->
-            state.listaEpisodios = data
-
 store = new Vuex.Store
     state:
         verAnime:
@@ -35,7 +28,8 @@ store = new Vuex.Store
             ep: -1
             ruta: ""
         verAnimeActivo: no
-        listaAnimes: []
+        listaAnimes: undefined
+        listaAnimesCargada: Promise.race []
         listaGeneros: []
         recomendacionSemanal: ""
         paginaLista: no
@@ -45,6 +39,7 @@ store = new Vuex.Store
     mutations:
         cambiarListaAnimes: (state, data) ->
             state.listaAnimes = data
+            state.listaAnimesCargada = Promise.resolve()
         cambiarRecomendacionSemanal: (state, nuevo) ->
             state.recomendacionSemanal = nuevo
         terminarCargaPagina: (state) ->
