@@ -2,8 +2,12 @@
     div.temporada
         img.portadaMini(:src="anime.img_portada" alt="img")
         span.nombre {{ nombreArreglado }}
-        router-link.season_link(:to="esRutaActual()? '.': anime.ruta" :style="obtColorFondo" )
-            span.icon-chevron-right
+        template(v-if="esRutaActual()")
+            router-link.season_link(to="." :style="obtColorFondo" )
+                // span.icon-checkmark
+        template(v-else)
+            router-link.season_link(:to="anime.ruta" :style="obtColorFondo" )
+                span.icon-chevron-right
     //
 </template>
 
@@ -30,8 +34,8 @@
         computed:
             obtColorFondo: ->
                 if @esRutaActual()
-                    "background: #ff0241"
-                else "background: #01bc59"
+                    "background: #01bc59; opacity: 0"
+                else "background: #ff0241"
             nombreArreglado: ->
                 nombre = @anime.nombre
                 if nombre?.length > 40 and window.innerWidth < 500
@@ -44,8 +48,8 @@
                 else
                     @anime.ruta == @$route.path
 
-    #
 
+#
 </script>
 
 <style scoped lang="sass">
@@ -92,6 +96,11 @@
 
     .icon-chevron-right::before
         content: "\e940"
+
+    .icon-checkmark
+        opacity: 0
+        &::before
+            content: "\e942"
 
     //
 </style>
