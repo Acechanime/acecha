@@ -13,6 +13,8 @@
         document.documentElement.style.setProperty("--sombra1", "rgba(0, 0, 0, 0.12)");
         document.documentElement.style.setProperty("--texto1", "#e8e8e1");
         document.documentElement.style.setProperty("--texto2", "#BFC1B6");
+        document.documentElement.style.setProperty("--opacidad1", "0.8");
+        document.documentElement.style.setProperty("--opacidad2", "0.9");
 
     cssClaro = =>
         document.documentElement.style.setProperty("--fondo0", "#ffffff");
