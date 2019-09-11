@@ -31,8 +31,12 @@
             textoBoton: "Cambiar"
             claseBoton: ""
         computed:
+            listaAnimes: -> @$store.state.listaAnimes
             listaAnimesOrd: ->
-                @$store.state.listaAnimes.sort (a, b) => a.nombre.localeCompare(b.nombre)
+                if @listaAnimes is undefined
+                    []
+                else
+                    @listaAnimes.sort (a, b) => a.nombre.localeCompare(b.nombre)
         watch:
             cargando: (n) ->
                 vm = this
