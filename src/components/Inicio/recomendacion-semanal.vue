@@ -50,13 +50,22 @@
             horas: -> Math.floor(this.segundos / 60 / 60) % 24
             minutos: -> Math.floor(this.segundos / 60) % 60
             segundosF: -> this.segundos % 60
+            listaAnimes: -> @$store.state.listaAnimes
         props:
             terminarCarga:
                 type: Function
                 required: true
         methods:
             cargarRecomendacion: ->
+                vm = this
+                cargaLista = new Promise (resolve) =>
+                    intervalo = setInterval (=>
+                        if vm.listaAnimes isnt undefined
+                            clearInterval intervalo
+                            resolve()
+                    ), 250
                 recRaw = await fetch "#{servidor}/api/recomendacionSemanal/"
+                await cargaLista
                 rec = await recRaw.json()
                 if rec.exito
                     animeId = rec.payload["anime_id"]
@@ -102,7 +111,8 @@
 
         beforeDestroy: ->
             clearInterval @intervaloSegundos
-    #
+
+#
 </script>
 
 <style scoped lang="sass">
