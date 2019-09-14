@@ -10,6 +10,11 @@
             option(value="1") En emisión
         select(v-model.number="anyo")
             option(value="-1" selected) Cualquier año
+        select
+            option(value="-1" selected) Cualquier orden
+            option Nombre
+            option Emision
+            option Agregado recientemente
 
     //
 </template>

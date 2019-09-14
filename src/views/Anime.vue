@@ -57,7 +57,6 @@
             colorEtiqueta: ->
                 if @animeObj.en_emision then "background: #01bc59" else "background: #ff0241"
             animeAdmin: ->
-                console.log "anuma v: cambioa"
                 @$store.state.animeAdmin
             animeObj:
                 get: ->

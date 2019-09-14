@@ -2,8 +2,7 @@
     article.ep
         a.link(:href="obtenerLink" @click.prevent="irAlEp")
             img.imagen(:src="anime.img_nuevo_ep" :alt="'Episodio ' + ep.num_ep + ' de ' + anime.nombre")
-            br
-            span.nombre {{ anime.nombre }} {{ ep.num_ep }}
+            h3.nombre {{ anime.nombre }} {{ ep.num_ep }}
 
     //
 </template>
@@ -68,14 +67,16 @@
         margin: 10px 0
 
     .link
+        display: block
         text-decoration: none
 
     .imagen
         @extend  %imgFlotantes
-        width: 94%
         border-radius: 5px
         box-shadow: 0 0 10px 0 rgba(0,0,0,.5)
         cursor: pointer
+        width: 95%
+        height: auto
 
     .nombre
         color: var(--texto1)
@@ -83,6 +84,7 @@
         font-weight: 700
         line-height: .9em
         letter-spacing: 0
+        margin-top: 0.3rem
 
     //
 </style>

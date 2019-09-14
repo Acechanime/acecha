@@ -64,6 +64,7 @@
                 @panelAbierto = !@panelAbierto
         created: ->
             @$store.commit "cambiarAModoAdmin"
+            @$store.commit "terminarCargaPagina"
 
     #
 
