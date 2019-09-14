@@ -5,24 +5,13 @@ const cluster = require('cluster'),
       fs = require("fs"),
       // http = require("http"),
       https = require("https"),
-      express = require("express"),
-      cors = require("cors");
+      express = require("express");
 
 const clavePrivada = fs.readFileSync("./ssl/private.key", "utf-8").toString();
 const certificado  = fs.readFileSync("./ssl/certificate.crt", "utf-8").toString();
 
 const credenciales = {key: clavePrivada, cert: certificado};
 
-const sitiosCors = ["https://acechanime.com", "https://dev.acechanime.com"];
-const opcionesCors = {
-    origin: (origin, callback) => {
-        if (sitiosCors.indexOf(origin) !== -1 || !origin) {
-            callback(null, true)
-        } else {
-            callback(new Error('Not allowed by CORS'))
-        }
-    }
-};
 
 if (cluster.isMaster) {
     // Fork workers.
@@ -40,7 +29,7 @@ if (cluster.isMaster) {
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
 
-    app.use(cors(opcionesCors));
+
 
     iniciarRutas(app, __dirname);
 
