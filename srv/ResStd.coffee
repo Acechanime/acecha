@@ -9,3 +9,7 @@ export crearError = (ruta, razon) =>
     error:
         ruta: ruta
         razon: razon
+
+export error500 = (res, error, ruta) =>
+    res.status(500).json crearError ruta, "Error al realizar " +
+        "consulta.\n#{error.stack}"
