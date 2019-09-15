@@ -2,7 +2,7 @@ con = require("../db").con
 import { crearRespuesta, crearError } from "../ResStd"
 
 export fun = (req, res) =>
-    sql = "SELECT * FROM animes"
+    sql = "SELECT * FROM animes ORDER BY anime_id DESC"
 
     con.query sql
         .then (respuesta) =>

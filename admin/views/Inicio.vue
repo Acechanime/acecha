@@ -5,7 +5,7 @@
                 h2 Varios
                 recomendacion-semanal
                 video-recomendado
-            section
+            // section
                 h2 Animes
                 div
                     carga-automatica
@@ -13,6 +13,15 @@
                     crear-anime(v-if="panelAbierto")
                     br
                     ver-anime
+            div.verAnime
+                div.verAnime__titulo Ver/Modificar Anime
+                br
+                div
+                    button(@click="obtenerListaAnimes") Recargar
+                    anime(v-for="anime in animes" :key="anime.anime_id" :anime="anime"
+                        :nombre="anime.nombre" :animeID="parseInt(anime.anime_id)"
+                        :fn-recargar-lista-animes="obtenerListaAnimes")
+
         div.preview(:style="clasePreview")
             vista-anime
 
@@ -30,6 +39,10 @@
     import verAnime from "../components/Inicio/ver-animes.vue"
     import CargaAutomatica from "../components/Inicio/carga-automatica";
 
+    import anime from "../components/Inicio/anime.vue"
+
+    servidor = "http://localhost:3000"
+
     export default
         name: "Inicio"
         components:
@@ -40,6 +53,8 @@
             "video-recomendado": videoRecomendado
             "ver-anime": verAnime
             "carga-automatica": CargaAutomatica
+
+            "anime": anime
         data: ->
             items: [
                 nombre: "Animes"
@@ -47,6 +62,9 @@
             ]
             fecha: new Date()
             panelAbierto: no
+
+            # nuevo-legacy
+            animes: []
         computed:
             mostrarCrear: -> @$store.state.mostrarAnimeAdmin
             clasePreview: ->
@@ -62,9 +80,22 @@
                 else
                     @$store.commit "mostrarAnimeAdmin"
                 @panelAbierto = !@panelAbierto
+            obtenerListaAnimes: ->
+                try
+                    data = await fetch "#{servidor}/api/animes"
+                    dataJ = await data.json()
+                    if dataJ.exito? and dataJ.exito is true
+                        @animes = dataJ.payload
+                    else
+                        console.log "Error al recuperar lista de animes."
+                catch e
+                    console.log "Error:"
+                    console.log e.stack
         created: ->
             @$store.commit "cambiarAModoAdmin"
             @$store.commit "terminarCargaPagina"
+
+            @obtenerListaAnimes()
 
     #
 

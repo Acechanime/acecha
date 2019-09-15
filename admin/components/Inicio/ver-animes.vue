@@ -44,8 +44,13 @@
         computed:
             claseBoton: ->
                 if @abierto then "boton--activo"
+            listaAnimes: -> @$store.state.listaAnimes
             animes: ->
-                mergesort @$store.state.listaAnimes
+                # A pesar de que la base de datos ordena, no funciona :c
+                lista = @listaAnimes
+                if lista?
+                    mergesort lista
+                else []
         methods: {}
 
     #

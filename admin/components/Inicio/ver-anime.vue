@@ -5,29 +5,33 @@
             span.nombre {{ anime.nombre }}
             i.material-icons.error(v-if="!animeIntegro") error
             div.botones
-                button.boton.agregar(title="Agregar episodio")
+                button.boton.agregar(@click="cambiarEpisodios" title="Agregar episodio")
                 button.boton.editar(@click="cambiarEdicion"
                     :class="edicionAbierta? 'boton--activo': ''" title="Editar anime")
                 // button.boton.eliminar(title="Eliminar anime")
         div.edicion(v-if="edicionAbierta")
             editar-anime(:config="anime" :texto="edicionTexto" :fun="actualizarAnime"
                 :error="edicionError")
+        episodios(v-if="episodiosAbierto" :animeId="anime.anime_id")
 
     //
 </template>
 
 <script lang="coffee">
     import editarAnime from "../editar-anime.vue"
+    import episodios from "./ver-anime/episodios.vue"
     import {servidor} from "../../../src/variables";
 
     export default
         name: "ver-anime"
         components:
             "editar-anime": editarAnime
+            "episodios": episodios
         data: ->
             edicionAbierta: no
             edicionTexto: "Actualizar"
             edicionError: no
+            episodiosAbierto: no
         props:
             anime:
                 type: Object
@@ -86,6 +90,8 @@
                         vm.edicionError = no
                     ), 2500
                     console.error respuesta.razon
+            cambiarEpisodios: ->
+                @episodiosAbierto = !@episodiosAbierto
         created: ->
             unless Array.isArray @anime.generos
                 @anime.generos = []
@@ -129,12 +135,12 @@
         background-color: #3B5998
         &::before
             font-family: 'Material Icons' !important
-            // padding-right: 10px
+            padding-right: 5px
 
         &.editar::before
             content: "edit"
         &.agregar::before
-            content: "add"
+            content: "laptop"
         &.eliminar
             background-color: #c42e32
             &::before
