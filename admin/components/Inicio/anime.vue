@@ -78,304 +78,282 @@
 
 </template>
 
-<script>
+<script lang="coffee">
     import miLink from "./mi-link.vue"
-    const servidor = 'http://localhost:3000';
+    servidor = 'http://localhost:3000'
 
-    export default {
-        name: "anime",
-        components: {
-            'mi-link': miLink
-        },
-        data: function () {
-            return {
-                epsData: undefined,
-                mostrarEps: false,
-                mostrarEditarAnime: false,
-                colores: ['#313EA9', '#5196a9', '#46a95d', '#a93783'],
-                esOva: false
-            }
-        },
-        props: {
-            nombre: {
-                type: String,
-                default: "Sin nombre",
-            },
-            animeID: {
-                type: Number,
+    export default
+        name: "anime"
+        components:
+            "mi-link": miLink
+        data: ->
+            epsData: undefined
+            mostrarEps: false
+            mostrarEditarAnime: false
+            colores: ['#313EA9', '#5196a9', '#46a95d', '#a93783']
+            esOva: false
+        props:
+            nombre:
+                type: String
+                default: "Sin nombre"
+            animeID:
+                type: Number
                 required: true
-            },
-            anime: {
-                type: Object,
+            anime:
+                type: Object
                 required: true
-            },
-            fnRecargarListaAnimes:{
-                type: Function,
+            fnRecargarListaAnimes:
+                type: Function
                 required: true
-            }
-        },
-        computed: {
-            nombreCorto: function () {
-                let nombreCorto = this.nombre;
-                while (/\s/.test(nombreCorto)) {
-                    nombreCorto = nombreCorto.replace(" ", "-");
-                }
-                return nombreCorto;
-            }
-        },
-        methods: {
-            mostrarEditarAnimeF(ev) {
-                if (!this.mostrarEditarAnime) {
-                    ev.target.innerText = "Cerrar";
-                }
-                else {
-                    ev.target.innerText = "Editar Anime";
-                }
-                this.mostrarEditarAnime = !this.mostrarEditarAnime;
-            },
-            eliminarAnime(animeID) {
-                const respuesta = confirm("Se borraran todos los datos del anime, incluidos sus episodios.");
+        computed:
+            nombreCorto: ->
+                nombreCorto = this.nombre
+                while /\s/.test(nombreCorto)
+                    nombreCorto = nombreCorto.replace(" ", "-")
+                nombreCorto
 
-                if (respuesta) {
-                    const xhr = new XMLHttpRequest();
-                    xhr.open("POST", `${servidor}/acecha/Animes/eliminarAnime.php`);
-                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                    xhr.onload = () => {
-                        JSON.parse(xhr.responseText);
-                        this.fnRecargarListaAnimes();
-                    };
-                    xhr.onerror = () => {
-                        console.log(xhr.responseText);
-                        console.error("Hubo un error :c");
-                    };
-                    xhr.send(`animeID=${this.animeID}`);
-                }
-            },
-            obtenerEpisodios () {
-                const vm = this;
-                const xhr = new XMLHttpRequest();
+        methods:
+            mostrarEditarAnimeF: (ev) ->
+                if !this.mostrarEditarAnime
+                    ev.target.innerText = "Cerrar"
+                else
+                    ev.target.innerText = "Editar Anime"
 
-                // xhr.open("POST", `${servidor}/acecha/Eps/obtenerEps.php`);
-                xhr.open("GET", `${servidor}/api/episodios?anime_id=${this.animeID}`);
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.onload = () => {
-                    const respuesta = JSON.parse(xhr.responseText);
-                    vm.epsData = respuesta.payload;
-                };
-                xhr.onerror = () => {
-                    console.log(xhr.responseText);
-                    console.error("Hubo un error :c");
-                };
-                // xhr.send(`animeID=${this.animeID}`);
-                xhr.send();
-            },
-            episodios (ev) {
-                if (!this.mostrarEps) {
-                    ev.target.innerText = "Cerrar";
-                }
-                else {
-                    ev.target.innerText = "Episodios";
-                }
-                this.mostrarEps = !this.mostrarEps;
+                this.mostrarEditarAnime = !this.mostrarEditarAnime
 
-                this.obtenerEpisodios();
-            },
-            crearEpisodio (ev) {
-                const form = ev.target;
-                const vm = this;
+            eliminarAnime: (animeID) ->
+                respuesta = confirm("Se borraran todos los datos del anime, incluidos sus episodios.")
 
-                const botonCrear = form['botonCrear'];
+                if respuesta
+                    xhr = new XMLHttpRequest()
+                    xhr.open("POST", "${servidor}/acecha/Animes/eliminarAnime.php")
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+                    xhr.onload = () =>
+                        JSON.parse(xhr.responseText)
+                        this.fnRecargarListaAnimes()
+                    xhr.onerror = () =>
+                        console.log(xhr.responseText)
+                        console.error("Hubo un error :c")
+                    xhr.send("animeID=#{this.animeID}")
+                null
+            obtenerEpisodios: ->
+                vm = this
+                xhr = new XMLHttpRequest()
 
-                const terminarCicloBotonCrear = this.cambiarColoresElem(botonCrear, "Creando...", "value");
+                # xhr.open("POST", `${servidor}/acecha/Eps/obtenerEps.php`);
+                xhr.open("GET", "#{servidor}/api/episodios?anime_id=#{this.animeID}")
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+                xhr.onload = () =>
+                    respuesta = JSON.parse(xhr.responseText)
+                    vm.epsData = respuesta.payload
 
-                const xhr = new XMLHttpRequest();
-                // xhr.open("POST", servidor + "/acecha/Eps/crearEp.php");
-                xhr.open("POST", `${servidor}/api/episodios`);
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.onload = () => {
-                    try {
-                        const data = JSON.parse(xhr.responseText);
+                xhr.onerror = () =>
+                    console.log(xhr.responseText)
+                    console.error("Hubo un error :c")
 
-                        if (data.exito) {
-                            console.log("Exito");
+                # xhr.send(`animeID=${this.animeID}`)
+                xhr.send()
+                null
 
-                            this.obtenerEpisodios();
+            episodios: (ev) ->
+                if !this.mostrarEps
+                    ev.target.innerText = "Cerrar"
+                else
+                    ev.target.innerText = "Episodios"
+                this.mostrarEps = !this.mostrarEps
+                this.obtenerEpisodios()
 
-                            const items = form.getElementsByClassName("anime__form__rapid");
-                            for (let i = 0; i < items.length; i++)
-                                items[i].value = "";
+            crearEpisodio: (ev) ->
+                form = ev.target
+                vm = this
 
-                            vm.esOva = false;
+                botonCrear = form['botonCrear']
 
-                            terminarCicloBotonCrear(true);
-                        } else {
-                            console.error(data.razon);
+                terminarCicloBotonCrear = this.cambiarColoresElem(botonCrear, "Creando...", "value")
 
-                            terminarCicloBotonCrear(false);
-                        }
-                    } catch (e) {
-                        console.log(xhr.responseText);
-                        console.error("Error al convertir JSON. Razon:\n" + e.stack + "\n" + e);
+                xhr = new XMLHttpRequest()
+                # xhr.open("POST", servidor + "/acecha/Eps/crearEp.php")
+                xhr.open("POST", "${servidor}/api/episodios")
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+                xhr.onload = () =>
+                    try
+                        data = JSON.parse(xhr.responseText)
 
-                        terminarCicloBotonCrear(false);
-                    }
-                };
-                xhr.onerror = () => {
+                        if data.exito
+                            console.log("Exito")
+                            this.obtenerEpisodios()
 
-                    console.error("Error al ejecutar la petición.");
+                            items = form.getElementsByClassName("anime__form__rapid")
+                            # for (let i = 0; i < items.length; i++)
+                            for num in [0..items.length]
+                                items[i].value = ""
 
-                    terminarCicloBotonCrear(false);
-                };
+                            vm.esOva = false
 
-                const datos = {
-                    animeID: this.animeID,
-                    numEp: form["numEp"].value,
-                    mega: form["linkMega"].value,
-                    rapidvideo: form["linkRapidVideo"].value,
-                    acortado: form["linkAcortado"].value,
-                    mango: form["linkMango"].value,
-                    mp4upload: form["linkMP4Upload"].value,
+                            terminarCicloBotonCrear(true)
+                        else
+                            console.error(data.razon)
 
-                    // ¡Nuevo!
-                    okru: form["linkOkru"].value,
-                    okruDescarga: form["linkOkru--descarga"].value,
-                    mangoDescarga: form["linkMango--descarga"].value,
-                    mp4uploadDescarga: form["linkMP4Upload--descarga"].value,
+                            terminarCicloBotonCrear(false)
+
+                    catch e
+                        console.log(xhr.responseText)
+                        console.error("Error al convertir JSON. Razon:\n" + e.stack + "\n" + e)
+
+                        terminarCicloBotonCrear(false)
+                xhr.onerror = () =>
+
+                    console.error("Error al ejecutar la petición.")
+                    terminarCicloBotonCrear(false)
+
+                datos =
+                    animeID: this.animeID
+                    numEp: form["numEp"].value
+                    mega: form["linkMega"].value
+                    rapidvideo: form["linkRapidVideo"].value
+                    acortado: form["linkAcortado"].value
+                    mango: form["linkMango"].value
+                    mp4upload: form["linkMP4Upload"].value
+
+                    # ¡Nuevo!
+                    okru: form["linkOkru"].value
+                    okruDescarga: form["linkOkru--descarga"].value
+                    mangoDescarga: form["linkMango--descarga"].value
+                    mp4uploadDescarga: form["linkMP4Upload--descarga"].value
 
                     esOva: this.esOva
-                };
-                let datosAEnviar = [];
-                for (const item in datos) {
-                    datosAEnviar.push(`${encodeURIComponent(item)}=${encodeURIComponent(datos[item])}`);
-                }
 
-                // console.log(datosAEnviar.join("&"));
-                xhr.send(datosAEnviar.join("&"));
-            },
-            editarAnime(ev, campo) {
-                ev.preventDefault();
-                const valorNuevo = ev.target.parentNode[campo].value;
-                const vm = this;
+                datosAEnviar = []
+                for item in datos
+                    datosAEnviar.push("#{encodeURIComponent(item)}=#{encodeURIComponent(datos[item])}")
 
-                const xhr = new XMLHttpRequest();
-                xhr.open("POST", `${servidor}/acecha/Animes/actualizarAnime.php`);
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                # // console.log(datosAEnviar.join("&"));
+                xhr.send(datosAEnviar.join("&"))
+                null
 
-                const terminarCicloBotonCrear = this.cambiarColoresElem(ev.target, "Actualizando...", "innerHTML");
+            editarAnime: (ev, campo) ->
+                ev.preventDefault()
+                valorNuevo = ev.target.parentNode[campo].value
+                vm = this
 
-                xhr.onload = () => {
-                    try {
-                        const respuesta = JSON.parse(xhr.responseText);
-                        if (respuesta.exito) {
-                            terminarCicloBotonCrear(true);
-                        } else {
-                            console.log(xhr.responseText);
-                            terminarCicloBotonCrear(false);
-                        }
-                    } catch (e) {
-                        console.log(xhr.responseText);
-                        terminarCicloBotonCrear(false);
-                    }
-                };
-                xhr.onerror = () => {
-                    console.log(xhr.responseText);
-                    terminarCicloBotonCrear(false);
-                };
-                xhr.send(`modo=individual&animeID=${this.animeID}&campo=${campo}&valor=${valorNuevo}`);
-            },
-            editarAnimeTodo (ev) {
-                const form = ev.target;
+                xhra = new XMLHttpRequest()
+                xhra.open("POST", "${servidor}/acecha/Animes/actualizarAnime.php")
+                xhra.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
 
-                const xhr = new XMLHttpRequest();
-                xhr.open("POST", `${servidor}/acecha/Animes/actualizarAnime.php`);
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                terminarCicloBotonCrear = this.cambiarColoresElem(ev.target, "Actualizando...", "innerHTML")
 
-                const terminarCicloBotonCrear = this.cambiarColoresElem(form["actualizar"], "Actualizando...", "value");
+                xhra.onload = () =>
+                    try
+                        respuesta = JSON.parse(xhra.responseText)
+                        if respuesta.exito
+                            terminarCicloBotonCrear true
+                        else
+                            console.log(xhra.responseText)
+                            terminarCicloBotonCrear(false)
 
-                xhr.onload = () => {
-                    try {
-                        const respuesta = JSON.parse(xhr.responseText);
-                        if (respuesta.exito) {
-                            terminarCicloBotonCrear(true);
-                        } else {
-                            console.log(xhr.responseText);
-                            terminarCicloBotonCrear(false);
-                        }
-                    } catch (e) {
-                        console.log(xhr.responseText);
-                        terminarCicloBotonCrear(false);
-                    }
-                };
-                xhr.onerror = () => {
-                    console.log(xhr.responseText);
-                    terminarCicloBotonCrear(false);
-                };
+                    catch e
+                        console.log(xhra.responseText)
+                        terminarCicloBotonCrear(false)
 
-                xhr.send(`modo=todo&animeID=${this.animeID}&nombre=${form["nombre"].value}&urlAnime=${form["urlAnime"].value
-                    }&urlImg=${form["urlImg"].value}`);
-            },
-            cambiarColoresElem (elem, textoNuevo, objetivo) {
-                const colorActual = elem.style.backgroundColor;
-                const textoActual = elem[objetivo];
 
-                const colores = ['#313EA9','#5196a9','#46a95d','#a93783'];
+                xhra.onerror = () =>
+                    console.log(xhr.responseText)
+                    terminarCicloBotonCrear(false)
 
-                elem[objetivo] = textoNuevo;
-                const intervalo = setInterval(() => {
-                    elem.style.backgroundColor = colores[parseInt(Math.random()*4)];
-                }, 750);
+                xhra.send("modo=individual&animeID=#{this.animeID}&campo=#{campo}&valor=#{valorNuevo}")
+                null
 
-                return exito => {
-                    clearInterval(intervalo);
-                    if (exito) {
-                        elem[objetivo] = "Éxito";
-                        elem.style.backgroundColor = "#2d9168";
+            editarAnimeTodo: (ev) ->
+                form = ev.target
 
-                        setTimeout(() => {
-                            elem[objetivo] = textoActual;
-                            elem.style.backgroundColor = colorActual;
-                        }, 4000);
-                    } else {
-                        elem[objetivo] = "Error";
-                        elem.style.backgroundColor = "#ac2923";
+                xhru = new XMLHttpRequest()
+                xhru.open("POST", "#{servidor}/acecha/Animes/actualizarAnime.php")
+                xhru.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
 
-                        setTimeout(() => {
-                            elem[objetivo] = textoActual;
-                            elem.style.backgroundColor = colorActual;
-                        }, 10000);
-                    }
-                };
-            },
-            actualizarCarpetaMega (ev) {
-                const boton = ev.target;
-                const nuevoNombre = document.getElementById("carpetaMega").value;
+                terminarCicloBotonCrear = this.cambiarColoresElem(form["actualizar"], "Actualizando...", "value")
 
-                const terminarCicloBoton = this.cambiarColoresElem(boton, "Actualizando...", "innerHTML");
+                xhru.onload = () =>
+                    try
+                        respuesta = JSON.parse(xhr.responseText)
+                        if respuesta.exito
+                            terminarCicloBotonCrear(true)
+                        else
+                            console.log(xhr.responseText)
+                            terminarCicloBotonCrear(false)
 
-                const xhr = new XMLHttpRequest();
-                xhr.open("POST", servidor + "/acecha/Animes/actualizarCampo.php");
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    catch e
+                        console.log(xhr.responseText)
+                        terminarCicloBotonCrear(false)
 
-                xhr.onload = () => {
-                    try {
-                        const res = JSON.parse(xhr.responseText);
-                        if (res.exito) {
-                            terminarCicloBoton(true);
-                        } else {
-                            terminarCicloBoton(false);
-                        }
-                    } catch (e) {
-                        terminarCicloBoton(false);
-                    }
-                };
-                xhr.onerror = () => {
-                    terminarCicloBoton(false);
-                };
 
-                xhr.send(`animeID=${this.anime.animeID}&campo=carpetaMega&valor=${nuevoNombre}`);
-            }
-        },
-    }
+                xhru.onerror = () =>
+                    console.log(xhr.responseText)
+                    terminarCicloBotonCrear(false)
+
+
+                xhru.send "modo=todo&animeID=" + this.animeID + "&nombre=" + form["nombre"].value +
+                    "&urlAnime=" + form["urlAnime"].value + "&urlImg=" + form["urlImg"].value
+                null
+
+            cambiarColoresElem: (elem, textoNuevo, objetivo) ->
+                colorActual = elem.style.backgroundColor
+                textoActual = elem[objetivo]
+
+                colores = ['#313EA9','#5196a9','#46a95d','#a93783']
+
+                elem[objetivo] = textoNuevo
+                intervalo = setInterval (() =>
+                    elem.style.backgroundColor = colores[parseInt(Math.random()*4)]
+                ), 750
+
+                (exito) =>
+                    clearInterval(intervalo)
+                    if (exito)
+                        elem[objetivo] = "Éxito"
+                        elem.style.backgroundColor = "#2d9168"
+
+                        setTimeout (() =>
+                            elem[objetivo] = textoActual
+                            elem.style.backgroundColor = colorActual
+                        ), 4000
+                    else
+                        elem[objetivo] = "Error"
+                        elem.style.backgroundColor = "#ac2923"
+
+                        setTimeout (() =>
+                            elem[objetivo] = textoActual
+                            elem.style.backgroundColor = colorActual
+                        ), 10000
+            actualizarCarpetaMega: (ev) ->
+                boton = ev.target
+                nuevoNombre = document.getElementById("carpetaMega").value
+
+                terminarCicloBoton = this.cambiarColoresElem(boton, "Actualizando...", "innerHTML")
+
+                xhr = new XMLHttpRequest()
+                xhr.open("POST", servidor + "/acecha/Animes/actualizarCampo.php")
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+
+                xhr.onload = () =>
+                    try
+                        res = JSON.parse(xhr.responseText)
+                        if res.exito
+                            terminarCicloBoton(true)
+                        else
+                            terminarCicloBoton(false)
+
+                    catch e
+                        terminarCicloBoton(false)
+
+
+                xhr.onerror = () =>
+                    terminarCicloBoton(false)
+
+
+                xhr.send("animeID=#{this.anime.animeID}&campo=carpetaMega&valor=#{nuevoNombre}")
+                null
+
+#
 </script>
 
 <style scoped lang="sass">
