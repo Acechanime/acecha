@@ -1,6 +1,6 @@
 <template lang="pug">
-    div.anime(:id="anime.nombre")
-        span.anime__titulo {{ anime.nombre }}
+    div.anime
+        span.anime__titulo {{ anime.anime_id }} {{ anime.nombre }}
         button.anime__boton(style="background-color: #004323; width: 98px;" @click="episodios($event)")
             | Episodios
         button.anime__boton(style="background-color: #210043; width: 126px;" @click="mostrarEditarAnimeF($event)")
@@ -75,23 +75,31 @@
                 template(v-for="link in epsData")
                     mi-link(v-if="link.es_ova" :key="link.num_ep + '-link--ova'" :link="link" :nombre="nombre"
                              :nombreCorto="nombreCorto" :fnObtenerEps="obtenerEpisodios")
+        div(v-if="mostrarEditarAnime")
+            editar-anime(:config="anime" :texto="edicionTexto" :fun="actualizarAnime"
+                :error="edicionError")
 
+    //
 </template>
 
 <script lang="coffee">
     import miLink from "./mi-link.vue"
+    import editarAnime from "../editar-anime.vue"
     servidor = 'http://localhost:3000'
 
     export default
         name: "anime"
         components:
             "mi-link": miLink
+            "editar-anime": editarAnime
         data: ->
             epsData: undefined
             mostrarEps: false
             mostrarEditarAnime: false
             colores: ['#313EA9', '#5196a9', '#46a95d', '#a93783']
             esOva: false
+            edicionTexto: "Actualizar"
+            edicionError: no
         props:
             nombre:
                 type: String
@@ -113,14 +121,40 @@
                 nombreCorto
 
         methods:
-            mostrarEditarAnimeF: (ev) ->
-                if !this.mostrarEditarAnime
-                    ev.target.innerText = "Cerrar"
+            actualizarAnime: ->
+                vm = this
+                resRaw = await fetch "#{servidor}/api/animes/#{vm.anime.anime_id}",
+                    method: "PUT"
+                    headers:
+                        "Content-Type": "application/json"
+                    body: JSON.stringify vm.$store.state.animeAdmin
+                respuesta =
+                    try
+                        await resRaw.json()
+                    catch e
+                        { exito: no}
+                if respuesta?.exito and respuesta.exito
+                    vm.edicionTexto = "Exito"
+                    setTimeout (() =>
+                        vm.edicionTexto = "Crear"
+                    ), 1500
                 else
+                    vm.edicionTexto = "Error"
+                    vm.error = yes
+                    setTimeout (() =>
+                        vm.edicionTexto = "Crear"
+                        vm.edicionError = no
+                    ), 2500
+                    console.error respuesta.razon
+            mostrarEditarAnimeF: (ev) ->
+                if @mostrarEditarAnime
+                    @$store.commit "ocultarAnimeAdmin"
                     ev.target.innerText = "Editar Anime"
+                else
+                    @$store.commit "mostrarAnimeAdmin"
+                    ev.target.innerText = "Cerrar"
 
-                this.mostrarEditarAnime = !this.mostrarEditarAnime
-
+                @mostrarEditarAnime = !@mostrarEditarAnime
             eliminarAnime: (animeID) ->
                 respuesta = confirm("Se borraran todos los datos del anime, incluidos sus episodios.")
 
@@ -171,9 +205,53 @@
 
                 terminarCicloBotonCrear = this.cambiarColoresElem(botonCrear, "Creando...", "value")
 
+                datos =
+                    animeID: this.animeID
+                    numEp: form["numEp"].value
+                    mega: form["linkMega"].value
+                    rapidvideo: form["linkRapidVideo"].value
+                    acortado: form["linkAcortado"].value
+                    mango: form["linkMango"].value
+                    mp4upload: form["linkMP4Upload"].value
+
+                    # ¡Nuevo!
+                    okru: form["linkOkru"].value
+                    okruDescarga: form["linkOkru--descarga"].value
+                    mangoDescarga: form["linkMango--descarga"].value
+                    mp4uploadDescarga: form["linkMP4Upload--descarga"].value
+
+                    esOva: this.esOva
+
+                datosAEnviar = for item, dato of datos
+                    "#{encodeURIComponent item}=#{encodeURIComponent dato}"
+
+                try
+                    dataR = await fetch "#{servidor}/api/episodios",
+                        method: "POST"
+                        headers:
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        body: datosAEnviar.join "&"
+                    data = await dataR.json()
+                    if data.exito? and data.exito is yes
+                        terminarCicloBotonCrear yes
+                        @obtenerEpisodios()
+                        items = form.getElementsByClassName("anime__form__rapid")
+
+                        for num in [0..items.length - 1]
+                            items[num].value = ""
+
+                        @esOva = false
+
+                    else throw new Error "Error. No exito en solicitud."
+
+                    terminarCicloBotonCrear yes
+                catch e
+                    console.log "Error.\n#{e.stack}"
+                    terminarCicloBotonCrear no
+
+                ###
                 xhr = new XMLHttpRequest()
-                # xhr.open("POST", servidor + "/acecha/Eps/crearEp.php")
-                xhr.open("POST", "${servidor}/api/episodios")
+                xhr.open("POST", "#{servidor}/api/episodios")
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
                 xhr.onload = () =>
                     try
@@ -184,9 +262,8 @@
                             this.obtenerEpisodios()
 
                             items = form.getElementsByClassName("anime__form__rapid")
-                            # for (let i = 0; i < items.length; i++)
                             for num in [0..items.length]
-                                items[i].value = ""
+                                items[num].value = ""
 
                             vm.esOva = false
 
@@ -206,30 +283,9 @@
                     console.error("Error al ejecutar la petición.")
                     terminarCicloBotonCrear(false)
 
-                datos =
-                    animeID: this.animeID
-                    numEp: form["numEp"].value
-                    mega: form["linkMega"].value
-                    rapidvideo: form["linkRapidVideo"].value
-                    acortado: form["linkAcortado"].value
-                    mango: form["linkMango"].value
-                    mp4upload: form["linkMP4Upload"].value
-
-                    # ¡Nuevo!
-                    okru: form["linkOkru"].value
-                    okruDescarga: form["linkOkru--descarga"].value
-                    mangoDescarga: form["linkMango--descarga"].value
-                    mp4uploadDescarga: form["linkMP4Upload--descarga"].value
-
-                    esOva: this.esOva
-
-                datosAEnviar = []
-                for item in datos
-                    datosAEnviar.push("#{encodeURIComponent(item)}=#{encodeURIComponent(datos[item])}")
-
-                # // console.log(datosAEnviar.join("&"));
                 xhr.send(datosAEnviar.join("&"))
                 null
+                ###
 
             editarAnime: (ev, campo) ->
                 ev.preventDefault()
@@ -237,7 +293,7 @@
                 vm = this
 
                 xhra = new XMLHttpRequest()
-                xhra.open("POST", "${servidor}/acecha/Animes/actualizarAnime.php")
+                xhra.open("POST", "#{servidor}/acecha/Animes/actualizarAnime.php")
                 xhra.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
 
                 terminarCicloBotonCrear = this.cambiarColoresElem(ev.target, "Actualizando...", "innerHTML")
