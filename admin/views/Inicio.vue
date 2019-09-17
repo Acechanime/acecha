@@ -5,14 +5,14 @@
                 h2 Varios
                 recomendacion-semanal
                 video-recomendado
-            // section
+            section
                 h2 Animes
                 div
-                    carga-automatica
+                    // carga-automatica
                     button.boton(@click="cambiarMostrarCrear" :class="claseBoton") Crear anime
                     crear-anime(v-if="panelAbierto")
-                    br
-                    ver-anime
+                    //  br
+                        ver-anime
             div.verAnime
                 div.verAnime__titulo Ver/Modificar Anime
                 br
@@ -40,8 +40,7 @@
     import CargaAutomatica from "../components/Inicio/carga-automatica";
 
     import anime from "../components/Inicio/anime.vue"
-
-    servidor = "http://localhost:3000"
+    import { servidor } from "../../src/variables"
 
     export default
         name: "Inicio"

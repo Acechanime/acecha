@@ -1,2 +1,4 @@
-export const servidor = process.env.NODE_ENV === "production"? "https://araozu.pro": "";
+export const servidor = process.env.NODE_ENV === "production"?
+    "https://araozu.pro":
+    "";
 // export const servidor = "https://araozu.pro";

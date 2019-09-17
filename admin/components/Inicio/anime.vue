@@ -85,7 +85,7 @@
 <script lang="coffee">
     import miLink from "./mi-link.vue"
     import editarAnime from "../editar-anime.vue"
-    servidor = 'http://localhost:3000'
+    import { servidor } from "../../../src/variables"
 
     export default
         name: "anime"
