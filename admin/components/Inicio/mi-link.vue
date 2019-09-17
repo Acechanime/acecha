@@ -1,103 +1,90 @@
-<template>
-    <div>
-        <span class="link__ep">{{(link.es_ova? 'ova ' : 'ep ') + link.num_ep }}</span> &rarr;
-        <a class="anime__form__link" :href="'https://acechanime.com/' + nombreCorto + '/' + ((link.es_ova === '1'? 'ova' : 'ep') + link.num_ep)" target="_blank">
-            /{{ nombreCorto }}/{{ (link.esOva === "1"? 'ova' : 'ep') + link.num_ep }}
-        </a>
-        <button class="link_verLinks" @click="botonVerLinks($event)">
-            Ver link
-        </button>
-        <button class="link_verLinks link_eliminarEp" @click="eliminarEpisodio($event)">
-            Eliminar
-        </button>
-        <div class="link__links" v-if="mostrarLinks">
-            <form @submit.prevent>
-                <span class="titulo-o">Online:</span>
-                <br>
+<template lang="pug">
+    div
+        span.link__ep {{(link.es_ova? 'ova ' : 'ep ') + link.num_ep }} &rarr;
+        a.anime__form__link(target="_blank"
+            :href="'https://acechanime.com/' + nombreCorto + '/' + ((link.es_ova === '1'? 'ova' : 'ep') + link.num_ep)")
+            | /{{ nombreCorto }}/{{ (link.esOva === "1"? 'ova' : 'ep') + link.num_ep }}
+        button.link_verLinks(@click="botonVerLinks($event)")
+            | Ver link
+        button.link_verLinks.link_eliminarEp(@click="eliminarEpisodio($event)")
+            | Eliminar
+        div.link__links(v-if="mostrarLinks")
+            form(@submit.prevent)
+                span.titulo-o Online:
+                br
 
-                <span class="link__links__label">RapidVideo</span> &rarr;
-                <input class="link__links__input" type="text" name="rapidvideo" :value="link.rapidvideo"
-                       :placeholder="link.rapidvideo? '': 'Sin episodio.'">
-                <button class="link__links__botonActualizar" @click="actualizarEpisodio($event, 'rapidvideo')">
-                    {{ link.rapidvideo? 'Actualizar': 'Crear' }}
-                </button>
-                <br>
+                span.link__links__label RapidVideo &rarr;
+                input.link__links__input(type="text" name="rapidvideo" :value="link.rapidvideo"
+                       :placeholder="link.rapidvideo? '': 'Sin episodio.'")
+                button.link__links__botonActualizar(@click="actualizarEpisodio($event, 'rapidvideo')")
+                    | {{ link.rapidvideo? 'Actualizar': 'Crear' }}
+                br
 
-                <span class="link__links__label">Mega</span> &rarr;
-                <input class="link__links__input" type="text" name="mega" :value="link.mega"
-                       :placeholder="link.mega? '': 'Sin episodio.'">
-                <button class="link__links__botonActualizar" @click="actualizarEpisodio($event, 'mega')">
-                    {{ link.mega? 'Actualizar': 'Crear' }}
-                </button>
-                <br>
+                span.link__links__label Mega &rarr;
+                input.link__links__input(type="text" name="mega" :value="link.mega"
+                       :placeholder="link.mega? '': 'Sin episodio.'")
+                button.link__links__botonActualizar(@click="actualizarEpisodio($event, 'mega')")
+                    | {{ link.mega? 'Actualizar': 'Crear' }}
+                br
 
-                <span class="link__links__label">Okru</span> &rarr;
-                <input class="link__links__input" type="text" name="okru" :value="link.okru"
-                       :placeholder="link.okru? '': 'Sin episodio.'">
-                <button class="link__links__botonActualizar" @click="actualizarEpisodio($event, 'okru')">
-                    {{ link.okru? 'Actualizar': 'Crear' }}
-                </button>
-                <br>
+                span.link__links__label Okru &rarr;
+                input.link__links__input(type="text" name="okru" :value="link.okru"
+                       :placeholder="link.okru? '': 'Sin episodio.'")
+                button.link__links__botonActualizar(@click="actualizarEpisodio($event, 'okru')")
+                    | {{ link.okru? 'Actualizar': 'Crear' }}
+                br
 
-                <span class="link__links__label">MP4Upload</span> &rarr;
-                <input class="link__links__input" type="text" name="mp4upload" :value="link.mp4upload"
-                       :placeholder="link.mp4upload? '': 'Sin episodio.'">
-                <button class="link__links__botonActualizar" @click="actualizarEpisodio($event, 'mp4upload')">
-                    {{ link.mp4upload? 'Actualizar': 'Crear' }}
-                </button>
-                <br>
+                span.link__links__label MP4Upload &rarr;
+                input.link__links__input(type="text" name="mp4upload" :value="link.mp4upload"
+                       :placeholder="link.mp4upload? '': 'Sin episodio.'")
+                button.link__links__botonActualizar(@click="actualizarEpisodio($event, 'mp4upload')")
+                    | {{ link.mp4upload? 'Actualizar': 'Crear' }}
+                br
 
-                <span class="link__links__label">Mango</span> &rarr;
-                <input class="link__links__input" type="text" name="mango" :value="link.mango"
-                       :placeholder="link.mango? '': 'Sin episodio.'">
-                <button class="link__links__botonActualizar" @click="actualizarEpisodio($event, 'mango')">
-                    {{ link.mango? 'Actualizar': 'Crear' }}
-                </button>
-                <br>
+                span.link__links__label Mango &rarr;
+                input.link__links__input(type="text" name="mango" :value="link.mango"
+                       :placeholder="link.mango? '': 'Sin episodio.'")
+                button.link__links__botonActualizar(@click="actualizarEpisodio($event, 'mango')")
+                    | {{ link.mango? 'Actualizar': 'Crear' }}
+                br
 
-                <hr>
+                hr
 
-                <span class="titulo-o">Descarga</span>
-                <br>
+                span.titulo-o Descarga
+                br
 
-                <span class="link__links__label">Mega</span> &rarr;
-                <input class="link__links__input" type="text" name="acortado" :value="link.mega_acortado"
-                       :placeholder="link.mega_acortado? '': 'Sin episodio.'">
-                <button class="link__links__botonActualizar" @click="actualizarEpisodio($event, 'mega_acortado')">
-                    {{ link.mega_acortado? 'Actualizar': 'Crear' }}
-                </button>
-                <br>
+                span.link__links__label Mega &rarr;
+                input.link__links__input(type="text" name="acortado" :value="link.mega_acortado"
+                       :placeholder="link.mega_acortado? '': 'Sin episodio.'")
+                button.link__links__botonActualizar(@click="actualizarEpisodio($event, 'mega_acortado')")
+                    | {{ link.mega_acortado? 'Actualizar': 'Crear' }}
+                br
 
-                <span class="link__links__label">Okru</span> &rarr;
-                <input class="link__links__input" type="text" name="okruDescarga" :value="link.okru_acortado"
-                       :placeholder="link.okru_acortado? '': 'Sin episodio.'">
-                <button class="link__links__botonActualizar" @click="actualizarEpisodio($event, 'okru_acortado')">
-                    {{ link.okru_acortado? 'Actualizar': 'Crear' }}
-                </button>
-                <br>
+                span.link__links__label Okru &rarr;
+                input.link__links__input(type="text" name="okruDescarga" :value="link.okru_acortado"
+                       :placeholder="link.okru_acortado? '': 'Sin episodio.'")
+                button.link__links__botonActualizar(@click="actualizarEpisodio($event, 'okru_acortado')")
+                    | {{ link.okru_acortado? 'Actualizar': 'Crear' }}
+                br
 
-                <span class="link__links__label">MP4Upload</span> &rarr;
-                <input class="link__links__input" type="text" name="mp4uploadDescarga" :value="link.mp4upload_acortado"
-                       :placeholder="link.mp4upload_acortado? '': 'Sin episodio.'">
-                <button class="link__links__botonActualizar" @click="actualizarEpisodio($event, 'mp4upload_acortado')">
-                    {{ link.mp4upload_acortado? 'Actualizar': 'Crear' }}
-                </button>
-                <br>
+                span.link__links__label MP4Upload &rarr;
+                input.link__links__input(type="text" name="mp4uploadDescarga" :value="link.mp4upload_acortado"
+                       :placeholder="link.mp4upload_acortado? '': 'Sin episodio.'")
+                button.link__links__botonActualizar(@click="actualizarEpisodio($event, 'mp4upload_acortado')")
+                    | {{ link.mp4upload_acortado? 'Actualizar': 'Crear' }}
+                br
 
-                <span class="link__links__label">Mango</span> &rarr;
-                <input class="link__links__input" type="text" name="mangoDescarga" :value="link.mango_acortado"
-                       :placeholder="link.mango_acortado? '': 'Sin episodio.'">
-                <button class="link__links__botonActualizar" @click="actualizarEpisodio($event, 'mango_acortado')">
-                    {{ link.mango_acortado? 'Actualizar': 'Crear' }}
-                </button>
+                span.link__links__label Mango &rarr;
+                input.link__links__input(type="text" name="mangoDescarga" :value="link.mango_acortado"
+                       :placeholder="link.mango_acortado? '': 'Sin episodio.'")
+                button.link__links__botonActualizar(@click="actualizarEpisodio($event, 'mango_acortado')")
+                    | {{ link.mango_acortado? 'Actualizar': 'Crear' }}
 
-            </form>
-        </div>
-    </div>
+    //
 </template>
 
 <script>
-    const servidor = 'https://acechanime.com';
+    import { servidor } from "../../../src/variables"
 
     export default {
         name: "mi-link",
