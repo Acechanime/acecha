@@ -110,25 +110,6 @@
 <style scoped lang="sass">
     @import "../sass/global"
 
-    .botonm
-        cursor: pointer
-        display: inline-block
-        overflow: hidden
-        user-select: none
-        -webkit-tap-highlight-color: transparent
-        vertical-align: middle
-        box-shadow: none
-        color: #0040ff
-        background-color: white
-        transition: background-color 150ms, color 150ms
-        border: none
-        border-radius: 5px
-        padding: 10px 16px
-        font:
-            family: "Product Sans", sans-serif
-            size: large
-            // weight: bold
-
     .botonm--error
         background-color: #e51400
         color: white
