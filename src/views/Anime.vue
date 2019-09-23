@@ -9,8 +9,11 @@
                         span.icon-check-box
                 redes-sociales
                 info(:animeObj="animeObj")
-                mal(:url="animeObj.mal? animeObj.mal: 'err'")
-                twitter
+                mal(:url="animeObj.mal? animeObj.mal: 'err'" v-if="!esMovil")
+                twitter(v-if="!esMovil")
+                template(v-if="esMovil")
+                    br
+                    br
             div
                 article.sinopsis
                     div.tit Sinopsis
@@ -38,6 +41,13 @@
     import redesSociales from "../components/Anime/redes-sociales.vue"
     import store from "../store.coffee"
 
+    esperarListaAnimes = new Promise (resolve) =>
+        intervaloP = setInterval (=>
+            if store.state.listaAnimes isnt undefined
+                clearInterval intervaloP
+                resolve()
+        ), 100
+
     export default
         name: "Anime"
         components:
@@ -53,6 +63,7 @@
         data: ->
             animeProv: {imagenes: {}}
             animeExiste: true
+            esMovil: window.innerWidth < 600
         computed:
             colorEtiqueta: ->
                 if @animeObj.en_emision then "background: #01bc59" else "background: #ff0241"
@@ -79,6 +90,7 @@
                 else (to.path.split "/")[1]
             fun = ->
                 nombreRuta = "/#{ruta}/"
+                await esperarListaAnimes
                 animes = store.state.listaAnimes.filter (a) -> a.ruta == nombreRuta
                 if animes.length == 1
                     to.params.animeObj = animes[0]
@@ -91,7 +103,7 @@
                 next (vm) -> vm.inicializarAnimeObj()
             else
                 intervalo = setInterval (->
-                    unless store.state.listaAnimes.length is 0
+                    if store.state.listaAnimes isnt undefined
                         clearInterval intervalo
                         fun()
                 ), 100
@@ -134,7 +146,7 @@
     @import "../sass/variables"
 
     .an
-        background-color: var(--fondo2)
+        background-color: var(--fondo1)
 
     .cont
         position: relative
@@ -174,7 +186,7 @@
 
     .sinopsis
         @extend %caja-textos
-        background-color: var(--fondo1)
+        background-color: var(--fondo2)
         .tit
             line-height: 1.3
             font:
