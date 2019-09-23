@@ -26,10 +26,16 @@
             filtros:
                 type: Array # [(a -> Bool)]
                 required: true
+            terminarCargaFn:
+                type: Function
+                required: true
         computed:
             listaAnimes: -> @$store.state.listaAnimes
             listaAnimesFiltrada: ->
-                @listaAnimes.filter comp @filtros
+                if @listaAnimes isnt undefined
+                    @terminarCargaFn()
+                    @listaAnimes.filter comp @filtros
+                else []
 
     #
     

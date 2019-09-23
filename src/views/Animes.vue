@@ -4,7 +4,7 @@
         div.grid
             div.cont
                 buscador(:cambiarFiltros="cambiarFiltros")
-                animes(:filtros="filtros")
+                animes(:filtros="filtros" :terminarCargaFn="terminarCarga")
             div.publicidad
                 publicidad
     //
@@ -26,8 +26,7 @@
             animes: animes
         methods:
             cambiarFiltros: (f) -> @filtros = f
-        mounted: ->
-            @$store.commit "terminarCargaPagina"
+            terminarCarga: -> @$store.commit "terminarCargaPagina"
 
     #
 </script>
