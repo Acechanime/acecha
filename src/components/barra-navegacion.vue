@@ -1,46 +1,51 @@
 <template lang="pug">
-    nav.navegacion(:class="barraMinClase")
-        div.contenedor
-            div.izq
-                router-link(to="/")
-                    img.logo( src="https://acechanime.com/wp-content/themes/anime/img/logo.png"
-                         alt="Logo AcechaAnime")
-            div.der
-                ul.items
-                    li#navbar-anime
-                        router-link(to="/animes/") Anime
-                            img.emoji( draggable="false" alt="📂" width="12px"
-                                src="https://s.w.org/images/core/emoji/2.4/svg/1f4c2.svg")
-                            // i.material-icons arrow_drop_down
-                    li#navbar-tips
-                        a Acecha tips
-                            img.emoji(draggable="false" alt=""
-                            src="https://acechanime.com/wp-content/themes/anime/img/bicons/parchment.svg"
-                            width="12px")
-                    li
-                        router-link(to="/acecha-premium/") Acecha premium
-                            img.emoji(draggable="false"
-                                alt="🔱"
-                                src="https://s.w.org/images/core/emoji/2.4/svg/1f531.svg"
+    div
+        nav.navegacion(:class="barraMinClase")
+            div.contenedor
+                div.izq
+                    router-link(to="/")
+                        img.logo( src="https://acechanime.com/wp-content/themes/anime/img/logo.png"
+                             alt="Logo AcechaAnime")
+                div.der
+                    ul.items
+                        li#navbar-anime
+                            router-link(to="/animes/") Anime
+                                img.emoji( draggable="false" alt="📂" width="12px"
+                                    src="https://s.w.org/images/core/emoji/2.4/svg/1f4c2.svg")
+                                // i.material-icons arrow_drop_down
+                        li#navbar-tips
+                            a Acecha tips
+                                img.emoji(draggable="false" alt=""
+                                src="https://acechanime.com/wp-content/themes/anime/img/bicons/parchment.svg"
                                 width="12px")
-                    li
-                        router-link(to="/acecha-tv/") Acecha tv
-                            img.emoji(draggable="false" alt="📺" width="12px"
-                                src="https://s.w.org/images/core/emoji/11/svg/1f4fa.svg")
-                    li#navbar-comunidad
-                        a Comunidad
-                            img.emoji(draggable="false" alt="👨‍👨‍👧‍👧" width="12px"
-                                src="https://s.w.org/images/core/emoji/11/svg/1f468-200d-1f468-200d-1f467-200d-1f467.svg")
-                    // li
-                        a
-                            img.search(src="../assets/icons/search.svg")
+                        li
+                            router-link(to="/acecha-premium/") Acecha premium
+                                img.emoji(draggable="false"
+                                    alt="🔱"
+                                    src="https://s.w.org/images/core/emoji/2.4/svg/1f531.svg"
+                                    width="12px")
+                        li
+                            router-link(to="/acecha-tv/") Acecha tv
+                                img.emoji(draggable="false" alt="📺" width="12px"
+                                    src="https://s.w.org/images/core/emoji/11/svg/1f4fa.svg")
+                        li#navbar-comunidad
+                            a Comunidad
+                                img.emoji(draggable="false" alt="👨‍👨‍👧‍👧" width="12px"
+                                    src="https://s.w.org/images/core/emoji/11/svg/1f468-200d-1f468-200d-1f467-200d-1f467.svg")
+                        // li
+                            a
+                                img.search(src="../assets/icons/search.svg")
+        // barra-navegacion-movil(v-else)
     //
 </template>
 
 <script lang="coffee">
+    import barraNavMovil from "./barra-navegacion-movil.vue"
 
     export default
         name: "barra-navegacion"
+        components:
+            "barra-navegacion-movil": barraNavMovil
         data: ->
             barraMin: no
         computed:
@@ -48,6 +53,7 @@
                 if @$route.path is "/"
                     if @barraMin then "navegacion--min" else ""
                 else "navegacion--min"
+            esMovil: -> window.innerWidth < 550
         created: ->
             vm = this
             window.addEventListener "scroll", () ->
