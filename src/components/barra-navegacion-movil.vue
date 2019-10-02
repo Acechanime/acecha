@@ -1,10 +1,20 @@
 <template lang="pug">
-    nav.navm(:class="navOculta? 'navm--oculto': ''")
+    nav.navm
         div.barra
-            span.material-icons.icono-menu menu
-            input.busqueda(placeholder="Buscar animes" :style="anchoInput")
-            span.usuario
-                span.ic
+            div.superior(:class="navOculta? 'superior--oculto': ''")
+                span.usuario
+                    img(src="https://png.icons8.com/windows/1600/0063B1/user")
+                input.busqueda(placeholder="Buscar animes" :style="anchoInput")
+                span.material-icons.icono-menu menu
+                div.separador
+            div.iconos
+                router-link(to="/" title="Inicio" :class="esPagInicio? 'resaltado': ''")
+                    i.material-icons home
+                router-link(to="/animes/" title="Todos los animes" :class="esPagAnimes? 'resaltado': ''")
+                    i.material-icons dashboard
+                router-link(to="/bugs/" title="Reportar error" :class="esPagBugs? 'resaltado': ''")
+                    i.material-icons bug_report
+
     //
 </template>
 
@@ -16,10 +26,14 @@
             anchoPantalla: -> window.innerWidth
             anchoInput: ->
                 ancho = @anchoPantalla - 122
-                "max-width: #{ancho}px"
+                "width: #{ancho}px"
         data: ->
             prevScrollPos: window.pageYOffset
             navOculta: no
+        computed:
+            esPagInicio: -> @$route.path is "/"
+            esPagAnimes: -> @$route.path is "/animes/"
+            esPagBugs: -> @$route.path is "/bugs/"
         methods:
             handleScroll: (ev) ->
                 actScrollPos = window.pageYOffset
@@ -43,7 +57,7 @@
 
     .navm
         position: fixed
-        top: 0
+        bottom: 0
         left: 0
         z-index: 10
         // Padding: 25 -> 10
@@ -51,7 +65,7 @@
         transition: transform 250ms
 
     .navm--oculto
-        transform: translateY(-70px)
+        transform: translateY(100px)
 
     .barra
         margin: 5px 10px
@@ -70,10 +84,11 @@
         color: var(--texto2)
 
     .busqueda
+
         display: inline-block
         height: 50px
-        width: auto
         padding: 7px
+        // margin-left: 50px
         background-color: transparent
         border: none
         color: var(--texto2)
@@ -87,19 +102,54 @@
             border-width: 2px
             outline: none
 
+    .superior
+        transition: height 250ms
+        height: 51px
+        overflow: hidden
+
+    .superior--oculto
+        height: 0
+
     .usuario
-        position: absolute
-        right: 11px
         display: inline-block
-        padding: 10px
-        width: 50px
-        height: 50px
-        .ic
+        margin: 10px
+        width: 30px
+        height: 30px
+        float: left
+        img
+            width: 30px
+            height: 30px
+            border-radius: 50%
+        // .ic
             display: inline-block
-            background-color: var(--texto1)
+            background-color: var(--fondo1)
             border-radius: 50%
             width: 100%
             height: 100%
+            img
+                width: 100%
+
+    .separador
+        height: 1px
+        background-color: var(--texto1)
+        opacity: 0.15
+        width: 95%
+        margin: 0 auto
+        clear: both
+
+    .iconos
+        padding: 7px
+        display: grid
+        grid-template-columns: repeat(3, 1fr)
+        a
+            text-align: center
+            color: var(--texto2)
+            user-select: none
+            cursor: pointer
+            transition: color 250ms ease-out
+
+    .resaltado
+        color: #E91E63 !important
 
 
     //
