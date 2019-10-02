@@ -5,11 +5,30 @@
 
 <script lang="coffee">
 
-    cssOscuro = =>
+    ###
         document.documentElement.style.setProperty("--fondo0", "black");
         document.documentElement.style.setProperty("--fondo1", "#0a0909");
         document.documentElement.style.setProperty("--fondo2", "#040303");
         document.documentElement.style.setProperty("--fondo3", "#0f0d0d");
+        document.documentElement.style.setProperty("--sombra1", "rgba(0, 0, 0, 0.12)");
+        document.documentElement.style.setProperty("--texto1", "#e8e8e1");
+        document.documentElement.style.setProperty("--texto2", "#BFC1B6");
+        document.documentElement.style.setProperty("--opacidad1", "0.8");
+        document.documentElement.style.setProperty("--opacidad2", "0.9");
+    ###
+
+    ###
+        document.documentElement.style.setProperty("--fondo0", "#0e1621");
+        document.documentElement.style.setProperty("--fondo1", "#080911");
+        document.documentElement.style.setProperty("--fondo2", "#0c131d");
+        document.documentElement.style.setProperty("--fondo3", "#080911");
+    ###
+
+    cssOscuro = =>
+        document.documentElement.style.setProperty("--fondo0", "#0e1621");
+        document.documentElement.style.setProperty("--fondo1", "#080911");
+        document.documentElement.style.setProperty("--fondo2", "#0c131d");
+        document.documentElement.style.setProperty("--fondo3", "#080911");
         document.documentElement.style.setProperty("--sombra1", "rgba(0, 0, 0, 0.12)");
         document.documentElement.style.setProperty("--texto1", "#e8e8e1");
         document.documentElement.style.setProperty("--texto2", "#BFC1B6");
@@ -20,7 +39,7 @@
         document.documentElement.style.setProperty("--fondo0", "#ffffff");
         document.documentElement.style.setProperty("--fondo1", "#ffffff");
         document.documentElement.style.setProperty("--fondo2", "#ffffff");
-        document.documentElement.style.setProperty("--fondo3", "#efefef");
+        document.documentElement.style.setProperty("--fondo3", "#ebebeb");
         document.documentElement.style.setProperty("--sombra1", "rgba(0, 0, 0, 0.15)");
         document.documentElement.style.setProperty("--texto1", "#3A3A3A");
         document.documentElement.style.setProperty("--texto2", "#4e565b");

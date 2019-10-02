@@ -67,7 +67,7 @@
 
     .temps
         @extend %caja-textos
-        background-color: var(--fondo1)
+        background-color: var(--fondo2)
 
     @media only screen and (max-width: 500px)
         .temps

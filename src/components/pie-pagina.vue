@@ -3,7 +3,7 @@
         div.cont-foot
             div.logo
                 h3.titulo Sobre Nosotros
-                img(src="https://acechanime.com/wp-content/uploads/2019/05/logo-e1559927675414.png"
+                img(src="../assets/img/acechanime.png"
                     alt="Logo")
                 br
                 span.txt.

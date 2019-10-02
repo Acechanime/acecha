@@ -69,7 +69,7 @@
     .eps
         @extend %caja-textos
         padding: 0
-        background-color: var(--fondo1)
+        background-color: var(--fondo2)
         color: var(--texto1)
 
     //
