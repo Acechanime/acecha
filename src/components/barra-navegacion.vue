@@ -1,51 +1,44 @@
 <template lang="pug">
     div
-        nav.navegacion(:class="barraMinClase")
+        nav.navegacion(:class="barraMinClase" v-if="!esMovil")
             div.contenedor
                 div.izq
                     router-link(to="/")
-                        img.logo( src="https://acechanime.com/wp-content/themes/anime/img/logo.png"
+                        img.logo(src="../assets/img/acechanime.png"
                              alt="Logo AcechaAnime")
                 div.der
                     ul.items
-                        li#navbar-anime
-                            router-link(to="/animes/") Anime
-                                img.emoji( draggable="false" alt="📂" width="12px"
-                                    src="https://s.w.org/images/core/emoji/2.4/svg/1f4c2.svg")
-                                // i.material-icons arrow_drop_down
-                        li#navbar-tips
-                            a Acecha tips
-                                img.emoji(draggable="false" alt=""
-                                src="https://acechanime.com/wp-content/themes/anime/img/bicons/parchment.svg"
-                                width="12px")
+                        anime
+                        tips
                         li
                             router-link(to="/acecha-premium/") Acecha premium
                                 img.emoji(draggable="false"
                                     alt="🔱"
-                                    src="https://s.w.org/images/core/emoji/2.4/svg/1f531.svg"
+                                    src="/img/bicons/anchor.svg"
                                     width="12px")
                         li
                             router-link(to="/acecha-tv/") Acecha tv
                                 img.emoji(draggable="false" alt="📺" width="12px"
-                                    src="https://s.w.org/images/core/emoji/11/svg/1f4fa.svg")
-                        li#navbar-comunidad
-                            a Comunidad
-                                img.emoji(draggable="false" alt="👨‍👨‍👧‍👧" width="12px"
-                                    src="https://s.w.org/images/core/emoji/11/svg/1f468-200d-1f468-200d-1f467-200d-1f467.svg")
-                        // li
-                            a
-                                img.search(src="../assets/icons/search.svg")
-        // barra-navegacion-movil(v-else)
+                                    src="/img/bicons/tv.svg")
+                        comunidad
+
+        barra-navegacion-movil(v-else)
     //
 </template>
 
 <script lang="coffee">
     import barraNavMovil from "./barra-navegacion-movil.vue"
+    import animeList from "./barra-navegacion-legacy/anime.vue"
+    import tipsList from "./barra-navegacion-legacy/tips.vue"
+    import comunidadList from "./barra-navegacion-legacy/comunidad.vue"
 
     export default
         name: "barra-navegacion"
         components:
             "barra-navegacion-movil": barraNavMovil
+            anime: animeList
+            tips: tipsList
+            comunidad: comunidadList
         data: ->
             barraMin: no
         computed:
@@ -53,7 +46,7 @@
                 if @$route.path is "/"
                     if @barraMin then "navegacion--min" else ""
                 else "navegacion--min"
-            esMovil: -> window.innerWidth < 550
+            esMovil: -> window.innerWidth < 769
         created: ->
             vm = this
             window.addEventListener "scroll", () ->
@@ -65,10 +58,11 @@
     #
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
     @import "../sass/variables"
 
-    #navbar-anime, #navbar-comunidad, #navbar-tips
+
+    #navbar-comunidad, #navbar-tips, .item
         &::after
             display: inline-block
             color: var(--texto1)
@@ -131,7 +125,7 @@
         display: inline-table
         margin: 0 10px
         height: 50px
-        li
+        .item, li
             position: relative
             display: table-cell
             vertical-align: middle
@@ -147,6 +141,9 @@
                 display: block
                 cursor: pointer
                 padding: 15px 1.6875rem 15px 10px !important
+                transition: color 250ms
+                &:hover
+                    color: #E91E63
 
             img.emoji
                 //vertical-align: top
@@ -155,21 +152,12 @@
             img.search
                 height: 12px
 
-            .material-icons
-                font:
-                    size: 20px
-                    weight: bold
-                display: inline-block
-                transform: translateY(7px)
-                transition: transform 500ms
-
             &:hover
-                color: #E91E63
                 &:after
                     transform: rotate(180deg)
                     color: #E91E63 !important
 
-    @media only screen and (max-width: 1023px)
+    @media only screen and (max-width: 900px)
         .der
             display: none !important
 
@@ -179,6 +167,25 @@
 
         //.logo
             height: 75px !important
+
+    .sub-menu
+        display: block
+        background-color: var(--fondo1)
+        position: absolute
+        left: 0
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175)
+        width: 190px
+        border-radius: 4px
+
+        transition: max-height 500ms
+        max-height: 0
+        overflow: hidden
+        li
+            list-style: none
+            position: relative
+            box-sizing: border-box
+            display: list-item
+            text-transform: none
 
 
     //
