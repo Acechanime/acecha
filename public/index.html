@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="favicon.png">
     <title><%= htmlWebpackPlugin.options.title %></title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600|Roboto:400,700,900"
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="theme-color" content="#E91E63">
     <style>
         #pantalla-carga {
             background-color: white;
@@ -100,12 +101,12 @@
         const url = window.location;
         const host = url.hostname;
         const protocolo = url.protocol;
-        if (host !== "localhost" && protocolo === "http:")
+        if ((host !== "localhost" & host !== "192.168.8.100" ) && protocolo === "http:")
             window.location.replace("https://" + url.host + url.pathname);
     </script>
 </head>
-<body style="overflow: hidden">
-
+<body>
+<!--
 <div id="pantalla-carga">
     <div id="contenido">
         <div id="bienvenida">
@@ -124,6 +125,7 @@
         </svg>
     </div>
 </div>
+-->
 <script>
     const modoColor = (() => {
         const modo = localStorage.getItem("modo-color");
