@@ -22,15 +22,14 @@
 
     export default
         name: "barra-navegacion-movil"
-        computed:
-            anchoPantalla: -> window.innerWidth
-            anchoInput: ->
-                ancho = @anchoPantalla - 122
-                "width: #{ancho}px"
         data: ->
             prevScrollPos: window.pageYOffset
             navOculta: no
         computed:
+            anchoPantalla: -> window.innerWidth
+            anchoInput: ->
+                ancho = @anchoPantalla - 122
+                "width: #{ancho}px;"
             esPagInicio: -> @$route.path is "/"
             esPagAnimes: -> @$route.path is "/animes/"
             esPagBugs: -> @$route.path is "/bugs/"
