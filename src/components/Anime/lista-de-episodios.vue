@@ -30,19 +30,28 @@
         data: ->
             episodios: []
             estadoCarga: 0
+
         computed:
             episodios_filtrados: -> @episodios.filter (x) -> x.es_ova is no
             ovas_filtradas: -> @episodios.filter (x) -> x.es_ova is yes
             tieneOvas: -> @ovas_filtradas.length > 0
+        watch:
+            anime: (n, v) ->
+                if n.anime_id isnt v.anime_id
+                    @cargarEpisodios()
+        methods:
+            cargarEpisodios: ->
+                datosRaw = await fetch "#{servidor}/api/episodios?anime_id=#{@anime.anime_id}"
+                datos = await datosRaw.json()
+                @estadoCarga =
+                    if datos.exito? && datos.exito
+                        @episodios = datos.payload
+                        @$store.commit "cambiarListaEpisodios", datos.payload
+                        1
+                    else -1
         created: ->
-            datosRaw = await fetch "#{servidor}/api/episodios?anime_id=#{@anime.anime_id}"
-            datos = await datosRaw.json()
-            @estadoCarga =
-                if datos.exito? && datos.exito
-                    @episodios = datos.payload
-                    @$store.commit "cambiarListaEpisodios", datos.payload
-                    1
-                else -1
+            @cargarEpisodios()
+
 
 
     #
