@@ -5,15 +5,19 @@
                 :largo="opciones.length" :posActiva="posActiva"
                 :cambiarOpcion="cambiarOpcion")
         div#contenedor-anime.contenedor-video
-        div.controles
-            a.izq.boton.boton--eps
-                i.material-icons chevron_left
-                span Anterior
-            router-link.boton.boton--ir(to="./")
-                span Ver capítulos
-            a.der.boton.boton--eps
-                span Siguiente
-                i.material-icons chevron_right
+        br
+        div.controles2
+            div.mizq
+                router-link.boton.boton--eps(:to="epAnterior")
+                    i.material-icons chevron_left
+                    span.ocultarMovil Anterior
+            div.mcentro
+                router-link.boton.boton--ir(to="./")
+                    span Ver capítulos
+            div.mder
+                router-link.boton.boton--eps(:to="epSiguiente")
+                    span.ocultarMovil Siguiente
+                    i.material-icons chevron_right
 
     //
 </template>
@@ -58,6 +62,9 @@
                 ), 50)
 
         computed:
+            epTexto: -> "./#{if @links.es_ova then 'ova' else 'ep'}"
+            epSiguiente: -> @epTexto + "#{@links.num_ep + 1}"
+            epAnterior: -> @epTexto +  "#{@links.num_ep - 1}"
             opciones: ->
                 opciones = []
                 if @links?.mega? and @links.mega isnt ""
@@ -104,15 +111,18 @@
 <style scoped lang="sass">
     @import "../../sass/variables"
 
-    .reproductor
-        // margin-top: -44px
-
     #contenedor-anime
         border-radius: 0 5px 5px 5px
 
-    .controles
-        margin: 10px 10px
-        text-align: center
+    .controles2
+        display: grid
+        grid-template-columns: auto auto auto
+        .mizq
+            text-align: left
+        .mcentro
+            text-align: center
+        .mder
+            text-align: right
 
     .boton
         display: inline-table
@@ -134,7 +144,9 @@
             font-size: 15px
 
     .boton--eps
+        width: auto
         background-color: #e46a69
+        text-decoration: none
         &:hover
             background-color: #c75857
 
@@ -146,9 +158,8 @@
     .izq
         float: left
 
-    .der
+    // .der
         float: right
-
 
     .contenedor-video
         position: relative
@@ -166,6 +177,10 @@
 
     .opciones
         list-style-type: none
+
+    @media only screen and (max-width: 500px)
+        .ocultarMovil
+            display: none !important
 
     //
 </style>
