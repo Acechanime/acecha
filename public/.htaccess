@@ -1,8 +1,19 @@
 <IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
-  RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule ^index\.html$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /index.html [L]
 </IfModule>
+
+# Evitar cacheado del service worker
+<Files "service-worker.js">
+    FileEtag None
+    <ifModule mod_headers.c>
+        Header Unset ETag
+        Header Set Cache-Control "max-age=0, no-store, no-cache, must-revalidate"
+        Header Set Pragma "no-cache"
+        Header Set Expires "Thu, 1 Jan 1970 00:00:00 GMT"
+    </ifModule>
+</Files>
