@@ -5,7 +5,7 @@
                 | Descargar
                 br
                 span.pequeno capitulo
-            div.boton(@click="abrirCarpetas()" style="margin-left: 10px")
+            // div.boton(@click="abrirCarpetas()" style="margin-left: 10px")
                 | Descargar
                 br
                 span.pequeno anime completo

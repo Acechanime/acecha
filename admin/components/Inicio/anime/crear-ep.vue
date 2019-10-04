@@ -1,13 +1,13 @@
 <template lang="pug">
     div
         div.botones
-            button.botonm.ep(v-if="creando === 0" @click="crearEp") Ep
-            button.botonm.ova(v-if="creando === 0" @click="crearOva") Ova
-            button.botonm.cancelar(v-if="creando !== 0" @click="cancelarCreacion")
+            button.botonm.ep(v-if="tipoCreando === 0" @click="crearEp") Ep
+            button.botonm.ova(v-if="tipoCreando === 0" @click="crearOva") Ova
+            button.botonm.cancelar(v-if="tipoCreando !== 0" @click="cancelarCreacion")
                 span.txtDefecto Creando {{ textoBoton }}
                     span.txtCancelar Cancelar
 
-        form.anime__form(v-if="creando !== 0")
+        form.anime__form(v-if="tipoCreando !== 0" @submit.prevent)
             label.anime__form__label {{ textoBoton }} numero
             input.anime__form__ep(type="number" min="0" v-model.number="numero")
             br
@@ -46,17 +46,29 @@
                     label.anime__form__label Mango
                     input.anime__form__rapid(type="text" v-model="link_mango_acortado")
             div.botones
-                button.botonm.crear(@click="crearEpisodio") Crear
+                button.botonm.crear(@click="crearEpisodio"
+                    :style="'background-color: ' + creando.color")
+                    i.material-icons {{ creando.icono }}
+                    | {{ creando.texto }}
+
     //
 </template>
 
 <script lang="coffee">
+    import {servidor} from "../../../../src/variables";
 
     export default
         name: "crear-ep"
         data: ->
-            creando: 0 # 0 nada, 1 ep, -1 ova
+            tipoCreando: 0 # 0 nada, 1 ep, -1 ova
             numero: 0
+
+            creando:
+                icono: "cloud_upload"
+                texto: "Crear"
+                error: no
+                color: "#004D40"
+
             link_rapidvideo: ""
             link_mega: ""
             link_okru: ""
@@ -71,12 +83,68 @@
                 type: Number
                 required: true
         computed:
-            textoBoton: -> if @creando is 1 then "episodio" else "ova"
+            textoBoton: -> if @tipoCreando is 1 then "episodio" else "ova"
         methods:
-            crearEp: -> @creando = 1
-            crearOva: -> @creando = -1
-            cancelarCreacion: -> @creando = 0
+            crearEp: -> @tipoCreando = 1
+            crearOva: -> @tipoCreando = -1
+            cancelarCreacion: -> @tipoCreando = 0
             crearEpisodio: ->
+                @creando =
+                    icono: "cloud_queue"
+                    texto: "Creando..."
+                    error: no
+                    color: "#004D40"
+                datos =
+                    anime_id: @anime_id
+                    num_ep: @numero
+                    mega: @link_mega
+                    rapidvideo: @link_rapidvideo
+                    mango: @link_mango
+                    mp4upload: @link_mp4upload
+                    okru: @link_okru
+                    mega_acortado: @link_mega_acortado
+                    okru_acortado: @link_okru_acortado
+                    mango_acortado: @link_mango_acortado
+                    mp4upload_acortado: @link_mp4upload_acortado
+                    es_ova: @tipoCreando is -1
+
+
+                try
+                    resR = await fetch "#{servidor}/api/episodios",
+                        method: "POST"
+                        headers:
+                            "Content-Type": "application/json"
+                        body: JSON.stringify datos
+                    res = await resR.json()
+
+                    if res.exito? and res.exito
+                        @creando =
+                            icono: "cloud_done"
+                            texto: "Exito"
+                            error: no
+                            color: "#1B5E20"
+                    else
+                        @creando =
+                            icono: "cloud_off"
+                            texto: "Error"
+                            error: no
+                            color: "#b71c1c"
+
+                catch e
+                    @creando =
+                        icono: "cloud_off"
+                        texto: "Error"
+                        error: no
+                        color: "#b71c1c"
+
+                vm = this
+                setTimeout (() =>
+                    vm.creando =
+                        icono: "cloud_upload"
+                        texto: "Crear"
+                        error: no
+                        color: "#004D40"
+                ), 3000
 
 #
 </script>
@@ -84,7 +152,7 @@
 <style scoped lang="sass">
 
     .botones
-        .ep, .ova, .cancelar, .crear
+        .ep, .ova, .cancelar
             &::before
                 content: "add"
                 font:
@@ -99,10 +167,10 @@
             &:hover
                 background-color: #b71c1c
         .crear
-            background-color: #004D40
             color: white
-            &::before
-                content: "check"
+            i
+                vertical-align: bottom
+                padding-right: 10px
 
     .txtDefecto
         position: relative

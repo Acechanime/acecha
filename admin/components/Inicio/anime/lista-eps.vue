@@ -55,13 +55,13 @@
             | Eps:
             br
             template(v-for="link in epsData")
-                mi-link(v-if="!link.es_ova" :key="link.num_ep + '-link'" :link="link" :nombre="nombre"
+                mi-link(v-if="!link.es_ova" :key="link.link_id" :link="link" :nombre="nombre"
                     :nombreCorto="nombreCorto" :fnObtenerEps="obtenerEpisodios")
             br
             | OVAs:
             br
             template(v-for="link in epsData")
-                mi-link(v-if="link.es_ova" :key="link.num_ep + '-link--ova'" :link="link" :nombre="nombre"
+                mi-link(v-if="link.es_ova" :key="link.link_id" :link="link" :nombre="nombre"
                     :nombreCorto="nombreCorto" :fnObtenerEps="obtenerEpisodios")
     //
 </template>

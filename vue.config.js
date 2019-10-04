@@ -7,6 +7,10 @@ module.exports = {
                     loader: 'coffee-loader',
                 }
             ]
+        },
+        devServer: {
+            compress: true,
+            disableHostCheck: true
         }
     },
     pluginOptions: {

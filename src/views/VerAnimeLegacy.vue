@@ -5,7 +5,7 @@
                 reproductor(:links="links")
                 descarga(:links="$store.state.verAnime.descarga")
             comentarios
-        div.fondo
+        div.fondo(v-if="!esMovil")
             publicidad
     //
 </template>
@@ -32,6 +32,7 @@
         name: "VerAnimeLegacy"
         components: { reproductor, descarga, comentarios, publicidad }
         computed:
+            esMovil: -> window.innerWidth < 780
             listaEps: -> @$store.state.verAnime.listaEpisodios
             numEp: -> @$store.state.verAnime.ep
             links: ->
@@ -70,6 +71,10 @@
         padding-left: 5px
         padding-right: 5px
         background-color: var(--fondo1)
+
+    @media only screen and (max-width: 780px)
+        .cont
+            grid-template-columns: none
 
 
     //

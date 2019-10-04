@@ -3,7 +3,8 @@
         div.barra
             div.superior(:class="navOculta? 'superior--oculto': ''")
                 span.usuario
-                    img(src="https://png.icons8.com/windows/1600/0063B1/user")
+                    // img(src="https://png.icons8.com/windows/1600/0063B1/user")
+                    img(src="/favicon.png")
                 input.busqueda(placeholder="Buscar animes" :style="anchoInput")
                 span.material-icons.icono-menu menu
                 div.separador
