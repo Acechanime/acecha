@@ -4,6 +4,7 @@
 </template>
 
 <script lang="coffee">
+    import {impr} from "../../variables";
 
     ###
         document.documentElement.style.setProperty("--fondo0", "black");
@@ -56,7 +57,9 @@
                     else console.log "Se intento cambiar el esquema de colores, pero no " +
                             "es ni claro ni oscuro :c"
             cambiarColor: ->
-                nuevoModo = localStorage.getItem "modo-color" ? "claro"
+                nuevoModo = do ->
+                    res = localStorage.getItem "modo-color"
+                    res ? "claro"
                 @cambiarVariables (
                     if nuevoModo is "claro"
                         localStorage.setItem "modo-color", "oscuro"
@@ -66,8 +69,9 @@
                         "claro"
                 )
         mounted: ->
-            esquema = (localStorage.getItem "modo-color" ? "claro")
-            @cambiarVariables esquema
+            @cambiarVariables do ->
+                res = localStorage.getItem "modo-color"
+                res ? "claro"
 
 #
 </script>
