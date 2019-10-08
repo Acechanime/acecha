@@ -4,7 +4,7 @@
             div.col.l6.s12.pad
                 div.cont-img
                     router-link(:to="recomendacion.ruta")
-                        img.img( :src="recomendacion.img_portada"
+                        img.img(:src="recomendacion.img_portada"
                              alt="Img anime" )
                 div.temporizador2.countdown
                     div.countdown__block
@@ -34,23 +34,26 @@
 </template>
 
 <script lang="coffee">
-    import {servidor} from "../../variables";
+    import {servidor, impr} from "../../variables";
+    import store, {listaAnimesCargada} from "../../store.coffee"
 
     export default
         name: "recomendacion-semanal"
         data: ->
             segundos: 0,
             intervaloSegundos: ''
-            recomendacion: {}
             error: no
             cargado: no
+            cache: no
             codigoDeError: "00"
+            recomendacion: {}
         computed:
             dias: -> Math.floor(this.segundos / 60 / 60 / 24)
             horas: -> Math.floor(this.segundos / 60 / 60) % 24
             minutos: -> Math.floor(this.segundos / 60) % 60
             segundosF: -> this.segundos % 60
-            listaAnimes: -> @$store.state.listaAnimes
+            listaAnimes: -> @$store.state.datos.listaAnimes
+            recomendacionRaw: -> @$store.state.datos.recomendacionSemanal
         props:
             terminarCarga:
                 type: Function
@@ -58,29 +61,23 @@
         methods:
             cargarRecomendacion: ->
                 vm = this
-                cargaLista = new Promise (resolve) =>
-                    intervalo = setInterval (=>
-                        if vm.listaAnimes isnt undefined
-                            clearInterval intervalo
-                            resolve()
-                    ), 250
                 recRaw = await fetch "#{servidor}/api/recomendacionSemanal/"
-                await cargaLista
                 rec = await recRaw.json()
+                await listaAnimesCargada
                 if rec.exito
-                    animeId = rec.payload["anime_id"]
-                    hora = rec.payload["hora"]
-                    [animeId, hora]
+                    rec.payload
                 else
                     throw new Error rec.error.razon
             inicializarRecomendacion: (animeId) ->
-                res = @$store.state.listaAnimes.filter (n) => n.anime_id == animeId
-                if res[0]?
-                    @recomendacion = res[0]
+                await listaAnimesCargada
+                res = @listaAnimes.find (n) => n.anime_id == animeId
+                if res?
+                    @recomendacion = res
                 else
                     @error = yes
                     @codigoDeError = "01"
-                    console.error "Error. No existe este anime en la recomendacion semanal."
+                    console.log "La recomendacion semanal tiene un anime_id invalido."
+                    impr "anime_id -> #{animeId}"
                 @cargado = yes
             inicializarTemporizador: (hora) ->
                 horaLimite = Math.floor (hora / 1000)
@@ -100,10 +97,28 @@
             ), 1000
 
             try
-                [ruta, hora] = await @cargarRecomendacion()
-                @inicializarRecomendacion ruta
+                [datos, cargadoDesdeLocalStorage] = await vm.recomendacionRaw
+
+                animeId = datos.anime_id
+                hora = datos.hora
+                @inicializarRecomendacion animeId
                 @inicializarTemporizador hora
+
+                if cargadoDesdeLocalStorage
+                    @cache = true
+                    setTimeout (->
+                        try
+                            mres = await vm.cargarRecomendacion()
+                            vm.inicializarRecomendacion mres.anime_id
+                            vm.inicializarTemporizador mres.hora
+                            store.commit "cambiarRecomendacionSemanal",
+                                anime_id: mres.anime_id
+                                hora: mres.hora
+                        catch e
+                            console.log e
+                    ), 100
             catch e
+                console.log e
                 @cargado = yes
                 @error = yes
                 @codigoDeError = "02"
