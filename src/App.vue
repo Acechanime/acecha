@@ -17,12 +17,14 @@
     import {servidor} from "./variables";
 
     quitarPantallaCarga = ->
+        ###
         elem = document.getElementById "pantalla-carga"
         elem.style.opacity = "0"
         setTimeout (=>
             elem.style.display = "none"
             document.body.style.overflow = "initial"
         ), 250
+        ###
 
     export default
         components:
@@ -34,7 +36,7 @@
         computed:
             esPagPrin: ->
                 this.$route.path is "/"
-            cargaCompleta: -> @$store.state.paginaLista
+            cargaCompleta: -> @$store.state.datos.paginaLista
         watch:
             cargaCompleta: (n, p) ->
                 if n is yes then quitarPantallaCarga()
@@ -56,6 +58,8 @@
                 else
                     console.log "Error al obtener la lista de animes desde el servidor.\n#{err}"
                     @$store.commit "cambiarListaAnimes", []
+            # Ahora la lista de generos se carga en el store.
+            ###
             inicializarListaGeneros: ->
                 res =
                     try
@@ -68,13 +72,16 @@
                 else
                     console.log "Error al obtener la lista de " +
                         "generos desde el servidor.\n#{res.err}"
+            ###
         created: ->
-            if @$store.state.listaAnimes is undefined
+            if @$store.state.datos.listaAnimes is undefined
                 @inicializarListaAnimes()
+            ###
             if @$store.state.listaGeneros.length == 0
                 @inicializarListaGeneros()
+            ###
 
-    #
+#
 </script>
 
 <style lang="sass">
