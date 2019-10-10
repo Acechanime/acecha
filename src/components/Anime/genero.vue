@@ -15,11 +15,11 @@
                 required: true
         computed:
             gen: ->
-                res = @$store.state.listaGeneros.find (x) => x.genero_id == @generoId
+                res = @$store.state.datos.listaGeneros.find (x) => x.genero_id == @generoId
                 res ? {}
             codigoIcono: -> "&##{ parseInt @gen.icono, 16 };"
-    #
-    
+
+#
 </script>
 
 <style scoped lang="sass">

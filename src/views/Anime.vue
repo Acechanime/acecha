@@ -1,7 +1,7 @@
 <template lang="pug">
     div.an
         imagen-anime(:nombre="animeObj.nombre" :img="animeObj.img_fondo")
-        main.cont.contenedor(v-show="!$store.state.verAnimeActivo")
+        main.cont.contenedor(v-show="!$store.state.verAnime.verAnimeActivo")
             div
                 div.contImg
                     img.imagen(:src="animeObj.img_portada")
@@ -39,14 +39,8 @@
     import listaDeEpisodios from "../components/Anime/lista-de-episodios.vue"
     import comentarios from "../components/Anime/comentarios.vue"
     import redesSociales from "../components/Anime/redes-sociales.vue"
-    import store from "../store.coffee"
-
-    esperarListaAnimes = new Promise (resolve) =>
-        intervaloP = setInterval (=>
-            if store.state.listaAnimes isnt undefined
-                clearInterval intervaloP
-                resolve()
-        ), 100
+    import store, { listaAnimesCargada } from "../store.coffee"
+    import {impr} from "../variables";
 
     export default
         name: "Anime"
@@ -88,25 +82,19 @@
                     if partes[0] is "" then partes[1]
                     else partes[0]
                 else (to.path.split "/")[1]
-            fun = ->
-                nombreRuta = "/#{ruta}/"
-                await esperarListaAnimes
-                animes = store.state.listaAnimes.filter (a) -> a.ruta == nombreRuta
-                if animes.length == 1
-                    to.params.animeObj = animes[0]
-                    next (vm) -> vm.inicializarAnimeObj()
-                else
-                    console.error "No se encontró un anime con ruta /#{nombreRuta}/"
-                    next (vm) -> vm.inicializarAnimeObj(true)
 
             if to.params.animeObj?
                 next (vm) -> vm.inicializarAnimeObj()
             else
-                intervalo = setInterval (->
-                    if store.state.listaAnimes isnt undefined
-                        clearInterval intervalo
-                        fun()
-                ), 100
+                nombreRuta = "/#{ruta}/"
+                await listaAnimesCargada
+                anime = store.state.datos.listaAnimes.find (a) -> a.ruta == nombreRuta
+                if anime?
+                    to.params.animeObj = anime
+                    next (vm) -> vm.inicializarAnimeObj()
+                else
+                    console.error "No se encontró un anime con ruta /#{nombreRuta}/"
+                    next (vm) -> vm.inicializarAnimeObj(true)
         beforeRouteUpdate: (to, from, next) ->
             if /\/(ep|ova)\d+$/.test to.path
                 next()
@@ -115,9 +103,10 @@
                 next()
             else
                 nombreRuta = to.path
-                animes = store.state.listaAnimes.filter (a) -> a.ruta == nombreRuta
-                if animes.length == 1
-                    @cambiarAnime animes[0]
+                await listaAnimesCargada
+                anime = store.state.datos.listaAnimes.find (a) -> a.ruta == nombreRuta
+                if anime?
+                    @cambiarAnime anime
                     next()
                 else
                     console.error "No se encontró un anime con ruta #{nombreRuta}"
@@ -129,14 +118,17 @@
                 @animeObj = @animeAdmin
             else
                 unless @$route?.params?.animeObj?
+                    impr "Buscando anime desde url"
                     nombreRuta = @$route.path
-                    animes = @$store.state.listaAnimes.filter (a) -> a.ruta == nombreRuta
-                    if animes.length == 1
+                    await listaAnimesCargada
+                    anime = store.state.listaAnimes.find (a) -> a.ruta == nombreRuta
+                    if anime?
                         console.log "existe #{nombreRuta}"
                     else
                         @animeExiste = no
                         console.error "No existe #{nombreRuta}"
                 else
+                    impr "Anime obtenido desde router."
                     @animeObj = @$route.params.animeObj
 
     #

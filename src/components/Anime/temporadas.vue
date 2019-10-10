@@ -27,7 +27,7 @@
                 anterior = []
                 animeActual = @anime
                 while animeActual.id_temporada_ant?
-                    animeAnt = @$store.state.listaAnimes.filter (a) ->
+                    animeAnt = @$store.state.datos.listaAnimes.filter (a) ->
                         a.anime_id == animeActual.id_temporada_ant
                     if animeAnt[0]?
                         anterior.unshift animeAnt[0]
@@ -37,15 +37,14 @@
                 siguiente = []
                 animeActual = @anime
                 while animeActual.id_temporada_sig?
-                    animeSig = @$store.state.listaAnimes.filter (a) ->
+                    animeSig = @$store.state.datos.listaAnimes.filter (a) ->
                         a.anime_id == animeActual.id_temporada_sig
                     if animeSig[0]?
                         siguiente.push animeSig[0]
                     animeActual = animeSig[0]
                 siguiente
 
-    #
-    
+#
 </script>
 
 <style scoped lang="sass">
