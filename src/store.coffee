@@ -88,24 +88,24 @@ moduloVerAnime =
         ruta: ""
     mutations:
         cambiarEstadoVerAnime: (state) ->
-            state.verAnime.activo = !state.verAnime.activo
+            state.activo = !state.activo
         activarVerAnime: (state) ->
-            state.verAnime.activo = true
+            state.activo = true
         desactivarVerAnime: (state) ->
-            state.verAnime.activo = false
+            state.activo = false
         cambiarRutaVerAnime: (state, ruta) ->
-            state.verAnime.ruta = ruta
+            state.ruta = ruta
         cambiarDatosVerAnime: (state, datos) ->
-            if state.verAnime.nombre isnt datos.nombre or state.verAnime.ep isnt datos.ep
-                state.verAnime.nombre = datos.nombre
-                state.verAnime.esOva = datos.esOva
-                state.verAnime.ep = datos.ep
-                state.verAnime.ruta = datos.ruta
+            if state.nombre isnt datos.nombre or state.ep isnt datos.ep
+                state.nombre = datos.nombre
+                state.esOva = datos.esOva
+                state.ep = datos.ep
+                state.ruta = datos.ruta
         cambiarAnimeVerAnime: (state, datos) ->
-            if state.verAnime.anime.mega isnt datos.mega
-                state.verAnime.anime = datos
+            if state.anime.mega isnt datos.mega
+                state.anime = datos
         cambiarListaEpisodios: (state, data) ->
-            state.verAnime.listaEpisodios = data
+            state.listaEpisodios = data
 
         activarVerAnime: (state) ->
             state.verAnimeActivo = yes
