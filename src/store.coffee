@@ -17,32 +17,12 @@ guardarListaAnimes = (data) =>
     dataJSON = JSON.stringify data
     localStorage?.setItem "lista-animes", dataJSON
 
-###: () -> Promise (Txt, Bool) Error
-Promesa
-###
-cargarRecomendacionSemanal = => new Promise (resolve, reject) =>
-    recomendacion = localStorage?.getItem "recomendacion-semanal"
-    if recomendacion?
-        resolve [(JSON.parse recomendacion), true]
-    else
-        res =
-            try
-                resRaw = await fetch "#{servidor}/api/recomendacionSemanal/"
-                await resRaw.json()
-            catch e
-                {exito: false, err: e}
-        if res?.exito
-            localStorage?.setItem "recomendacion-semanal", JSON.stringify res.payload
-            resolve [res.payload, false]
-        else
-            reject new Error "Error al obtener la lista de " +
-                "generos desde el servidor.\n#{res.err}"
-
 moduloAnimeAdmin =
     state:
         modoAdmin: no
         animeAdmin: {}
         mostrarAnimeAdmin: no
+        otros_nombres: []
     mutations:
         cambiarAModoAdmin: (state) ->
             state.modoAdmin = yes
@@ -50,12 +30,12 @@ moduloAnimeAdmin =
         cambiarAnimeAdmin: (state, anime) ->
             state.animeAdmin = anime
         cambiarAnimeAdmin_alternativo: (state, arr) ->
-            state.animeAdmin.otros_nombres = arr
+            state.otros_nombres = arr
         agregarAnimeAdmin_alternativo: (state) ->
-            unless Array.isArray state.animeAdmin.otros_nombres
-                state.animeAdmin.otros_nombres = []
+            unless Array.isArray state.otros_nombres
+                state.otros_nombres = []
             else
-                state.animeAdmin.otros_nombres = state.animeAdmin.otros_nombres.concat ""
+                state.otros_nombres = state.otros_nombres.concat ""
 
         mostrarAnimeAdmin: (state) ->
             state.mostrarAnimeAdmin = yes
@@ -112,6 +92,31 @@ moduloVerAnime =
         desactivarVerAnime: (state) ->
             state.verAnimeActivo = no
 
+###: (nombre: Txt, url: Txt) -> Promise ({}, Bool) Error
+    Intenta cargar un recurso desde localStorage, sino lo carga desde el servidor
+    y lo almacena el localStorage.
+    |nombre: El nombre a buscar en localStorage.
+    |url: La URL del servidor
+    Promesa que contiene: La respuesta como objeto, Bool indicando
+        si se cargo desde localStorage.
+###
+cargarRecurso = (nombre, url) => new Promise (resolve, reject) =>
+    datosLocales = localStorage?.getItem nombre
+    if generos?
+        resolve [(JSON.parse datosLocales), true]
+    else
+        res =
+            try
+                resRaw = await fetch "#{servidor}#{url}"
+                await resRaw.json()
+            catch e
+                {exito: false, err: e}
+        if res?.exito
+            localStorage?.setItem nombre, JSON.stringify res.payload
+            resolve [res.payload, false]
+        else
+            reject new Error "Error al obtener recurso desde el servidor.\n#{res.err}"
+
 moduloDatos =
     state:
         # TODO: Hacer que la lista de animes en si sea una Promesa.
@@ -121,13 +126,14 @@ moduloDatos =
         # En desuso.
         listaAnimesCargada: Promise.race []
 
-        # TODO: Promesa
-        listaGeneros: []
+        #: Promise ({}, Bool) Error
+        listaGeneros: cargarRecurso "generos", "/api/generos"
 
         ###: Promise (Txt, Bool) Error
         Promesa que se recupera desde localStorage. Bool indica si se sacó de localStorage.
         ###
-        recomendacionSemanal: cargarRecomendacionSemanal()
+        recomendacionSemanal: cargarRecurso "recomendacion-semanal",
+            "/api/recomendacionSemanal/"
 
         # Indica si la pagina termino de cargar sus recursos. En desuso.
         paginaLista: no
