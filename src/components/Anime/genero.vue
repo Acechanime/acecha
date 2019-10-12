@@ -6,18 +6,32 @@
 </template>
 
 <script lang="coffee">
+    import {impr} from "../../variables";
 
     export default
         name: "genero"
+        data: ->
+            gen: {}
         props:
             generoId:
                 type: Number
                 required: true
         computed:
+            ###
             gen: ->
                 res = @$store.state.datos.listaGeneros.find (x) => x.genero_id == @generoId
                 res ? {}
+            ###
             codigoIcono: -> "&##{ parseInt @gen.icono, 16 };"
+        methods:
+            cargarGenero: ->
+                vm = this
+                generosRaw = await @$store.state.datos.listaGeneros
+                generos = generosRaw[0]
+                @gen = (generos.find (x) => x.genero_id == vm.generoId) ? {}
+
+        created: ->
+            @cargarGenero()
 
 #
 </script>
