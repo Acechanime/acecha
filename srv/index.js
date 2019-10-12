@@ -45,11 +45,6 @@ const iniciarRutas = (app, ruta) => {
     app.get("/api/recomendacionSemanal/", require("./recomendacionSemanal/get").fun);
     app.post("/api/recomendacionSemanal/", require("./recomendacionSemanal/set").fun);
 
-    app.get("/api/cafe", (req, res) => {
-        res.status(418);
-        res.end();
-    });
-
 };
 
 module.exports = (app, http) => {

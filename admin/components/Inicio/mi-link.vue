@@ -5,7 +5,7 @@
             :href="'https://acechanime.com/' + nombreCorto + '/' + ((link.es_ova === '1'? 'ova' : 'ep') + link.num_ep)")
             | /{{ nombreCorto }}/{{ (link.esOva === "1"? 'ova' : 'ep') + link.num_ep }}
         button.link_verLinks(@click="botonVerLinks($event)")
-            | Ver link
+            | Ver links
         button.link_verLinks.link_eliminarEp(@click="eliminarEpisodio($event)")
             | Eliminar
         div.link__links(v-if="mostrarLinks")

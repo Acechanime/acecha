@@ -26,8 +26,7 @@
         methods:
             cargarGenero: ->
                 vm = this
-                generosRaw = await @$store.state.datos.listaGeneros
-                generos = generosRaw[0]
+                [generos, _] = await @$store.state.datos.listaGeneros
                 @gen = (generos.find (x) => x.genero_id == vm.generoId) ? {}
 
         created: ->

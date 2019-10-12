@@ -1,5 +1,5 @@
 <template lang="pug">
-    article.ep
+    article.ep(v-if="ep.anime_id")
         a.link(:href="obtenerLink" @click.prevent="irAlEp")
             img.imagen(:src="anime.img_nuevo_ep" :alt="'Episodio ' + ep.num_ep + ' de ' + anime.nombre")
             h3.nombre {{ anime.nombre }} {{ ep.num_ep }}
@@ -8,6 +8,8 @@
 </template>
 
 <script lang="coffee">
+    import { listaAnimesCargada } from "../../store.coffee"
+    import { impr } from "../../variables";
 
     export default
         name: "episodio"
@@ -16,16 +18,16 @@
                 type: Object
                 required: true
         computed:
-            listaAnimes: -> @$store.state.listaAnimes
+            listaAnimes: -> @$store.state.datos.listaAnimes
             anime: ->
                 lista = @listaAnimes
-                if lista isnt undefined and @ep?
-                    animes = lista.filter (x) => x.anime_id == @ep.anime_id
-                    if animes.length is 0
-                        console.log "El episodio con link_id #{@ep.link_id} no tiene anime."
+                anime_id = @ep.anime_id
+                if lista isnt undefined and @ep? and anime_id?
+                    anime = lista.find (x) => x.anime_id == anime_id
+                    anime ? do ->
+                        console.log "Inicio/episodio. No existe anime con id #{anime_id}"
                         {}
-                    else
-                        animes[0]
+
                 else if lista isnt undefined
                     console.log "Error. El objeto ep que se pasó no existe " +
                         "(#{typeof @ep})."

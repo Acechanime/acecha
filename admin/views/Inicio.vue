@@ -65,7 +65,7 @@
             # nuevo-legacy
             animes: []
         computed:
-            mostrarCrear: -> @$store.state.mostrarAnimeAdmin
+            mostrarCrear: -> @$store.state.animeAdmin.mostrarAnimeAdmin
             clasePreview: ->
                 if @mostrarCrear then "width: 40%"
             claseAdm: ->

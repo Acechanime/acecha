@@ -8,15 +8,17 @@
 <script lang="coffee">
     import Inicio from "./views/Inicio.vue"
     import cabecera from "./components/cabecera.vue"
-    import {servidor} from "../src/variables";
+    import { servidor, impr } from "../src/variables"
 
     quitarPantallaCarga = ->
+        ###
         elem = document.getElementById "pantalla-carga"
         elem.style.opacity = "0"
         setTimeout (=>
             elem.style.display = "none"
             document.body.style.overflow = "initial"
         ), 250
+        ###
 
     cssOscuro = =>
         document.documentElement.style.setProperty("--fondo0", "black");
@@ -40,7 +42,6 @@
         document.documentElement.style.setProperty("--opacidad1", "1");
         document.documentElement.style.setProperty("--opacidad2", "0.9");
 
-
     cambiarVariables = (modo) =>
         switch modo
             when "claro"  then cssClaro()
@@ -54,7 +55,7 @@
             "inicio": Inicio
             "cabecera": cabecera
         computed:
-            cargaCompleta: -> @$store.state.paginaLista
+            cargaCompleta: -> @$store.state.datos.paginaLista
         watch:
             cargaCompleta: (n, p) ->
                 if n is yes then quitarPantallaCarga()
@@ -88,8 +89,10 @@
 
             if @$store.state.listaAnimes is undefined
                 @inicializarListaAnimes()
+            ###
             if @$store.state.listaGeneros.length == 0
                 @inicializarListaGeneros()
+            ###
 
 #
 </script>

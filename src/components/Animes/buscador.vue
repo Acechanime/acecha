@@ -3,7 +3,7 @@
         input#nombre(placeholder="Nombre del anime" v-model="nombre")
         select#generos(v-model.number="genero")
             option(value="-1" selected) Cualquier género
-            option(v-for="gen in $store.state.listaGeneros" :value="gen.genero_id") {{ gen.nombre }}
+            option(v-for="gen in listaGeneros" :value="gen.genero_id") {{ gen.nombre }}
         select#emision(v-model.number="estado")
             option(value="-1" selected) Cualquier estado
             option(value="0") Terminado
@@ -21,6 +21,7 @@
 
 <!-- TODO: Hacer que los filtros que se apliquen se vean en la url. -->
 <script lang="coffee">
+    import {impr} from "../../variables";
 
     removerCaracteres = (str, strArr) =>
         caracs = strArr.split ""
@@ -36,11 +37,17 @@
             genero: -1
             estado: -1
             anyo: -1
+            listaGeneros: []
         props:
             cambiarFiltros:
                 type: Function # [(a -> Bool)] -> ()
                 required: true
+        methods:
+            cargarListaGeneros: ->
+                [datos, bool] = await @$store.state.datos.listaGeneros
+                @listaGeneros = datos
         created: ->
+            @cargarListaGeneros()
             vm = this
             filtroEstado = (a) ->
                 if vm.estado is -1 then true

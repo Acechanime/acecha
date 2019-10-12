@@ -1,7 +1,7 @@
 <template lang="pug">
     div.reproductor
         ul.opciones
-            opcion(v-for="(opcion, i) in opciones" :opcion="opcion" :pos="i" :key="i"
+            opcion(v-for="(op, i) in opciones" :opcion="op" :pos="i" :key="i"
                 :largo="opciones.length" :posActiva="posActiva"
                 :cambiarOpcion="cambiarOpcion")
         div#contenedor-anime.contenedor-video
@@ -105,7 +105,7 @@
                     clearInterval intervalo
             ), 50)
 
-    #
+#
 </script>
 
 <style scoped lang="sass">

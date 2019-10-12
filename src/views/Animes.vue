@@ -14,7 +14,6 @@
     import publicidad from "../components/Animes/publicidad.vue"
     import buscador from "../components/Animes/buscador.vue"
     import animes from "../components/Animes/animes.vue"
-    import YAML from "yaml"
 
     export default
         name: "Animes"
@@ -28,7 +27,7 @@
             cambiarFiltros: (f) -> @filtros = f
             terminarCarga: -> @$store.commit "terminarCargaPagina"
 
-    #
+#
 </script>
 
 <style scoped lang="sass">

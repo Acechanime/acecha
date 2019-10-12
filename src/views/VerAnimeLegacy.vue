@@ -65,12 +65,11 @@
     .cont
         grid-template-columns: 1fr 250px
 
-
     .fondo
         @extend %caja-textos
         padding-left: 5px
         padding-right: 5px
-        background-color: var(--fondo1)
+        background-color: var(--fondo2)
 
     @media only screen and (max-width: 780px)
         .cont

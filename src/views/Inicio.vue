@@ -60,8 +60,8 @@
                     "Código #{epsRecientes.status}.\n#{epsRecientes.err}"
 
             @terminarCarga()
-    #
 
+#
 </script>
 
 <style scoped lang="sass">

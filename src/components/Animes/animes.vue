@@ -30,15 +30,14 @@
                 type: Function
                 required: true
         computed:
-            listaAnimes: -> @$store.state.listaAnimes
+            listaAnimes: -> @$store.state.datos.listaAnimes
             listaAnimesFiltrada: ->
                 if @listaAnimes isnt undefined
                     @terminarCargaFn()
                     @listaAnimes.filter comp @filtros
                 else []
 
-    #
-    
+#
 </script>
 
 <style scoped lang="sass">

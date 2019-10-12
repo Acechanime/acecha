@@ -62,10 +62,10 @@
             colorEtiqueta: ->
                 if @animeObj.en_emision then "background: #01bc59" else "background: #ff0241"
             animeAdmin: ->
-                @$store.state.animeAdmin
+                @$store.state.animeAdmin.animeAdmin
             animeObj:
                 get: ->
-                    if @$store.state?.modoAdmin then @$store.state.animeAdmin
+                    if @$store.state.animeAdmin.modoAdmin then @animeAdmin
                     else @animeProv
                 set: (a) -> @animeProv = a
         methods:

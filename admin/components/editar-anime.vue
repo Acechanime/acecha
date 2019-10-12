@@ -80,7 +80,7 @@
         computed:
             anime: ->
                 console.log "eh?"
-                @$store.state.animeAdmin
+                @$store.state.animeAdmin.animeAdmin
             otrosNombresAlt: -> @$store.state.animeAdmin.otros_nombres
         props:
             texto:
