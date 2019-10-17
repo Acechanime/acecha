@@ -8,13 +8,9 @@
             option(value="-1" selected) Cualquier estado
             option(value="0") Terminado
             option(value="1") En emisión
-        select(v-model.number="anyo")
+        // select(v-model.number="anyo")
             option(value="-1" selected) Cualquier año
-        select
-            option(value="-1" selected) Cualquier orden
-            option Nombre
-            option Emision
-            option Agregado recientemente
+        // orden(:cambiarFiltro="cambiarFiltroOrden")
 
     //
 </template>
@@ -22,6 +18,7 @@
 <!-- TODO: Hacer que los filtros que se apliquen se vean en la url. -->
 <script lang="coffee">
     import {impr} from "../../variables";
+    import orden from "./buscador/orden.vue"
 
     removerCaracteres = (str, strArr) =>
         caracs = strArr.split ""
@@ -32,12 +29,15 @@
 
     export default
         name: "buscador"
+        components: { orden }
         data: ->
             nombre: ""
             genero: -1
             estado: -1
             anyo: -1
             listaGeneros: []
+            filtros:
+                orden: () -> true
         props:
             cambiarFiltros:
                 type: Function # [(a -> Bool)] -> ()
@@ -46,7 +46,12 @@
             cargarListaGeneros: ->
                 [datos, bool] = await @$store.state.datos.listaGeneros
                 @listaGeneros = datos
+            cambiarFiltroOrden: (f) ->
+                @filtros.orden = f
         created: ->
+            impr @$route.query
+            @$route.query.hola = "mundo"
+            impr @$route.query
             @cargarListaGeneros()
             vm = this
             filtroEstado = (a) ->
@@ -68,7 +73,12 @@
                 else
                     res = a.generos?.find (g) -> g == vm.genero
                     res?
-            vm.cambiarFiltros [filtroEstado, filtroGenero, filtroNombre]
+            vm.cambiarFiltros [
+                filtroEstado
+                filtroGenero
+                filtroNombre
+                @filtros.orden
+            ]
 
 #
 </script>

@@ -3,30 +3,31 @@
 import { register } from 'register-service-worker'
 
 if (process.env.NODE_ENV === 'production') {
-  register(`${process.env.BASE_URL}service-worker.js`, {
-    ready () {
-      console.log(
-        'App is being served from cache by a service worker.\n' +
-        'For more details, visit https://goo.gl/AFskqB'
-      )
-    },
-    registered () {
-      console.log('Service worker has been registered.')
-    },
-    cached () {
-      console.log('Content has been cached for offline use.')
-    },
-    updatefound () {
-      console.log('New content is downloading.')
-    },
-    updated () {
-      console.log('New content is available; please refresh.')
-    },
-    offline () {
-      console.log('No internet connection found. App is running in offline mode.')
-    },
-    error (error) {
-      console.error('Error during service worker registration:', error)
-    }
-  })
+    register(`${process.env.BASE_URL}service-worker.js`, {
+        ready() {
+            console.log(
+                'Aplicacion servida desde un service worker.\n' +
+                'Detalles -> https://goo.gl/AFskqB'
+            )
+        },
+        registered() {
+            console.log("Se ha registrado el Service Worker.");
+        },
+        cached() {
+            console.log("Se ha descargado contenido para usarlo sin internet.");
+        },
+        updatefound() {
+            console.log("Descargando nuevo contenido.");
+        },
+        updated() {
+            console.log("Nuevo contenido disponible, la pagina se recargará.");
+            window.location.reload(true);
+        },
+        offline() {
+            console.log("No hay conexion a internet.");
+        },
+        error(error) {
+            console.error("Error al registrar el service worker: ", error);
+        }
+    })
 }
