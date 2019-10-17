@@ -1,12 +1,13 @@
 <template lang="pug">
     nav.navm
         div.barra
+            lista-items(:mostrar="mostrarMenu")
             div.superior(:class="navOculta? 'superior--oculto': ''")
                 span.usuario
                     // img(src="https://png.icons8.com/windows/1600/0063B1/user")
                     img(src="/favicon.png")
                 input.busqueda(placeholder="Buscar animes" :style="anchoInput")
-                span.material-icons.icono-menu menu
+                span.material-icons.icono-menu(@click="mostrarMenu = !mostrarMenu") menu
                 div.separador
             div.iconos
                 router-link(to="/" title="Inicio" :class="esPagInicio? 'resaltado': ''")
@@ -20,12 +21,15 @@
 </template>
 
 <script lang="coffee">
+    import listaItems from "./barra-navegacion-movil/lista-items"
 
     export default
         name: "barra-navegacion-movil"
+        components: { listaItems }
         data: ->
             prevScrollPos: window.pageYOffset
             navOculta: no
+            mostrarMenu: no
         computed:
             anchoPantalla: -> window.innerWidth
             anchoInput: ->
@@ -48,8 +52,7 @@
         destroyed: ->
             window.removeEventListener "scroll", @handleScroll
 
-    #
-    
+#
 </script>
 
 <style scoped lang="sass">
@@ -119,7 +122,7 @@
         img
             width: 30px
             height: 30px
-            border-radius: 50%
+            border-radius: 10%
         // .ic
             display: inline-block
             background-color: var(--fondo1)

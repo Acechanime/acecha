@@ -1,6 +1,6 @@
 <template lang="pug">
     div
-        nav.navegacion(:class="barraMinClase" v-if="!esMovil")
+        nav.navegacion.barra-pc(:class="barraMinClase" )
             div.contenedor
                 div.izq
                     router-link(to="/")
@@ -22,7 +22,7 @@
                                     src="/img/bicons/tv.svg")
                         comunidad
 
-        barra-navegacion-movil(v-else)
+        barra-navegacion-movil.barra-movil
     //
 </template>
 
@@ -187,6 +187,19 @@
             display: list-item
             text-transform: none
 
+    .barra-pc
+        display: block
+
+    .barra-movil
+        display: block
+
+    @media only screen and (max-width: 770px)
+        .barra-pc
+            display: none
+
+    @media only screen and (min-width: 771px)
+        .barra-movil
+            display: none
 
     //
 </style>
