@@ -1,5 +1,7 @@
 <template lang="pug">
-    li.opcion(:title="opcion[0]" :class="clases" @click="cambiar()") Opcion {{ pos + 1 }}
+    li.opcion(:title="opcion[0]" :class="clases" @click="cambiar()")
+        span.ocultarMov Opcion
+        span  {{ pos + 1 }}
     //
 </template>
 
@@ -57,6 +59,11 @@
 
     .opcion--ultimo
         border-radius: 0 22px 0 0
+
+
+    @media only screen and (max-width: 600px)
+        .ocultarMov
+            display: none
 
     //
 </style>

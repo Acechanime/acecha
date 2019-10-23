@@ -75,6 +75,9 @@
         .cont
             grid-template-columns: none
 
+    @media only screen and (max-width: 450px)
+        .contenedor
+            width: 96%
 
     //
 </style>
