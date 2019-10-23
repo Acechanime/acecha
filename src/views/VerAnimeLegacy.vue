@@ -2,7 +2,8 @@
     main.cont.contenedor
         div
             div.fondo
-                reproductor(:links="links")
+                h3.label_episodio Episodio {{ $store.state.verAnime.ep }}
+                reproductor
                 descarga(:links="$store.state.verAnime.descarga")
             comentarios
         div.fondo(v-if="!esMovil")
@@ -15,6 +16,7 @@
     import descarga from "../components/VerAnime/descarga.vue"
     import comentarios from "../components/VerAnime/comentarios.vue"
     import publicidad from "../components/Animes/publicidad.vue"
+    import {impr} from "../variables";
 
     extraerDatos = =>
         url = (new URL window.location.href).pathname.toString()
@@ -33,14 +35,9 @@
         components: { reproductor, descarga, comentarios, publicidad }
         computed:
             esMovil: -> window.innerWidth < 780
-            listaEps: -> @$store.state.verAnime.listaEpisodios
-            numEp: -> @$store.state.verAnime.ep
-            links: ->
-                res =
-                    if @listaEps.length isnt 0 and @numEp? and @numEp isnt -1
-                        (@listaEps.find (a) => a.num_ep is @numEp) ? {}
-                    else {}
-                res
+        beforeRouteUpdate: (to, from, next) ->
+            @$store.commit "cambiarNumEp", parseInt to.params.ep
+            next()
         mounted: ->
             @$store.commit "activarVerAnime"
             res = extraerDatos()
@@ -61,6 +58,15 @@
 
 <style scoped lang="sass">
     @import "../sass/variables"
+
+    .label_episodio
+        color: var(--texto1)
+        font:
+            family: Roboto, sans-serif
+            weight: normal
+            size: x-large
+        padding-bottom: 30px
+        padding-left: 15px
 
     .cont
         grid-template-columns: 1fr 250px

@@ -15,7 +15,9 @@
                 router-link.boton.boton--ir(to="./")
                     span Ver capítulos
             div.mder
-                router-link.boton.boton--eps(:to="epSiguiente")
+                router-link.boton.boton--eps(:to="epSiguiente"
+                    :class="epSiguiente === ''? 'boton--desactivado': ''"
+                )
                     span.ocultarMovil Siguiente
                     i.material-icons chevron_right
 
@@ -24,14 +26,11 @@
 
 <script lang="coffee">
     import opcion from "./opcion.vue"
+    import {impr} from "../../variables";
 
     export default
         name: "reproductor"
         components: { opcion }
-        props:
-            links:
-                type: Object
-                required: true
         data: ->
             posActiva: 0
         watch:
@@ -41,7 +40,7 @@
             links: ->
                 vm = this
                 @posActiva = 0
-                intervalo = setInterval((() =>
+                intervalo = setInterval((=>
                     if (document.getElementById "contenedor-anime")?
                         cont = document.getElementById "contenedor-anime"
                         try
@@ -62,9 +61,31 @@
                 ), 50)
 
         computed:
+            listaEps: -> @$store.state.verAnime.listaEpisodios
+            numEp: -> @$store.state.verAnime.ep
+            links: ->
+                res =
+                    if @listaEps.length isnt 0 and @numEp? and @numEp isnt -1
+                        vm = this
+                        (@listaEps.find (a) -> a.num_ep is vm.numEp) ? {}
+                    else {}
+                res
+
             epTexto: -> "./#{if @links.es_ova then 'ova' else 'ep'}"
-            epSiguiente: -> @epTexto + "#{@links.num_ep + 1}"
-            epAnterior: -> @epTexto +  "#{@links.num_ep - 1}"
+            epSiguiente: ->
+                numEpActual = @links.num_ep
+                existeEpSiguiente = @listaEps.find (anime) => anime.num_ep is (numEpActual + 1)
+                if existeEpSiguiente?
+                    @epTexto + "#{numEpActual + 1}"
+                else
+                    ""
+            epAnterior: ->
+                numEpActual = @links.num_ep
+                existeEpSiguiente = @listaEps.find (anime) => anime.num_ep is (numEpActual - 1)
+                if existeEpSiguiente?
+                    @epTexto + "#{numEpActual - 1}"
+                else
+                    ""
             opciones: ->
                 opciones = []
                 if @links?.mega? and @links.mega isnt ""
@@ -142,6 +163,12 @@
             display: table-cell
             vertical-align: middle
             font-size: 15px
+
+    .boton--desactivado
+        background-color: #dbdbdb !important
+        color: #767676
+
+
 
     .boton--eps
         width: auto

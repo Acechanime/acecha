@@ -67,6 +67,8 @@ moduloVerAnime =
         ep: -1
         ruta: ""
     mutations:
+        cambiarNumEp: (state, valor) ->
+            state.ep = valor
         cambiarEstadoVerAnime: (state) ->
             state.activo = !state.activo
         activarVerAnime: (state) ->
