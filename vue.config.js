@@ -31,5 +31,11 @@ module.exports = {
             template: "public/index.html"
         }
     },
-    productionSourceMap: false
+    productionSourceMap: false,
+    pwa: {
+        workboxPluginMode: "InjectManifest",
+        workboxOptions: {
+            swSrc: __dirname + "/public/service-worker.js"
+        }
+    }
 };

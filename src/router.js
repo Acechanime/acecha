@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Inicio from './views/Inicio.vue'
+import Ajustes from "./views/Ajustes.vue"
 import Animes from "./views/Animes.vue"
 import Anime from "./views/Anime.vue"
 import Premium from "./views/Premium.vue"
@@ -100,6 +101,17 @@ const router = new Router({
             name: 'Inicio',
             component: Inicio
         },
+        {
+            path: "/ajustes/",
+            name: "Ajustes",
+            component: Ajustes
+        },
+        { path: "/calendario/", redirect: "/en-construccion/" },
+        { path: "/leer-manga/", redirect: "/en-construccion/" },
+        { path: "/comprar-anime/", redirect: "/en-construccion/" },
+        { path: "/comprar-desde-japon/", redirect: "/en-construccion/" },
+        { path: "/nosotros/", redirect: "/en-construccion/" },
+        { path: "/creadores-de-contenido/", redirect: "/en-construccion/" },
         { path: "/acecha-premium/", redirect: "/premium/" },
         { path: "/comprar-acecha-premium/", redirect: "/premium/" },
         {

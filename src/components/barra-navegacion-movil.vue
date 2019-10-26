@@ -1,13 +1,13 @@
 <template lang="pug">
     nav.navm
         div.barra
-            lista-items(:mostrar="mostrarMenu")
+            lista-items(:mostrar="mostrarMenu" :cambiarEstadoMenu="cambiarEstadoMenu")
             div.superior(:class="navOculta? 'superior--oculto': ''")
                 span.usuario
                     // img(src="https://png.icons8.com/windows/1600/0063B1/user")
                     img(src="/favicon.png")
                 input.busqueda(placeholder="Buscar animes" :style="anchoInput")
-                span.material-icons.icono-menu(@click="mostrarMenu = !mostrarMenu") menu
+                span.material-icons.icono-menu(@click="cambiarEstadoMenu") menu
                 div.separador
             div.iconos
                 router-link(to="/" title="Inicio" :class="esPagInicio? 'resaltado': ''")
@@ -39,6 +39,13 @@
             esPagAnimes: -> @$route.path is "/animes/"
             esPagBugs: -> @$route.path is "/bugs/"
         methods:
+            cambiarEstadoMenu: () ->
+                window.document.body.style.overflow =
+                    if @mostrarMenu then "initial"
+                    else "hidden"
+
+                @mostrarMenu = !@mostrarMenu
+
             handleScroll: (ev) ->
                 actScrollPos = window.pageYOffset
                 if @prevScrollPos > actScrollPos

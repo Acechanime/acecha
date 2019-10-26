@@ -27,7 +27,7 @@
 
     cssOscuro = =>
         document.documentElement.style.setProperty("--fondo0", "#0e1621");
-        document.documentElement.style.setProperty("--fondo1", "#080911");
+        document.documentElement.style.setProperty("--fondo1", "#1a2329");
         document.documentElement.style.setProperty("--fondo2", "#0c131d");
         document.documentElement.style.setProperty("--fondo3", "#080911");
         document.documentElement.style.setProperty("--sombra1", "rgba(0, 0, 0, 0.12)");

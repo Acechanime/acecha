@@ -6,7 +6,6 @@ const sitiosCors = [
     "https://dev.acechanime.com",
     "http://localhost:8080",
     "http://localhost:8081",
-    "https://5fa57b48.ngrok.io/"
 ];
 
 const opcionesCors = {

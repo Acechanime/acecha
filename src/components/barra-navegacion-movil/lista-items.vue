@@ -14,7 +14,7 @@
             li Calendario
             div.ltitulo Yo
             li Mi cuenta
-            li Ajustes
+            li.item-activo(@click="irA('/ajustes/')") Ajustes
     //
 </template>
 
@@ -28,13 +28,21 @@
             mostrar:
                 type: Boolean
                 required: true
+            cambiarEstadoMenu:
+                type: Function
+                required: true
         computed:
             ancho: ->
                 if @elem?
                     if @mostrar
-                        "height: #{@elem.scrollHeight}px"
-                    else "height: 0"
+                        res = parseInt((window.innerHeight - 100) * 0.9)
+                        "max-height: #{res}px;"
+                    else "max-height: 0"
                 else "/* -- */"
+        methods:
+            irA: (link) ->
+                @cambiarEstadoMenu()
+                @$router.push link
         mounted: ->
             vm = this
             intervalo = setInterval (=>
@@ -48,14 +56,19 @@
 <style scoped lang="sass">
     @import "../../sass/variables"
 
-    .lista
-        max-height: 50%
-        list-style-type: none
-        overflow: hidden
-        transition: height 250ms ease-in-out
+    .item-activo
+        color: $colorPrincipal
+        background-color: rgba(233, 30, 99, 0.25)
+        border-radius: 0 17px 17px 0
 
-    #menu-cont
-        padding: 15px
+    .lista
+        list-style-type: none
+        overflow-y: scroll
+        transition: max-height 250ms ease-in-out
+
+    #menu-cont li
+        padding: 7px 15px
+        margin-right: 5px
 
     .ltitulo
         // text-transform: uppercase
@@ -65,6 +78,7 @@
             size: medium
         padding-top: 12px
         padding-bottom: 5px
+        padding-left: 10px
 
     .lseparador
         height: 8px
