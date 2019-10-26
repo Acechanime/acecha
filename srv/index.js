@@ -3,7 +3,7 @@ const cors = require("cors");
 
 const sitiosCors = [
     "https://acechanime.com",
-    "https://dev.acechanime.com",
+    "https://beta.acechanime.com",
     "http://localhost:8080",
     "http://localhost:8081",
 ];
@@ -33,6 +33,8 @@ const iniciarRutas = (app, ruta) => {
 
     app.get("/api/episodios", require("./episodios/get").fun);
     app.post("/api/episodios", require("./episodios/create").fun);
+
+    app.delete("/api/episodio", require("./episodio/delete").fun);
 
     app.get("/api/episodiosRecientes", require("./episodiosRecientes/get").fun);
 
