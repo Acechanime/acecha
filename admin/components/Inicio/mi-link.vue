@@ -83,157 +83,174 @@
     //
 </template>
 
-<script>
+<script lang="coffee">
     import { servidor } from "../../../src/variables"
 
-    export default {
-        name: "mi-link",
-        data: function () {
-            return {
-                mostrarLinks: false,
-                okru: {},
-                mango: {},
-                mp4upload: {},
-                mega: {},
-                rapidvideo: {},
-                okruDescarga: {},
-                mangoDescarga: {},
-                mp4uploadDescarga: {},
-                acortado: {}
-            }
-        },
-        props: {
-            link: {
-                type: Object,
+    export default
+        name: "mi-link"
+        data: ->
+            mostrarLinks: false,
+            okru: {},
+            mango: {},
+            mp4upload: {},
+            mega: {},
+            rapidvideo: {},
+            okruDescarga: {},
+            mangoDescarga: {},
+            mp4uploadDescarga: {},
+            acortado: {}
+
+        props:
+            link:
+                type: Object
                 required: true
-            },
-            nombre: {
-                type: String,
+
+            nombre:
+                type: String
                 required: true
-            },
-            nombreCorto: {
-                type: String,
+
+            nombreCorto:
+                type: String
                 required: true
-            },
-            fnObtenerEps: {
-                type: Function,
+
+            fnObtenerEps:
+                type: Function
                 required: true
-            }
-        },
-        methods: {
-            botonVerLinks (ev) {
-                if (!this.mostrarLinks) {
-                    ev.target.innerText = "Cerrar";
-                }
-                else {
-                    ev.target.innerText = "Ver links";
-                }
-                this.mostrarLinks = !this.mostrarLinks;
-            },
-            eliminarEpisodio (ev) {
-                const xhr = new XMLHttpRequest();
-                const vm = this;
-                xhr.open("POST", `${servidor}/acecha/Eps/eliminarEp.php`);
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-                const terminarCicloBotonCrear = this.cambiarColoresElem(ev.target, "Eliminando...", "innerHTML");
+        methods:
+            botonVerLinks: (ev) ->
+                if (!this.mostrarLinks)
+                    ev.target.innerText = "Cerrar"
 
-                xhr.onload = () => {
-                    try {
-                        const respuesta = JSON.parse(xhr.responseText);
-                        if (respuesta.exito) {
-                            vm.fnObtenerEps();
-                            terminarCicloBotonCrear(true);
-                        } else {
-                            console.log(xhr.responseText);
-                            terminarCicloBotonCrear(false);
-                        }
-                    } catch (e) {
-                        console.log(xhr.responseText);
-                        terminarCicloBotonCrear(false);
-                    }
-                };
-                xhr.onerror = () => {
-                    console.log(xhr.responseText);
-                    terminarCicloBotonCrear(false);
-                };
-                xhr.send(`linkID=${this.link.linkID}`);
-            },
-            actualizarEpisodio (ev, elem) {
-                const valorNuevo = ev.target.parentNode[elem].value;
-                const vm = this;
+                else
+                    ev.target.innerText = "Ver links"
 
-                const xhr = new XMLHttpRequest();
-                xhr.open("POST", `${servidor}/acecha/Eps/actualizarEp.php`);
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                this.mostrarLinks = !this.mostrarLinks
+                undefined
 
-                const terminarCicloBotonCrear = this.cambiarColoresElem(ev.target, "Actualizando...", "innerHTML");
+            eliminarEpisodio: (ev) ->
 
-                xhr.onload = () => {
-                    try {
-                        const respuesta = JSON.parse(xhr.responseText);
-                        if (respuesta.exito) {
-                            terminarCicloBotonCrear(true);
-                            vm.fnObtenerEps();
-                        } else {
-                            console.log(xhr.responseText);
-                            terminarCicloBotonCrear(true);
-                        }
-                    } catch (e) {
-                        console.log(xhr.responseText);
-                        terminarCicloBotonCrear(true);
-                    }
-                };
-                xhr.onerror = () => {
+                terminarCicloBotonCrear = this.cambiarColoresElem ev.target, "Eliminando...", "innerHTML"
 
-                };
-                xhr.send(`linkID=${this.link.linkID}&campo=${elem}&valor=${valorNuevo}`);
-            },
-            cambiarColoresElem (elem, textoNuevo, objetivo) {
-                const colorActual = elem.style.backgroundColor;
-                const textoActual = elem[objetivo];
+                try
+                    resRaw = await fetch "#{servidor}/api/episodio",
+                        method: "DELETE"
+                        headers:
+                            "Content-Type": "application/json"
+                        body: "linkID=#{this.link.linkID}"
+                    respuesta = await resRaw.json()
+                    if respuesta?.exito? and respuesta.exito
+                        vm.fnObtenerEps()
+                        terminarCicloBotonCrear true
+                    else
+                        console.error "Error al eliminar el episodio."
+                        terminarCicloBotonCrear false
+                catch e
+                    console.error "Error al eliminar el episodio."
+                    terminarCicloBotonCrear false
 
-                const colores = ['#313EA9','#5196a9','#46a95d','#a93783'];
 
-                elem[objetivo] = textoNuevo;
-                const intervalo = setInterval(() => {
-                    elem.style.backgroundColor = colores[parseInt(Math.random()*4)];
-                }, 750);
+                ###
+                xhr = new XMLHttpRequest()
+                vm = this
+                xhr.open "POST", "#{servidor}/api/Eps/eliminarEp.php"
+                xhr.setRequestHeader "Content-Type", "application/x-www-form-urlencoded"
 
-                return exito => {
+                terminarCicloBotonCrear = this.cambiarColoresElem(ev.target, "Eliminando...", "innerHTML")
+
+                xhr.onload = =>
+                    try
+                        respuesta = JSON.parse xhr.responseText
+                        if respuesta.exito
+                            vm.fnObtenerEps()
+                            terminarCicloBotonCrear true
+                        else
+                            console.log xhr.responseText
+                            terminarCicloBotonCrear false
+
+                    catch e
+                        console.log xhr.responseText
+                        terminarCicloBotonCrear false
+
+
+                xhr.onerror = =>
+                    console.log xhr.responseText
+                    terminarCicloBotonCrear false
+
+                xhr.send "linkID=#{this.link.linkID}"
+                undefined
+                ###
+
+            actualizarEpisodio: (ev, elem) ->
+                valorNuevo = ev.target.parentNode[elem].value
+                vm = this
+
+                xhr = new XMLHttpRequest()
+                xhr.open "POST", "#{servidor}/acecha/Eps/actualizarEp.php"
+                xhr.setRequestHeader "Content-Type", "application/x-www-form-urlencoded"
+
+                terminarCicloBotonCrear = this.cambiarColoresElem(ev.target, "Actualizando...", "innerHTML")
+
+                xhr.onload = =>
+                    try
+                        respuesta = JSON.parse(xhr.responseText)
+                        if respuesta.exito
+                            terminarCicloBotonCrear(true)
+                            vm.fnObtenerEps()
+                        else
+                            console.log(xhr.responseText)
+                            terminarCicloBotonCrear(true)
+
+                    catch e
+                        console.log(xhr.responseText)
+                        terminarCicloBotonCrear(true)
+
+
+                xhr.send "linkID=#{this.link.linkID}&campo=#{elem}&valor=#{valorNuevo}"
+                undefined
+
+            cambiarColoresElem: (elem, textoNuevo, objetivo) ->
+                colorActual = elem.style.backgroundColor
+                textoActual = elem[objetivo]
+
+                colores = ['#313EA9','#5196a9','#46a95d','#a93783']
+
+                elem[objetivo] = textoNuevo
+                intervalo = setInterval (=>
+                    elem.style.backgroundColor = colores[parseInt(Math.random()*4)]
+                ), 750
+
+                (exito) =>
                     clearInterval(intervalo);
-                    if (exito) {
-                        elem[objetivo] = "Éxito";
-                        elem.style.backgroundColor = "#2d9168";
+                    if exito
+                        elem[objetivo] = "Éxito"
+                        elem.style.backgroundColor = "#2d9168"
 
-                        setTimeout(() => {
-                            elem[objetivo] = textoActual;
-                            elem.style.backgroundColor = colorActual;
-                        }, 4000);
-                    } else {
-                        elem[objetivo] = "Error";
-                        elem.style.backgroundColor = "#ac2923";
+                        setTimeout (=>
+                            elem[objetivo] = textoActual
+                            elem.style.backgroundColor = colorActual
+                        ), 4000
+                    else
+                        elem[objetivo] = "Error"
+                        elem.style.backgroundColor = "#ac2923"
 
-                        setTimeout(() => {
-                            elem[objetivo] = textoActual;
-                            elem.style.backgroundColor = colorActual;
-                        }, 10000);
-                    }
-                };
-            }
-        },
-        created () {
-            this.okru = this.link.okru;
-            this.mango = this.link.mango;
-            this.mp4upload = this.link.mp4upload;
-            this.mega = this.link.mega;
-            this.rapidvideo = this.link.rapidvideo;
-            this.okruDescarga = this.link.okruDescarga;
-            this.mangoDescarga = this.link.mangoDescarga;
-            this.mp4uploadDescarga = this.link.mp4uploadDescarga;
-            this.acortado = this.link.acortado;
-        }
-    }
+                        setTimeout (=>
+                            elem[objetivo] = textoActual
+                            elem.style.backgroundColor = colorActual
+                        ), 10000
+
+        created: ->
+            this.okru = this.link.okru
+            this.mango = this.link.mango
+            this.mp4upload = this.link.mp4upload
+            this.mega = this.link.mega
+            this.rapidvideo = this.link.rapidvideo
+            this.okruDescarga = this.link.okruDescarga
+            this.mangoDescarga = this.link.mangoDescarga
+            this.mp4uploadDescarga = this.link.mp4uploadDescarga
+            this.acortado = this.link.acortado
+
+#
 </script>
 
 <style scoped lang="sass">

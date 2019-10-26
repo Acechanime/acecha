@@ -21,7 +21,7 @@
         label Géneros
         br
         div.check
-            div(v-for="genero in $store.state.listaGeneros")
+            div(v-for="genero in todosLosGeneros")
                 input(type="checkbox" :value="genero.genero_id" v-model="anime.generos")
                 label {{ genero.nombre }}
         br
@@ -77,11 +77,7 @@
         data: ->
             otrosNombres: @otrosNombresAlt ? ["Nombre alternativo"]
             generos: []
-        computed:
-            anime: ->
-                console.log "eh?"
-                @$store.state.animeAdmin.animeAdmin
-            otrosNombresAlt: -> @$store.state.animeAdmin.otros_nombres
+            todosLosGeneros: []
         props:
             texto:
                 type: String
@@ -98,13 +94,23 @@
         watch:
             otrosNombres: (nuevo, viejo) ->
                 @$store.commit "cambiarAnimeAdmin_alternativo", nuevo
+        computed:
+            anime: ->
+                console.log "eh?"
+                @$store.state.animeAdmin.animeAdmin
+            otrosNombresAlt: -> @$store.state.animeAdmin.otros_nombres
         methods:
             agregarOtroNombre: ->
                 @$store.commit "agregarAnimeAdmin_alternativo"
+            obtenerGeneros: ->
+                # ([Genero], Bool)
+                generosProm = await @$store.state.datos.listaGeneros
+                @todosLosGeneros = generosProm[0]
         mounted: ->
+            @obtenerGeneros()
             @$store.commit "cambiarAnimeAdmin", @config
 
-    #
+#
 </script>
 
 <style scoped lang="sass">

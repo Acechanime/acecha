@@ -31,7 +31,7 @@
             textoBoton: "Cambiar"
             claseBoton: ""
         computed:
-            listaAnimes: -> @$store.state.listaAnimes
+            listaAnimes: -> @$store.state.datos.listaAnimes
             listaAnimesOrd: ->
                 if @listaAnimes is undefined
                     []
