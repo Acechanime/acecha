@@ -1,3 +1,4 @@
+# TODO: ajustar los colores
 colores =
     claro:
         "--fondo0": "#ffffff"
@@ -12,6 +13,36 @@ colores =
     azulOscuro:
         "--fondo0": "#0e1621"
         "--fondo1": "#080911"
+        "--fondo2": "#0c131d"
+        "--fondo3": "#080911"
+        "--sombra1": "rgba(0, 0, 0, 0.12)"
+        "--texto1": "#e8e8e1"
+        "--texto2": "#BFC1B6"
+        "--opacidad1": "0.8"
+        "--opacidad2": "0.9"
+    negro:
+        "--fondo0": "#0e1621"
+        "--fondo1": "black"
+        "--fondo2": "#0c131d"
+        "--fondo3": "#080911"
+        "--sombra1": "rgba(0, 0, 0, 0.12)"
+        "--texto1": "#e8e8e1"
+        "--texto2": "#BFC1B6"
+        "--opacidad1": "0.8"
+        "--opacidad2": "0.9"
+    oscuro:
+        "--fondo0": "#0e1621"
+        "--fondo1": "black"
+        "--fondo2": "#0c131d"
+        "--fondo3": "#080911"
+        "--sombra1": "rgba(0, 0, 0, 0.12)"
+        "--texto1": "#e8e8e1"
+        "--texto2": "#BFC1B6"
+        "--opacidad1": "0.8"
+        "--opacidad2": "0.9"
+    gris:
+        "--fondo0": "#0e1621"
+        "--fondo1": "black"
         "--fondo2": "#0c131d"
         "--fondo3": "#080911"
         "--sombra1": "rgba(0, 0, 0, 0.12)"
@@ -38,6 +69,10 @@ inicializarModoColorOscuro = () =>
         localStorage.setItem "modo-color-oscuro", "azulOscuro"
 
 
+cambiarModoColorOscuro = (modo) =>
+    localStorage.setItem "modo-color-oscuro", modo
+
+
 cambiarColor = () =>
     nuevoModo = do ->
         res = localStorage.getItem "modo-color"
@@ -52,4 +87,5 @@ cambiarColor = () =>
 export cambiarEsquema = cambiarEsquema
 export cambiarColor = cambiarColor
 export inicializarModoColorOscuro = inicializarModoColorOscuro
+export cambiarModoColorOscuro = cambiarModoColorOscuro
 #
