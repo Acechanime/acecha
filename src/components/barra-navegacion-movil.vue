@@ -14,8 +14,8 @@
                     i.material-icons home
                 router-link(to="/animes/" title="Todos los animes" :class="esPagAnimes? 'resaltado': ''")
                     i.material-icons dashboard
-                router-link(to="/bugs/" title="Reportar error" :class="esPagBugs? 'resaltado': ''")
-                    i.material-icons bug_report
+                a.boton--oscuro(title="Cambiar colores" @click.prevent)
+                    i.material-icons invert_colors
 
     //
 </template>
@@ -92,6 +92,9 @@
         vertical-align: top
         font-size: 20px
         color: var(--texto2)
+        position: absolute
+        right: 0
+        top: 0
 
     .busqueda
 
@@ -116,6 +119,7 @@
         transition: height 250ms
         height: 51px
         overflow: hidden
+        position: relative
 
     .superior--oculto
         height: 0
