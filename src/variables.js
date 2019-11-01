@@ -1,5 +1,5 @@
 export const servidor = process.env.NODE_ENV === "production"?
-    "https://araozu.pro":
+    "https://api.acechanime.com":
     "";
 // export const servidor = "https://araozu.pro";
 

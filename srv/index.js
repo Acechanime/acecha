@@ -25,26 +25,31 @@ const iniciarRutas = (app, ruta) => {
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
 
-    app.post("/api/legacy/obtenerEp", require("./legacy/obtenerEp").fun);
+    app.get("/", (req, res) => {
+        res.send("<h1>Bienvenido a la API de acechanime. " +
+            "Si no sabes qué hacer, no deberías estar aqui v:</h1>");
+    });
 
-    app.get("/api/animes", require("./animes/get").fun);
-    app.post("/api/animes", require("./animes/create").fun);
-    app.put("/api/animes/:anime_id", require("./animes/update").fun);
+    app.post("/legacy/obtenerEp", require("./legacy/obtenerEp").fun);
 
-    app.get("/api/episodios", require("./episodios/get").fun);
-    app.post("/api/episodios", require("./episodios/create").fun);
+    app.get("/animes", require("./animes/get").fun);
+    app.post("/animes", require("./animes/create").fun);
+    app.put("/animes/:anime_id", require("./animes/update").fun);
 
-    app.delete("/api/episodio", require("./episodio/delete").fun);
+    app.get("/episodios", require("./episodios/get").fun);
+    app.post("/episodios", require("./episodios/create").fun);
 
-    app.get("/api/episodiosRecientes", require("./episodiosRecientes/get").fun);
+    app.delete("/episodio", require("./episodio/delete").fun);
 
-    app.get("/api/generos", require("./generos/get").fun);
+    app.get("/episodiosRecientes", require("./episodiosRecientes/get").fun);
 
-    app.get("/api/videoRecomendado/", require("./videoRecomendado/get").fun);
-    app.post("/api/videoRecomendado/", require("./videoRecomendado/set").fun);
+    app.get("/generos", require("./generos/get").fun);
 
-    app.get("/api/recomendacionSemanal/", require("./recomendacionSemanal/get").fun);
-    app.post("/api/recomendacionSemanal/", require("./recomendacionSemanal/set").fun);
+    app.get("/videoRecomendado", require("./videoRecomendado/get").fun);
+    app.post("/videoRecomendado", require("./videoRecomendado/set").fun);
+
+    app.get("/recomendacionSemanal", require("./recomendacionSemanal/get").fun);
+    app.post("/recomendacionSemanal", require("./recomendacionSemanal/set").fun);
 
 };
 
