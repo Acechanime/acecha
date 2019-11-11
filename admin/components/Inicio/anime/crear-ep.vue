@@ -110,7 +110,7 @@
 
 
                 try
-                    resR = await fetch "#{servidor}/api/episodios",
+                    resR = await fetch "#{servidor}/episodios",
                         method: "POST"
                         headers:
                             "Content-Type": "application/json"

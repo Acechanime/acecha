@@ -45,7 +45,7 @@
                 vm = this
                 @texto = "Creando..."
 
-                respuestaRaw = await fetch "#{servidor}/api/animes",
+                respuestaRaw = await fetch "#{servidor}/animes",
                     method: "POST"
                     headers:
                         "Accept": "application/json"

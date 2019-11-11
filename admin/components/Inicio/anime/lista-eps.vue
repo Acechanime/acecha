@@ -122,7 +122,7 @@
                     "#{encodeURIComponent item}=#{encodeURIComponent dato}"
 
                 try
-                    dataR = await fetch "#{servidor}/api/episodios",
+                    dataR = await fetch "#{servidor}/episodios",
                         method: "POST"
                         headers:
                             "Content-Type": "application/x-www-form-urlencoded"

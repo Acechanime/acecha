@@ -8,14 +8,17 @@
                 Reporta errores y pregunta todo lo que quieras, tus preguntas serán respondidas
                 antes de 24h.
             br
-            div.simular-com
+            fb-comments(path="/")
+
     //
 </template>
 
 <script lang="coffee">
+    import fbComments from "../fb-comments.vue"
 
     export default
         name: "comentarios"
+        components: { fbComments }
 
     #
 
@@ -30,10 +33,6 @@
         font-size: 14px
         color: var(--texto1)
 
-    .simular-com
-        height: 600px
-        background-color: var(--texto1)
-        opacity: 0.1
 
     //
 </style>

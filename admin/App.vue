@@ -62,7 +62,7 @@
         methods:
             obtenerListaAnimes: ->
                 try
-                    resRaw = await fetch "#{servidor}/api/animes"
+                    resRaw = await fetch "#{servidor}/animes"
                     res = await resRaw.json()
 
                     if res.exito
@@ -77,7 +77,7 @@
                 else
                     console.error err
             inicializarListaGeneros: ->
-                resRaw = await fetch "#{servidor}/api/generos"
+                resRaw = await fetch "#{servidor}/generos"
                 res = await resRaw.json()
                 if res?.exito
                     @$store.commit "cambiarListaGeneros", res.payload

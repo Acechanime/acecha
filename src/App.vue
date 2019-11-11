@@ -43,7 +43,7 @@
         methods:
             obtenerListaAnimes: ->
                 try
-                    resRaw = await fetch "#{servidor}/api/animes"
+                    resRaw = await fetch "#{servidor}/animes"
                     res = await resRaw.json()
 
                     if res.exito

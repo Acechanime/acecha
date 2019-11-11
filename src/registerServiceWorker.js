@@ -20,8 +20,7 @@ if (process.env.NODE_ENV === 'production')
             console.log("Descargando nuevo contenido.");
         },
         updated() {
-            console.log("Nuevo contenido disponible, la pagina se recargará.");
-            window.location.reload(true);
+            console.log("Nuevo contenido disponible.");
         },
         offline() {
             console.log("No hay conexion a internet.");

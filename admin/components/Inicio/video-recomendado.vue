@@ -42,7 +42,7 @@
                 vm = this
                 if vm.url isnt ""
                     vm.cargando = 1
-                    resRaw = await fetch "#{servidor}/api/videoRecomendado",
+                    resRaw = await fetch "#{servidor}/videoRecomendado",
                         method: "POST"
                         headers:
                             "Content-Type": "application/json"

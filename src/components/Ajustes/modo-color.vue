@@ -13,7 +13,7 @@
 
         div(:class="modoGrisActivo? 'texto_activo': ''") Gris
         div#color_gris.color_demo(:class="modoGrisActivo? 'color_activo': ''"
-            @click="establecerEsquema('oscuro')")
+            @click="establecerEsquema('gris')")
             | Acechanime
 
         div(:class="modoNegroActivo? 'texto_activo': ''") Amoled

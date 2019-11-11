@@ -105,7 +105,7 @@
                 @panelAbierto = !@panelAbierto
             obtenerListaAnimes: ->
                 try
-                    data = await fetch "#{servidor}/api/animes"
+                    data = await fetch "#{servidor}/animes"
                     dataJ = await data.json()
                     if dataJ.exito? and dataJ.exito is true
                         @animes = dataJ.payload

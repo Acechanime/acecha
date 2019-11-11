@@ -64,7 +64,7 @@
                     vm.cargando = -2
                 else
                     vm.cargando = 1
-                    resRaw = await fetch "#{servidor}/api/recomendacionSemanal",
+                    resRaw = await fetch "#{servidor}/recomendacionSemanal",
                         method: "POST"
                         headers:
                             "Content-Type": "application/json"

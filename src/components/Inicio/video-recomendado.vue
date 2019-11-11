@@ -32,7 +32,7 @@
             vm = this
 
             try
-                xhr = await fetch "#{servidor}/api/videoRecomendado/"
+                xhr = await fetch "#{servidor}/videoRecomendado/"
                 resJ = await xhr.json()
                 if resJ.exito
                     res = resJ.payload["url"]

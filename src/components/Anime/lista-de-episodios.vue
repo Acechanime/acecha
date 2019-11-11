@@ -41,7 +41,7 @@
                     @cargarEpisodios()
         methods:
             cargarEpisodios: ->
-                datosRaw = await fetch "#{servidor}/api/episodios?anime_id=#{@anime.anime_id}"
+                datosRaw = await fetch "#{servidor}/episodios?anime_id=#{@anime.anime_id}"
                 datos = await datosRaw.json()
                 @estadoCarga =
                     if datos.exito? && datos.exito

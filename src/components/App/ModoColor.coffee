@@ -32,7 +32,7 @@ colores =
         "--opacidad2": "0.9"
     oscuro:
         "--fondo0": "#0e1621"
-        "--fondo1": "black"
+        "--fondo1": "#101010"
         "--fondo2": "#0c131d"
         "--fondo3": "#080911"
         "--sombra1": "rgba(0, 0, 0, 0.12)"
@@ -42,7 +42,7 @@ colores =
         "--opacidad2": "0.9"
     gris:
         "--fondo0": "#0e1621"
-        "--fondo1": "black"
+        "--fondo1": "#1a2329"
         "--fondo2": "#0c131d"
         "--fondo3": "#080911"
         "--sombra1": "rgba(0, 0, 0, 0.12)"

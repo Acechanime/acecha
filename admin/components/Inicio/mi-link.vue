@@ -133,7 +133,7 @@
                 terminarCicloBotonCrear = this.cambiarColoresElem ev.target, "Eliminando...", "innerHTML"
 
                 try
-                    resRaw = await fetch "#{servidor}/api/episodio",
+                    resRaw = await fetch "#{servidor}/episodio",
                         method: "DELETE"
                         headers:
                             "Content-Type": "application/json"

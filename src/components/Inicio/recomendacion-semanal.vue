@@ -61,7 +61,7 @@
         methods:
             cargarRecomendacion: ->
                 vm = this
-                recRaw = await fetch "#{servidor}/api/recomendacionSemanal/"
+                recRaw = await fetch "#{servidor}/recomendacionSemanal/"
                 rec = await recRaw.json()
                 await listaAnimesCargada
                 if rec.exito

@@ -3,13 +3,14 @@
 * */
 
 self.addEventListener("install", (event) => {
-    console.log("Evento install :c");
     event.waitUntil(
         caches.open("cache-imagenes").then((cache) => {
             console.log("Cacheando imagen.");
             return cache.addAll(
                 [
-                    '/img/animes/bokuben_2_portada.jpg'
+                    "/img/animes/bokuben_2_portada.jpg",
+                    "/wp-content/uploads/2019/05/subheader.jpg",
+                    "https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.0"
                 ]
             );
         })
@@ -18,7 +19,6 @@ self.addEventListener("install", (event) => {
 
 
 self.addEventListener('fetch', (event) => {
-    console.log("Lanzado evento fetch");
     event.respondWith(
         caches.match(event.request)
             .then((response) => {

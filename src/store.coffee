@@ -129,13 +129,13 @@ moduloDatos =
         listaAnimesCargada: Promise.race []
 
         #: Promise ({}, Bool) Error
-        listaGeneros: cargarRecurso "generos", "/api/generos"
+        listaGeneros: cargarRecurso "generos", "/generos"
 
         ###: Promise (Txt, Bool) Error
         Promesa que se recupera desde localStorage. Bool indica si se sacó de localStorage.
         ###
         recomendacionSemanal: cargarRecurso "recomendacion-semanal",
-            "/api/recomendacionSemanal/"
+            "/recomendacionSemanal/"
 
         # Indica si la pagina termino de cargar sus recursos. En desuso.
         paginaLista: no

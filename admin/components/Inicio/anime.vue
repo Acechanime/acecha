@@ -56,9 +56,9 @@
                 nombreCorto
 
         methods:
-            actualizarAnime: ->
+            actualizarAime: ->
                 vm = this
-                resRaw = await fetch "#{servidor}/api/animes/#{vm.anime.anime_id}",
+                resRaw = await fetch "#{servidor}/animes/#{vm.anime.anime_id}",
                     method: "PUT"
                     headers:
                         "Content-Type": "application/json"
@@ -110,7 +110,7 @@
                 xhr = new XMLHttpRequest()
 
                 # xhr.open("POST", `${servidor}/acecha/Eps/obtenerEps.php`);
-                xhr.open("GET", "#{servidor}/api/episodios?anime_id=#{this.animeID}")
+                xhr.open("GET", "#{servidor}/episodios?anime_id=#{this.animeID}")
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
                 xhr.onload = () =>
                     respuesta = JSON.parse(xhr.responseText)

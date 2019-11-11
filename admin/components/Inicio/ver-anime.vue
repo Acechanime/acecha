@@ -67,7 +67,7 @@
                 @edicionAbierta = !@edicionAbierta
             actualizarAnime: ->
                 vm = this
-                resRaw = await fetch "#{servidor}/api/animes/#{vm.anime.anime_id}",
+                resRaw = await fetch "#{servidor}/animes/#{vm.anime.anime_id}",
                     method: "PUT"
                     headers:
                         "Content-Type": "application/json"
