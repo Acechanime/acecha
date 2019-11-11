@@ -14,7 +14,7 @@
                     i.material-icons home
                 router-link(to="/animes/" title="Todos los animes" :class="esPagAnimes? 'resaltado': ''")
                     i.material-icons dashboard
-                a.boton--oscuro(title="Cambiar colores" @click.prevent)
+                a.boton--oscuro(title="Cambiar colores" @click.prevent="cambiarColor()")
                     i.material-icons invert_colors
 
     //
@@ -22,6 +22,7 @@
 
 <script lang="coffee">
     import listaItems from "./barra-navegacion-movil/lista-items"
+    import { cambiarColor } from "./App/ModoColor.coffee"
 
     export default
         name: "barra-navegacion-movil"
@@ -53,6 +54,7 @@
                 else
                     @navOculta = yes
                 @prevScrollPos = actScrollPos
+            cambiarColor: cambiarColor
 
         created: ->
             window.addEventListener "scroll", @handleScroll
