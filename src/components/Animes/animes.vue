@@ -6,17 +6,8 @@
 
 <script lang="coffee">
     import anime from "./anime.vue"
+    import { comp } from "./buscador.coffee"
 
-    ###: [(a -> Bool)] -> a -> Bool ###
-    comp = (fs) => (elem) =>
-        estado = true
-        fs.forEach (f) =>
-            estado =
-                if estado
-                    f elem
-                else
-                    false
-        estado
 
     export default
         name: "animes"

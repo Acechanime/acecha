@@ -19,13 +19,8 @@
 <script lang="coffee">
     import {impr} from "../../variables";
     import orden from "./buscador/orden.vue"
+    import { removerCaracteres } from "./buscador.coffee"
 
-    removerCaracteres = (str, strArr) =>
-        caracs = strArr.split ""
-        arr = (str.split "").map (c) =>
-            res = caracs.filter (c2) => c == c2
-            if res.length == 1 then " " else c
-        arr.join("").toLowerCase().split(" ")
 
     export default
         name: "buscador"
