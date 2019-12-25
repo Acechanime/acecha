@@ -8,6 +8,7 @@ import Anime from "./views/Anime.vue"
 import Premium from "./views/Premium.vue"
 import EnConstruccion from "./views/EnConstruccion.vue"
 import VerAnimeLegacy from "./views/VerAnimeLegacy.vue"
+import Calendario from "./views/Calendario.vue"
 
 import store from "./store.coffee"
 
@@ -106,7 +107,11 @@ const router = new Router({
             name: "Ajustes",
             component: Ajustes
         },
-        { path: "/calendario/", redirect: "/en-construccion/" },
+        {
+            path: "/calendario/",
+            name: "Calendario",
+            component: Calendario
+        },
         { path: "/leer-manga/", redirect: "/en-construccion/" },
         { path: "/comprar-anime/", redirect: "/en-construccion/" },
         { path: "/comprar-desde-japon/", redirect: "/en-construccion/" },

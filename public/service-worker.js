@@ -10,7 +10,9 @@ self.addEventListener("install", (event) => {
                 [
                     "/img/animes/bokuben_2_portada.jpg",
                     "/wp-content/uploads/2019/05/subheader.jpg",
-                    "https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.0"
+                    "https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.0",
+                    "/img/tamako_mainVisual_edit.jpg",
+                    "/img/k-on_cover.jpg"
                 ]
             );
         })

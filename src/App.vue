@@ -76,6 +76,7 @@
         created: ->
             if @$store.state.datos.listaAnimes is undefined
                 @inicializarListaAnimes()
+
             ###
             if @$store.state.listaGeneros.length == 0
                 @inicializarListaGeneros()

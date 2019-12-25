@@ -19,9 +19,14 @@
         name: "imagen-principal",
         data() {
             return {
+                cabecera: (Math.random() > 0.35)
+                    ? "/img/tamako_mainVisual_edit.jpg"
+                    : "/img/k-on_cover.jpg"
+                /*
                 cabecera: process.env.NODE_ENV === "production"
                     ? "/wp-content/uploads/2019/05/subheader.jpg"
-                    : "/img/you-kei.jpg"
+                    : "/img/tamako_mainVisual_edit.jpg" // "/img/k-on_cover.jpg"
+                */
             }
         }
     }

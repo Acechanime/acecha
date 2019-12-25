@@ -4,8 +4,19 @@ import { servidor, impr } from "./variables"
 
 Vue.use Vuex
 
+actualizarAnimes = () =>
+    res =
+        try
+            resRaw = await fetch "#{servidor}/animes"
+            await resRaw.json()
+        catch e
+            {exito: false, err: e}
+    if res?.exito
+        localStorage?.setItem "lista-animes", JSON.stringify res.payload
+
 #: () -> (Txt | undefined)
 cargarListaAnimes = =>
+    actualizarAnimes()
     datos = localStorage?.getItem "lista-animes"
     if datos?
         JSON.parse datos
@@ -94,6 +105,21 @@ moduloVerAnime =
         desactivarVerAnime: (state) ->
             state.verAnimeActivo = no
 
+cargarRecursoDesdeRed = (nombre, url) => new Promise (resolve, reject) =>
+    impr "Cargando #{nombre} desde #{url}"
+    res =
+        try
+            resRaw = await fetch "#{servidor}#{url}"
+            await resRaw.json()
+        catch e
+            {exito: false, err: e}
+    if res?.exito
+        localStorage?.setItem nombre, JSON.stringify res.payload
+        resolve [res.payload, false]
+    else
+        reject new Error "Error al obtener recurso desde el servidor.\n#{res.err}"
+
+
 ###: (nombre: Txt, url: Txt) -> Promise ({}, Bool) Error
     Intenta cargar un recurso desde localStorage, sino lo carga desde el servidor
     y lo almacena el localStorage.
@@ -102,22 +128,14 @@ moduloVerAnime =
     Promesa que contiene: La respuesta como objeto, Bool indicando
         si se cargo desde localStorage.
 ###
-cargarRecurso = (nombre, url) => new Promise (resolve, reject) =>
+cargarRecurso = (nombre, url) =>
+    promesaRed = cargarRecursoDesdeRed nombre, url
     datosLocales = localStorage?.getItem nombre
-    if generos?
-        resolve [(JSON.parse datosLocales), true]
+    if datosLocales?
+        impr "Se encontró #{nombre} en localStorage."
+        Promise.resolve [(JSON.parse datosLocales), true]
     else
-        res =
-            try
-                resRaw = await fetch "#{servidor}#{url}"
-                await resRaw.json()
-            catch e
-                {exito: false, err: e}
-        if res?.exito
-            localStorage?.setItem nombre, JSON.stringify res.payload
-            resolve [res.payload, false]
-        else
-            reject new Error "Error al obtener recurso desde el servidor.\n#{res.err}"
+        promesaRed
 
 moduloDatos =
     state:
