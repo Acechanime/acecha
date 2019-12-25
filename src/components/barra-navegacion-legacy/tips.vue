@@ -38,7 +38,7 @@
             if elem?
                 @altoMax = elem.scrollHeight + 5
             else
-                console.error "Error. No existe el sub-menu-animes."
+                console.error "Error. No existe el sub-menu-tips."
 
 #
 </script>

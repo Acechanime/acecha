@@ -1,7 +1,7 @@
 <template lang="pug">
     li.item(@mouseover="mostrarSubMenu" @mouseout="ocultarSubMenu")
         a Comunidad
-            img.emoji(draggable="false" alt="👨‍👨‍👧‍👧" width="12px" src="/img/bicons/parchment.svg")
+            img.emoji(draggable="false" alt="👨‍👨‍👧‍👧" width="12px" src="/img/bicons/family.svg")
         ul#sub-menu-comunidad.sub-menu(:style="estilosLista")
             li.menu-item
                 router-link(to="/nosotros/") Nosotros

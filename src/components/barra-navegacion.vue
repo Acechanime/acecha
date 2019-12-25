@@ -10,17 +10,9 @@
                     ul.items
                         anime
                         tips
-                        li
-                            router-link(to="/acecha-premium/") Acecha premium
-                                img.emoji(draggable="false"
-                                    alt="🔱"
-                                    src="/img/bicons/anchor.svg"
-                                    width="12px")
-                        li
-                            router-link(to="/acecha-tv/") Acecha tv
-                                img.emoji(draggable="false" alt="📺" width="12px"
-                                    src="/img/bicons/tv.svg")
+                        mi-experiencia
                         comunidad
+                        buscador
 
         barra-navegacion-movil.barra-movil
     //
@@ -30,7 +22,9 @@
     import barraNavMovil from "./barra-navegacion-movil.vue"
     import animeList from "./barra-navegacion-legacy/anime.vue"
     import tipsList from "./barra-navegacion-legacy/tips.vue"
+    import miExperiencia from "./barra-navegacion-legacy/mi-experiencia.vue"
     import comunidadList from "./barra-navegacion-legacy/comunidad.vue"
+    import buscador from "./barra-navegacion-legacy/buscador.vue"
 
     export default
         name: "barra-navegacion"
@@ -39,6 +33,8 @@
             anime: animeList
             tips: tipsList
             comunidad: comunidadList
+            buscador: buscador
+            "mi-experiencia": miExperiencia
         data: ->
             barraMin: no
         computed:
@@ -125,7 +121,7 @@
         display: inline-table
         margin: 0 10px
         height: 50px
-        .item, li
+        .item
             position: relative
             display: table-cell
             vertical-align: middle
@@ -140,7 +136,7 @@
                 // padding: 10px 0
                 display: block
                 cursor: pointer
-                padding: 15px 1.6875rem 15px 10px !important
+                padding: 15px 1.4rem 15px 10px !important
                 transition: color 250ms
                 &:hover
                     color: #E91E63
