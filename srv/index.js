@@ -6,6 +6,8 @@ const sitiosCors = [
     "https://beta.acechanime.com",
     "http://localhost:8080",
     "http://localhost:8081",
+    "90.165.186.93",
+    "179.7.225.13"
 ];
 
 const opcionesCors = {
@@ -27,7 +29,7 @@ const iniciarRutas = (app, ruta) => {
 
     app.get("/", (req, res) => {
         res.send("<h1>Bienvenido a la API de acechanime. " +
-            "Si no sabes qué hacer, no deberías estar aqui v:</h1>");
+            "Si no sabes qué hacer, no deberias estar aqui v:</h1>");
     });
 
     app.post("/legacy/obtenerEp", require("./legacy/obtenerEp").fun);
@@ -40,6 +42,7 @@ const iniciarRutas = (app, ruta) => {
     app.post("/episodios", require("./episodios/create").fun);
 
     app.delete("/episodio", require("./episodio/delete").fun);
+    app.put("/episodio", require("./episodio/update").fun);
 
     app.get("/episodiosRecientes", require("./episodiosRecientes/get").fun);
 
@@ -50,7 +53,7 @@ const iniciarRutas = (app, ruta) => {
 
     app.get("/recomendacionSemanal", require("./recomendacionSemanal/get").fun);
     app.post("/recomendacionSemanal", require("./recomendacionSemanal/set").fun);
-
+    app.post("/animeinfo", require("./animelist/scrapper.js"));
 };
 
 module.exports = (app, http) => {

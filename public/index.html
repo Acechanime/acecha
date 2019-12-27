@@ -5,98 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="favicon.png">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>Acechanime | Anime online HD sub español</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600|Roboto:400,700,900"
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta name="theme-color" content="#E91E63">
-    <style>
-        #pantalla-carga {
-            background-color: white;
-            color: black;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1000;
-            display: table;
-            text-align: center;
-
-            transition:
-                background-color 250ms ease-in-out,
-                color 250ms ease-in-out,
-                opacity 250ms ease-in-out;
-        }
-
-        .pantalla-carga--oscuro {
-            background-color: #0a0909 !important;
-            color: #e8e8e1 !important;
-        }
-
-        .pantalla-carga--claro {
-            background-color: white !important;
-            color: #0a0909 !important;
-        }
-
-        #contenido {
-            display: table-cell;
-            vertical-align: middle;
-            transition: opacity 250ms ease-in-out;
-        }
-
-        #bienvenida {
-            font-size: x-large;
-            font-weight: bold;
-            font-family: 'Open Sans', Roboto, sans-serif;
-        }
-
-        #bienvenida-label {
-            font-family: Roboto, sans-serif;
-        }
-
-    </style>
-    <style>
-
-        /* Spinner */
-        .spinner {
-            animation: rotator 1.4s linear infinite;
-        }
-
-        @keyframes rotator {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(270deg); }
-        }
-
-        .path {
-            stroke-dasharray: 187;
-            stroke-dashoffset: 0;
-            transform-origin: center;
-            animation:
-                    dash 1.4s ease-in-out infinite,
-                    colors 5.6s ease-in-out infinite;
-        }
-
-        @keyframes colors {
-            0% { stroke: #4285F4; }
-            25% { stroke: #DE3E35; }
-            50% { stroke: #F7C223; }
-            75% { stroke: #1B9A59; }
-            100% { stroke: #4285F4; }
-        }
-
-        @keyframes dash {
-            0% { stroke-dashoffset: 187; }
-            50% {
-                stroke-dashoffset: 47;
-                transform:rotate(135deg);
-            }
-            100% {
-                stroke-dashoffset: 187;
-                transform:rotate(450deg);
-            }
-        }
-    </style>
+    <style>#pantalla-carga{background-color:white;color:black;position:fixed;top:0;left:0;width:100%;height:100%;z-index:1000;display:table;text-align:center;transition:background-color 250ms ease-in-out, color 250ms ease-in-out, opacity 250ms ease-in-out}.pantalla-carga--oscuro{background-color:#0a0909 !important;color:#e8e8e1 !important}.pantalla-carga--claro{background-color:white !important;color:#0a0909 !important}#contenido{display:table-cell;vertical-align:middle;transition:opacity 250ms ease-in-out}#bienvenida{font-size:x-large;font-weight:bold;font-family:'Open Sans', Roboto, sans-serif}#bienvenida-label{font-family:Roboto, sans-serif}.spinner{animation:rotator 1.4s linear infinite}@keyframes rotator{0%{transform:rotate(0deg)}100%{transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;transform-origin:center;animation:dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite}@keyframes colors{0%{stroke:#4285F4}25%{stroke:#DE3E35}50%{stroke:#F7C223}75%{stroke:#1B9A59}100%{stroke:#4285F4}}@keyframes dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:47;transform:rotate(135deg)}100%{stroke-dashoffset:187;transform:rotate(450deg)}}</style>
     <script>
         const url = window.location;
         const host = url.hostname;

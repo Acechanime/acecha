@@ -10,8 +10,8 @@
                     ul.items
                         anime
                         tips
-                        mi-experiencia
                         comunidad
+                        mi-experiencia
                         buscador
 
         barra-navegacion-movil.barra-movil
@@ -40,7 +40,7 @@
         computed:
             barraMinClase: ->
                 if @$route.path is "/"
-                    if @barraMin then "navegacion--min" else ""
+                    if @barraMin then "navegacion--min" else "navegacion--no-min"
                 else "navegacion--min"
             esMovil: -> window.innerWidth < 769
         created: ->
@@ -78,6 +78,7 @@
             -webkit-font-smoothing: antialiased
             transition: transform 250ms ease-in-out, color 250ms ease-in-out
 
+
     .navegacion
         color: var(--texto1)
         background-color: transparent
@@ -90,11 +91,17 @@
         width: 100%
         transition: padding 300ms ease-in-out, background-color 300ms ease-in-out
 
+
     .navegacion--min
         padding: 10px 0
         background-color: var(--fondo1)
         color: var(--texto2)
         box-shadow: 0 1px 10px -6px rgba(0, 0, 0, 0.42), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 4px 5px -2px rgba(0, 0, 0, 0.1)
+
+
+    .navegacion--no-min
+        color: white
+
 
     .izq
         display: inline-block
@@ -107,6 +114,7 @@
             clear: both
             display: table
 
+
     .der
         display: inline-block
         float: right
@@ -115,6 +123,7 @@
             content: ""
             clear: both
             display: table
+
 
     .items
         list-style: none

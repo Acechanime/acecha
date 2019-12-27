@@ -1,7 +1,9 @@
 <template lang="pug">
     article.ep(v-if="ep.anime_id")
         a.link(:href="obtenerLink" @click.prevent="irAlEp")
-            img.imagen(:src="anime.img_nuevo_ep" :alt="'Episodio ' + ep.num_ep + ' de ' + anime.nombre")
+            img.imagen(:src="anime.img_nuevo_ep"
+                :alt="'Episodio ' + ep.num_ep + ' de ' + anime.nombre"
+                :style="'height: ' + alto + 'px'")
             h3.nombre {{ anime.nombre }} {{ ep.num_ep }}
 
     //
@@ -17,6 +19,8 @@
             ep:
                 type: Object
                 required: true
+        data: ->
+            alto: 0
         computed:
             listaAnimes: -> @$store.state.datos.listaAnimes
             anime: ->
@@ -57,6 +61,16 @@
                     mp4upload: ep.mp4upload
                     okru: ep.okru
                 @$router.push @obtenerLink
+        mounted: ->
+            vm = this
+            intervalo = setInterval (=>
+                elemento = vm.$el.firstChild?.firstChild
+                if elemento?
+                    clearInterval intervalo
+                    ancho = elemento.scrollWidth
+                    alto = Math.floor(9 * (ancho / 16))
+                    vm.alto = alto
+            ), 250
 
 #
 </script>

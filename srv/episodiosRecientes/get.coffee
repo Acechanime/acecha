@@ -3,7 +3,7 @@ import { crearRespuesta, crearError } from "../ResStd"
 
 export fun = (req, res) =>
 
-    sql = "SELECT link_id, anime_id, num_ep, es_ova, nivel_prioridad, mega, okru, mango, mp4upload, rapidvideo
+    sql = "SELECT link_id, anime_id, num_ep, es_ova, nivel_prioridad, okru, fembed
             FROM links WHERE mostrar_en_inicio=TRUE ORDER BY link_id DESC LIMIT 21;"
 
     con.query sql
