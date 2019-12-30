@@ -54,7 +54,9 @@
                 else
                     @navOculta = yes
                 @prevScrollPos = actScrollPos
-            cambiarColor: cambiarColor
+            cambiarColor: ->
+                storeFn = @$store.commit
+                cambiarColor { storeFn }
 
         created: ->
             window.addEventListener "scroll", @handleScroll

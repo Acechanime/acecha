@@ -1,6 +1,6 @@
 <template lang="pug">
     li.item(@mouseover="mostrarSubMenu" @mouseout="ocultarSubMenu")
-        a Acecha tips
+        a.item_label Acecha tips
             img.emoji(draggable="false" alt=""
                 src="/img/bicons/parchment.svg"
                 width="12px")

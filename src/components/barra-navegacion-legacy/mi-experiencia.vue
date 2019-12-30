@@ -1,17 +1,17 @@
 <template lang="pug">
     li.item(@mouseover="mostrarSubMenu" @mouseout="ocultarSubMenu")
-        a Mi experiencia
+        a.item_label Mi experiencia
             img.emoji(draggable="false" alt=""
                 src="/img/bicons/heart.svg"
                 width="12px")
         ul#sub-menu-experiencia.sub-menu(:style="estilosLista")
-            li.menu_item
+            li.menu-item
                 router-link(to="/acecha-premium/") Acecha premium
                     img.emoji(draggable="false"
                         alt="🔱"
                         src="/img/bicons/anchor.svg"
                         width="12px")
-            li.menu_item
+            li.menu-item
                 router-link(to="/acecha-tv/") Acecha tv
                     img.emoji(draggable="false" alt="📺" width="12px"
                         src="/img/bicons/tv.svg")

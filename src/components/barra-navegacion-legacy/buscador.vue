@@ -103,7 +103,7 @@
 
         input
             background-color: inherit
-            color: var(--textos1)
+            color: var(--texto1)
             border: none
             height: 100%
             width: 15rem
@@ -132,6 +132,25 @@
 
     .texto_error
         list-style-type: none
+
+
+    @media only screen and (max-width: 1100px)
+
+        #buscador_barra input
+            width: 10rem
+
+
+    @media only screen and (max-width: 950px)
+
+        #buscador_barra
+            input
+                width: 6rem
+
+            &::after
+                content: ""
+
+
+
 
     //
 </style>

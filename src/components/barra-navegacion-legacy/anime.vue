@@ -1,6 +1,6 @@
 <template lang="pug">
     li.item(@mouseover="mostrarSubMenu" @mouseout="ocultarSubMenu")
-        router-link(to="/animes/") Anime
+        router-link.item_label(to="/animes/") Anime
             img.emoji( draggable="false" alt="📂" width="12px" src="/img/bicons/folder.svg")
         ul#sub-menu-animes.sub-menu(:style="estilosLista")
             li.menu-item

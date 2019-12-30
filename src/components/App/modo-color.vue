@@ -1,5 +1,5 @@
 <template lang="pug">
-    i.modo-color.material-icons(@click="cambiarColor") brightness_3
+    i.modo-color.material-icons(@click="cambiarColor") invert_colors
     //
 </template>
 
@@ -30,11 +30,14 @@
     export default
         name: "modo-color"
         methods:
-            cambiarColor: cambiarColor
+            cambiarColor: ->
+                storeFn = @$store.commit
+                cambiarColor {storeFn}
         mounted: ->
             inicializarModoColorOscuro()
             cambiarEsquema do ->
                 res = localStorage.getItem "modo-color"
+
                 res ? "claro"
 
 #

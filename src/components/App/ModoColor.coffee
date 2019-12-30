@@ -73,15 +73,14 @@ cambiarModoColorOscuro = (modo) =>
     localStorage.setItem "modo-color-oscuro", modo
 
 
-cambiarColor = () =>
-    nuevoModo = do ->
-        res = localStorage.getItem "modo-color"
-        res ? "claro"
-    cambiarEsquema (
-        if nuevoModo is "claro"
-            (localStorage?.getItem "modo-color-oscuro") ? "azulOscuro"
+cambiarColor = ({ storeFn }) =>
+    modoActual = (localStorage.getItem "modo-color") ? "claro"
+    nuevoModo =
+        if modoActual is "claro"
+            (localStorage.getItem "modo-color-oscuro") ? "azulOscuro"
         else "claro"
-    )
+    storeFn? "cambiarModoColor", nuevoModo
+    cambiarEsquema nuevoModo
 
 
 export cambiarEsquema = cambiarEsquema

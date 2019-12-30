@@ -103,6 +103,10 @@
         color: white
 
 
+    .menu-item a
+        color: var(--texto2) !important
+
+
     .izq
         display: inline-block
         float: left

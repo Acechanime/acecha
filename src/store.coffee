@@ -157,6 +157,7 @@ moduloDatos =
 
         # Indica si la pagina termino de cargar sus recursos. En desuso.
         paginaLista: no
+        modoColor: (localStorage.getItem "modo-color") ? "claro"
 
     mutations:
         cambiarListaAnimes: (state, data) ->
@@ -170,6 +171,9 @@ moduloDatos =
             state.recomendacionSemanal = Promise.resolve [nuevo, false]
         terminarCargaPagina: (state) ->
             state.paginaLista = yes
+        cambiarModoColor: (state, nuevo) ->
+            state.modoColor = nuevo
+
 
 
 store = new Vuex.Store
