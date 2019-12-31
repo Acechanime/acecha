@@ -45,7 +45,10 @@
                     ep = @ep
                     anime.ruta + (if ep.es_ova then "ova" else "ep") + ep.num_ep
                 else "./#"
-
+            resizeEvent: -> @$store.state.datos.resizeEvent
+        watch:
+            resizeEvent: ->
+                @ajustarTamanoElem()
         methods:
             irAlEp: ->
                 ep = @ep
@@ -61,16 +64,18 @@
                     mp4upload: ep.mp4upload
                     okru: ep.okru
                 @$router.push @obtenerLink
+            ajustarTamanoElem: ->
+                vm = this
+                intervalo = setInterval (=>
+                    elemento = vm.$el.firstChild?.firstChild
+                    if elemento?
+                        clearInterval intervalo
+                        ancho = elemento.scrollWidth
+                        alto = Math.floor(9 * (ancho / 16))
+                        vm.alto = alto
+                ), 250
         mounted: ->
-            vm = this
-            intervalo = setInterval (=>
-                elemento = vm.$el.firstChild?.firstChild
-                if elemento?
-                    clearInterval intervalo
-                    ancho = elemento.scrollWidth
-                    alto = Math.floor(9 * (ancho / 16))
-                    vm.alto = alto
-            ), 250
+            @ajustarTamanoElem()
 
 #
 </script>

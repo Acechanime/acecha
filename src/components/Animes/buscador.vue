@@ -44,9 +44,6 @@
             cambiarFiltroOrden: (f) ->
                 @filtros.orden = f
         created: ->
-            impr @$route.query
-            @$route.query.hola = "mundo"
-            impr @$route.query
             @cargarListaGeneros()
             vm = this
             filtroEstado = (a) ->
@@ -83,7 +80,7 @@
 
     .busc
         padding: 25px 0
-        display: table
+        // display: table
 
     #nombre
         background-color: var(--fondo1)

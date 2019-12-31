@@ -20,55 +20,6 @@
     </script>
 </head>
 <body>
-<!--
-<div id="pantalla-carga">
-    <div id="contenido">
-        <div id="bienvenida">
-            ¡Bienvenido a Acechanime!
-        </div>
-        <div id="bienvenida-label">
-            Estamos preparándolo todo...
-        </div>
-        <br>
-
-        <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66"
-             xmlns="http://www.w3.org/2000/svg">
-            <circle class="path" fill="none" stroke-width="6" stroke-linecap="round"
-                    cx="33" cy="33" r="30">
-            </circle>
-        </svg>
-    </div>
-</div>
--->
-<!--
-<script>
-    const modoColor = (() => {
-        const modo = localStorage.getItem("modo-color");
-        if (modo === null) {
-            localStorage.setItem("modo-color", "claro");
-            return "claro";
-        }
-        else return modo;
-    })();
-    const textos = (() => {
-        const esPrimeraVez = localStorage.getItem("primera-vez");
-        if (esPrimeraVez === null) {
-            localStorage.setItem("primera-vez", "no");
-            return ["¡Bienvenido a Acechanime!", "Estamos preparandolo todo..."];
-        } else {
-            return ["Bienvenido de nuevo.", "Estamos buscando nuevos episodios."];
-        }
-    })();
-
-    document.getElementById("bienvenida").innerText = textos[0];
-    document.getElementById("bienvenida-label").innerText = textos[1];
-
-    const pantallaCarga = document.getElementById("pantalla-carga");
-
-    pantallaCarga.className = "pantalla-carga--" + modoColor;
-
-</script>
--->
 <noscript style="font-family: Roboto, sans-serif">
     <style>
         #pantalla-carga {

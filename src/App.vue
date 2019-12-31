@@ -74,6 +74,7 @@
                         "generos desde el servidor.\n#{res.err}"
             ###
         created: ->
+            @$store.commit "registrarResizeEvent"
             if @$store.state.datos.listaAnimes is undefined
                 @inicializarListaAnimes()
 

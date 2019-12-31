@@ -158,6 +158,7 @@ moduloDatos =
         # Indica si la pagina termino de cargar sus recursos. En desuso.
         paginaLista: no
         modoColor: (localStorage.getItem "modo-color") ? "claro"
+        resizeEvent: {}
 
     mutations:
         cambiarListaAnimes: (state, data) ->
@@ -173,6 +174,10 @@ moduloDatos =
             state.paginaLista = yes
         cambiarModoColor: (state, nuevo) ->
             state.modoColor = nuevo
+        registrarResizeEvent: (state) ->
+            window.addEventListener "resize", (ev)=>
+                state.resizeEvent = ev
+
 
 
 
