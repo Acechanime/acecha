@@ -38,6 +38,7 @@
                 elem2.setAttribute "data-order-by", "reverse_time"
                 elem2.setAttribute "data-colorscheme",
                         if @esClaro then "light" else "dark"
+                elem2.setAttribute "data-width", "1000"
 
                 while contenedor.hasChildNodes()
                     contenedor.removeChild contenedor.firstChild

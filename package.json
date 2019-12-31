@@ -2,16 +2,15 @@
   "name": "acecha",
   "version": "0.1.0",
   "private": true,
-  "license": "MIT",
   "scripts": {
-    "start": "node app.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit",
     "express": "vue-cli-service express:watch",
-    "test:unit": "vue-cli-service test:unit"
+    "start": "node app.js"
   },
   "dependencies": {
-    "core-js": "^2.6.5",
+    "core-js": "^3.4.4",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "lodash": "^4.17.13",
@@ -32,9 +31,9 @@
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
-    "@vue/cli-plugin-babel": "^3.8.0",
-    "@vue/cli-plugin-pwa": "^3.8.0",
-    "@vue/cli-service": "^3.8.0",
+    "@vue/cli-plugin-babel": "^4.1.2",
+    "@vue/cli-plugin-pwa": "^4.1.2",
+    "@vue/cli-service": "^4.1.2",
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
@@ -43,7 +42,7 @@
     "pug": "^2.0.3",
     "pug-plain-loader": "^1.0.0",
     "sass": "^1.18.0",
-    "sass-loader": "^7.1.0",
+    "sass-loader": "^8.0.0",
     "supertest": "^4.0.2",
     "vue-cli-plugin-express": "^1.0.1",
     "vue-seo": "^0.1.5",
@@ -81,5 +80,6 @@
       "jest-serializer-vue"
     ],
     "testURL": "http://localhost/"
-  }
+  },
+  "license": "MIT"
 }
