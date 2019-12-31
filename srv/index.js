@@ -54,6 +54,9 @@ const iniciarRutas = (app, ruta) => {
     app.get("/recomendacionSemanal", require("./recomendacionSemanal/get").fun);
     app.post("/recomendacionSemanal", require("./recomendacionSemanal/set").fun);
     app.post("/animeinfo", require("./animelist/scrapper.js"));
+    app.post("/usuario/registrar", require("./usuario/registrar").fun);
+    app.post("/usuario/login", require("./usuario/login").fun);
+    app.post("/usuario/estadoEpisodio", require("./usuario/estadoEpisodio").fun);
 };
 
 module.exports = (app, http) => {

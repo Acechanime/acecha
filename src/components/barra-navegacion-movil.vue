@@ -2,13 +2,16 @@
     nav.navm
         div.barra
             lista-items(:mostrar="mostrarMenu" :cambiarEstadoMenu="cambiarEstadoMenu")
+            resultado-buscador(:nombre="query" :limpiarBuscador="limpiarBuscador")
+
             div.superior(:class="navOculta? 'superior--oculto': ''")
                 span.usuario
                     // img(src="https://png.icons8.com/windows/1600/0063B1/user")
                     img(src="/favicon.png")
-                input.busqueda(placeholder="Buscar animes" :style="anchoInput")
+                input.busqueda(placeholder="Buscar animes" :style="anchoInput" v-model="query")
                 span.material-icons.icono-menu(@click="cambiarEstadoMenu") menu
                 div.separador
+
             div.iconos
                 router-link(to="/" title="Inicio" :class="esPagInicio? 'resaltado': ''")
                     i.material-icons home
@@ -22,15 +25,17 @@
 
 <script lang="coffee">
     import listaItems from "./barra-navegacion-movil/lista-items"
+    import resultadoBuscador from "./barra-navegacion-movil/resultado-buscador.vue"
     import { cambiarColor } from "./App/ModoColor.coffee"
 
     export default
         name: "barra-navegacion-movil"
-        components: { listaItems }
+        components: { listaItems, resultadoBuscador }
         data: ->
             prevScrollPos: window.pageYOffset
             navOculta: no
             mostrarMenu: no
+            query: ""
         computed:
             anchoPantalla: -> window.innerWidth
             anchoInput: ->
@@ -57,6 +62,8 @@
             cambiarColor: ->
                 storeFn = @$store.commit
                 cambiarColor { storeFn }
+            limpiarBuscador: ->
+                @query = ""
 
         created: ->
             window.addEventListener "scroll", @handleScroll
