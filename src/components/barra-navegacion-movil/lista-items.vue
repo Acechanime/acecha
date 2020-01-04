@@ -15,6 +15,7 @@
             div.ltitulo Yo
             li Mi cuenta
             li.item-activo(@click="irA('/ajustes/')") Ajustes
+
     //
 </template>
 
@@ -39,6 +40,7 @@
                         "max-height: #{res}px;"
                     else "max-height: 0"
                 else "/* -- */"
+            esPagAjustes: -> @$route.path is "/ajustes/"
         methods:
             irA: (link) ->
                 @cambiarEstadoMenu()

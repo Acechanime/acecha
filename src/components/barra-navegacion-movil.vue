@@ -8,7 +8,7 @@
                 span.usuario
                     // img(src="https://png.icons8.com/windows/1600/0063B1/user")
                     img(src="/favicon.png")
-                input.busqueda(placeholder="Buscar animes" :style="anchoInput" v-model="query")
+                input.busqueda(placeholder="Buscar animes" :style="anchoInput" @input="registrar")
                 span.material-icons.icono-menu(@click="cambiarEstadoMenu") menu
                 div.separador
 
@@ -45,6 +45,9 @@
             esPagAnimes: -> @$route.path is "/animes/"
             esPagBugs: -> @$route.path is "/bugs/"
         methods:
+            registrar: (ev) ->
+                @query = ev.target.value
+
             cambiarEstadoMenu: () ->
                 window.document.body.style.overflow =
                     if @mostrarMenu then "initial"

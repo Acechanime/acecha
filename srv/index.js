@@ -6,8 +6,9 @@ const sitiosCors = [
     "https://beta.acechanime.com",
     "http://localhost:8080",
     "http://localhost:8081",
+    "http://192.168.0.4:8080",
     "90.165.186.93",
-    "179.7.224.178"
+    "179.7.224.119",
 ];
 
 const opcionesCors = {
