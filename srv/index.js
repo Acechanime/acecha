@@ -8,7 +8,7 @@ const sitiosCors = [
     "http://localhost:8081",
     "http://192.168.0.4:8080",
     "90.165.186.93",
-    "179.7.224.119",
+    "179.7.225.19",
 ];
 
 const opcionesCors = {

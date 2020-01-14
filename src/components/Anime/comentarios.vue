@@ -2,13 +2,18 @@
     div.comentarios
         h2.titulo Comentarios
         p.label ¿Qué te ha parecido? Opina con el resto de la comunidad =)
+        fb-comments(:path="$router.currentRoute.path")
+
     //
 </template>
 
 <script lang="coffee">
+    import fbComments from "../fb-comments.vue"
 
     export default
         name: "comentarios"
+        components: { fbComments }
+
     #
     
 </script>

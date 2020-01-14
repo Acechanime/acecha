@@ -9,7 +9,7 @@
                 div.der
                     ul.items
                         anime
-                        tips
+                        // tips
                         comunidad
                         mi-experiencia
                         buscador

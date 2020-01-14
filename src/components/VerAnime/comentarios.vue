@@ -1,13 +1,15 @@
 <template lang="pug">
     div.comentarios
-        div Comentarios
+        fb-comments(:path="$router.currentRoute.path")
     //
 </template>
 
 <script lang="coffee">
+    import fbComments from "../fb-comments.vue"
 
     export default
         name: "comentarios"
+        components: { fbComments }
     #
     
 </script>

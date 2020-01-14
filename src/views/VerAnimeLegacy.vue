@@ -5,7 +5,8 @@
                 h3.label_episodio Episodio {{ $store.state.verAnime.ep }}
                 reproductor
                 descarga(:links="$store.state.verAnime.descarga")
-            comentarios
+            br
+            comentarios.fondo
         div.fondo(v-if="!esMovil")
             publicidad
     //

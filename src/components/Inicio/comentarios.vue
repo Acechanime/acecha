@@ -4,9 +4,12 @@
             img(src="https://image.flaticon.com/icons/svg/179/179319.svg" height="60px")
             br
             br
-            p.txt.
-                Reporta errores y pregunta todo lo que quieras, tus preguntas serán respondidas
-                antes de 24h.
+            p.txt
+                b.
+                    Esta página está en beta. Los comentarios relacionados a errores se
+                    responderán <i>en menos de 4h por los programadores</i>.
+                br
+                | Las preguntas generales se responderán a discreción.
             br
             fb-comments(path="/")
 

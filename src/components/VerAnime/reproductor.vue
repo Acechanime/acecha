@@ -4,8 +4,13 @@
             opcion(v-for="(op, i) in opciones" :opcion="op" :pos="i" :key="i"
                 :largo="opciones.length" :posActiva="posActiva"
                 :cambiarOpcion="cambiarOpcion")
-        div#contenedor-anime.contenedor-video
-        br
+        template(v-if="opciones.length !== 0")
+            div#contenedor-anime.contenedor-video
+            br
+        template(v-else)
+            br
+            p No hay servidores disponibles.
+            br
         div.controles2
             div.mizq
                 router-link.boton.boton--eps(:to="epAnterior")

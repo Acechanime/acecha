@@ -2,19 +2,19 @@
     ul.lista#menu-barrra-movil(:style="ancho")
         div#menu-cont
             div.ltitulo Comunidad
-            li Nosotros
-            li Creadores de contenido
-            div.ltitulo Acecha Tips
-            li Comprar desde Japón
-            li Comprar anime
-            li Leer Manga
+            li(:class="pagNosotros" @click="irA('/nosotros/')") Nosotros
+            li(:class="pagCreadoresDeContenido" @click="irA('/creadores-de-contenido/')") Creadores de contenido
+            // div.ltitulo Acecha Tips
+            // li(:class="pagComprarDesdeJapon" @click="irA('/comprar-desde-japon/')") Comprar desde Japón
+            // li(:class="pagComprarAnime" @click="irA('/comprar-anime/')") Comprar anime
+            // li(:class="pagLeerManga" @click="irA('/leer-manga/')") Leer Manga
             div.ltitulo Mi experiencia
-            li Acecha TV
-            li Acecha Premium
-            li Calendario
+            li(:class="pagAcechaTv" @click="irA('/acecha-tv/')") Acecha TV
+            li(:class="pagAcechaPremium" @click="irA('/acecha-premium/')") Acecha Premium
+            li(:class="pagCalendario" @click="irA('/calendario/')") Calendario
             div.ltitulo Yo
-            li Mi cuenta
-            li.item-activo(@click="irA('/ajustes/')") Ajustes
+            li(:class="pagMiCuenta" @click="irA('/mi-cuenta/')") Mi cuenta
+            li(:class="pagAjustes" @click="irA('/ajustes/')") Ajustes
 
     //
 </template>
@@ -40,7 +40,17 @@
                         "max-height: #{res}px;"
                     else "max-height: 0"
                 else "/* -- */"
-            esPagAjustes: -> @$route.path is "/ajustes/"
+            pagAjustes: -> if @$route.path is "/ajustes/" then 'item-activo' else ''
+            pagMiCuenta: -> if @$route.path is "/mi-cuenta/" then 'item-activo' else ''
+            pagAcechaTv: -> if @$route.path is "/acecha-tv/" then 'item-activo' else ''
+            pagAcechaPremium: -> if @$route.path is "/acecha-premium/" then 'item-activo' else ''
+            pagCalendario: -> if @$route.path is "/calendario/" then 'item-activo' else ''
+            pagComprarDesdeJapon: -> if @$route.path is "/comprar-desde-japon/" then 'item-activo' else ''
+            pagComprarAnime: -> if @$route.path is "/comprar-anime/" then 'item-activo' else ''
+            pagLeerManga: -> if @$route.path is "/leer-manga/" then 'item-activo' else ''
+            pagNosotros: -> if @$route.path is "/nosotros/" then 'item-activo' else ''
+            pagCreadoresDeContenido: -> if @$route.path is "/creadores-de-contenido/" then 'item-activo' else ''
+            pagAjustes: -> if @$route.path is "/ajustes/" then 'item-activo' else ''
         methods:
             irA: (link) ->
                 @cambiarEstadoMenu()

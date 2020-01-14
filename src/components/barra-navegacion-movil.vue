@@ -13,9 +13,9 @@
                 div.separador
 
             div.iconos
-                router-link(to="/" title="Inicio" :class="esPagInicio? 'resaltado': ''")
+                a(@click="cerrarMenu('/')" title="Inicio" :class="esPagInicio? 'resaltado': ''")
                     i.material-icons home
-                router-link(to="/animes/" title="Todos los animes" :class="esPagAnimes? 'resaltado': ''")
+                a(@click="cerrarMenu('/animes/')" title="Todos los animes" :class="esPagAnimes? 'resaltado': ''")
                     i.material-icons dashboard
                 a.boton--oscuro(title="Cambiar colores" @click.prevent="cambiarColor()")
                     i.material-icons invert_colors
@@ -54,6 +54,11 @@
                     else "hidden"
 
                 @mostrarMenu = !@mostrarMenu
+
+            cerrarMenu: (ruta) ->
+                window.document.body.style.overflow = "initial"
+                @mostrarMenu = no
+                @$router.push ruta
 
             handleScroll: (ev) ->
                 actScrollPos = window.pageYOffset
