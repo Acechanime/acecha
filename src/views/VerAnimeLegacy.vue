@@ -6,7 +6,7 @@
                 reproductor
                 descarga(:links="$store.state.verAnime.descarga")
             br
-            comentarios.fondo
+            // comentarios.fondo
         div.fondo(v-if="!esMovil")
             publicidad
     //

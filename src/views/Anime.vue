@@ -24,8 +24,11 @@
 
                 temporadas(:anime="animeObj")
                 lista-de-episodios(:anime="animeObj")
-                comentarios
+
         router-view
+        div.contenedor.contenedor_comentarios
+            comentarios
+        br
     //
 </template>
 
@@ -146,6 +149,11 @@
         grid-template-columns: 250px 1fr
         display: grid
         grid-gap: 2.5rem
+
+
+    .contenedor_comentarios
+        @extend %caja-textos
+
 
     .contImg
         position: relative

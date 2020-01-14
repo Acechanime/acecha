@@ -7,6 +7,7 @@
 </template>
 
 <script lang="coffee">
+    import { impr } from "../variables"
 
     export default
         name: "fb-comments"
@@ -16,12 +17,16 @@
                 required: true
         computed:
             url: -> "https://acechanime.com" + @path
-            modoColor: -> @$store.state.datos.modoColor
+            modoColor: ->
+                modo = @$store.state.datos.modoColor
+                impr "El modo de color es #{modo}, #{modo is 'claro'}"
+                modo
             esClaro: -> @modoColor is "claro"
         watch:
-            url: (nuevo, viejo) ->
+            url: ->
                 @cargarFbSdk()
-            modoColor: () ->
+            modoColor: ->
+                impr "Color actualizado..."
                 @cargarFbSdk()
         methods:
             ajustarNodos: ->
