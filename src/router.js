@@ -9,6 +9,7 @@ import Premium from "./views/Premium.vue"
 import EnConstruccion from "./views/EnConstruccion.vue"
 import VerAnimeLegacy from "./views/VerAnimeLegacy.vue"
 import Calendario from "./views/Calendario.vue"
+import _404 from "./views/404.vue"
 
 import store from "./store.coffee"
 
@@ -103,6 +104,11 @@ const router = new Router({
             component: Inicio
         },
         {
+            path: "/404",
+            name: "NotFound",
+            component: _404
+        },
+        {
             path: "/ajustes/",
             name: "Ajustes",
             component: Ajustes
@@ -152,7 +158,8 @@ const router = new Router({
                     component: VerAnimeLegacy
                 }
             ]
-        }
+        },
+        { path: '*', redirect: "/404" }
     ],
     scrollBehavior (to, from, savedPosition) {
         if (to.name === "VerAnimeLegacy" && from.name === "Anime") {

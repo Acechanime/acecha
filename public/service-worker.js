@@ -12,7 +12,11 @@ self.addEventListener("install", (event) => {
                     "/wp-content/uploads/2019/05/subheader.jpg",
                     "https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.0",
                     "/img/tamako_mainVisual_edit.jpg",
-                    "/img/k-on_cover.jpg"
+                    "/img/k-on_cover.jpg",
+                    "/fonts/ProductSansBold.ttf",
+                    "/fonts/ProductSansBoldItalic.ttf",
+                    "/fonts/ProductSansItalic.ttf",
+                    "/fonts/ProductSansRegular.ttf"
                 ]
             );
         })

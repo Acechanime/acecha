@@ -41,14 +41,15 @@
                     @cargarEpisodios()
         methods:
             cargarEpisodios: ->
-                datosRaw = await fetch "#{servidor}/episodios?anime_id=#{@anime.anime_id}"
-                datos = await datosRaw.json()
-                @estadoCarga =
-                    if datos.exito? && datos.exito
-                        @episodios = datos.payload
-                        @$store.commit "cambiarListaEpisodios", datos.payload
-                        1
-                    else -1
+                if @anime.anime_id?
+                    datosRaw = await fetch "#{servidor}/episodios?anime_id=#{@anime.anime_id}"
+                    datos = await datosRaw.json()
+                    @estadoCarga =
+                        if datos.exito? && datos.exito
+                            @episodios = datos.payload
+                            @$store.commit "cambiarListaEpisodios", datos.payload
+                            1
+                        else -1
         created: ->
             @cargarEpisodios()
 

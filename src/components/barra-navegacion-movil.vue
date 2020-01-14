@@ -101,7 +101,7 @@
         border-radius: 10px
         border: 1px solid rgba(209, 209, 209, 0.51)
         color: var(--texto1)
-        background-color: var(--fondo1)
+        background-color: var(--fondo2)
         box-sizing: border-box
         box-shadow: 0 0 5px 0 var(--sombra1)
 

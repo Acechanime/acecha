@@ -17,17 +17,11 @@
                 required: true
         computed:
             url: -> "https://acechanime.com" + @path
-            modoColor: ->
-                modo = @$store.state.datos.modoColor
-                impr "El modo de color es #{modo}, #{modo is 'claro'}"
-                modo
+            modoColor: -> @$store.state.datos.modoColor
             esClaro: -> @modoColor is "claro"
         watch:
-            url: ->
-                @cargarFbSdk()
-            modoColor: ->
-                impr "Color actualizado..."
-                @cargarFbSdk()
+            url: -> @cargarFbSdk()
+            modoColor: -> @cargarFbSdk()
         methods:
             ajustarNodos: ->
                 contenedor = document.getElementById "contenedor-fb"

@@ -1,17 +1,17 @@
 <template lang="pug">
     div.the-post__social
         a.the-post__social__link(
-            :href="'https://www.facebook.com/sharer/sharer.php?u=' + urlActual"
+            :href="'https://www.facebook.com/sharer/sharer.php?u=' + encodeURI(urlActual)"
             target="_blank" data-bgcolor="facebook"
         )
             span.icon-facebook
         a.the-post__social__link(
-            :href="'https://twitter.com/home?status=' + urlActual"
+            :href="'https://twitter.com/home?status=' + encodeURI(urlActual)"
             target="_blank" data-bgcolor="twitter"
         )
             span.icon-twitter
         a.the-post__social__link(
-            :href="'https://api.whatsapp.com/send?phone=#&amp;text=' + urlActual"
+            :href="'https://api.whatsapp.com/send?phone=#&amp;text=' + encodeURI(urlActual)"
             target="_blank" data-bgcolor="whatsapp"
         )
             span.icon-whatsapp

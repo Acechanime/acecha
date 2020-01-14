@@ -1,7 +1,7 @@
 <template lang="pug">
     div.ajustes.contenedor
         h1.titulo Ajustes
-        p En el futuro, aquí podras configurar colores, fuentes, imagenes y mucho mas.
+        p Aquí puedes configurar colores, fuentes, imagenes y mucho mas.
         modo-color
         div.separador
         div.separador

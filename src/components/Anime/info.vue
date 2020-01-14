@@ -25,7 +25,7 @@
     export default
         name: "info"
         data: ->
-            esMovil: window.innerWidth < 600
+            # esMovil: window.innerWidth < 600
             mostrarDetalles: no
             textoIcono: "expand_more"
         props:
@@ -37,6 +37,10 @@
                 if @esMovil && @mostrarDetalles is no
                     "tit--movil"
                 else ""
+            esMovil: ->
+                evResize = @$store.state.datos.resizeEvent
+                window.innerWidth < 600
+
         methods:
             cambiarEstadoDetalles: ->
                 @mostrarDetalles = !@mostrarDetalles
