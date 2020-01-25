@@ -37,7 +37,9 @@
             mostrarMenu: no
             query: ""
         computed:
-            anchoPantalla: -> window.innerWidth
+            anchoPantalla: ->
+                ev = @$store.state.datos.resizeEvent
+                window.innerWidth
             anchoInput: ->
                 ancho = @anchoPantalla - 122
                 "width: #{ancho}px;"

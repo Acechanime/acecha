@@ -74,8 +74,9 @@
         methods:
             inicializarAnimeObj: (err) ->
                 @$store.commit "terminarCargaPagina"
-                if err? then @animeExiste = false
-                @$router.push "/404"
+                if err?
+                    @animeExiste = false
+                    @$router.push "/404"
             cambiarAnime: (obj) ->
                 @animeObj = obj
 

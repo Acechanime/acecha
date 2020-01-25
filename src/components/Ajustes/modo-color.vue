@@ -1,30 +1,30 @@
 <template lang="pug">
-    div
-        h2 Modo color
-        p Estos son los colores que se implementarán en el futuro.
-        br
-        div Claro
-        div#color_claro.color_demo(@click="establecerEsquema('claro')") Acechanime
+    div.contenedor-ajuste
+        div.color-modo-oscuro(@click="alternarSelector")
+            div.ajuste
+                div.titulo-ajuste.titulo-modo-color
+                    span Tono del Modo Oscuro
+                    i.material-icons {{ textoIconoSelector }}
 
-        div(:class="modoOscuroActivo? 'texto_activo': ''") Oscuro
-        div#color_oscuro.color_demo(:class="modoOscuroActivo? 'color_activo': ''"
-            @click="establecerEsquema('oscuro')")
-            | Acechanime
+        div.selector(:style="estiloSelector")
 
-        div(:class="modoGrisActivo? 'texto_activo': ''") Gris
-        div#color_gris.color_demo(:class="modoGrisActivo? 'color_activo': ''"
-            @click="establecerEsquema('gris')")
-            | Acechanime
+            div#color_oscuro.color_demo(:class="modoOscuroActivo? 'color_activo': ''"
+                @click="establecerEsquema('oscuro')")
+                | Normal
 
-        div(:class="modoNegroActivo? 'texto_activo': ''") Amoled
-        div#color_negro.color_demo(:class="modoNegroActivo? 'color_activo': ''"
-            @click="establecerEsquema('negro')")
-            | Acechanime
+            div#color_gris.color_demo(:class="modoGrisActivo? 'color_activo': ''"
+                @click="establecerEsquema('gris')")
+                | Gris
 
-        div(:class="modoAzulOscuroActivo? 'texto_activo': ''") Azul oscuro
-        div#color_azul_oscuro.color_demo(:class="modoAzulOscuroActivo? 'color_activo': ''"
-            @click="establecerEsquema('azulOscuro')")
-            | Acechanime
+            div#color_negro.color_demo(:class="modoNegroActivo? 'color_activo': ''"
+                @click="establecerEsquema('negro')")
+                | Amoled
+
+            div#color_azul_oscuro.color_demo(:class="modoAzulOscuroActivo? 'color_activo': ''"
+                @click="establecerEsquema('azulOscuro')")
+                | Azul oscuro
+
+        div.adicional Este tono se guarda solo en este navegador.
 
     //
 </template>
@@ -36,23 +36,52 @@
         name: "modo-color"
         data: ->
             modoColorOscuro: localStorage?.getItem "modo-color-oscuro"
+            selectorAbierto: false
+            textoIconoSelector: "keyboard_arrow_down"
         computed:
             modoOscuroActivo: -> @modoColorOscuro is "oscuro"
             modoGrisActivo: -> @modoColorOscuro is "gris"
             modoNegroActivo: -> @modoColorOscuro is "negro"
             modoAzulOscuroActivo: -> @modoColorOscuro is "azulOscuro"
+            estiloSelector: -> if @selectorAbierto then "display: block;" else ""
         methods:
             establecerEsquema: (modo) ->
-                cambiarEsquema modo
-                if modo isnt "claro"
-                    @modoColorOscuro = modo
-                    cambiarModoColorOscuro modo
+                cambiarEsquema modo, @$store.commit
+                cambiarModoColorOscuro modo
+                @modoColorOscuro = modo
+
+            alternarSelector: ->
+                [@selectorAbierto, @textoIconoSelector] =
+                    if @selectorAbierto
+                        [false, "keyboard_arrow_down"]
+                    else
+                        [true, "keyboard_arrow_up"]
 
 #
 </script>
 
 <style scoped lang="sass">
     @import "../../sass/variables"
+
+    .selector
+        display: none
+        padding-left: 10px
+        border-left: solid 1px gray
+
+
+    .titulo-modo-color
+        position: relative
+
+        i
+            position: absolute
+            right: 0
+            font-size: 1.5rem
+
+
+    .color-modo-oscuro
+        cursor: pointer
+        user-select: none
+
 
     .texto_activo
         font:
@@ -65,14 +94,14 @@
         border: none !important
 
     .color_demo
-        padding: 15px 5px
+        padding: 0.5rem 0.25rem
         text-align: center
         font:
             family: "Product Sans", Roboto, sans-serif
-            size: larger
+            size: 1rem
         border-radius: 26px
-        margin: 20px 0
         cursor: pointer
+        margin-bottom: 1rem
 
     %bordeBlanco
         border: solid 1px white

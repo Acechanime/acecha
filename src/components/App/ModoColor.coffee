@@ -52,13 +52,15 @@ colores =
         "--opacidad2": "0.9"
 
 
-cambiarEsquema = (nombreEsquema) =>
-    localStorage.setItem "modo-color", nombreEsquema
+cambiarEsquema = (nombreEsquema, storeFn) =>
     esquema = colores[nombreEsquema]
     if esquema?
+        localStorage.setItem "modo-color", nombreEsquema
         for propiedad, color of esquema
             document.documentElement.style.setProperty propiedad, color
             null
+        storeFn? "cambiarModoColor", nombreEsquema
+
     else
         console.error "Error al cambiar el esquema de color. #{nombreEsquema} no existe."
 

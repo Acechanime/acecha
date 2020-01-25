@@ -68,6 +68,10 @@
 <style scoped lang="sass">
     @import "../../sass/variables"
 
+    #menu-barrra-movil
+        max-height: 0
+
+
     .item-activo
         color: $colorPrincipal
         background-color: rgba(233, 30, 99, 0.25)
