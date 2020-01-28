@@ -158,6 +158,8 @@ moduloDatos =
         # Indica si la pagina termino de cargar sus recursos. En desuso.
         paginaLista: no
         modoColor: (localStorage.getItem "modo-color") ? "claro"
+        modoColorAutomatico: ((localStorage.getItem "modo-color-automatico") == "si" ) ? false
+
         resizeEvent: {}
 
     mutations:
@@ -177,6 +179,14 @@ moduloDatos =
         registrarResizeEvent: (state) ->
             window.addEventListener "resize", (ev)=>
                 state.resizeEvent = ev
+
+        cambiarModoColorAutomatico: (state) ->
+            activo = !state.modoColorAutomatico
+            state.modoColorAutomatico = activo
+            localStorage.setItem "modo-color-automatico", (if activo then "si" else "no")
+            unless localStorage.getItem "segundos-claro-auto"
+                localStorage.setItem "segundos-claro-auto", 25200
+                localStorage.setItem "segundos-oscuro-auto", 64800
 
 
 

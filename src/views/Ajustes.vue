@@ -13,7 +13,9 @@
                             span.switcher(@click.prevent.stop="cambiarColor")
             div.adicional Al cambiar el modo se reinician los comentarios de Facebook.
 
-        modo-color
+        modo-color-oscuro
+
+        modo-color-automatico
 
         div.contenedor-ajuste
             div.titulo-ajuste Mas ajustes
@@ -28,12 +30,13 @@
 </template>
 
 <script lang="coffee">
-    import modoColor from "../components/Ajustes/modo-color.vue"
+    import modoColorOscuro from "../components/Ajustes/modo-color-oscuro.vue"
+    import modoColorAutomatico from "../components/Ajustes/modo-color-automatico.vue"
     import { cambiarColor } from "../components/App/ModoColor.coffee"
 
     export default
         name: "Ajustes"
-        components: { modoColor }
+        components: { modoColorOscuro, modoColorAutomatico }
         computed:
             mmodoColor: -> @$store.state.datos.modoColor
             etiquetaModoColor: -> if @mmodoColor is "claro" then "des" else ""

@@ -6,7 +6,7 @@
                     span Tono del Modo Oscuro
                     i.material-icons {{ textoIconoSelector }}
 
-        div.selector(:style="estiloSelector")
+        div.selector(v-if="selectorAbierto")
 
             div#color_oscuro.color_demo(:class="modoOscuroActivo? 'color_activo': ''"
                 @click="establecerEsquema('oscuro')")
@@ -24,7 +24,7 @@
                 @click="establecerEsquema('azulOscuro')")
                 | Azul oscuro
 
-        div.adicional Este tono se guarda solo en este navegador.
+        // div.adicional Este tono se guarda solo en este navegador.
 
     //
 </template>
@@ -33,7 +33,7 @@
     import { cambiarModoColorOscuro, cambiarEsquema } from "../App/ModoColor.coffee"
 
     export default
-        name: "modo-color"
+        name: "modo-color-oscuro"
         data: ->
             modoColorOscuro: localStorage?.getItem "modo-color-oscuro"
             selectorAbierto: false
@@ -64,7 +64,6 @@
     @import "../../sass/variables"
 
     .selector
-        display: none
         padding-left: 10px
         border-left: solid 1px gray
 
