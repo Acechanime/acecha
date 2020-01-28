@@ -57,14 +57,12 @@
             horaClaro: segundosAStr ((localStorage.getItem "segundos-claro-auto") ? 25200)
             horaOscuro: segundosAStr ((localStorage.getItem "segundos-oscuro-auto") ? 64800)
         watch:
-            horaClaro: (nuevo) ->
+            horaClaro: (nuevo, viejo) ->
                 segundos = strASegundos nuevo
-                segundosAStr segundos
                 localStorage.setItem "segundos-claro-auto", segundos
 
             horaOscuro: (nuevo) ->
                 segundos = strASegundos nuevo
-                segundosAStr segundos
                 localStorage.setItem "segundos-oscuro-auto", segundos
 
         computed:

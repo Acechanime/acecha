@@ -35,10 +35,46 @@
                 cambiarColor {storeFn}
         mounted: ->
             inicializarModoColorOscuro()
-            cambiarEsquema do ->
-                res = localStorage.getItem "modo-color"
+            if (localStorage.getItem "modo-color-automatico") is "si"
+                horaActual = new Date()
+                segundos = horaActual.getHours() * 3600 + horaActual.getMinutes() * 60
 
-                res ? "claro"
+                segundosInicioClaro = parseInt localStorage.getItem "segundos-claro-auto"
+                segundosOscuroClaro = parseInt localStorage.getItem "segundos-oscuro-auto"
+
+                modoActual = "claro"
+
+                if segundosInicioClaro < segundosOscuroClaro
+
+                    if segundosInicioClaro <= segundos < segundosOscuroClaro
+                        modoActual = "claro"
+                        # console.log "Cambiando a #{modoActual} porque claro < oscuro"
+                        cambiarEsquema modoActual
+                    else
+                        modoActual = (localStorage.getItem "modo-color-oscuro") ? "azulOscuro"
+                        # console.log "Cambiando a #{modoActual} porque claro < oscuro"
+                        cambiarEsquema modoActual
+
+                else
+
+                    if segundosOscuroClaro <= segundos < segundosInicioClaro
+                        modoActual = (localStorage.getItem "modo-color-oscuro") ? "azulOscuro"
+                        # console.log "Cambiando a #{modoActual} porque oscuro < claro"
+                        cambiarEsquema modoActual
+                    else
+                        modoActual = "claro"
+                        # console.log "Cambiando a #{modoActual} porque oscuro < claro"
+                        cambiarEsquema modoActual
+
+
+
+                @$store.commit "cambiarModoColor", modoActual
+
+            else
+                modoActual = (localStorage.getItem "modo-color") ? "claro"
+                cambiarEsquema modoActual
+                @$store.commit "cambiarModoColor", modoActual
+
 
 #
 </script>

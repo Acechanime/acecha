@@ -66,7 +66,7 @@ cambiarEsquema = (nombreEsquema, storeFn) =>
 
 
 inicializarModoColorOscuro = () =>
-    modoActual = localStorage?.getItem "modo-color-oscuro"
+    modoActual = localStorage.getItem "modo-color-oscuro"
     unless modoActual?
         localStorage.setItem "modo-color-oscuro", "azulOscuro"
 
