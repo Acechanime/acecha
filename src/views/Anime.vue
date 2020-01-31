@@ -63,7 +63,7 @@
             esMovil: window.innerWidth < 600
         computed:
             colorEtiqueta: ->
-                if @animeObj.en_emision then "background: #01bc59" else "background: #ff0241"
+                if @animeObj.emision.en_emision then "background: #01bc59" else "background: #ff0241"
             animeAdmin: ->
                 @$store.state.animeAdmin.animeAdmin
             animeObj:

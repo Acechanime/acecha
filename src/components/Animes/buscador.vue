@@ -19,7 +19,7 @@
 <script lang="coffee">
     import {impr} from "../../variables";
     import orden from "./buscador/orden.vue"
-    import { removerCaracteres } from "./buscador.coffee"
+    import { removerCaracteres, filtroNombre, comp2 } from "./buscador.coffee"
 
 
     export default
@@ -34,13 +34,18 @@
             filtros:
                 orden: () -> true
         props:
-            cambiarFiltros:
+            cambiarFiltro:
                 type: Function # [(a -> Bool)] -> ()
                 required: true
         methods:
             cargarListaGeneros: ->
                 [datos, bool] = await @$store.state.datos.listaGeneros
-                @listaGeneros = datos
+
+                @listaGeneros = datos.sort (a, b) =>
+                    if a.nombre > b.nombre then 1
+                    else if a.nombre < b.nombre then -1
+                    else 0
+
             cambiarFiltroOrden: (f) ->
                 @filtros.orden = f
         created: ->
@@ -54,6 +59,10 @@
                     a.emision.en_emision is true
                 else true
 
+
+            filtroNombre2 = (_, anime) -> filtroNombre vm, anime
+
+            ###
             filtroNombre = (a) ->
                 if vm.nombre.length is 0 then return true
 
@@ -67,18 +76,22 @@
                         if (p1.search p2) != -1 then return true
                 return false
 
+             ###
+
             filtroGenero = (a) ->
                 if vm.genero is -1 then true
                 else
                     res = a.info.generos?.find (g) -> g == vm.genero
                     res?
 
-            vm.cambiarFiltros [
-                filtroEstado
-                filtroGenero
-                filtroNombre
-                @filtros.orden
-            ]
+            vm.cambiarFiltro (comp2 [filtroEstado, filtroGenero], filtroNombre2)
+
+            # vm.cambiarFiltros [
+            #     filtroEstado
+            #     filtroGenero
+            #     filtroNombre
+            #     @filtros.orden
+            # ]
 
 #
 </script>

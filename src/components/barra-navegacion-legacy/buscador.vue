@@ -3,8 +3,8 @@
         div#buscador_barra
             input(placeholder="Buscar anime" v-model="nombre")
         ul.autocompletar(:style="estilos")
-            template(v-if="listaAnimesFiltrada.length !== 0")
-                item-buscador(v-for="(anime, i) in listaAnimesFiltrada"
+            template(v-if="listaAnimesFiltrada2.length !== 0")
+                item-buscador(v-for="(anime, i) in listaAnimesFiltrada2"
                     :anime="anime"
                     :limpiarBuscador="limpiarBuscador"
                     :key="i")
@@ -13,7 +13,7 @@
 </template>
 
 <script lang="coffee">
-    import { comp, removerCaracteres } from "../Animes/buscador.coffee"
+    import { filtroNombre, filtrar } from "../Animes/buscador.coffee"
     import itemBuscador from "./item-buscador.vue"
 
     export default
@@ -37,17 +37,12 @@
                 if @listaAnimes isnt undefined
                     (@listaAnimes.filter @filtroNombre).slice 0, 5
                 else []
-        methods:
-            filtroNombre: (a) ->
+            listaAnimesFiltrada2: ->
                 vm = this
-                if vm.nombre.length is 0 then return true
-                palabras = removerCaracteres a.info.nombre, "-:"
-                nombre = removerCaracteres vm.nombre, "-:"
-                if nombre.length is 0 then return true
-                for p1 in palabras
-                    for p2 in nombre
-                        if (p1.search p2) != -1 then return true
-                return false
+                if @listaAnimes isnt undefined
+                    filtrar @, @listaAnimes, filtroNombre, 5
+                else []
+        methods:
             limpiarBuscador: ->
                 @nombre = ""
         mounted: ->

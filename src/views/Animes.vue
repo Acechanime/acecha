@@ -3,8 +3,8 @@
         div.separador
         div.grid
             div.cont
-                buscador(:cambiarFiltros="cambiarFiltros")
-                animes(:filtros="filtros" :terminarCargaFn="terminarCarga")
+                buscador(:cambiarFiltro="cambiarFiltro")
+                animes(:filtro="filtro" :terminarCargaFn="terminarCarga")
             div.publicidad
                 publicidad
     //
@@ -15,16 +15,16 @@
     import buscador from "../components/Animes/buscador.vue"
     import animes from "../components/Animes/animes.vue"
 
+    filtroBase = => 1
+
     export default
         name: "Animes"
+        components: { publicidad, buscador, animes }
         data: ->
-            filtros: []
-        components:
-            publicidad: publicidad
-            buscador: buscador
-            animes: animes
+            filtro: filtroBase
         methods:
-            cambiarFiltros: (f) -> @filtros = f
+            cambiarFiltro: (f) ->
+                @filtro = f
             terminarCarga: -> @$store.commit "terminarCargaPagina"
 
 #
@@ -36,7 +36,7 @@
         background-color: var(--fondo1)
 
     .grid
-        margin: 48px 0
+        // margin: 48px 0
         display: grid
         grid-template-columns: 1fr 250px
         grid-gap: 2rem

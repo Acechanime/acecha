@@ -41,7 +41,7 @@
                     ep = @epRecientePrincipal
                     unless ep.anime_id?
                         animes = @$store.state.listaAnimes.filter (x) =>
-                            x.anime_id == ep.anime_id
+                            x.info.anime_id == ep.anime_id
                         animes[0]
                     else {}
                 else {}

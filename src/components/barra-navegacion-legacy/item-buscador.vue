@@ -1,7 +1,8 @@
 <template lang="pug">
-    li.item_buscador(@click="irAlAnime")
-        img(:src="anime.imagenes.portada")
-        span.nombre_anime {{ anime.info.nombre }}
+    li.item_buscador
+        router-link(:to="anime.info.ruta" @click.prevent="irAlAnime" :title="anime.info.nombre")
+            img(:src="anime.imagenes.portada")
+            span.nombre_anime {{ anime.info.nombre }}
 
     //
 </template>
@@ -57,6 +58,7 @@
 
     .nombre_anime
         // vertical-align: middle
+        color: var(--texto1)
         display: inline-block
         height: 100%
         width: calc(100% - 2.5rem)
