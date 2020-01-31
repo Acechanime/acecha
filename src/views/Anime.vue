@@ -1,15 +1,15 @@
 <template lang="pug">
     div.an
-        imagen-anime(:nombre="animeObj.nombre || ''" :img="animeObj.img_fondo || ''")
+        imagen-anime(:nombre="animeObj.info.nombre || ''" :img="animeObj.imagenes.fondo || ''")
         main.cont.contenedor(v-show="!$store.state.verAnime.verAnimeActivo")
             div
                 div.contImg
-                    img.imagen(:src="animeObj.img_portada")
-                    figcaption.estado(:style="colorEtiqueta") {{ animeObj.en_emision? 'en emision': 'finalizado' }}
+                    img.imagen(:src="animeObj.imagenes.portada")
+                    figcaption.estado(:style="colorEtiqueta") {{ animeObj.emision.en_emision? 'en emision': 'finalizado' }}
                         span.icon-check-box
                 redes-sociales
                 info(:animeObj="animeObj")
-                mal(:url="animeObj.mal? animeObj.mal: 'err'" v-if="!esMovil")
+                mal(:url="animeObj.info.mal? animeObj.info.mal: 'err'" v-if="!esMovil")
                 twitter(v-if="!esMovil")
                 template(v-if="esMovil")
                     br
@@ -17,9 +17,9 @@
             div
                 article.sinopsis
                     div.tit Sinopsis
-                    p.txt {{ animeObj.sinopsis }}
+                    p.txt {{ animeObj.info.sinopsis }}
                     ul
-                        genero(v-for="(g, i) in animeObj.generos" :generoId="g" :key="i")
+                        genero(v-for="(g, i) in animeObj.info.generos" :generoId="g" :key="i")
                     // span.generos(v-for="g in animeObj.generos")  {{ $store.state.listaGeneros.find(x => x.genero_id === g).nombre }}
 
                 temporadas(:anime="animeObj")
@@ -76,7 +76,8 @@
                 @$store.commit "terminarCargaPagina"
                 if err?
                     @animeExiste = false
-                    @$router.push "/404"
+                    # @$router.push "/404" # Inicia un bucle infinito al intentar regresar a pag. anterior
+
             cambiarAnime: (obj) ->
                 @animeObj = obj
 
@@ -93,7 +94,7 @@
             else
                 nombreRuta = "/#{ruta}/"
                 await listaAnimesCargada
-                anime = store.state.datos.listaAnimes?.find (a) -> a.ruta == nombreRuta
+                anime = store.state.datos.listaAnimes?.find (a) -> a.info.ruta == nombreRuta
                 if anime?
                     to.params.animeObj = anime
                     next (vm) -> vm.inicializarAnimeObj()
@@ -109,7 +110,7 @@
             else
                 nombreRuta = to.path
                 await listaAnimesCargada
-                anime = store.state.datos.listaAnimes?.find (a) -> a.ruta == nombreRuta
+                anime = store.state.datos.listaAnimes?.find (a) -> a.info.ruta == nombreRuta
                 if anime?
                     @cambiarAnime anime
                     next()
@@ -119,17 +120,14 @@
                     next()
 
         created: ->
-            if @$store.state.modoAdmin
-                @animeObj = @animeAdmin
+            unless @$route?.params?.animeObj?
+                nombreRuta = @$route.path
+                await listaAnimesCargada
+                anime = store.state.listaAnimes?.find (a) -> a.info.ruta == nombreRuta
+                unless anime?
+                    @animeExiste = no
             else
-                unless @$route?.params?.animeObj?
-                    nombreRuta = @$route.path
-                    await listaAnimesCargada
-                    anime = store.state.listaAnimes?.find (a) -> a.ruta == nombreRuta
-                    unless anime?
-                        @animeExiste = no
-                else
-                    @animeObj = @$route.params.animeObj
+                @animeObj = @$route.params.animeObj
 
     #
 </script>

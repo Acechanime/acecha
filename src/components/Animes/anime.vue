@@ -1,12 +1,12 @@
 <template lang="pug">
     article.link
-        a.link(:href="anime.ruta" @click.prevent="irAPagAnime(anime)")
+        a.link(:href="anime.info.ruta" @click.prevent="irAPagAnime(anime)")
             div.img
-                img(:src="anime.img_portada"
+                img(:src="anime.imagenes.portada"
                     sizes="(max-width: 247px) 100vw, 247px"
                     width="247" height="350"
                 )
-            h2.nombre {{ anime.nombre }}
+            h2.nombre {{ anime.info.nombre }}
     //
 </template>
 
@@ -20,7 +20,7 @@
         methods:
             irAPagAnime: (anime) ->
                 @$router.push
-                    path: anime.ruta
+                    path: anime.info.ruta
                     params:
                         animeObj: anime
 

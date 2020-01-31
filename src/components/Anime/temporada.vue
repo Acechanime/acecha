@@ -1,12 +1,12 @@
 <template lang="pug">
     div.temporada
-        img.portadaMini(:src="anime.img_portada" alt="img")
+        img.portadaMini(:src="anime.imagenes.portada" alt="img")
         span.nombre {{ nombreArreglado }}
         template(v-if="esRutaActual()")
             router-link.season_link(to="." :style="obtColorFondo" )
                 // span.icon-checkmark
         template(v-else)
-            router-link.season_link(:to="anime.ruta" :style="obtColorFondo" )
+            router-link.season_link(:to="anime.info.ruta" :style="obtColorFondo" )
                 span.icon-chevron-right
     //
 </template>
@@ -37,7 +37,7 @@
                     "background: #01bc59; opacity: 0"
                 else "background: #ff0241"
             nombreArreglado: ->
-                nombre = @anime.nombre
+                nombre = @anime.info.nombre
                 if nombre?.length > 40 and window.innerWidth < 500
                     extraerNombreCorto nombre, 40
                 else nombre
@@ -46,7 +46,7 @@
                 if @$store.state.modoAdmin
                     true
                 else
-                    @anime.ruta == @$route.path
+                    @anime.info.ruta == @$route.path
 
 
 #

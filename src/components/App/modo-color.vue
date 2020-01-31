@@ -1,5 +1,5 @@
 <template lang="pug">
-    i.modo-color.material-icons(@click="cambiarColor") invert_colors
+    i.modo-color-pc.material-icons(@click="cambiarColor") invert_colors
     //
 </template>
 
@@ -82,7 +82,7 @@
 <style scoped lang="sass">
     @import "../../sass/variables"
 
-    .modo-color
+    .modo-color-pc
         position: fixed
         bottom: 0
         right: 0
@@ -98,7 +98,7 @@
         box-shadow: rgba(84, 84, 84, 0.65) 1px 1px 1px 1px
 
     @media only screen and (max-width: 770px)
-        .modo-color
+        .modo-color-pc
             display: none !important
 
     //

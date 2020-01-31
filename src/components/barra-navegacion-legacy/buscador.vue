@@ -41,7 +41,7 @@
             filtroNombre: (a) ->
                 vm = this
                 if vm.nombre.length is 0 then return true
-                palabras = removerCaracteres a.nombre, "-:"
+                palabras = removerCaracteres a.info.nombre, "-:"
                 nombre = removerCaracteres vm.nombre, "-:"
                 if nombre.length is 0 then return true
                 for p1 in palabras

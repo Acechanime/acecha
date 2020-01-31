@@ -3,6 +3,8 @@
         div.modo-color(@click="alternarModoColorAutomatico")
             div.ajuste
                 div.titulo-ajuste Cambio de color automático
+                div.etiqueta-ajuste Cambia al modo oscuro/claro en ciertas horas del dia.
+                br
             div.ajuste-switch
                 div
                     label.cl-switch.cl-switch-red

@@ -4,19 +4,19 @@
             span.material-icons(v-if="esMovil") {{ textoIcono }}
         template(v-if="!esMovil || (esMovil && mostrarDetalles)")
             div.eps Numero de episodios
-            p {{ animeObj.episodios === -1? "??": animeObj.episodios }}
+            p {{ animeObj.emision.episodios === -1? "??": animeObj.emision.episodios }}
             div.temp Temporada
-            p {{ animeObj.temporada }} {{ animeObj.anio }}
+            p {{ animeObj.emision.temporada }} {{ animeObj.emision.anio }}
             div.estudio Estudio
-            p {{ animeObj.estudio }}
+            p {{ animeObj.info.estudio }}
             div.fuente ¿De donde viene el anime?
-            p {{ animeObj.fuente }}
+            p {{ animeObj.info.fuente }}
             div.emision Fecha de emision
-            p {{ animeObj.emision }}
+            p {{ animeObj.emision.inicio_emision }}
             div.culminacion Fecha de culminacion
-            p {{ animeObj.culminacion }}
+            p {{ animeObj.emision.culminacion }}
             div.otrosNombres Otros nombres
-                p(v-for="n in animeObj.otros_nombres") {{ n }}
+                p(v-for="n in animeObj.info.otros_nombres") {{ n }}
     //
 </template>
 

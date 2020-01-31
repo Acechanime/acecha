@@ -1,7 +1,7 @@
 <template lang="pug">
     li.item_buscador(@click="irAlAnime")
-        img(:src="anime.img_portada")
-        span.nombre_anime {{ anime.nombre }}
+        img(:src="anime.imagenes.portada")
+        span.nombre_anime {{ anime.info.nombre }}
 
     //
 </template>
@@ -22,7 +22,7 @@
                 @limpiarBuscador()
                 anime = @anime
                 @$router.push
-                    path: anime.ruta
+                    path: anime.info.ruta
                     params:
                         animeObj: anime
 

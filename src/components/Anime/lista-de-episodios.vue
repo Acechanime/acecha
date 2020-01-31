@@ -2,17 +2,17 @@
     div.capitulos
         template(v-if="tieneOvas")
             h2.titulo Lista de Ovas
-            p.label Todas las OVAs de {{ anime.nombre }}
+            p.label Todas las OVAs de {{ anime.info.nombre }}
             div.eps
                 episodio(v-for="(ep, i) in ovas_filtradas" :key="i"
-                    :episodio="ep" :nombre="anime.nombre")
+                    :episodio="ep" :nombre="anime.info.nombre")
             br
             br
         h2.titulo Lista de Capítulos
-        p.label Todos los capítulos de {{ anime.nombre }}
+        p.label Todos los capítulos de {{ anime.info.nombre }}
         div.eps
             episodio(v-for="(ep, i) in episodios_filtrados" :key="i"
-                :episodio="ep" :nombre="anime.nombre")
+                :episodio="ep" :nombre="anime.info.nombre")
     //
 </template>
 
@@ -37,12 +37,12 @@
             tieneOvas: -> @ovas_filtradas.length > 0
         watch:
             anime: (n, v) ->
-                if n.anime_id isnt v.anime_id
+                if n.info.anime_id isnt v.info.anime_id
                     @cargarEpisodios()
         methods:
             cargarEpisodios: ->
-                if @anime.anime_id?
-                    datosRaw = await fetch "#{servidor}/episodios?anime_id=#{@anime.anime_id}"
+                if @anime.info.anime_id?
+                    datosRaw = await fetch "#{servidor}/episodios?anime_id=#{@anime.info.anime_id}"
                     datos = await datosRaw.json()
                     @estadoCarga =
                         if datos.exito? && datos.exito

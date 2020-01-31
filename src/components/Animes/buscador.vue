@@ -48,23 +48,31 @@
             vm = this
             filtroEstado = (a) ->
                 if vm.estado is -1 then true
-                else if vm.estado is 0 then a.en_emision is false or a.en_emision is null
-                else if vm.estado is 1 then a.en_emision is true
+                else if vm.estado is 0
+                    a.emision.en_emision is false or a.emision.en_emision is null
+                else if vm.estado is 1
+                    a.emision.en_emision is true
                 else true
+
             filtroNombre = (a) ->
                 if vm.nombre.length is 0 then return true
-                palabras = removerCaracteres a.nombre, "-:"
+
+                palabras = removerCaracteres a.info.nombre, "-:"
                 nombre = removerCaracteres vm.nombre, "-:"
+
                 if nombre.length is 0 then return true
+
                 for p1 in palabras
                     for p2 in nombre
                         if (p1.search p2) != -1 then return true
                 return false
+
             filtroGenero = (a) ->
                 if vm.genero is -1 then true
                 else
-                    res = a.generos?.find (g) -> g == vm.genero
+                    res = a.info.generos?.find (g) -> g == vm.genero
                     res?
+
             vm.cambiarFiltros [
                 filtroEstado
                 filtroGenero
