@@ -106,18 +106,18 @@ moduloVerAnime =
             state.verAnimeActivo = no
 
 cargarRecursoDesdeRed = (nombre, url) => new Promise (resolve, reject) =>
-    impr "Cargando #{nombre} desde #{url}"
     res =
         try
             resRaw = await fetch "#{servidor}#{url}"
-            await resRaw.json()
+            json = await resRaw.json()
+            json
         catch e
             {exito: false, err: e}
-    if res?.exito
+    if res?.exito is true
         localStorage?.setItem nombre, JSON.stringify res.payload
         resolve [res.payload, false]
     else
-        reject new Error "Error al obtener recurso desde el servidor.\n#{res.err}"
+        reject new Error "Error al obtener recurso #{nombre} desde #{url}.\n#{res.err}"
 
 
 ###: (nombre: Txt, url: Txt) -> Promise ({}, Bool) Error

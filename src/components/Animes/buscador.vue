@@ -1,6 +1,6 @@
 <template lang="pug">
     div.busc
-        input#nombre(placeholder="Nombre del anime" v-model="nombre")
+        input#nombre(placeholder="Nombre del anime" @input="cambiarNombre($event)")
         select#generos(v-model.number="genero")
             option(value="-1" selected) Cualquier género
             option(v-for="gen in listaGeneros" :value="gen.genero_id") {{ gen.nombre }}
@@ -38,6 +38,9 @@
                 type: Function # [(a -> Bool)] -> ()
                 required: true
         methods:
+            cambiarNombre: (element) ->
+                @nombre = element.target.value
+
             cargarListaGeneros: ->
                 [datos, bool] = await @$store.state.datos.listaGeneros
 

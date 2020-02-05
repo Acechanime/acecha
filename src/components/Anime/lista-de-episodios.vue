@@ -8,11 +8,17 @@
                     :episodio="ep" :nombre="anime.info.nombre")
             br
             br
-        h2.titulo Lista de Capítulos
-        p.label Todos los capítulos de {{ anime.info.nombre }}
-        div.eps
-            episodio(v-for="(ep, i) in episodios_filtrados" :key="i"
-                :episodio="ep" :nombre="anime.info.nombre")
+        template(v-if="episodios_filtrados.length > 0")
+            h2.titulo Lista de Capítulos
+            p.label Todos los capítulos de {{ anime.info.nombre }}
+            div.eps
+                episodio(v-for="(ep, i) in episodios_filtrados" :key="i"
+                    :episodio="ep" :nombre="anime.info.nombre")
+        template(v-else-if="estadoCarga === 0")
+            p Cargando episodios...
+        template(v-else)
+            p No hay episodios disponibles.
+
     //
 </template>
 
@@ -42,7 +48,8 @@
         methods:
             cargarEpisodios: ->
                 if @anime.info.anime_id?
-                    datosRaw = await fetch "#{servidor}/episodios?anime_id=#{@anime.info.anime_id}"
+                    # datosRaw = await fetch "#{servidor}/episodios?anime_id=#{@anime.info.anime_id}"
+                    datosRaw = await fetch "#{servidor}/animes/#{@anime.info.anime_id}/episodios"
                     datos = await datosRaw.json()
                     @estadoCarga =
                         if datos.exito? && datos.exito

@@ -1,7 +1,7 @@
 <template lang="pug">
     li.barra_li
         div#buscador_barra
-            input(placeholder="Buscar anime" v-model="nombre")
+            input(placeholder="Buscar anime" @input="cambiarNombre($event)")
         ul.autocompletar(:style="estilos")
             template(v-if="listaAnimesFiltrada2.length !== 0")
                 item-buscador(v-for="(anime, i) in listaAnimesFiltrada2"
@@ -43,6 +43,9 @@
                     filtrar @, @listaAnimes, filtroNombre, 5
                 else []
         methods:
+            cambiarNombre: (element) ->
+                @nombre = element.target.value
+
             limpiarBuscador: ->
                 @nombre = ""
         mounted: ->
