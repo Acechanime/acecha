@@ -25,22 +25,23 @@
         name: "mi-experiencia"
         data: ->
             hover: no
-            altoMax: 0
         computed:
+            altoMaximo: ->
+                ev = @$store.state.datos.resizeEvent
+                root = @$el
+                elem = root.children[1]
+                if elem?
+                    elem.scrollHeight + 5
+                else
+                    100
             estilosLista: ->
-                if @hover then "max-height: #{@altoMax}px;" else ""
+                if @hover then "max-height: #{@altoMaximo}px;" else ""
         methods:
             mostrarSubMenu: ->
                 @hover = yes
             ocultarSubMenu: ->
                 @hover = no
-        mounted: ->
-            elem = document.getElementById "sub-menu-experiencia"
-            if elem?
-                @altoMax = elem.scrollHeight + 5
-            else
-                console.error "Error. No existe el sub-menu-experiencia."
-    
+
 #
 </script>
 
