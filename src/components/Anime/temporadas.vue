@@ -26,7 +26,7 @@
             obtTempAnteriores: ->
                 anterior = []
                 animeActual = @anime
-                while animeActual.temporada.id_temporada_ant? and animeActual.temporada.id_temporada_ant isnt -1
+                while animeActual?.temporada?.id_temporada_ant? and animeActual.temporada.id_temporada_ant isnt -1
                     animeAnt = @$store.state.datos.listaAnimes.filter (a) ->
                         a.info.anime_id == animeActual.temporada.id_temporada_ant
                     if animeAnt[0]?
@@ -37,7 +37,7 @@
             obtTempSiguientes: ->
                 siguiente = []
                 animeActual = @anime
-                while animeActual.temporada.id_temporada_sig? and animeActual.temporada.id_temporada_sig isnt -1
+                while animeActual?.temporada?.id_temporada_sig? and animeActual.temporada.id_temporada_sig isnt -1
                     animeSig = @$store.state.datos.listaAnimes.filter (a) ->
                         a.info.anime_id == animeActual.temporada.id_temporada_sig
                     if animeSig[0]?

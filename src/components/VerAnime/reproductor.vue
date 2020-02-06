@@ -31,7 +31,7 @@
 
 <script lang="coffee">
     import opcion from "./opcion.vue"
-    import {impr} from "../../variables";
+    import {impr} from "../../variables"
 
     export default
         name: "reproductor"
@@ -93,16 +93,16 @@
                     ""
             opciones: ->
                 opciones = []
-                if @links?.mega? and @links.mega isnt ""
-                    opciones.push ["Mega", @links.mega]
-                if @links?.rapidvideo? and @links.rapidvideo isnt ""
-                    opciones.push ["RapidVideo", @links.rapidvideo]
-                if @links?.mango? and @links.mango isnt ""
-                    opciones.push ["Mango", @links.mango]
+
+                if @links?.fembed? and @links.fembed isnt ""
+                    opciones.push ["fembed", @links.fembed]
+                if @links?.yourupload? and @links.yourupload isnt ""
+                    opciones.push ["yourupload", @links.yourupload]
                 if @links?.mp4upload? and @links.mp4upload isnt ""
-                    opciones.push ["MP4Upload", @links.mp4upload]
-                if @links?.okru? and @links.okru isnt ""
-                    opciones.push ["Okru", @links.okru]
+                    opciones.push ["mp4upload", @links.mp4upload]
+                if @links?.pasfox? and @links.pasfox isnt ""
+                    opciones.push ["pasfox", @links.pasfox]
+
                 opciones
             linkActivo: -> @opciones?[@posActiva]?[1]?.replace "mega.nz/", "mega.nz/embed"
 

@@ -1,5 +1,7 @@
 # Acechanime
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cdeb5378-efc5-4146-8476-fc08ae964088/deploy-status)](https://app.netlify.com/sites/gifted-lamarr-11dd12/deploys)
+
 Bienvenido al repositorio de Acechanime, aquí se encuentra el
 código que permite funcionar la página.
 
