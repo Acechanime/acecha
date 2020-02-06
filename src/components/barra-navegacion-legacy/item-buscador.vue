@@ -1,6 +1,6 @@
 <template lang="pug">
     li.item_buscador
-        router-link(:to="anime.info.ruta" @click.prevent="irAlAnime" :title="anime.info.nombre")
+        a(:href="anime.info.ruta" @click.prevent="irAlAnime" :title="anime.info.nombre")
             img(:src="anime.imagenes.portada")
             span.nombre_anime {{ anime.info.nombre }}
 
@@ -20,6 +20,7 @@
                 required: true
         methods:
             irAlAnime: ->
+                console.log "Yendo a la cosa..."
                 @limpiarBuscador()
                 anime = @anime
                 @$router.push
