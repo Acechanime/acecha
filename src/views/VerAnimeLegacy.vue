@@ -4,7 +4,7 @@
             div.fondo
                 h3.label_episodio Episodio {{ $store.state.verAnime.ep }}
                 reproductor
-                descarga(:links="$store.state.verAnime.descarga")
+                descarga
             // comentarios.fondo
         div.fondo(v-if="!esMovil")
             publicidad
@@ -35,7 +35,10 @@
         name: "VerAnimeLegacy"
         components: { reproductor, descarga, comentarios, publicidad }
         computed:
-            esMovil: -> window.innerWidth < 780
+            anchoPantalla: ->
+                ev = @$store.state.datos.resizeEvent
+                window.innerWidth
+            esMovil: -> @anchoPantalla < 780
         beforeRouteUpdate: (to, from, next) ->
             @$store.commit "cambiarNumEp", parseInt to.params.ep
             next()

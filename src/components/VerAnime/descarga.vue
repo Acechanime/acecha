@@ -41,32 +41,22 @@
         data: ->
             panelLinks: false
             panelCarpetas: false
-        props:
-            links:
-                type: Object
-                required: true
         computed:
+            listaEps: -> @$store.state.verAnime.listaEpisodios
+            numEp: -> @$store.state.verAnime.ep
+            links: ->
+                res =
+                    if @listaEps.length isnt 0 and @numEp? and @numEp isnt -1
+                        vm = this
+                        (@listaEps.find (a) -> a.num_ep is vm.numEp) ? {}
+                    else {}
+                res
             listaLinks: ->
                 lista = []
-                if @links.okru?
+                if @links?.pasfox? and @links.pasfox isnt ""
                     lista.push
-                        nombre: "OkRu"
-                        link: @links.okru
-                    
-                if @links.mango?
-                    lista.push
-                        nombre: "Mango"
-                        link: @links.mango
-                        
-                if @links.mega?
-                    lista.push
-                        nombre: "Mega"
-                        link: @links.mega
-                        
-                if @links.mp4upload?
-                    lista.push
-                        nombre: "Mp4Upload",
-                        link: @links.mp4upload
+                        nombre: "PassFox",
+                        link: @links.pasfox
                     
                 lista
             listaCarpetas: ->

@@ -67,9 +67,7 @@
             animeAdmin: ->
                 @$store.state.animeAdmin.animeAdmin
             animeObj:
-                get: ->
-                    if @$store.state.animeAdmin.modoAdmin then @animeAdmin
-                    else @animeProv
+                get: -> @animeProv
                 set: (a) -> @animeProv = a
         methods:
             inicializarAnimeObj: (err) ->

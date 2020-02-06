@@ -28,46 +28,12 @@ guardarListaAnimes = (data) =>
     dataJSON = JSON.stringify data
     localStorage?.setItem "lista-animes", dataJSON
 
-moduloAnimeAdmin =
-    state:
-        modoAdmin: no
-        animeAdmin: {}
-        mostrarAnimeAdmin: no
-        otros_nombres: []
-    mutations:
-        cambiarAModoAdmin: (state) ->
-            state.modoAdmin = yes
-
-        cambiarAnimeAdmin: (state, anime) ->
-            state.animeAdmin = anime
-        cambiarAnimeAdmin_alternativo: (state, arr) ->
-            state.otros_nombres = arr
-        agregarAnimeAdmin_alternativo: (state) ->
-            unless Array.isArray state.otros_nombres
-                state.otros_nombres = []
-            else
-                state.otros_nombres = state.otros_nombres.concat ""
-
-        mostrarAnimeAdmin: (state) ->
-            state.mostrarAnimeAdmin = yes
-        ocultarAnimeAdmin: (state) ->
-            state.mostrarAnimeAdmin = no
-
 moduloVerAnime =
     state:
         verAnimeActivo: no
         listaEpisodios: []
         activo: no
         anime:
-            mega: null
-            rapidvideo: null
-            mango: null
-            mp4upload: null
-            okru: null
-        descarga:
-            carpeta_mega: null
-            # Solucion temporal. Cuando se implementen cuentas los links se obtendran tras
-            # una solicitud al servidor.
             mega: null
             rapidvideo: null
             mango: null
@@ -193,7 +159,6 @@ moduloDatos =
 
 store = new Vuex.Store
     modules:
-        animeAdmin: moduloAnimeAdmin
         verAnime: moduloVerAnime
         datos: moduloDatos
 

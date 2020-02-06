@@ -100,8 +100,6 @@
                     opciones.push ["yourupload", @links.yourupload]
                 if @links?.mp4upload? and @links.mp4upload isnt ""
                     opciones.push ["mp4upload", @links.mp4upload]
-                if @links?.pasfox? and @links.pasfox isnt ""
-                    opciones.push ["pasfox", @links.pasfox]
 
                 opciones
             linkActivo: -> @opciones?[@posActiva]?[1]?.replace "mega.nz/", "mega.nz/embed"
