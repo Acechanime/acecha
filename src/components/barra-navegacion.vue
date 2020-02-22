@@ -166,16 +166,6 @@
                     transform: rotate(180deg)
                     color: #E91E63 !important
 
-    @media only screen and (max-width: 900px)
-        .der
-            display: none !important
-
-    @media only screen and (max-width: 500px)
-        .izq
-            height: 51px !important
-
-        //.logo
-            height: 75px !important
 
     .sub-menu
         display: block

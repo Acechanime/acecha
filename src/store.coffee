@@ -119,7 +119,7 @@ moduloDatos =
         Promesa que se recupera desde localStorage. Bool indica si se sacó de localStorage.
         ###
         recomendacionSemanal: cargarRecurso "recomendacion-semanal",
-            "/recomendacionSemanal/"
+            "/recomendacion/"
 
         # Indica si la pagina termino de cargar sus recursos. En desuso.
         paginaLista: no

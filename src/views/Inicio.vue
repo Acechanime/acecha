@@ -44,7 +44,7 @@
             # Carga los datos
             epsRecientes =
                 try
-                    epsRecientesRaw = await fetch "#{servidor}/episodiosRecientes"
+                    epsRecientesRaw = await fetch "#{servidor}/episodios/reciente"
                     await epsRecientesRaw.json()
                 catch e
                     console.log "Error al recuperar los episodios recientes.\n#{e}"

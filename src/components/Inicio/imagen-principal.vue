@@ -9,7 +9,7 @@
                     br
                     br
                     br
-                    div.boton Compatible para
+                    // div.boton Compatible para
         div.img(:style="'background: url(' + cabecera + ') center center'")
     //
 </template>

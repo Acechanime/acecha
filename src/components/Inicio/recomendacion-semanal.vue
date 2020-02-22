@@ -3,10 +3,10 @@
         div.row(v-if="cargado && !error")
             div.col.l6.s12.pad
                 div.cont-img
-                    router-link(:to="recomendacion.ruta")
-                        img.img(:src="recomendacion.img_portada"
+                    router-link(:to="recomendacion.info.ruta")
+                        img.img(:src="recomendacion.imagenes.portada"
                              alt="Img anime" )
-                div.temporizador2.countdown
+                // div.temporizador2.countdown
                     div.countdown__block
                         div.countdown__digits {{ dias }}
                         label.countdown__label Días
@@ -24,7 +24,7 @@
                 div.titulo acechanime
                 div.txt Recomendación Semanal
                 hr.divisor
-                router-link.boton(:to="recomendacion.ruta") Click para verlo
+                router-link.boton(:to="recomendacion.info.ruta") Click para verlo
         div.err(v-if="error")
             span.
                 Hubo un error al cargar la recomendación semanal.<br>
@@ -46,7 +46,12 @@
             cargado: no
             cache: no
             codigoDeError: "00"
-            recomendacion: {}
+            recomendacion:
+                info: 
+                    ruta: "."
+                emision: {}
+                temporada: {}
+                imagenes: {}
         computed:
             dias: -> Math.floor(this.segundos / 60 / 60 / 24)
             horas: -> Math.floor(this.segundos / 60 / 60) % 24
@@ -61,16 +66,17 @@
         methods:
             cargarRecomendacion: ->
                 vm = this
-                recRaw = await fetch "#{servidor}/recomendacionSemanal/"
+                recRaw = await fetch "#{servidor}/recomendacion"
                 rec = await recRaw.json()
                 await listaAnimesCargada
                 if rec.exito
                     rec.payload
                 else
                     throw new Error rec.error.razon
+
             inicializarRecomendacion: (animeId) ->
                 await listaAnimesCargada
-                res = @listaAnimes.find (n) => n.anime_id == animeId
+                res = @listaAnimes.find (n) => n.info.anime_id == animeId
                 if res?
                     @recomendacion = res
                 else
@@ -78,6 +84,9 @@
                     @codigoDeError = "01"
                     console.log "La recomendacion semanal tiene un anime_id invalido."
                     impr "anime_id -> #{animeId}"
+                @cargado = yes
+            inicializarRecomendacion2: (anime) ->
+                @recomendacion = anime
                 @cargado = yes
             inicializarTemporizador: (hora) ->
                 horaLimite = Math.floor (hora / 1000)
@@ -99,26 +108,31 @@
             try
                 [datos, cargadoDesdeLocalStorage] = await vm.recomendacionRaw
 
-                animeId = datos.anime_id
-                hora = datos.hora
-                @inicializarRecomendacion animeId
-                @inicializarTemporizador hora
+                if datos?.info?.anime_id?
+                    @inicializarRecomendacion2 datos
+                else
+                    animeId = datos.anime_id
+                    @inicializarRecomendacion animeId
+                # Deprecado porque el servidor ya no establece una hora.
+                # @inicializarTemporizador hora
 
                 if cargadoDesdeLocalStorage
                     @cache = true
                     setTimeout (->
                         try
                             mres = await vm.cargarRecomendacion()
-                            vm.inicializarRecomendacion mres.anime_id
-                            vm.inicializarTemporizador mres.hora
+                            vm.inicializarRecomendacion2 mres
+                            # Deprecado
+                            # vm.inicializarTemporizador mres.hora
                             store.commit "cambiarRecomendacionSemanal",
-                                anime_id: mres.anime_id
-                                hora: mres.hora
+                                anime_id: mres.info.anime_id
+                                hora: 0
                         catch e
                             console.log e
                     ), 100
             catch e
-                console.log e
+                impr "Inicio/recSemanal - atrapado"
+                impr e
                 @cargado = yes
                 @error = yes
                 @codigoDeError = "02"
