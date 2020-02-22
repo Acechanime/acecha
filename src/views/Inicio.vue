@@ -54,7 +54,7 @@
                     if nuevo["nivel_prioridad"] > acc["nivel_prioridad"] then nuevo else acc
                 @epRecientePrincipal = epRecientePrincipal
                 @epsRecientes = epsRecientes.payload.filter (x) =>
-                    x["link_id"] != epRecientePrincipal["link_id"]
+                    x.episodio_id != epRecientePrincipal.episodio_id
             else
                 console.log "Error al obtener los episodios recientes. " +
                     "Código #{epsRecientes.status}.\n#{epsRecientes.err}"

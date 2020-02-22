@@ -1,4 +1,4 @@
 export manejarError = (err, codigo, vm) ->
-    console.error "Error al cargar los ultimos episodios.\n#{err}"
+    console.error "Error al cargar recurso.\n#{err}"
     vm.cargaFallida = yes
     vm.codigoDeError = codigo

@@ -1,17 +1,17 @@
 <template lang="pug">
-    article.ep(v-if="ep.anime_id")
+    article.ep(v-if="ep.anime_id && anime.info.nombre")
         a.link(:href="obtenerLink" @click.prevent="irAlEp")
-            img.imagen(:src="anime.img_nuevo_ep"
-                :alt="'Episodio ' + ep.num_ep + ' de ' + anime.nombre"
+            img.imagen(:src="anime.imagenes.nuevo_ep"
+                :alt="'Episodio ' + ep.num_ep + ' de ' + anime.info.nombre"
                 :style="'height: ' + alto + 'px'")
-            h3.nombre {{ anime.nombre }} {{ ep.num_ep }}
+            h3.nombre {{ anime.info.nombre }} {{ ep.num_ep }}
 
     //
 </template>
 
 <script lang="coffee">
     import { listaAnimesCargada } from "../../store.coffee"
-    import { impr } from "../../variables";
+    import { impr } from "../../variables"
 
     export default
         name: "episodio"
@@ -27,7 +27,7 @@
                 lista = @listaAnimes
                 anime_id = @ep.anime_id
                 if lista isnt undefined and @ep? and anime_id?
-                    anime = lista.find (x) => x.anime_id == anime_id
+                    anime = lista.find (x) => x.info.anime_id == anime_id
                     anime ? do ->
                         console.log "Inicio/episodio. No existe anime con id #{anime_id}"
                         {}
@@ -41,9 +41,9 @@
                     {}
             obtenerLink: ->
                 anime = @anime
-                if anime.ruta?
+                if anime.info.ruta?
                     ep = @ep
-                    anime.ruta + (if ep.es_ova then "ova" else "ep") + ep.num_ep
+                    anime.info.ruta + (if ep.es_ova then "ova" else "ep") + ep.num_ep
                 else "./#"
             resizeEvent: -> @$store.state.datos.resizeEvent
         watch:
@@ -53,10 +53,10 @@
             irAlEp: ->
                 ep = @ep
                 @$store.commit "cambiarDatosVerAnime",
-                    nombre: @anime.nombre
+                    nombre: @anime.info.nombre
                     esOva: @ep.es_ova
                     ep: @ep.num_ep
-                    ruta: @anime.ruta
+                    ruta: @anime.info.ruta
                 @$store.commit "cambiarAnimeVerAnime",
                     mega: ep.mega
                     rapidvideo: ep.rapidvideo

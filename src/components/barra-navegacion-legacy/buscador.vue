@@ -80,6 +80,7 @@
         border-right: $borde
         border-bottom: $borde
         border-radius: 0 0 5px 5px
+        min-width: 15rem
 
         right: 0
         text-transform: none
