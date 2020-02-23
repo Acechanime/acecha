@@ -7,17 +7,21 @@ export comp = (fs) => (elem) =>
                 f elem
             else
                 false
+
     estado
 
 
-#:    ([(Contexto, Anime) -> Bool], (Contexto, Anime) -> Prioridad)
+#:    ( [(Contexto, Anime) -> Bool], (Contexto, Anime) -> Prioridad)
 #: -> (Contexto, Anime)
 #: -> Prioridad
-export comp2 = (funciones, funcionPrioridad) => (vm, a) =>
-    if comp(funciones)(a)
-        funcionPrioridad vm, a
-    else
-        1
+export comp2 = (funciones, funcionPrioridad) => 
+    filtroBase = comp funciones
+    (vm, a) =>
+        if filtroBase a
+            funcionPrioridad vm, a
+
+        else
+            0
 
 
 

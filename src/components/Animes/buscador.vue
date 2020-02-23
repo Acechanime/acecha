@@ -84,8 +84,7 @@
             filtroGenero = (a) ->
                 if vm.genero is -1 then true
                 else
-                    res = a.info.generos?.find (g) -> g == vm.genero
-                    res?
+                    (a.info.generos?.find (g) -> g == vm.genero)?
 
             vm.cambiarFiltro (comp2 [filtroEstado, filtroGenero], filtroNombre2)
 
@@ -126,29 +125,22 @@
             border-radius: 5px
             outline: none
 
-    #generos
-        display: table-cell
+
+
+    #generos, #emision
+        display:  inline-table
         vertical-align: middle
         margin-right: 1rem
-        padding: 5px 10px
+        padding: 5px 0.5rem
         font:
             family: $titulos
+            size: 0.85rem
         border-radius: 5px
         box-shadow: none
         &:focus
             outline: none
 
-    #emision
-        display: inline-table
-        margin-right: 1rem
-        vertical-align: middle
-        padding: 5px 10px
-        font:
-            family: $titulos
-        border-radius: 5px
-        box-shadow: none
-        &:focus
-            outline: none
+        
 
     //
 </style>
