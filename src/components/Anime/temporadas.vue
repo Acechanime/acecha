@@ -52,7 +52,7 @@
     @import "../../sass/variables"
 
     .temporadas
-        margin: 50px 0
+        margin: 3rem 0
         text-align: center
 
     .titulo

@@ -22,7 +22,7 @@
     @import "../../sass/variables"
 
     .comentarios
-        margin: 50px 0
+        margin: 2rem 0
         text-align: center
 
     .titulo

@@ -77,11 +77,12 @@
             line-height: 1.2
             font:
                 weight: 700
+                size: 0.85rem
         p
-            padding-bottom: 10px
-            padding-top: 3px
+            padding-bottom: 0.5rem
+            padding-top: 0.25rem
             color: $colorPrincipal
-            font-size: 14px
+            font-size: 0.75rem
 
         .otrosNombres p
             padding-top: 5px

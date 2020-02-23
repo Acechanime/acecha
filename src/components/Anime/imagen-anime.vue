@@ -30,17 +30,17 @@
     .sub
         clip-path: ellipse(100% 100% at 50% -0.25%)
         position: relative
-        padding-bottom: 200px
-        padding-top: 70px
+        padding-bottom: 8rem // 200px
+        padding-top: 4rem // 70px
 
     .nombre
         position: relative
         z-index: 2
         font:
             weight: 400
-            size: 3.6rem
+            size: 2.5rem
         color: white
-        padding: 155px 0
+        padding: 8rem 0 // 155px 0
         text-align: center
 
     .cover

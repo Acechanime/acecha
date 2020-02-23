@@ -103,7 +103,7 @@
     @import "../../sass/variables"
 
     .busc
-        padding: 25px 0
+        padding: 2rem 0
         // display: table
 
     #nombre
@@ -111,12 +111,12 @@
         display: table-cell
         vertical-align: middle
         max-width: 100%
-        margin-right: 15px
+        margin-right: 1rem
         font:
             family: $titulos
-            size: 21px
+            size: 1.15rem
 
-        padding: 10px 20px
+        padding: 0.5rem 1.15rem
         border-radius: 25px
         border: solid $colorPrincipal 1px
         box-shadow: none
@@ -124,14 +124,12 @@
         &:focus
             color: $colorPrincipal
             border-radius: 5px
-            border-width: 2px
             outline: none
-            padding-bottom: 8px
 
     #generos
         display: table-cell
         vertical-align: middle
-        margin-right: 15px
+        margin-right: 1rem
         padding: 5px 10px
         font:
             family: $titulos
@@ -142,7 +140,7 @@
 
     #emision
         display: inline-table
-        margin-right: 15px
+        margin-right: 1rem
         vertical-align: middle
         padding: 5px 10px
         font:

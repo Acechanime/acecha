@@ -24,7 +24,7 @@
 
     .mal
         @extend %textosGris
-        margin: 50px 0
+        margin: 3rem 0
         text-align: center
         a
             display: inline-block

@@ -9,7 +9,7 @@
     export default
         name: "publicidad"
     #
-    
+
 </script>
 
 <style scoped lang="sass">
@@ -18,7 +18,7 @@
     .titulo
         font:
             family: $titulos
-            size: 24px
+            size: 1.5rem
             weight: 600
         color: var(--texto2)
 

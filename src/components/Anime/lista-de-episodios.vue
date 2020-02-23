@@ -70,7 +70,7 @@
     @import "../../sass/variables"
 
     .capitulos
-        margin: 50px 0
+        margin: 3rem 0
         text-align: center
 
     .titulo
@@ -78,10 +78,11 @@
         font:
             family: $titulos
             size: 1.75rem
+        padding: 0.75rem 0
 
     .label
         @extend %textosGris
-        margin: 10px 0
+        margin-bottom: 1rem
 
     .eps
         @extend %caja-textos

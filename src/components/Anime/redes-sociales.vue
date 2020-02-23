@@ -39,11 +39,11 @@
         -webkit-box-pack: center
         -ms-flex-pack: center
         justify-content: center
-        padding-top: 50px
-        padding-bottom: 25px
+        padding-top: 2.5rem
+        padding-bottom: 1.5rem
 
     .the-post__social__link
-        --size: 44px
+        --size: 2.5rem
         color: var(--white-color)
         font-size: 1.125rem
         width: var(--size)
