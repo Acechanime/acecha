@@ -14,7 +14,7 @@
     import publicidad from "../components/Animes/publicidad.vue"
     import buscador from "../components/Animes/buscador.vue"
     import animes from "../components/Animes/animes.vue"
-    import { PaginationControl, PaginationPage } from 'vue-smart-pagination'
+    # import { PaginationControl, PaginationPage } from 'vue-smart-pagination'
 
     filtroBase = => 1
 
