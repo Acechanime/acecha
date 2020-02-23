@@ -1,14 +1,14 @@
 <template lang="pug">
     li.item(@mouseover="mostrarSubMenu" @mouseout="ocultarSubMenu")
         router-link.item_label(to="/animes/") Anime
-            img.emoji( draggable="false" alt="📂" width="12px" src="/img/bicons/folder.svg")
+            img.emoji( draggable="false" alt="📂" src="/img/bicons/folder.svg")
         ul#sub-menu-animes.sub-menu(:style="estilosLista")
             li.menu-item
                 router-link(to="/animes/") Ver Anime
-                    img.emoji( draggable="false" alt="📂" width="12px" src="/img/bicons/folder.svg")
+                    img.emoji( draggable="false" alt="📂" src="/img/bicons/folder.svg")
             li.menu-item
                 router-link(to="/calendario/") Calendario
-                    img.emoji( draggable="false" alt="📂" width="12px" src="/img/bicons/calendar.svg")
+                    img.emoji( draggable="false" alt="📂" src="/img/bicons/calendar.svg")
     //
 </template>
 
@@ -41,6 +41,8 @@
 <style scoped lang="sass">
     @import "../../sass/variables"
 
+    .emoji
+        width: 1rem
 
     //
 </style>

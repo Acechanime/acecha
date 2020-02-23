@@ -1,18 +1,18 @@
 <template lang="pug">
     div
         nav.navegacion.barra-pc(:class="barraMinClase" )
-            div.contenedor
+            div.contenedor.wrap
                 div.izq
                     router-link(to="/")
                         img.logo(src="../assets/img/acechanime.png"
                              alt="Logo AcechaAnime")
-                div.der
-                    ul.items
-                        anime
-                        // tips
-                        comunidad
-                        mi-experiencia
-                        buscador
+                
+                ul.items
+                    anime
+                    // tips
+                    comunidad
+                    mi-experiencia
+                    buscador
 
         barra-navegacion-movil.barra-movil
     //
@@ -63,8 +63,8 @@
             display: inline-block
             color: var(--texto1)
             content: "\e90b"
-            top: 17px
-            right: 14px
+            top: 40%
+            right: 0.75rem
             position: absolute
             font-size: var(--normal-font-size)
             pointer-events: none
@@ -87,13 +87,18 @@
         left: 0
         z-index: 10
         // Padding: 25 -> 10
-        padding: 25px 0
+        padding: 1.5rem 0
         width: 100%
         transition: padding 300ms ease-in-out, background-color 300ms ease-in-out
 
 
+    .wrap
+        display: grid
+        grid-template-columns: 5rem auto
+
+
     .navegacion--min
-        padding: 10px 0
+        padding: 1rem 0
         background-color: var(--fondo1)
         color: var(--texto2)
         box-shadow: 0 1px 10px -6px rgba(0, 0, 0, 0.42), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 4px 5px -2px rgba(0, 0, 0, 0.1)
@@ -108,49 +113,43 @@
 
 
     .izq
-        display: inline-block
-        float: left
-        height: 50px
-        .logo
-            height: 50px
-        &:after
-            content: ""
-            clear: both
-            display: table
+        a
+            display: block
+            margin: auto
+            img
+                display: block
+                margin: auto
+                max-width: 100%
+                height: auto
 
-
-    .der
-        display: inline-block
-        float: right
-        height: 50px
-        &:after
-            content: ""
-            clear: both
-            display: table
 
 
     .items
         list-style: none
-        display: inline-table
-        margin: 0 10px
-        height: 50px
+        display: flex !important
+        align-self: center
+        grid-column: 2 / 3
+        justify-self: end
+        margin-top: 0
+        height: 100%
+        
         .item
+            list-style: none
             position: relative
-            display: table-cell
-            vertical-align: middle
-            font:
-                size: 12px
-                family: Roboto, sans-serif
+            font-size: 0.65rem
             text-transform: uppercase
             transition: color 250ms ease-in-out
+            height: 100%
             a
                 color: inherit
                 text-decoration: none
                 // padding: 10px 0
                 display: block
                 cursor: pointer
-                padding: 15px 1.4rem 15px 10px !important
+                padding: 0.65rem
+                padding-right: 1.4rem !important
                 transition: color 250ms
+                position: relative
                 &:hover
                     color: #E91E63
 

@@ -94,7 +94,7 @@
         background-color: var(--fondo1)
         display: table-cell
         vertical-align: middle
-        padding: 2px 0.75rem 8px
+        padding: 0.25rem 0.75rem 0.5rem
         border-radius: 5px
         border: solid rgba(117, 117, 117, 0.85) 1px
         box-shadow: none
