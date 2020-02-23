@@ -14,12 +14,13 @@
     import publicidad from "../components/Animes/publicidad.vue"
     import buscador from "../components/Animes/buscador.vue"
     import animes from "../components/Animes/animes.vue"
+    import { PaginationControl, PaginationPage } from 'vue-smart-pagination'
 
     filtroBase = => 1
 
     export default
         name: "Animes"
-        components: { publicidad, buscador, animes }
+        components: { publicidad, buscador, animes, PaginationPage, PaginationControl }
         data: ->
             filtro: filtroBase
         methods:
