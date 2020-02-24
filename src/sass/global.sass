@@ -116,13 +116,18 @@ $ancho-col: 8.33%
         opacity: 0.6
 
 .separador
-    height: 70px
+    height: 3.5rem
     width: 100%
 
 /* Responsividad */
 
+@media only screen and (max-width: 850px)
+    .separador
+        display: none !important
+
+
 @media only screen and (max-width: 500px)
-    .ocultarBajo500, .separador
+    .ocultarBajo500
         display: none !important
 
 @media only screen and (max-width: 700px)

@@ -108,8 +108,8 @@ const router = new Router({
             component: _404
         },
         {
-            path: "/ajustes/",
-            name: "Ajustes",
+            path: "/mi-cuenta/",
+            name: "Cuenta",
             component: Ajustes
         },
         {

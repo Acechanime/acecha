@@ -1,5 +1,6 @@
 <template lang="pug">
     div.ajustes.contenedor
+        div.separador
         h1.titulo Ajustes
         div.contenedor-ajuste
             div.modo-color(@click="cambiarColor")
@@ -14,17 +15,13 @@
             div.adicional Al cambiar el modo se reinician los comentarios de Facebook.
 
         modo-color-oscuro
-
         modo-color-automatico
 
-        div.contenedor-ajuste
+        // div.contenedor-ajuste
             div.titulo-ajuste Mas ajustes
             div.etiqueta-ajuste Muy pronto...
 
-        div.separador
-        div.separador
-        div.separador
-
+        credito
 
     //
 </template>
@@ -32,11 +29,12 @@
 <script lang="coffee">
     import modoColorOscuro from "../components/Ajustes/modo-color-oscuro.vue"
     import modoColorAutomatico from "../components/Ajustes/modo-color-automatico.vue"
+    import credito from "../components/Ajustes/credito.vue"
     import { cambiarColor } from "../components/App/ModoColor.coffee"
 
     export default
         name: "Ajustes"
-        components: { modoColorOscuro, modoColorAutomatico }
+        components: { modoColorOscuro, modoColorAutomatico, credito }
         computed:
             mmodoColor: -> @$store.state.datos.modoColor
             etiquetaModoColor: -> if @mmodoColor is "claro" then "des" else ""

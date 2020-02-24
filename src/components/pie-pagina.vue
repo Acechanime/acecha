@@ -36,7 +36,11 @@
         name: "pie-pagina"
         computed:
             mostrar: ->
-                if @$route.path is "/en-construccion/" then "display: none"
+                vm = this
+                listaBlanca = ["/mi-cuenta", "/en-construccion/"]
+                if (listaBlanca.find (x) => x is vm.$route.path)?
+                    "display: none"
+                else ""
 
 #
 </script>

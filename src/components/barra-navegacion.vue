@@ -14,6 +14,9 @@
                     mi-experiencia
                     buscador
 
+                router-link.imagen_usuario(to="/mi-cuenta")
+                    img(src="/favicon.png")
+
         barra-navegacion-movil.barra-movil
     //
 </template>
@@ -94,7 +97,15 @@
 
     .wrap_barra
         display: grid
-        grid-template-columns: 5rem auto
+        grid-template-columns: 5rem auto 4rem
+
+
+    .imagen_usuario
+        text-align: center
+        img
+            height: auto
+            width: 2rem
+            vertical-align: middle
 
 
     .navegacion--min
@@ -191,11 +202,11 @@
     .barra-movil
         display: block
 
-    @media only screen and (max-width: 770px)
+    @media only screen and (max-width: 850px)
         .barra-pc
             display: none
 
-    @media only screen and (min-width: 771px)
+    @media only screen and (min-width: 851px)
         .barra-movil
             display: none
 

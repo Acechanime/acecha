@@ -5,7 +5,7 @@
             resultado-buscador(:nombre="query" :limpiarBuscador="limpiarBuscador")
 
             div.superior(:class="navOculta? 'superior--oculto': ''")
-                span.usuario
+                router-link.usuario(to="/mi-cuenta/")
                     // img(src="https://png.icons8.com/windows/1600/0063B1/user")
                     img(src="/favicon.png")
                 // Si, uso un @input en vez de v-model, porque solo así funciona en movil.
