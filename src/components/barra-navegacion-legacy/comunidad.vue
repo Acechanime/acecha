@@ -2,12 +2,12 @@
     li.item(@mouseover="mostrarSubMenu" @mouseout="ocultarSubMenu")
         a.item_label Comunidad
             img.emoji(draggable="false" alt="👨‍👨‍👧‍👧" width="12px" src="/img/bicons/family.svg")
-        ul#sub-menu-comunidad.sub-menu(:style="estilosLista")
+        ul#sub-menu-comunidad.sub-menu-barra(:style="estilosLista")
             li.menu-item
-                a(href="/nosotros/index.html") Nosotros
+                router-link(to="/nosotros/") Nosotros
                     img.emoji(draggable="false" alt="📂" width="12px" src="/img/bicons/family.svg")
             li.menu-item
-                a(href="/creadores-de-contenido/index.html") Creadores de Contenido
+                router-link(to="/creadores-de-contenido/") Creadores de Contenido
                     img.emoji(draggable="false" alt="📂" width="12px" src="/img/bicons/play-button.svg")
 
     //

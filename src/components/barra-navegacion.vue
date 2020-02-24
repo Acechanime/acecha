@@ -1,7 +1,7 @@
 <template lang="pug">
     div
         nav.navegacion.barra-pc(:class="barraMinClase" )
-            div.contenedor.wrap
+            div.contenedor.wrap_barra
                 div.izq
                     router-link(to="/")
                         img.logo(src="../assets/img/acechanime.png"
@@ -63,7 +63,7 @@
             display: inline-block
             color: var(--texto1)
             content: "\e90b"
-            top: 40%
+            top: 30%
             right: 0.75rem
             position: absolute
             font-size: var(--normal-font-size)
@@ -92,7 +92,7 @@
         transition: padding 300ms ease-in-out, background-color 300ms ease-in-out
 
 
-    .wrap
+    .wrap_barra
         display: grid
         grid-template-columns: 5rem auto
 
@@ -166,7 +166,7 @@
                     color: #E91E63 !important
 
 
-    .sub-menu
+    .sub-menu-barra 
         display: block
         background-color: var(--fondo1)
         position: absolute

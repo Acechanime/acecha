@@ -4,15 +4,15 @@
             img.emoji(draggable="false" alt=""
                 src="/img/bicons/heart.svg"
                 width="12px")
-        ul#sub-menu-experiencia.sub-menu(:style="estilosLista")
+        ul#sub-menu-experiencia.sub-menu-barra(:style="estilosLista")
             li.menu-item
-                a(href="/acecha-premium/index.html") Acecha premium
+                router-link(to="/acecha-premium/") Acecha premium
                     img.emoji(draggable="false"
                         alt="🔱"
                         src="/img/bicons/anchor.svg"
                         width="12px")
             li.menu-item
-                a(href="/acecha-tv/index.html") Acecha tv
+                router-link(to="/acecha-tv/") Acecha tv
                     img.emoji(draggable="false" alt="📺" width="12px"
                         src="/img/bicons/tv.svg")
 

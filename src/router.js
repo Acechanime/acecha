@@ -5,7 +5,6 @@ import Inicio from './views/Inicio.vue'
 import Ajustes from "./views/Ajustes.vue"
 import Animes from "./views/Animes.vue"
 import Anime from "./views/Anime.vue"
-import Premium from "./views/Premium.vue"
 import EnConstruccion from "./views/EnConstruccion.vue"
 import VerAnimeLegacy from "./views/VerAnimeLegacy.vue"
 import Calendario from "./views/Calendario.vue"
@@ -31,7 +30,7 @@ const rutasNormales = [
 ];
 
 window.requestAnimFrame = (function(){
-    return  window.requestAnimationFrame       ||
+    return window.requestAnimationFrame    ||
         window.webkitRequestAnimationFrame ||
         window.mozRequestAnimationFrame    ||
         function( callback ){
@@ -121,24 +120,30 @@ const router = new Router({
         { path: "/leer-manga/", redirect: "/en-construccion/" },
         { path: "/comprar-anime/", redirect: "/en-construccion/" },
         { path: "/comprar-desde-japon/", redirect: "/en-construccion/" },
-        { path: "/nosotros/", redirect: "/en-construccion/" },
-        { path: "/creadores-de-contenido/", redirect: "/en-construccion/" },
-        { path: "/acecha-premium/", redirect: "/premium/" },
-        { path: "/comprar-acecha-premium/", redirect: "/premium/" },
+        { 
+            path: "/nosotros/", 
+            name: "Nosotros",
+            component: () => import("./views/PaginasSecundarias/Nosotros.vue")
+        },
+        { 
+            path: "/creadores-de-contenido/", 
+            name: "Creadores",
+            component: () => import("./views/PaginasSecundarias/CreadoresDeContenido.vue")
+        },
+        { 
+            path: "/acecha-premium/", 
+            name: "Premium",
+            component: () => import("./views/PaginasSecundarias/AcechaPremium.vue")
+        },
         {
             path: "/en-construccion/",
             name: "EnConstruccion",
             component: EnConstruccion
         },
         {
-            path: "/premium/",
-            name: "Premium",
-            redirect: "/en-construccion/"
-        },
-        {
             path: "/acecha-tv/",
             name: "AcechaTV",
-            redirect: "/en-construccion/"
+            component: () => import("./views/PaginasSecundarias/AcechaTv.vue")
         },
         {
             path: '/animes/',

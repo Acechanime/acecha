@@ -2,7 +2,7 @@
     li.item(@mouseover="mostrarSubMenu" @mouseout="ocultarSubMenu")
         router-link.item_label(to="/animes/") Anime
             img.emoji( draggable="false" alt="📂" src="/img/bicons/folder.svg")
-        ul#sub-menu-animes.sub-menu(:style="estilosLista")
+        ul#sub-menu-animes.sub-menu-barra(:style="estilosLista")
             li.menu-item
                 router-link(to="/animes/") Ver Anime
                     img.emoji( draggable="false" alt="📂" src="/img/bicons/folder.svg")
