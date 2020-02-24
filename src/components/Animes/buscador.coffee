@@ -17,7 +17,7 @@ export comp2 = (funciones, funcionPrioridad) => (vm, a) =>
     if comp(funciones)(a)
         funcionPrioridad vm, a
     else
-        1
+        0
 
 
 

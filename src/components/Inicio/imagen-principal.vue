@@ -6,9 +6,9 @@
                     div.titulo AcechaAnime
                     br
                     span.motto Te damos el amor que no te da él/ella
-                    br
-                    br
-                    br
+                    // br
+                    // br
+                    // br
                     // div.boton Compatible para
         div.img(:style="'background: url(' + cabecera + ') center center'")
     //
@@ -34,10 +34,17 @@
 
 <style scoped lang="sass">
 
+    $altoImg: 40rem
+
+    .imgPrin
+        position: relative
+        height: 150%
+
+
     .contenido
         position: relative
         z-index: 2
-        height: 862px
+        height: $altoImg
         .m-contenedor
             padding: 120px 0
             height: 100%
@@ -70,7 +77,7 @@
         right: 0
         z-index: 1
         background-size: cover !important
-        height: 862px
+        height: $altoImg
         &::before
             background-color: rgba(0, 0, 0, 0.6) !important
         &:before
