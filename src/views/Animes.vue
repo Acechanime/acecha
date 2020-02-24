@@ -20,7 +20,7 @@
 
     export default
         name: "Animes"
-        components: { publicidad, buscador, animes, PaginationPage, PaginationControl }
+        components: { publicidad, buscador, animes }
         data: ->
             filtro: filtroBase
         methods:
