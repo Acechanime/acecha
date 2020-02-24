@@ -6,13 +6,13 @@
                 width="12px")
         ul#sub-menu-tips.sub-menu(:style="estilosLista")
             li.menu-item
-                router-link(to="/leer-manga/") Leer Manga
+                a(href="/leer-manga/index.html") Leer Manga
                     img.emoji(draggable="false" alt="" src="/img/bicons/book.svg" width="12px")
             li.menu-item
-                router-link(to="/comprar-anime/") Comprar Anime
+                a(href="/comprar-anime/index.html") Comprar Anime
                     img.emoji(draggable="false" alt="" src="/img/bicons/heart.svg" width="12px")
             li.menu-item
-                router-link(to="/comprar-desde-japon/") Comprar desde Japón
+                a(href="/comprar-desde-japon/index.html") Comprar desde Japón
                     img.emoji(draggable="false" alt="" src="/img/bicons/japan.svg" width="12px")
 
     //

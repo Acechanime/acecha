@@ -4,10 +4,10 @@
             img.emoji(draggable="false" alt="👨‍👨‍👧‍👧" width="12px" src="/img/bicons/family.svg")
         ul#sub-menu-comunidad.sub-menu(:style="estilosLista")
             li.menu-item
-                router-link(to="/nosotros/") Nosotros
+                a(href="/nosotros/index.html") Nosotros
                     img.emoji(draggable="false" alt="📂" width="12px" src="/img/bicons/family.svg")
             li.menu-item
-                router-link(to="/creadores-de-contenido/") Creadores de Contenido
+                a(href="/creadores-de-contenido/index.html") Creadores de Contenido
                     img.emoji(draggable="false" alt="📂" width="12px" src="/img/bicons/play-button.svg")
 
     //

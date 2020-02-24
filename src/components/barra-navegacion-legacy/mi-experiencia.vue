@@ -6,13 +6,13 @@
                 width="12px")
         ul#sub-menu-experiencia.sub-menu(:style="estilosLista")
             li.menu-item
-                router-link(to="/acecha-premium/") Acecha premium
+                a(href="/acecha-premium/index.html") Acecha premium
                     img.emoji(draggable="false"
                         alt="🔱"
                         src="/img/bicons/anchor.svg"
                         width="12px")
             li.menu-item
-                router-link(to="/acecha-tv/") Acecha tv
+                a(href="/acecha-tv/index.html") Acecha tv
                     img.emoji(draggable="false" alt="📺" width="12px"
                         src="/img/bicons/tv.svg")
 
