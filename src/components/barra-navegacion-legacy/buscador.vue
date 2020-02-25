@@ -1,7 +1,7 @@
 <template lang="pug">
     li.barra_li
         div#buscador_barra
-            input(placeholder="Buscar anime" @input="cambiarNombre($event)")
+            input(placeholder="Buscar anime" @input="cambiarNombre($event)" :value="nombre")
         ul.autocompletar(:style="estilos")
             template(v-if="listaAnimesFiltrada2.length !== 0")
                 item-buscador(v-for="(anime, i) in listaAnimesFiltrada2"
@@ -9,6 +9,7 @@
                     :limpiarBuscador="limpiarBuscador"
                     :key="i")
             li.texto_error(v-else) No se encontraron animes.
+
     //
 </template>
 

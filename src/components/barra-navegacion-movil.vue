@@ -9,7 +9,7 @@
                     // img(src="https://png.icons8.com/windows/1600/0063B1/user")
                     img(src="/favicon.png")
                 // Si, uso un @input en vez de v-model, porque solo así funciona en movil.
-                input.busqueda(placeholder="Buscar animes" :style="anchoInput" @input="registrar")
+                input.busqueda(placeholder="Buscar animes" :style="anchoInput" @input="registrar" :value="query")
                 span.material-icons.icono-menu(@click="cambiarEstadoMenu") menu
                 div.separador
 
