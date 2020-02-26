@@ -17,6 +17,9 @@
             filtro:
                 type: Function # (Contexto, Anime) -> Prioridad
                 required: true
+            funOrden:
+                type: Function # 'A -> 'B -> Num
+                required: true
             terminarCargaFn:
                 type: Function
                 required: true
@@ -25,7 +28,9 @@
             listaAnimesFiltrada2: ->
                 if @listaAnimes isnt undefined
                     @terminarCargaFn()
-                    filtrar @, @listaAnimes, @filtro
+                    primerRes = filtrar @, @listaAnimes, @filtro
+                    primerRes.sort @funOrden
+
                 else []
 
 #
@@ -36,8 +41,9 @@
 
     .gridIn
         display: grid
-        grid-template-columns: repeat(4, 1fr)
-        grid-gap: 2rem
+        grid-template-columns: repeat(4, 21.25%)
+        grid-column-gap: 5%
+        grid-row-gap: 1.5rem
 
     @media only screen and (max-width: 500px)
         .gridIn

@@ -1,9 +1,10 @@
 <template lang="pug">
-    select(v-model="opcion")
-        option(value="-1" selected) Cualquier orden
-        option(value="1") Nombre
-        option(value="2") Emision
-        option(value="3") Agregado recientemente
+    select(v-model.number="opcion")
+        option(value="-1" selected) Agregado recientemente
+        option(value="1") Odenar por nombre
+        option(value="2") Ordenar por emision
+        // option(value="3") Agregado recientemente
+
     //
 </template>
 
@@ -13,17 +14,53 @@
     Toma 2 animes y los ordena
     ###
     ordenarPorNombre = (x, y) =>
+        if x.info.nombre > y.info.nombre then 1 else -1
+
+
+    obtenerMs = (fecha) =>
+        posPrimerSlash = fecha.indexOf "/"
+        temp = fecha.substr (posPrimerSlash + 1)
+        posSegundoSlash = temp.indexOf "/"
+
+        dia = fecha.substring 0, posPrimerSlash
+        mes = temp.substring 0, posSegundoSlash
+        año = temp.substr (posSegundoSlash + 1)
+
+        Date.parse "#{mes}/#{dia}/#{año}"
+
+
+    ordenarPorEmision = (x, y) =>
+
+        emisionX = obtenerMs x.emision.inicio_emision
+        if Number.isNaN emisionX
+            console.log "#{x.info.nombre} tiene inicio `#{x.emision.inicio_emision}`"
+            console.log new Date x.emision.inicio_emision
+            emisionX = 0
+
+        emisionY = obtenerMs y.emision.inicio_emision
+        if Number.isNaN emisionY
+            console.log "#{y.info.nombre} tiene inicio ´#{y.emision.inicio_emision}´"
+            console.log new Date y.emision.inicio_emision
+            emisionY = 0
+
+        if emisionX < emisionY then 1 else -1
+
+
 
     export default
         name: "orden"
         data: ->
             opcion: -1
         props:
-            cambiarFiltro:
+            cambiarFunOrden:
                 type: Function
                 required: true
         watch:
-            opcion: (nuevo, viejo) ->
+            opcion: (nuevo) ->
+                @cambiarFunOrden switch nuevo
+                    when -1 then => -1
+                    when 1 then ordenarPorNombre
+                    when 2 then ordenarPorEmision
 
 
 #

@@ -3,8 +3,8 @@
         div.separador
         div.grid
             div.cont
-                buscador(:cambiarFiltro="cambiarFiltro")
-                animes(:filtro="filtro" :terminarCargaFn="terminarCarga")
+                buscador(:cambiarFiltro="cambiarFiltro" :cambiarFunOrden="cambiarFunOrden")
+                animes(:filtro="filtro" :funOrden="funOrden" :terminarCargaFn="terminarCarga")
             div.publicidad
                 publicidad
     //
@@ -14,7 +14,6 @@
     import publicidad from "../components/Animes/publicidad.vue"
     import buscador from "../components/Animes/buscador.vue"
     import animes from "../components/Animes/animes.vue"
-    # import { PaginationControl, PaginationPage } from 'vue-smart-pagination'
 
     filtroBase = => 1
 
@@ -23,9 +22,13 @@
         components: { publicidad, buscador, animes }
         data: ->
             filtro: filtroBase
+            funOrden: (x, y) => -1
         methods:
             cambiarFiltro: (f) ->
                 @filtro = f
+            cambiarFunOrden: (f) ->
+                @funOrden = f
+            
             terminarCarga: -> @$store.commit "terminarCargaPagina"
 
 #
@@ -39,7 +42,7 @@
     .grid
         // margin: 48px 0
         display: grid
-        grid-template-columns: 1fr 250px
+        grid-template-columns: 1fr auto
         grid-gap: 2rem
 
     @media only screen and (max-width: 500px)

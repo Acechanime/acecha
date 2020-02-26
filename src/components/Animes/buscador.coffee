@@ -13,11 +13,13 @@ export comp = (fs) => (elem) =>
 #:    ([(Contexto, Anime) -> Bool], (Contexto, Anime) -> Prioridad)
 #: -> (Contexto, Anime)
 #: -> Prioridad
-export comp2 = (funciones, funcionPrioridad) => (vm, a) =>
-    if comp(funciones)(a)
-        funcionPrioridad vm, a
-    else
-        0
+export comp2 = (funciones, funcionPrioridad) => 
+    fcomp = comp funciones
+    (vm, a) =>
+        if fcomp a
+            funcionPrioridad vm, a
+        else
+            0
 
 
 

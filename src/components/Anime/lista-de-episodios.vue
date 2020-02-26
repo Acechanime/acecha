@@ -14,9 +14,9 @@
             div.eps
                 episodio(v-for="(ep, i) in episodios_filtrados" :key="i"
                     :episodio="ep" :nombre="anime.info.nombre")
-        template(v-else-if="estadoCarga === 0")
+        div.no-caps(v-else-if="estadoCarga === 0")
             p Cargando episodios...
-        template(v-else)
+        div.no-caps(v-else)
             p No hay episodios disponibles.
 
     //
@@ -68,6 +68,10 @@
 
 <style scoped lang="sass">
     @import "../../sass/variables"
+
+    .no-caps
+        color: var(--texto1)
+
 
     .capitulos
         margin: 3rem 0

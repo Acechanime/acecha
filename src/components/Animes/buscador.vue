@@ -10,7 +10,7 @@
             option(value="1") En emisión
         // select(v-model.number="anyo")
             option(value="-1" selected) Cualquier año
-        // orden(:cambiarFiltro="cambiarFiltroOrden")
+        orden(:cambiarFunOrden="cambiarFunOrden")
 
     //
 </template>
@@ -36,6 +36,9 @@
         props:
             cambiarFiltro:
                 type: Function # [(a -> Bool)] -> ()
+                required: true
+            cambiarFunOrden:
+                type: Function # ('A -> 'B -> Num) -> ()
                 required: true
         methods:
             cambiarNombre: (element) ->
@@ -106,10 +109,22 @@
         padding: 2rem 0
         // display: table
 
+    select
+        vertical-align: middle
+        margin-right: 1rem
+        padding: 5px 10px
+        font:
+            family: $titulos
+        border-radius: 5px
+        box-shadow: none
+        &:focus
+            outline: none
+
+
+
     #nombre
         background-color: var(--fondo1)
-        display: table-cell
-        vertical-align: middle
+        color: var(--texto1)
         max-width: 100%
         margin-right: 1rem
         font:
@@ -126,29 +141,9 @@
             border-radius: 5px
             outline: none
 
-    #generos
-        display: table-cell
-        vertical-align: middle
-        margin-right: 1rem
-        padding: 5px 10px
-        font:
-            family: $titulos
-        border-radius: 5px
-        box-shadow: none
-        &:focus
-            outline: none
 
-    #emision
-        display: inline-table
-        margin-right: 1rem
-        vertical-align: middle
-        padding: 5px 10px
-        font:
-            family: $titulos
-        border-radius: 5px
-        box-shadow: none
-        &:focus
-            outline: none
+        
+        
 
     //
 </style>
