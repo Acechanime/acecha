@@ -13,7 +13,7 @@
             li(:class="pagAcechaPremium" @click="irA('/acecha-premium/')") Acecha Premium
             li(:class="pagCalendario" @click="irA('/calendario/')") Calendario
             div.ltitulo Yo
-            li(:class="pagMiCuenta" @click="irA('/mi-cuenta/')") Mi cuenta
+            // li(:class="pagMiCuenta" @click="irA('/mi-cuenta/')") Mi cuenta
             li(:class="pagAjustes" @click="irA('/mi-cuenta/')") Ajustes
 
     //

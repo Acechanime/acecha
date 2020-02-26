@@ -23,7 +23,7 @@
 
     //
 </template>
-
+ 
 <script lang="coffee">
     import listaItems from "./barra-navegacion-movil/lista-items"
     import resultadoBuscador from "./barra-navegacion-movil/resultado-buscador.vue"

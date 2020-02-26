@@ -20,7 +20,6 @@
                 required: true
         methods:
             irAlAnime: ->
-                console.log "Yendo a la cosa..."
                 @limpiarBuscador()
                 anime = @anime
                 @$router.push
