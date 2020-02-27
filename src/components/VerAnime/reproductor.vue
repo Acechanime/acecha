@@ -6,7 +6,14 @@
                 :cambiarOpcion="cambiarOpcion")
 
         template(v-if="opciones.length !== 0")
-            div#contenedor-anime.contenedor-video
+            div#contenedor-anime.contenedor-video(v-show="posActiva !== 0")
+            video.reproductor(v-if="posActiva === 0 && links.episodio_id" 
+                controls 
+                :key="links.episodio_id"
+                )
+                source(:src="opciones[0][1]" type="video/mp4")
+
+
             br
         template(v-else-if="opciones.length === 0 && !links.anime_id")
             br
@@ -39,15 +46,25 @@
     import opcion from "./opcion.vue"
     import {impr} from "../../variables"
 
+    obtenerIframe = => new Promise (resolve) =>
+        intervalo = setInterval (=>
+            el = document.getElementById "iframe-anime"
+            if el?
+                clearInterval intervalo
+                resolve el
+        ), 100
+
+
     export default
         name: "reproductor"
         components: { opcion }
         data: ->
             posActiva: 0
         watch:
-            posActiva: ->
-                ifr = document.getElementById "iframe-anime"
-                ifr.contentWindow.location.replace @linkActivo
+            posActiva: (n) ->
+                unless n is 0
+                    ifr = document.getElementById "iframe-anime"
+                    ifr.contentWindow.location.replace @linkActivo
             links: ->
                 vm = this
                 @posActiva = 0
@@ -100,6 +117,7 @@
             opciones: ->
                 opciones = []
 
+                opciones.push ["acecha", "https://api.acechanime.com/stream?id=#{@links.episodio_id}"]
                 if @links?.fembed? and @links.fembed isnt ""
                     opciones.push ["fembed", @links.fembed]
                 if @links?.yourupload? and @links.yourupload isnt ""
@@ -140,6 +158,10 @@
 
 <style scoped lang="sass">
     @import "../../sass/variables"
+
+    .reproductor
+        width: 100%
+
 
     #contenedor-anime
         border-radius: 0 5px 5px 5px

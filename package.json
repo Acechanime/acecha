@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build --modern"
   },
   "dependencies": {
     "register-service-worker": "^1.6.2",
@@ -30,6 +30,7 @@
     "sass": "^1.18.0",
     "sass-loader": "^8.0.0",
     "supertest": "^4.0.2",
+    "video.js": "^7.6.6",
     "vue-cli-plugin-express": "^1.0.1",
     "vue-seo": "^0.1.5",
     "vue-template-compiler": "^2.6.10",
