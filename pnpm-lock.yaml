@@ -25,6 +25,7 @@ devDependencies:
   vue-cli-plugin-express: 1.0.2_@vue+cli-service@4.1.2
   vue-seo: 0.1.5
   vue-template-compiler: 2.6.11
+  vue-video-player: 5.0.2
   vue2-timepicker: 1.0.8_vue@2.6.11
   vuejs-datepicker: 1.6.2_vue@2.6.11
 lockfileVersion: 5.1
@@ -1476,6 +1477,12 @@ packages:
       node: '>= 0.12.0'
     resolution:
       integrity: sha512-aT6camzM4xEA54YVJYSqxz1kv4IHnQZRtThJJHhUMRExaU5spC7jX5ugSwTaTgJliIgs4VhZOk7htClvQ/LmRA==
+  /aes-decrypter/1.0.3:
+    dependencies:
+      pkcs7: 0.2.3
+    dev: true
+    resolution:
+      integrity: sha1-nAa4pUNaWtCduTP4oBSvzxhMw04=
   /aes-decrypter/3.0.0:
     dependencies:
       commander: 2.20.3
@@ -3615,6 +3622,12 @@ packages:
       node: '>= 0.4'
     resolution:
       integrity: sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA==
+  /es5-shim/4.5.13:
+    dev: true
+    engines:
+      node: '>=0.4.0'
+    resolution:
+      integrity: sha512-xi6hh6gsvDE0MaW4Vp1lgNEBpVcCXRWfPXj5egDvtgLz4L9MEvNwYEMdJH+JJinWkwa8c3c3o5HduV7dB/e1Hw==
   /escape-html/1.0.3:
     dev: true
     resolution:
@@ -5715,6 +5728,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==
+  /m3u8-parser/2.1.0:
+    dev: true
+    resolution:
+      integrity: sha1-yBcDKewc1RXQ1Yu4t2LamJbLA2g=
   /m3u8-parser/4.4.0:
     dependencies:
       global: 4.4.0
@@ -6087,6 +6104,10 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-ji6J5enbMyGRHIAkAOu3WdV8nggqviKCEKtXcOqfphZZtQrmHKycfynJ2V7eVPUA4NhJ6V7Wf4TmGbTwKE9B6g==
+  /mux.js/4.3.2:
+    dev: true
+    resolution:
+      integrity: sha512-g0q6DPdvb3yYcoK7ElBGobdSSrhY/RjPt19U7uUc733aqvc5bCS/aCvL9z+448y+IoCZnYDwyZfQBBXMSmGOaQ==
   /mux.js/5.2.1:
     dev: true
     resolution:
@@ -6815,6 +6836,14 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-clVrgM+g1IqXToDnckjoDtT3+HA=
+  /pkcs7/0.2.3:
+    dev: true
+    engines:
+      node: ^0.10
+      npm: ^1.4.6
+    hasBin: true
+    resolution:
+      integrity: sha1-ItYGZtAQZcXyRDkJjkpIMEUic74=
   /pkcs7/1.0.2:
     dev: true
     engines:
@@ -8930,6 +8959,11 @@ packages:
     dev: true
     resolution:
       integrity: sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==
+  /tsml/1.0.1:
+    deprecated: no longer maintained
+    dev: true
+    resolution:
+      integrity: sha1-ifghi52eJX9H1/a1bQHFpNLGj8M=
   /tty-browserify/0.0.0:
     dev: true
     resolution:
@@ -9254,6 +9288,19 @@ packages:
       '0': node >=0.6.0
     resolution:
       integrity: sha1-OhBcoXBTr1XW4nDB+CiGguGNpAA=
+  /video.js/6.13.0:
+    dependencies:
+      babel-runtime: 6.26.0
+      global: 4.3.2
+      safe-json-parse: 4.0.0
+      tsml: 1.0.1
+      videojs-font: 2.1.0
+      videojs-ie8: 1.1.2
+      videojs-vtt.js: 0.12.6
+      xhr: 2.4.0
+    dev: true
+    resolution:
+      integrity: sha512-36/JR/GhPQSZj0o+GNbhcEYv/b0SkV9SQsjlodAnzMQYN0TA7VhmqrKPYMCi1NGRYu7S9W3OaFCFoUxkYfSVlg==
   /video.js/7.6.6:
     dependencies:
       '@babel/runtime': 7.8.4
@@ -9267,10 +9314,68 @@ packages:
     dev: true
     resolution:
       integrity: sha512-AXzHwymhvMpS7c7rF29u0j0/3tSs+v2gIk5UY8OkiDHSEHL7T0+t3hid4JHW7aGvTruUUgwyf4C74cX2RDL1Pw==
+  /videojs-contrib-hls/5.15.0:
+    dependencies:
+      aes-decrypter: 1.0.3
+      global: 4.4.0
+      m3u8-parser: 2.1.0
+      mux.js: 4.3.2
+      url-toolkit: 2.1.6
+      video.js: 6.13.0
+      videojs-contrib-media-sources: 4.7.2
+      webwackify: 0.1.6
+    dev: true
+    engines:
+      node: '>= 0.10.12'
+    resolution:
+      integrity: sha512-18zbMYZ0XRBKTPEayA9bFTWWrqhT9b4G8+zf0czJLD7Epe5PcK1I/3dflTHQeQ5rwlWir+/XnFU3sMg/B2MMcw==
+  /videojs-contrib-media-sources/4.7.2:
+    dependencies:
+      global: 4.4.0
+      mux.js: 4.3.2
+      video.js: 6.13.0
+      webwackify: 0.1.6
+    dev: true
+    resolution:
+      integrity: sha512-e6iCHWBFuV05EGo7v+pS9iepObXnJ9joms467gzi8ZjpKVb3ifha9M0Ja24Rd8JfvYpzjltsgDVtGFDvIg4hQQ==
+  /videojs-flash/2.2.1:
+    dependencies:
+      global: 4.4.0
+      video.js: 7.6.6
+      videojs-swf: 5.4.2
+    dev: true
+    engines:
+      node: '>=4.4.0'
+    resolution:
+      integrity: sha512-mHu6TD12EKkxMvr8tg4AcfV/DuVLff427nneoZom3N9Dd2bv0sJOWwdLPQH1v5BCuAuXAVuAOba56ovTl+G3tQ==
+  /videojs-font/2.1.0:
+    dev: true
+    resolution:
+      integrity: sha1-olkwpn9snPvyu4jay4xrRR8JM3k=
   /videojs-font/3.2.0:
     dev: true
     resolution:
       integrity: sha512-g8vHMKK2/JGorSfqAZQUmYYNnXmfec4MLhwtEFS+mMs2IDY398GLysy6BH6K+aS1KMNu/xWZ8Sue/X/mdQPliA==
+  /videojs-hotkeys/0.2.25:
+    dev: true
+    resolution:
+      integrity: sha512-XgMjWiqGlmAjuHtpP529A2voVh++z46FSD0XeSy+65yeuTZOd+w2CJmfrL4jPpGm+MME5l9lOLfVpoEeDaBa1Q==
+  /videojs-ie8/1.1.2:
+    dependencies:
+      es5-shim: 4.5.13
+    dev: true
+    resolution:
+      integrity: sha1-oj09hgitcZK2nGB3/E64SJmNNdk=
+  /videojs-swf/5.4.2:
+    dev: true
+    resolution:
+      integrity: sha512-FGg+Csioa8/A/EacvFefBdb9Z0rSiMlheHDunZnN3xXfUF43jvjawcWFQnZvrv1Cs1nE1LBrHyUZjF7j2mKOLw==
+  /videojs-vtt.js/0.12.6:
+    dependencies:
+      global: 4.3.2
+    dev: true
+    resolution:
+      integrity: sha512-XFXeGBQiljnElMhwCcZst0RDbZn2n8LU7ZScXryd3a00OaZsHAjdZu/7/RdSr7Z1jHphd45FnOvOQkGK4YrWCQ==
   /videojs-vtt.js/0.14.1:
     dependencies:
       global: 4.3.2
@@ -9357,6 +9462,19 @@ packages:
     dev: true
     resolution:
       integrity: sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
+  /vue-video-player/5.0.2:
+    dependencies:
+      object-assign: 4.1.1
+      video.js: 6.13.0
+      videojs-contrib-hls: 5.15.0
+      videojs-flash: 2.2.1
+      videojs-hotkeys: 0.2.25
+    dev: true
+    engines:
+      node: '>= 4.0.0'
+      npm: '>= 3.0.0'
+    resolution:
+      integrity: sha512-IZXeRGGSX4YIp54G0Q5cB7iqh6Ok6Dpa2jRkjdyvMWw7MShJuh54/d5QNb1CZ+CvZUzX/TH7osnpir7mBNcFvQ==
   /vue/2.6.11:
     resolution:
       integrity: sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
@@ -9558,6 +9676,10 @@ packages:
       node: '>=0.8.0'
     resolution:
       integrity: sha512-nqHUnMXmBzT0w570r2JpJxfiSD1IzoI+HGVdd3aZ0yNi3ngvQ4jv1dtHt5VGxfI2yj5yqImPhOK4vmIh2xMbGg==
+  /webwackify/0.1.6:
+    dev: true
+    resolution:
+      integrity: sha512-pGcw1T3HpNnM/UTRQqqRkkkzythSLts05mB+7Gr00B+0VbL0m39dFL5g20rSIEUt9Wrpw+/8k+snxRlUFHhcqA==
   /which-module/2.0.0:
     dev: true
     resolution:
@@ -9917,6 +10039,7 @@ specifiers:
   vue-router: ^3.0.3
   vue-seo: ^0.1.5
   vue-template-compiler: ^2.6.10
+  vue-video-player: ^5.0.2
   vue2-timepicker: ^1.0.8
   vuejs-datepicker: ^1.6.2
   vuex: ^3.0.1

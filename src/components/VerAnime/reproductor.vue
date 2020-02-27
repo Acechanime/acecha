@@ -7,12 +7,14 @@
 
         template(v-if="opciones.length !== 0")
             div#contenedor-anime.contenedor-video(v-show="posActiva !== 0")
-            video.reproductor(v-if="posActiva === 0 && links.episodio_id" 
+            // video.reproductor(v-if="posActiva === 0 && links.episodio_id" 
                 controls 
                 :key="links.episodio_id"
                 )
                 source(:src="opciones[0][1]" type="video/mp4")
-
+            video-player.reproductor(v-if="posActiva === 0 && links.episodio_id" 
+                :options="opcionesVideoJs" :key="links.episodio_id"
+                )
 
             br
         template(v-else-if="opciones.length === 0 && !links.anime_id")
@@ -46,6 +48,9 @@
     import opcion from "./opcion.vue"
     import {impr} from "../../variables"
 
+    import 'video.js/dist/video-js.css'
+    import { videoPlayer } from 'vue-video-player'
+
     obtenerIframe = => new Promise (resolve) =>
         intervalo = setInterval (=>
             el = document.getElementById "iframe-anime"
@@ -57,7 +62,7 @@
 
     export default
         name: "reproductor"
-        components: { opcion }
+        components: { opcion, videoPlayer }
         data: ->
             posActiva: 0
         watch:
@@ -126,6 +131,17 @@
                     opciones.push ["mp4upload", @links.mp4upload]
 
                 opciones
+            opcionesVideoJs: ->
+                if @links.episodio_id?
+                    controls: true
+                    preload: "auto"
+                    sources: [{
+                        type: "video/mp4"
+                        src: @opciones[0][1]
+                    }]
+                    fluid: true
+                    language: "es"
+                else {}
             linkActivo: -> @opciones?[@posActiva]?[1]?.replace "mega.nz/", "mega.nz/embed"
 
         methods:
