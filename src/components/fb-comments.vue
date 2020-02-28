@@ -1,7 +1,7 @@
 <template lang="pug">
     div#contenedor-fb
         div#fb-root
-        div.fb-comments(:data-href="url" data-width="" data-numposts="5")
+        div.fb-comments(:data-href="url" data-width="100%" data-numposts="5")
 
     //
 </template>
@@ -33,7 +33,7 @@
                 elem2.className = "fb-comments"
                 elem2.setAttribute "data-href", @url
                 elem2.setAttribute "data-numposts", "5"
-                elem2.setAttribute "data-width", ""
+                elem2.setAttribute "data-width", "100%"
                 elem2.setAttribute "data-order-by", "reverse_time"
                 elem2.setAttribute "data-colorscheme",
                         if @esClaro then "light" else "dark"
@@ -69,5 +69,8 @@
 <style scoped lang="sass">
     @import "../sass/variables"
     
+    // .fb-comments, .fb-comments iframe[style], .fb-comments * 
+    //     width: 100% !important
+
     //
 </style>

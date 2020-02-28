@@ -14,7 +14,7 @@
                     mi-experiencia
                     buscador
 
-                router-link.imagen_usuario(to="/mi-cuenta")
+                router-link.imagen_usuario(to="/mi-cuenta/")
                     img(src="/favicon.png")
 
         barra-navegacion-movil.barra-movil
