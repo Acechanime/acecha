@@ -21,7 +21,7 @@ devDependencies:
   sass: 1.25.0
   sass-loader: 8.0.2_sass@1.25.0
   supertest: 4.0.2
-  video.js: 7.6.6
+  video.js: 6.13.0
   vue-cli-plugin-express: 1.0.2_@vue+cli-service@4.1.2
   vue-seo: 0.1.5
   vue-template-compiler: 2.6.11
@@ -9372,7 +9372,7 @@ packages:
       integrity: sha512-FGg+Csioa8/A/EacvFefBdb9Z0rSiMlheHDunZnN3xXfUF43jvjawcWFQnZvrv1Cs1nE1LBrHyUZjF7j2mKOLw==
   /videojs-vtt.js/0.12.6:
     dependencies:
-      global: 4.3.2
+      global: 4.4.0
     dev: true
     resolution:
       integrity: sha512-XFXeGBQiljnElMhwCcZst0RDbZn2n8LU7ZScXryd3a00OaZsHAjdZu/7/RdSr7Z1jHphd45FnOvOQkGK4YrWCQ==
@@ -10033,7 +10033,7 @@ specifiers:
   sass: ^1.18.0
   sass-loader: ^8.0.0
   supertest: ^4.0.2
-  video.js: ^7.6.6
+  video.js: 6.13.0
   vue: ^2.6.10
   vue-cli-plugin-express: ^1.0.1
   vue-router: ^3.0.3

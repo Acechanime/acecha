@@ -49,6 +49,7 @@
     import {impr} from "../../variables"
 
     import 'video.js/dist/video-js.css'
+    # import "./estilo.scss"
     import { videoPlayer } from 'vue-video-player'
 
     obtenerIframe = => new Promise (resolve) =>
@@ -141,6 +142,8 @@
                     }]
                     fluid: true
                     language: "es"
+                    notSupportedMessage: "Este episodio no está soportado. Escribenos a nuestro Discord."
+                    
                 else {}
             linkActivo: -> @opciones?[@posActiva]?[1]?.replace "mega.nz/", "mega.nz/embed"
 
