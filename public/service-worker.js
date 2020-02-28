@@ -26,8 +26,7 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener('fetch', (event) => {
     if (event.request.method != 'GET') return;
-    if (event.request.url.find)
-        if (event.request.url.find("api") !== -1) return;
+    if (event.request.url.search("api") !== -1) return;
 
     event.respondWith(
         caches.match(event.request)

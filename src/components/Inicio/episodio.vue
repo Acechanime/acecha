@@ -1,5 +1,5 @@
 <template lang="pug">
-    article.ep(v-if="ep.anime_id && anime.info.nombre")
+    article.ep(v-if="ep.anime_id && anime.info && anime.info.nombre")
         a.link(:href="obtenerLink" @click.prevent="irAlEp")
             img.imagen(:src="anime.imagenes.nuevo_ep"
                 :alt="'Episodio ' + ep.num_ep + ' de ' + anime.info.nombre"
