@@ -1,5 +1,5 @@
 <template lang="pug">
-    select(v-model.number="opcion")
+    select(:value="value" @input="$emit('input', parseInt($event.target.value))")
         option(value="-1" selected) Agregado recientemente
         option(value="1") Odenar por nombre
         option(value="2") Ordenar por emision
@@ -49,18 +49,24 @@
 
     export default
         name: "orden"
-        data: ->
-            opcion: -1
         props:
             cambiarFunOrden:
                 type: Function
                 required: true
+            value:
+                type: Number
+                required: true
         watch:
-            opcion: (nuevo) ->
+            value: (nuevo) ->
                 @cambiarFunOrden switch nuevo
                     when -1 then => -1
-                    when 1 then ordenarPorNombre
-                    when 2 then ordenarPorEmision
+                    when  1 then ordenarPorNombre
+                    when  2 then ordenarPorEmision
+        created: ->
+            @cambiarFunOrden switch @value
+                when -1 then => -1
+                when  1 then ordenarPorNombre
+                when  2 then ordenarPorEmision
 
 
 #

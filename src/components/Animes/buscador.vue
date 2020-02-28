@@ -10,7 +10,7 @@
             option(value="1") En emisión
         // select(v-model.number="anyo")
             option(value="-1" selected) Cualquier año
-        orden(:cambiarFunOrden="cambiarFunOrden")
+        orden(:cambiarFunOrden="cambiarFunOrden" v-model="orden")
 
     //
 </template>
@@ -30,9 +30,11 @@
             genero: -1
             estado: -1
             anyo: -1
+            orden: -1
             listaGeneros: []
             filtros:
                 orden: () -> true
+            primeraCarga: true
         props:
             cambiarFiltro:
                 type: Function # [(a -> Bool)] -> ()
@@ -40,9 +42,21 @@
             cambiarFunOrden:
                 type: Function # ('A -> 'B -> Num) -> ()
                 required: true
+        watch:
+            genero: (nuevo, viejo) ->
+                if !@primeraCarga and nuevo != viejo
+                    @$router.push "?genero=#{nuevo}&estado=#{@estado}&orden=#{@orden}"
+            estado: (nuevo, viejo) ->
+                if !@primeraCarga and nuevo != viejo
+                    @$router.push "?genero=#{@genero}&estado=#{nuevo}&orden=#{@orden}"
+            orden: (nuevo, viejo) ->
+                if !@primeraCarga and nuevo != viejo
+                    @$router.push "?genero=#{@genero}&estado=#{@estado}&orden=#{nuevo}"
         methods:
             cambiarNombre: (element) ->
-                @nombre = element.target.value
+                nombre = element.target.value
+                @nombre = nombre
+                # @$router.push "#nombre=#{nombre}"
 
             cargarListaGeneros: ->
                 [datos, bool] = await @$store.state.datos.listaGeneros
@@ -54,8 +68,14 @@
 
             cambiarFiltroOrden: (f) ->
                 @filtros.orden = f
+            recuperarFiltros: ->
+                q = @$route.query
+                @genero = parseInt (q.genero || "-1")
+                @estado = parseInt (q.estado || "-1")
+                @orden  = parseInt (q.orden  || "-1")
         created: ->
             @cargarListaGeneros()
+            @recuperarFiltros()
             vm = this
             filtroEstado = (a) ->
                 if vm.estado is -1 then true
@@ -91,6 +111,9 @@
                     res?
 
             vm.cambiarFiltro (comp2 [filtroEstado, filtroGenero], filtroNombre2)
+            setTimeout (=>
+                vm.primeraCarga = false
+            ), 0
 
             # vm.cambiarFiltros [
             #     filtroEstado
