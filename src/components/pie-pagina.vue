@@ -25,7 +25,7 @@
                     router-link(to="/politica-privacidad/") Política de privacidad
             div.contacto
                 h3.titulo Contacto
-                img( src="https://acechanime.com/wp-content/uploads/2019/05/twitter-300x264.png"
+                img(src="https://legacy.acechanime.com/wp-content/uploads/2019/05/twitter-300x264.png"
                      alt="Contacto")
     //
 </template>
