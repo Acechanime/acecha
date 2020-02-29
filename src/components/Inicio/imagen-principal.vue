@@ -1,35 +1,46 @@
 <template lang="pug">
     div.imgPrin
-        div.contenido
+        div.contenido(:style="estiloAlto")
             div.m-contenedor
                 div.txt
-                    div.titulo AcechaAnime
+                    div.titulo {{ titulo }}
                     br
-                    span.motto Te damos el amor que no te da él/ella
+                    span.motto(v-if="mostrarExtra") Te damos el amor que no te da él/ella
                     // br
                     // br
                     // br
                     // div.boton Compatible para
-        div.img(:style="'background: url(' + cabecera + ') center center'")
+        div.img(:style="[estiloAlto, estiloCabecera]")
     //
 </template>
 
-<script>
-    export default {
-        name: "imagen-principal",
-        data() {
-            return {
-                cabecera: (Math.random() > 0.35)
-                    ? "/img/tamako_mainVisual_edit.jpg"
-                    : "/img/k-on_cover.jpg"
-                /*
-                cabecera: process.env.NODE_ENV === "production"
-                    ? "/wp-content/uploads/2019/05/subheader.jpg"
-                    : "/img/tamako_mainVisual_edit.jpg" // "/img/k-on_cover.jpg"
-                */
-            }
-        }
-    }
+<script lang="coffee">
+
+    export default
+        name: "imagen-principal"
+        data: ->
+            cabecera:
+                if Math.random() > 0.35 then "/img/tamako_mainVisual_edit.jpg"
+                else "/img/k-on_cover.jpg"
+            ###
+            cabecera: process.env.NODE_ENV === "production"
+                ? "/wp-content/uploads/2019/05/subheader.jpg"
+                : "/img/tamako_mainVisual_edit.jpg" // "/img/k-on_cover.jpg"
+            ###
+        props:
+            alto:
+                type: Number
+                default: 40
+            titulo:
+                type: String
+                default: "AcechaAnime"
+        computed:
+            estiloAlto: -> {height: "#{ @alto }rem"}
+            estiloCabecera: -> { background: "url('#{ @cabecera }') center center" }
+            mostrarExtra: -> @titulo is "AcechaAnime"
+
+
+#
 </script>
 
 <style scoped lang="sass">
@@ -44,7 +55,7 @@
     .contenido
         position: relative
         z-index: 2
-        height: $altoImg
+        // height: $altoImg
         .m-contenedor
             padding: 120px 0
             height: 100%
@@ -77,7 +88,7 @@
         right: 0
         z-index: 1
         background-size: cover !important
-        height: $altoImg
+        // height: $altoImg
         &::before
             background-color: rgba(0, 0, 0, 0.6) !important
         &:before

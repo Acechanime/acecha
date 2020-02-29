@@ -1,17 +1,20 @@
 <template lang="pug">
     div
-        div.separador
-        p Calendario
-        br
-        br
-        p Esperando respuesta de backend...
+        // div.separador
+        imagen-principal(:alto="30" titulo="Calendario")
+
+        selector
+
     //
 </template>
 
 <script lang="coffee">
+    import imagenPrincipal from "../components/Inicio/imagen-principal.vue"
+    import selector from "../components/Calendario/selector.vue"
 
     export default
         name: "Calendario"
+        components: { imagenPrincipal, selector }
     
 #
 </script>

@@ -5,7 +5,7 @@
             :epRecientePrincipal="epRecientePrincipal")
         episodios(:terminarCarga="terminarCarga" :ultimosEpisodios="epsRecientes")
         recomendacion-semanal(:terminarCarga="terminarCarga")
-        video-recomendado(:terminarCarga="terminarCarga")
+        // video-recomendado(:terminarCarga="terminarCarga")
         comentarios
 
     //
@@ -30,7 +30,7 @@
             "video-recomendado": VideoRecomendado
             "comentarios": Comentarios
         data: ->
-            componentesCargando: 3
+            componentesCargando: 2
             fecha_recomendacion: 0
             recomendacion: ""
             video_recomendado: ""
