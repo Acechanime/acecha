@@ -28,8 +28,8 @@
         ), 250
         ###
 
-    esBeta = process.env.BRANCH is "beta"
-    console.log "En branch #{process.env.BRANCH}"
+    esBeta = process.env.RAMA is "beta"
+    console.log "En branch #{process.env.RAMA}"
 
 
     export default
