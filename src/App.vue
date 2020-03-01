@@ -5,6 +5,7 @@
         pie-pagina
         // ver-anime
         modo-color
+        indicador-beta(v-if="esBeta")
     //
 </template>
 
@@ -13,8 +14,9 @@
     import PiePagina from "./components/pie-pagina.vue"
     import pantallaCarga from "./components/App/pantalla-carga.vue"
     import modoColor from "./components/App/modo-color.vue"
+    import indicadorBeta from "./components/App/indicador-beta.vue"
     import VerAnime from "./views/VerAnime.vue"
-    import {servidor} from "./variables";
+    import {servidor} from "./variables"
 
     quitarPantallaCarga = ->
         ###
@@ -26,6 +28,9 @@
         ), 250
         ###
 
+    esBeta = process.env.BRANCH is "beta"
+
+
     export default
         components:
             "pie-pagina": PiePagina
@@ -33,6 +38,9 @@
             "pantalla-carga": pantallaCarga
             "ver-anime": VerAnime
             "modo-color": modoColor
+            "indicador-beta": indicadorBeta
+        data: ->
+            esBeta: esBeta
         computed:
             esPagPrin: ->
                 this.$route.path is "/"
