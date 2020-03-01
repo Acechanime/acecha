@@ -16,7 +16,7 @@
     import reproductor from "../components/VerAnime/reproductor.vue"
     import descarga from "../components/VerAnime/descarga.vue"
     import comentarios from "../components/VerAnime/comentarios.vue"
-    import publicidad from "../components/Animes/publicidad.vue"
+    import publicidad from "../components/publicidad.vue"
     import {impr} from "../variables";
 
     extraerDatos = =>

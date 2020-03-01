@@ -11,7 +11,7 @@
 </template>
 
 <script lang="coffee">
-    import publicidad from "../components/Animes/publicidad.vue"
+    import publicidad from "../components/publicidad.vue"
     import buscador from "../components/Animes/buscador.vue"
     import animes from "../components/Animes/animes.vue"
 
