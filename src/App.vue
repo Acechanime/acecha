@@ -29,6 +29,7 @@
         ###
 
     esBeta = process.env.BRANCH is "beta"
+    console.log "En branch #{process.env.BRANCH}"
 
 
     export default
