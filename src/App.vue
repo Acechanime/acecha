@@ -28,8 +28,7 @@
         ), 250
         ###
 
-    esBeta = process.env.RAMA is "beta"
-    console.log "En branch #{process.env.RAMA}"
+    esBeta = window.location.hostname.search "beta" != -1
 
 
     export default
