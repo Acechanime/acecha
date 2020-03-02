@@ -18,8 +18,7 @@
                 article.sinopsis
                     div.tit Sinopsis
                     p.txt {{ animeObj.info.sinopsis }}
-                    ul
-                        genero(v-for="(g, i) in animeObj.info.generos" :generoId="g" :key="i")
+                    generos(:generos="animeObj.info.generos")
                     // span.generos(v-for="g in animeObj.generos")  {{ $store.state.listaGeneros.find(x => x.genero_id === g).nombre }}
 
                 temporadas(:anime="animeObj")
@@ -37,7 +36,7 @@
     import info from "../components/Anime/info.vue"
     import mal from "../components/Anime/mal.vue"
     import twitter from "../components/Anime/twitter.vue"
-    import genero from "../components/Anime/genero.vue"
+    import generos from "../components/Anime/generos.vue"
     import temporadas from "../components/Anime/temporadas.vue"
     import listaDeEpisodios from "../components/Anime/lista-de-episodios.vue"
     import comentarios from "../components/Anime/comentarios.vue"
@@ -56,7 +55,7 @@
             "temporadas": temporadas
             "lista-de-episodios": listaDeEpisodios
             "comentarios": comentarios
-            "genero": genero
+            "generos": generos
         data: ->
             animeProv: {imagenes: {}}
             animeExiste: true
