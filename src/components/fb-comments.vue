@@ -68,9 +68,10 @@
 
 <style lang="sass">
     @import "../sass/variables"
-    
-    .fb-comments, .fb-comments iframe[style], .fb-comments *
-        width: 100% !important
+
+    @media only screen and (max-width: 850px)
+        .fb-comments, .fb-comments iframe[style], .fb-comments *
+            width: 100% !important
 
 
     //
