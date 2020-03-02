@@ -195,6 +195,11 @@
         .generos
             color: var(--texto1)
 
+    @media only screen and (max-width: 850px)
+        .contenedor_comentarios
+            padding: 0.5rem
+
+
     @media only screen and (max-width: 500px)
         .cont
             grid-template-columns: initial

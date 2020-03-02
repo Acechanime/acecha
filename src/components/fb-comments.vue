@@ -66,11 +66,12 @@
 #
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
     @import "../sass/variables"
     
-    // .fb-comments, .fb-comments iframe[style], .fb-comments * 
-    //     width: 100% !important
+    .fb-comments, .fb-comments iframe[style], .fb-comments *
+        width: 100% !important
+
 
     //
 </style>
