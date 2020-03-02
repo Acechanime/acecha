@@ -27,8 +27,8 @@
         mes = temp.substring 0, posSegundoSlash
         año = temp.substr (posSegundoSlash + 1)
 
-        (new Date "#{mes}/#{dia}/#{año}").getDay()
-
+        pre = (new Date "#{mes}/#{dia}/#{año}").getDay()
+        (pre + 6) % 7
 
 
     export default
