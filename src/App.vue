@@ -28,7 +28,7 @@
         ), 250
         ###
 
-    esBeta = window.location.hostname.search "beta" != -1
+    esBeta = (window.location.hostname.search "beta") != -1
 
 
     export default
