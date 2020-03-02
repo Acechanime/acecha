@@ -38,8 +38,20 @@
             estadoCarga: 0
 
         computed:
-            episodios_filtrados: -> @episodios.filter (x) -> x.es_ova is no
-            ovas_filtradas: -> @episodios.filter (x) -> x.es_ova is yes
+            episodios_filtrados: ->
+                epsFiltrados = @episodios.filter (x) -> x.es_ova is no
+                epsFiltrados.sort (x, y) =>
+                    if x.num_ep > y.num_ep then 1
+                    else -1
+
+
+            ovas_filtradas: ->
+                epsFiltrados = @episodios.filter (x) -> x.es_ova is yes
+                epsFiltrados.sort (x, y) =>
+                    if x.num_ep > y.num_ep then 1
+                    else -1
+
+
             tieneOvas: -> @ovas_filtradas.length > 0
         watch:
             anime: (n, v) ->

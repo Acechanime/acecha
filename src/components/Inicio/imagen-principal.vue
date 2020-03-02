@@ -19,9 +19,9 @@
     export default
         name: "imagen-principal"
         data: ->
-            cabecera: "https://legacy.acechanime.com/wp-content/themes/anime/img/subheader.png"
-                # if Math.random() > 0.35 then "/img/tamako_mainVisual_edit.jpg"
-                # else "/img/k-on_cover.jpg"
+            cabecera: # "https://legacy.acechanime.com/wp-content/themes/anime/img/subheader.png"
+                if Math.random() > 0.35 then "/img/tamako_mainVisual_edit.jpg"
+                else "/img/k-on_cover.jpg"
             ###
             cabecera: process.env.NODE_ENV === "production"
                 ? "/wp-content/uploads/2019/05/subheader.jpg"
