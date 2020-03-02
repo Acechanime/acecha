@@ -2,7 +2,7 @@
     main.cont.contenedor
         div
             div.fondo
-                h3.label_episodio Episodio {{ $store.state.verAnime.ep }}
+                h3.label_episodio {{ etiqueta }}
                 reproductor
                 descarga
             // comentarios.fondo
@@ -17,7 +17,7 @@
     import descarga from "../components/VerAnime/descarga.vue"
     import comentarios from "../components/VerAnime/comentarios.vue"
     import publicidad from "../components/publicidad.vue"
-    import {impr} from "../variables";
+    import {impr} from "../variables"
 
     extraerDatos = =>
         url = (new URL window.location.href).pathname.toString()
@@ -39,6 +39,9 @@
                 ev = @$store.state.datos.resizeEvent
                 window.innerWidth
             esMovil: -> @anchoPantalla < 780
+            etiqueta: ->
+                (if @$store.state.verAnime.esOva is true then "Ova" else "Episodio") + " " +
+                    @$store.state.verAnime.ep
         beforeRouteUpdate: (to, from, next) ->
             @$store.commit "cambiarNumEp", parseInt to.params.ep
             next()

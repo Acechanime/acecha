@@ -7,14 +7,14 @@
 
         template(v-if="opciones.length !== 0")
             div#contenedor-anime.contenedor-video(v-show="posActiva !== 0")
-            // video.reproductor(v-if="posActiva === 0 && links.episodio_id" 
-                controls 
-                :key="links.episodio_id"
-                )
-                source(:src="opciones[0][1]" type="video/mp4")
+            // video.reproductor(v-if="posActiva === 0 && links.episodio_id"
+            //     controls
+            //     :key="links.episodio_id"
+            // )
+            //     source(:src="opciones[0][1]" type="video/mp4")
             video-player.reproductor(v-if="posActiva === 0 && links.episodio_id" 
                 :options="opcionesVideoJs" :key="links.episodio_id"
-                )
+            )
 
             br
         template(v-else-if="opciones.length === 0 && !links.anime_id")
@@ -28,7 +28,9 @@
 
         div.controles2
             div.mizq
-                router-link.boton.boton--eps(:to="epAnterior")
+                router-link.boton.boton--eps(:to="epAnterior"
+                    :class="epAnterior === ''? 'boton--desactivado': ''"
+                )
                     i.material-icons chevron_left
                     span.ocultarMovil Anterior
             div.mcentro
@@ -108,15 +110,19 @@
             epTexto: -> "./#{if @links.es_ova then 'ova' else 'ep'}"
             epSiguiente: ->
                 numEpActual = @links.num_ep
-                existeEpSiguiente = @listaEps.find (anime) => anime.num_ep is (numEpActual + 1)
+                esOva = @$store.state.verAnime.esOva
+                existeEpSiguiente = @listaEps.find (anime) =>
+                    (anime.num_ep is (numEpActual + 1)) and (anime.es_ova is esOva)
                 if existeEpSiguiente?
                     @epTexto + "#{numEpActual + 1}"
                 else
                     ""
             epAnterior: ->
                 numEpActual = @links.num_ep
-                existeEpSiguiente = @listaEps.find (anime) => anime.num_ep is (numEpActual - 1)
-                if existeEpSiguiente?
+                esOva = @$store.state.verAnime.esOva
+                existeEpAnterior = @listaEps.find (anime) =>
+                    (anime.num_ep is (numEpActual - 1)) and (anime.es_ova is esOva)
+                if existeEpAnterior?
                     @epTexto + "#{numEpActual - 1}"
                 else
                     ""
