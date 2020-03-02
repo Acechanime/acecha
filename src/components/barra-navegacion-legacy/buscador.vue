@@ -1,7 +1,9 @@
 <template lang="pug">
     li.barra_li
         div#buscador_barra
-            input(placeholder="Buscar anime" @input="cambiarNombre($event)" :value="nombre")
+            form(@submit.prevent="buscarAnime")
+                input(placeholder="Buscar anime" @input="cambiarNombre($event)" :value="nombre")
+                i.material-icons(@click="buscarAnime") search
         ul.autocompletar(:style="estilos")
             template(v-if="listaAnimesFiltrada2.length !== 0")
                 item-buscador(v-for="(anime, i) in listaAnimesFiltrada2"
@@ -26,7 +28,8 @@
             nombre: ""
             tieneNombre: no
         watch:
-            nombre: (nuevo) -> @tieneNombre = nuevo isnt ""
+            nombre: (nuevo) ->
+                @tieneNombre = (nuevo isnt "")
 
         computed:
             estilos: ->
@@ -49,6 +52,12 @@
 
             limpiarBuscador: ->
                 @nombre = ""
+
+            buscarAnime: () ->
+                nombre = @nombre
+                @limpiarBuscador()
+                @$router.push "/animes/?nombre=#{ encodeURI nombre }"
+
         mounted: ->
             vm = this
             intervalo = setInterval (=>
@@ -112,15 +121,15 @@
                 family: $titulos
                 size: 15px
             outline: none
+            // transition: width 250ms ease-in-out
 
-        &::after
+        i
             font:
                 family: 'Material Icons'
                 weight: normal
                 style: normal
                 size: 20px
             vertical-align: middle
-            content: "search"
             line-height: 1
             letter-spacing: normal
             text-transform: none
@@ -128,6 +137,8 @@
             white-space: nowrap
             word-wrap: normal
             direction: ltr
+            user-select: none
+            cursor: pointer
 
 
     .texto_error

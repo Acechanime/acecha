@@ -1,6 +1,6 @@
 <template lang="pug">
     div.busc
-        input#nombre(placeholder="Nombre del anime" @input="cambiarNombre($event)")
+        input#nombre(placeholder="Nombre del anime" @input="cambiarNombre($event)" :value="nombre")
         select#generos(v-model.number="genero")
             option(value="-1" selected) Cualquier género
             option(v-for="gen in listaGeneros" :value="gen.genero_id") {{ gen.nombre }}
@@ -15,7 +15,6 @@
     //
 </template>
 
-<!-- TODO: Hacer que los filtros que se apliquen se vean en la url. -->
 <script lang="coffee">
     import {impr} from "../../variables";
     import orden from "./buscador/orden.vue"
@@ -70,6 +69,7 @@
                 @filtros.orden = f
             recuperarFiltros: ->
                 q = @$route.query
+                @nombre = q.nombre || ""
                 @genero = parseInt (q.genero || "-1")
                 @estado = parseInt (q.estado || "-1")
                 @orden  = parseInt (q.orden  || "-1")
