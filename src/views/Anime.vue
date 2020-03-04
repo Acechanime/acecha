@@ -46,6 +46,8 @@
 
     export default
         name: "Anime"
+        metaInfo: ->
+            title: @animeObj.info.nombre
         components:
             "imagen-anime": imagenAnime
             "redes-sociales": redesSociales

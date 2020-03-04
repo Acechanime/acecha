@@ -19,6 +19,8 @@
 
     export default
         name: "Animes"
+        metaInfo:
+            title: "Lista de animes"
         components: { publicidad, buscador, animes }
         data: ->
             filtro: filtroBase

@@ -14,6 +14,8 @@
 
     export default
         name: "Calendario"
+        metaInfo:
+            title: "Calendario"
         components: { imagenPrincipal, selector }
     
 #

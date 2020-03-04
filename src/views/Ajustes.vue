@@ -34,6 +34,8 @@
 
     export default
         name: "Ajustes"
+        metaInfo:
+            title: "Ajustes"
         components: { modoColorOscuro, modoColorAutomatico, credito }
         computed:
             mmodoColor: -> @$store.state.datos.modoColor

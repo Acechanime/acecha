@@ -23,7 +23,8 @@ devDependencies:
   supertest: 4.0.2
   video.js: 6.13.0
   vue-cli-plugin-express: 1.0.2_@vue+cli-service@4.1.2
-  vue-seo: 0.1.5
+  vue-gtag: 1.6.2
+  vue-meta: 2.3.3
   vue-template-compiler: 2.6.11
   vue-video-player: 5.0.2
   vue2-timepicker: 1.0.8_vue@2.6.11
@@ -3252,6 +3253,12 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-95k0GDqvBjZavkuvzx/YqVLv/6YYa17fz6ILMSf7neqQITCPbnfEnQvEgMPNjH4kgobe7+WIL0yJEHku+H3qtQ==
+  /deepmerge/4.2.2:
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-FJ3UgI4gIl+PHZm53knsuSFpE+nESMr7M4v9QcgB7S63Kj/6WqMiFQJpBBYz1Pt+66bZpP3Q7Lye0Oo9MPKEdg==
   /default-gateway/4.2.0:
     dependencies:
       execa: 1.0.0
@@ -9410,6 +9417,10 @@ packages:
       '@vue/cli-shared-utils': ^3.0.0
     resolution:
       integrity: sha512-j/hoRL6CNRMJ6MwTcv7fF0uuN4CZJDgp/si7NxwZe4NuOT/Kz0zjNAym5jDldi7WWsdeNF0Bmofq3qAVETu0Aw==
+  /vue-gtag/1.6.2:
+    dev: true
+    resolution:
+      integrity: sha512-kKjVP+ch89IkGWfnszd02Lbg4W76rsPlrCZrRzDBoQaBPPx5TTQIL/bbt9hxcWDcRDNdAeh2NCYfijl/TAD+Mw==
   /vue-hot-reload-api/2.3.4:
     dev: true
     resolution:
@@ -9434,16 +9445,16 @@ packages:
         optional: true
     resolution:
       integrity: sha512-yFksTFbhp+lxlm92DrKdpVIWMpranXnTEuGSc0oW+Gk43M9LWaAmBTnfj5+FCdve715mTHvo78IdaXf5TbiTJg==
+  /vue-meta/2.3.3:
+    dependencies:
+      deepmerge: 4.2.2
+    dev: true
+    resolution:
+      integrity: sha512-FmeekLkd5+BI7NFBnU4bEnTpVZqmu3q8ztW4R4U3GBQljgDM7QAuwMXs8/aJP0U1tjtxobX8T6HcyZXimGj1DQ==
   /vue-router/3.1.5:
     dev: false
     resolution:
       integrity: sha512-BszkPvhl7I9h334GjckCh7sVFyjTPMMJFJ4Bsrem/Ik+B/9gt5tgrk8k4gGLO4ZpdvciVdg7O41gW4DisQWurg==
-  /vue-seo/0.1.5:
-    dev: true
-    peerDependencies:
-      lodash: ^3.10.1
-    resolution:
-      integrity: sha1-cg+zJ6YTsjtzJ2AfITMCxVXgCWs=
   /vue-style-loader/4.1.2:
     dependencies:
       hash-sum: 1.0.2
@@ -10036,8 +10047,9 @@ specifiers:
   video.js: 6.13.0
   vue: ^2.6.10
   vue-cli-plugin-express: ^1.0.1
+  vue-gtag: ^1.6.2
+  vue-meta: ^2.3.3
   vue-router: ^3.0.3
-  vue-seo: ^0.1.5
   vue-template-compiler: ^2.6.10
   vue-video-player: ^5.0.2
   vue2-timepicker: ^1.0.8

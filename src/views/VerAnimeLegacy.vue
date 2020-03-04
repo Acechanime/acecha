@@ -33,6 +33,7 @@
 
     export default
         name: "VerAnimeLegacy"
+
         components: { reproductor, descarga, comentarios, publicidad }
         computed:
             anchoPantalla: ->

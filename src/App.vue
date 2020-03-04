@@ -32,6 +32,9 @@
 
 
     export default
+        metaInfo:
+            title: "Anime online HD sub español"
+            titleTemplate: "%s | Acechanime"
         components:
             "pie-pagina": PiePagina
             "barra-navegacion": BarraNavegacion
