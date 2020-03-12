@@ -49,11 +49,19 @@ export filtroNombre = (vm, a) ->
     for p2 in nombre
         if p2.length is 1 then continue
 
-        for p1 in palabras
-            if (p1.search p2) != -1
-                prioridadNueva = Math.pow(p2.length, 2)
-                prioridad += prioridadNueva
-                # strDebug += "Encontrado ´#{p2}´ en ´#{p1}´ con p=#{prioridadNueva}\n"
+        for p1, i in palabras
+            posBusqueda = p1.search p2
+            if posBusqueda != -1
+                prioridadPosicion =
+                    if i > 0 then 0
+                    else if posBusqueda > 5 then 0
+                    else
+                        # strDebug += "Encontrado #{p1} en pos #{posBusqueda}\n"
+                        Math.pow (5 - posBusqueda), 2
+
+                prioridadAncho = Math.pow(p2.length, 2)
+                prioridad += prioridadAncho + prioridadPosicion
+                # strDebug += "Encontrado ´#{p2}´ en ´#{p1}´ con p=#{prioridadAncho}\n"
                 break
 
     # console.log (strDebug + "Res: Prioridad #{prioridad}")
