@@ -3,11 +3,11 @@
         div.cont-foot
             div.logo
                 h3.titulo Sobre Nosotros
-                img(src="../assets/img/acechanime.png"
+                // img(src="../assets/img/acechanime.png"
                     alt="Logo")
-                br
+                // br
                 span.txt.
-                    AcechaAnime es una página web segura para descargar y ver anime online gratis.
+                    AcechaAnime es una página web segura para descargar y ver anime online.
                     Soporte 24/7.
             div.nosotros
                 h3.titulo ¿Qué nos distingue?
@@ -17,6 +17,8 @@
                     span Optimizado al 100%
                     br
                     span Ofrecemos Soporte
+                    br
+                    span Publicidad mínima
             div.distingue
                 h3.titulo URLS
                 div.txt
