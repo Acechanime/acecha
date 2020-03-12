@@ -69,9 +69,17 @@
 
     .gridIn
         display: grid
-        grid-template-columns: repeat(4, 21.25%)
-        grid-column-gap: 5%
+        grid-template-columns: repeat(6, 14.16%)
+        grid-column-gap: 3%
         grid-row-gap: 1.5rem
+
+
+
+    @media only screen and (max-width: 1024px)
+        .gridIn
+            grid-template-columns: repeat(4, 21.25%)
+            grid-column-gap: 5%
+
 
 
     @media only screen and (max-width: 850px)
@@ -81,8 +89,8 @@
 
     @media only screen and (max-width: 500px)
         .gridIn
-            grid-template-columns: repeat(2, 1fr)
-            grid-gap: 1rem
+            grid-template-columns: repeat(2, 48%)
+            grid-column-gap: 4%
 
         .dias
             grid-template-columns: repeat(2, auto)
