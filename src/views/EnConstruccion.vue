@@ -3,8 +3,8 @@
         div.img-fondo
         div.construccion
             div.cont
-                h2 Esta página está en construcción
-                p Pero aun puedes ver todos tus animes, solo debes
+                h2 {{ titulo }}
+                p {{ texto }}
                 br
                 br
                 router-link.ir-inicio(to="/") Ir al inicio
@@ -15,6 +15,13 @@
 
     export default
         name: "EnConstruccion"
+        props:
+            titulo:
+                type: String
+                default: "Esta página está en construcción"
+            texto:
+                type: String
+                default: "Pero aun puedes ver todos tus animes, solo debes"
         created: ->
             @$store.commit "terminarCargaPagina"
     #

@@ -1,33 +1,41 @@
 <template lang="pug">
     div.an
-        imagen-anime(:nombre="animeObj.info.nombre || ''" :img="animeObj.imagenes.fondo || ''")
-        main.cont.contenedor(v-show="!$store.state.verAnime.verAnimeActivo")
-            div
-                div.contImg
-                    img.imagen(:src="animeObj.imagenes.portada")
-                    figcaption.estado(:style="colorEtiqueta") {{ animeObj.emision.en_emision? 'en emision': 'finalizado' }}
-                        span.icon-check-box
-                redes-sociales
-                info(:animeObj="animeObj")
-                mal(:url="animeObj.info.mal? animeObj.info.mal: 'err'" v-if="!esMovil")
-                twitter(v-if="!esMovil")
-                template(v-if="esMovil")
-                    br
-                    br
-            div
-                article.sinopsis
-                    div.tit Sinopsis
-                    p.txt {{ animeObj.info.sinopsis }}
-                    generos(:generos="animeObj.info.generos")
-                    // span.generos(v-for="g in animeObj.generos")  {{ $store.state.listaGeneros.find(x => x.genero_id === g).nombre }}
+        template(v-if="animeExiste")
+            imagen-anime(:nombre="animeObj.info.nombre || ''" :img="animeObj.imagenes.fondo || ''")
+            main.cont.contenedor(v-show="!$store.state.verAnime.verAnimeActivo")
+                div
+                    div.contImg
+                        img.imagen(:src="animeObj.imagenes.portada")
+                        figcaption.estado(:style="colorEtiqueta") {{ animeObj.emision.en_emision? 'en emision': 'finalizado' }}
+                            span.icon-check-box
+                    redes-sociales
+                    info(:animeObj="animeObj")
+                    mal(:url="animeObj.info.mal? animeObj.info.mal: 'err'" v-if="!esMovil")
+                    twitter(v-if="!esMovil")
+                    template(v-if="esMovil")
+                        br
+                        br
+                div
+                    article.sinopsis
+                        div.tit Sinopsis
+                        p.txt {{ animeObj.info.sinopsis }}
+                        generos(:generos="animeObj.info.generos")
+                        // span.generos(v-for="g in animeObj.generos")  {{ $store.state.listaGeneros.find(x => x.genero_id === g).nombre }}
 
-                temporadas(:anime="animeObj")
-                lista-de-episodios(:anime="animeObj")
+                    temporadas(:anime="animeObj")
+                    lista-de-episodios(:anime="animeObj")
 
-        router-view
-        div.contenedor.contenedor_comentarios
-            comentarios
-        br
+            router-view
+            div.contenedor.contenedor_comentarios
+                comentarios
+            br
+        div(v-else)
+            div.separador
+            en-construccion(titulo="Esta página no existe"
+                texto="Vuelve al inicio para ver nuestros animes disponibles."
+            )
+
+
     //
 </template>
 
@@ -42,12 +50,13 @@
     import comentarios from "../components/Anime/comentarios.vue"
     import redesSociales from "../components/Anime/redes-sociales.vue"
     import store, { listaAnimesCargada } from "../store.coffee"
+    import EnConstruccion from "./EnConstruccion.vue"
     import {impr} from "../variables"
 
     export default
         name: "Anime"
         metaInfo: ->
-            title: @animeObj.info.nombre
+            title: if @animeObj?.info?.nombre? then @animeObj.info.nombre else "404"
         components:
             "imagen-anime": imagenAnime
             "redes-sociales": redesSociales
@@ -58,9 +67,10 @@
             "lista-de-episodios": listaDeEpisodios
             "comentarios": comentarios
             "generos": generos
+            "en-construccion": EnConstruccion
         data: ->
             animeProv: {imagenes: {}}
-            animeExiste: true
+            animeExiste: false
             esMovil: window.innerWidth < 600
         computed:
             colorEtiqueta: ->
@@ -71,11 +81,9 @@
                 get: -> @animeProv
                 set: (a) -> @animeProv = a
         methods:
-            inicializarAnimeObj: (err) ->
+            inicializarAnimeObj: (animeExiste = false) ->
                 @$store.commit "terminarCargaPagina"
-                if err?
-                    @animeExiste = false
-                    # @$router.push "/404" # Inicia un bucle infinito al intentar regresar a pag. anterior
+                @animeExiste = animeExiste
 
             cambiarAnime: (obj) ->
                 @animeObj = obj
@@ -89,17 +97,17 @@
                 else (to.path.split "/")[1]
 
             if to.params.animeObj?
-                next (vm) -> vm.inicializarAnimeObj()
+                next (vm) -> vm.inicializarAnimeObj true
             else
                 nombreRuta = "/#{ruta}/"
                 await listaAnimesCargada
                 anime = store.state.datos.listaAnimes?.find (a) -> a.info.ruta == nombreRuta
                 if anime?
                     to.params.animeObj = anime
-                    next (vm) -> vm.inicializarAnimeObj()
+                    next (vm) -> vm.inicializarAnimeObj true
                 else
                     console.error "No se encontró un anime con ruta `#{nombreRuta}`"
-                    next (vm) -> vm.inicializarAnimeObj(true)
+                    next (vm) -> vm.inicializarAnimeObj false
         beforeRouteUpdate: (to, from, next) ->
             if /\/(ep|ova)\d+$/.test to.path
                 next()
