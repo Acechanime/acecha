@@ -10,7 +10,7 @@
 </template>
 
 <script lang="coffee">
-    import { listaAnimesCargada } from "../../store.coffee"
+    import { listaAnimesCargada } from "../../store/store.coffee"
     import { impr } from "../../variables"
 
     export default

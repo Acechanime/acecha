@@ -10,7 +10,7 @@ import VerAnimeLegacy from "./views/VerAnimeLegacy.vue"
 import Calendario from "./views/Calendario.vue"
 import _404 from "./views/404.vue"
 
-import store from "./store.coffee"
+import store from "./store/store.coffee"
 
 Vue.use(Router);
 

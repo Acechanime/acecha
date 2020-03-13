@@ -49,7 +49,7 @@
     import listaDeEpisodios from "../components/Anime/lista-de-episodios.vue"
     import comentarios from "../components/Anime/comentarios.vue"
     import redesSociales from "../components/Anime/redes-sociales.vue"
-    import store, { listaAnimesCargada } from "../store.coffee"
+    import store, { listaAnimesCargada } from "../store/store.coffee"
     import EnConstruccion from "./EnConstruccion.vue"
     import {impr} from "../variables"
 

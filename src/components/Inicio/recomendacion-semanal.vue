@@ -35,7 +35,7 @@
 
 <script lang="coffee">
     import {servidor, impr} from "../../variables";
-    import store, {listaAnimesCargada} from "../../store.coffee"
+    import store, {listaAnimesCargada} from "../../store/store.coffee"
 
     export default
         name: "recomendacion-semanal"
