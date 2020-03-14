@@ -2,7 +2,7 @@
     div
         // p {{ numeroDeAnimes }}
         div.gridIn
-            anime(v-for="anime in listaAnimesFiltrada3" :key="anime.anime_id" :anime="anime")
+            anime(v-for="anime in listaAnimesFiltrada2" :key="anime.anime_id" :anime="anime")
     //
 </template>
 
