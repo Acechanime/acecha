@@ -40,7 +40,7 @@
         text-decoration: none
 
     .img-fondo
-        background: url("../assets/img/construccion.jpg") fixed center
+        background: url("../assets/img/construccion.webp") fixed center
         position: fixed
         top: 0
         left: 0

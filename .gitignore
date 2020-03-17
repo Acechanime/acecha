@@ -3,6 +3,9 @@ node_modules
 /dist
 /ssl
 
+# Recursos
+/resources
+
 # local env files
 .env.local
 .env.*.local

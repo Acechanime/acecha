@@ -2,32 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Inicio from './views/Inicio.vue'
-import Ajustes from "./views/Ajustes.vue"
-import Animes from "./views/Animes.vue"
-import Anime from "./views/Anime.vue"
 import EnConstruccion from "./views/EnConstruccion.vue"
 import VerAnimeLegacy from "./views/VerAnimeLegacy.vue"
 import Calendario from "./views/Calendario.vue"
-import _404 from "./views/404.vue"
-
-import store from "./store/store.coffee"
 
 Vue.use(Router);
-
-const rutasNormales = [
-    "/animes/",
-    "/calendario/",
-    "/leer-manga/",
-    "/comprar-anime/",
-    "/comprar-desde-japon/",
-    "/acecha-premium/",
-    "/acecha-tv/",
-    "/nosotros/",
-    "/creadores-de-contenido/",
-    "/dmca/",
-    "/politica-privacidad/",
-    "/comprar-acecha-premium/"
-];
 
 window.requestAnimFrame = (function(){
     return window.requestAnimationFrame    ||
@@ -105,17 +84,17 @@ const router = new Router({
         {
             path: "/404",
             name: "NotFound",
-            component: _404
+            component: () => import("./views/404.vue")
         },
         {
             path: "/mi-cuenta/",
             name: "Cuenta",
-            component: Ajustes
+            component: () => import("./views/Ajustes.vue")
         },
         {
             path: "/calendario/",
             name: "Calendario",
-            component: Calendario
+            component: () => import("./views/Calendario.vue")
         },
         { path: "/leer-manga/", redirect: "/en-construccion/" },
         { path: "/comprar-anime/", redirect: "/en-construccion/" },
@@ -138,7 +117,7 @@ const router = new Router({
         {
             path: "/en-construccion/",
             name: "EnConstruccion",
-            component: EnConstruccion
+            component: () => import("./views/EnConstruccion.vue")
         },
         {
             path: "/acecha-tv/",
@@ -148,12 +127,12 @@ const router = new Router({
         {
             path: '/animes/',
             name: 'Animes',
-            component: Animes
+            component: () => import("./views/Animes.vue")
         },
         {
             path: "/:anime/",
             name: "Anime",
-            component: Anime,
+            component: () => import("./views/Anime.vue"),
             props: true,
             children: [
                 {

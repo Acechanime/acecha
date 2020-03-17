@@ -34,7 +34,7 @@
         width: 100%
         height: 100%
         display: table
-        background: url("../../assets/img/you-kei.jpg")
+        background: url("https://acechanime.com/img/portada/you-kei.webp")
         background-size: cover
         opacity: 1
         z-index: 100

@@ -8,7 +8,6 @@ self.addEventListener("install", (event) => {
             console.log("Cacheando imagen.");
             return cache.addAll(
                 [
-                    "/img/animes/bokuben_2_portada.jpg",
                     "/wp-content/uploads/2019/05/subheader.jpg",
                     "https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.0",
                     "/img/tamako_mainVisual_edit.jpg",
