@@ -4,7 +4,7 @@
             div.contenedor.wrap_barra
                 div.izq
                     router-link(to="/")
-                        img.logo(src="../assets/img/acechanime.png"
+                        img.logo(src="../assets/img/LOGO_ACECHA_claro.webp"
                              alt="Logo AcechaAnime")
                 
                 ul.items
@@ -59,6 +59,9 @@
 
 <style lang="sass">
     @import "../sass/variables"
+
+    .logo
+        height: 2.5rem !important
 
 
     #navbar-comunidad, #navbar-tips, .item
