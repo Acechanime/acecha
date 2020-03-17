@@ -4,7 +4,7 @@
             div.contenedor.wrap_barra
                 div.izq
                     router-link(to="/")
-                        img.logo(src="../assets/img/LOGO_TEXTO_ACECHA.webp"
+                        img.logo(:src="linkLogo"
                              alt="Logo AcechaAnime")
                 
                 ul.items
@@ -41,6 +41,10 @@
         data: ->
             barraMin: no
         computed:
+            modoColor: -> @$store.state.datos.modoColor
+            linkLogo: ->
+                if @modoColor is "claro" then "/img/logos/LOGO_TEXTO_ACECHA_claro.webp"
+                else "/img/logos/LOGO_TEXTO_ACECHA_oscuro.webp"
             barraMinClase: ->
                 if @$route.path is "/"
                     if @barraMin then "navegacion--min" else "navegacion--no-min"

@@ -1,5 +1,5 @@
 <template lang="pug">
-    footer.pie(:style="mostrar")
+    footer.pie(:style="estilos")
         div.cont-foot
             div.logo
                 h3.titulo Sobre Nosotros
@@ -37,12 +37,18 @@
     export default
         name: "pie-pagina"
         computed:
-            mostrar: ->
+            estilos: ->
                 vm = this
                 listaBlanca = ["/mi-cuenta", "/mi-cuenta/", "/en-construccion/"]
+                estilos = {}
                 if (listaBlanca.find (x) => x is vm.$route.path)?
-                    "display: none"
-                else ""
+                    estilos.display = "none"
+
+                estilos.backgroundImage =
+                    if Math.random() < 0.01 then "url('/img/portada/you-kei.webp')"
+                    else "url('/img/portada/footer.jpg')"
+
+                estilos
 
 #
 </script>
@@ -54,7 +60,8 @@
         color: white
         position: relative
         font-family: $titulos
-        background: url("../assets/img/footer.jpg") no-repeat top left/cover
+        // background-image: url("../assets/img/footer.jpg")
+        background: no-repeat top left/cover
         padding: 64px 0
         z-index: 1
         &::before
