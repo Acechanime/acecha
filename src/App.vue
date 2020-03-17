@@ -5,7 +5,7 @@
         pie-pagina
         // ver-anime
         modo-color
-        indicador-beta(v-if="esBeta")
+        indicador-version
     //
 </template>
 
@@ -14,7 +14,7 @@
     import PiePagina from "./components/pie-pagina.vue"
     import pantallaCarga from "./components/App/pantalla-carga.vue"
     import modoColor from "./components/App/modo-color.vue"
-    import indicadorBeta from "./components/App/indicador-beta.vue"
+    import indicadorVersion from "./components/App/indicador-version.vue"
     import VerAnime from "./views/VerAnime.vue"
     import {servidor} from "./variables"
 
@@ -28,9 +28,6 @@
         ), 250
         ###
 
-    esBeta = (window.location.hostname.search "beta") != -1
-
-
     export default
         metaInfo:
             title: "Anime online HD sub español"
@@ -41,9 +38,7 @@
             "pantalla-carga": pantallaCarga
             "ver-anime": VerAnime
             "modo-color": modoColor
-            "indicador-beta": indicadorBeta
-        data: ->
-            esBeta: esBeta
+            "indicador-version": indicadorVersion
         computed:
             esPagPrin: ->
                 this.$route.path is "/"

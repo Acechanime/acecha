@@ -16,6 +16,7 @@
 
         modo-color-oscuro
         modo-color-automatico
+        mostrar-version
 
         // div.contenedor-ajuste
             div.titulo-ajuste Mas ajustes
@@ -29,6 +30,7 @@
 <script lang="coffee">
     import modoColorOscuro from "../components/Ajustes/modo-color-oscuro.vue"
     import modoColorAutomatico from "../components/Ajustes/modo-color-automatico.vue"
+    import mostrarVersion from "../components/Ajustes/mostrar-version.vue"
     import credito from "../components/Ajustes/credito.vue"
     import { cambiarColor } from "../components/App/ModoColor.coffee"
 
@@ -36,7 +38,7 @@
         name: "Ajustes"
         metaInfo:
             title: "Ajustes"
-        components: { modoColorOscuro, modoColorAutomatico, credito }
+        components: { modoColorOscuro, modoColorAutomatico, credito, mostrarVersion }
         computed:
             mmodoColor: -> @$store.state.datos.modoColor
             etiquetaModoColor: -> if @mmodoColor is "claro" then "des" else ""
