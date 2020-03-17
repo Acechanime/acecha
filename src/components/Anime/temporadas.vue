@@ -3,11 +3,12 @@
         h2.titulo Temporadas
         p.label Todas las temporadas de {{ anime.info.nombre }}
         div.temps
-            temporada(v-for="animeSig in obtTempSiguientes" :anime="animeSig"
-                :key="animeSig.info.anime_id")
-            temporada(:anime="anime")
             temporada(v-for="animeAnt in obtTempAnteriores" :anime="animeAnt"
                 :key="animeAnt.info.anime_id")
+            temporada(:anime="anime")
+            temporada(v-for="animeSig in obtTempSiguientes" :anime="animeSig"
+                :key="animeSig.info.anime_id")
+
     //
 </template>
 
