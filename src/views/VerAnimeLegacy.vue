@@ -76,8 +76,10 @@
         padding-bottom: 30px
         padding-left: 15px
 
+
     .cont
-        grid-template-columns: 1fr 250px
+        grid-template-columns: 1fr 250px !important
+
 
     .fondo
         @extend %caja-textos
@@ -85,9 +87,11 @@
         padding-right: 5px
         background-color: var(--fondo2)
 
+
     @media only screen and (max-width: 780px)
         .cont
-            grid-template-columns: none
+            grid-template-columns: none !important
+
 
     @media only screen and (max-width: 450px)
         .contenedor
