@@ -1,7 +1,7 @@
 <template lang="pug">
     div
-        div.boton-cont
-            div.boton(@click="abrirEps()")
+        div.boton-cont(v-if="linkPasfox")
+            a.boton(:href="linkPasfox" target="_blank")
                 | Descargar
                 br
                 span.pequeno capitulo
@@ -32,6 +32,8 @@
                         tr(v-if="listaCarpetas.length === 0")
                             td No hay carpetas disponibles.
                             td
+
+    //
 </template>
 
 <script lang="coffee">
@@ -44,6 +46,7 @@
         computed:
             listaEps: -> @$store.state.verAnime.listaEpisodios
             numEp: -> @$store.state.verAnime.ep
+            linkPasfox: -> @links.pasfox
             links: ->
                 res =
                     if @listaEps.length isnt 0 and @numEp? and @numEp isnt -1

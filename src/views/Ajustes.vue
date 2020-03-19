@@ -16,7 +16,7 @@
 
         modo-color-oscuro
         modo-color-automatico
-        mostrar-version
+        mostrar-version(v-if="!esBeta")
 
         // div.contenedor-ajuste
             div.titulo-ajuste Mas ajustes
@@ -39,6 +39,8 @@
         metaInfo:
             title: "Ajustes"
         components: { modoColorOscuro, modoColorAutomatico, credito, mostrarVersion }
+        data: ->
+            esBeta: (window.location.hostname.search "beta") != -1
         computed:
             mmodoColor: -> @$store.state.datos.modoColor
             etiquetaModoColor: -> if @mmodoColor is "claro" then "des" else ""

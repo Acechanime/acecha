@@ -28,9 +28,7 @@
                 anime_id = @ep.anime_id
                 if lista isnt undefined and @ep? and anime_id?
                     anime = lista.find (x) => x.info.anime_id == anime_id
-                    anime ? do ->
-                        console.log "Inicio/episodio. No existe anime con id #{anime_id}"
-                        {}
+                    anime ? {}
 
                 else if lista isnt undefined
                     console.log "Error. El objeto ep que se pasó no existe " +
