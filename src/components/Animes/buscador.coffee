@@ -23,13 +23,17 @@ export comp2 = (funciones, funcionPrioridad) =>
 
 
 
-export removerCaracteres = (str, strArr) =>
-    caracs = strArr.split ""
-    arr = (str.split "").map (c) =>
+export removerCaracteres = (palabra, claves) =>
+    caracs = claves.split ""
+    arr = (palabra.split "").map (c) =>
         res = caracs.filter (c2) => c == c2
         if res.length == 1 then " " else c
 
     arr.join("").toLowerCase().split(" ")
+
+
+export removerCaracteresArr = (palabras, claves) =>
+    palabras.map((x) => removerCaracteres x, claves).flat()
 
 
 
@@ -38,7 +42,8 @@ export removerCaracteres = (str, strArr) =>
 export filtroNombre = (vm, a) ->
     if vm.nombre.length is 0 then return 1
 
-    palabras = removerCaracteres a.info.nombre, "-:"
+    palabras = removerCaracteresArr [a.info.otros_nombres..., a.info.nombre], "-:"
+    # palabras = removerCaracteres a.info.nombre, "-:"
     nombre = removerCaracteres vm.nombre, "-:"
 
     if nombre.length is 0 then return 1
