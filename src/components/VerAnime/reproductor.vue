@@ -99,18 +99,25 @@
         computed:
             listaEps: -> @$store.state.verAnime.listaEpisodios
             numEp: -> @$store.state.verAnime.ep
+            esOva: ->
+                ruta = @$route.path
+                posInicioIndicador = ruta.substr(1).indexOf("/")
+                indicador = ruta.substr (1 + posInicioIndicador)
+                (indicador.search "ova") isnt -1
+
             links: ->
                 res =
                     if @listaEps.length isnt 0 and @numEp? and @numEp isnt -1
                         vm = this
-                        (@listaEps.find (a) -> a.num_ep is vm.numEp) ? {}
+                        esOva = @esOva
+                        (@listaEps.find (a) -> (a.num_ep is vm.numEp) and (a.es_ova is esOva)) ? {}
                     else {}
                 res
 
-            epTexto: -> "./#{if @links.es_ova then 'ova' else 'ep'}"
+            epTexto: -> "./#{if @esOva then 'ova' else 'ep'}"
             epSiguiente: ->
                 numEpActual = @links.num_ep
-                esOva = @$store.state.verAnime.esOva
+                esOva = @esOva
                 existeEpSiguiente = @listaEps.find (anime) =>
                     (anime.num_ep is (numEpActual + 1)) and (anime.es_ova is esOva)
                 if existeEpSiguiente?
