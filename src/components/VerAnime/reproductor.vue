@@ -1,6 +1,6 @@
 <template lang="pug">
     div.reproductor
-        ul.opciones
+        ul.opciones(v-if="opciones.length > 1")
             opcion(v-for="(op, i) in opciones" :opcion="op" :pos="i" :key="i"
                 :largo="opciones.length" :posActiva="posActiva"
                 :cambiarOpcion="cambiarOpcion")
