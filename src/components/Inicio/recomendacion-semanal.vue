@@ -1,30 +1,22 @@
 <template lang="pug">
     div.rec.contenedor.contenedor--rec
-        div.row(v-if="cargado && !error")
-            div.col.l6.s12.pad
+        div.malla-recomendacion(v-if="cargado && !error")
+            div.pad.leyenda(v-if="esMovil")
+                div.titulo.titulo-recomendacion-movil acechanime
+                div.txt.txt-recomendacion-movil Recomendación Semanal
+
+            div.pad
                 div.cont-img
                     router-link(:to="recomendacion.info.ruta")
                         img.img(:src="recomendacion.imagenes.portada"
                              alt="Img anime" )
-                // div.temporizador2.countdown
-                    div.countdown__block
-                        div.countdown__digits {{ dias }}
-                        label.countdown__label Días
-                    div.countdown__block
-                        div.countdown__digits {{ horas }}
-                        label.countdown__label Horas
-                    div.countdown__block
-                        div.countdown__digits {{ minutos }}
-                        label.countdown__label Minutos
-                    div.countdown__block
-                        div.countdown__digits {{ segundosF }}
-                        label.countdown__label Segundos
 
-            div.col.l6.s12.pad.leyenda
+            div.pad.leyenda(v-if="!esMovil")
                 div.titulo acechanime
                 div.txt Recomendación Semanal
                 hr.divisor
                 router-link.boton(:to="recomendacion.info.ruta") Click para verlo
+
         div.err(v-if="error")
             span.
                 Hubo un error al cargar la recomendación semanal.<br>
@@ -59,6 +51,10 @@
             segundosF: -> this.segundos % 60
             listaAnimes: -> @$store.state.datos.listaAnimes
             recomendacionRaw: -> @$store.state.datos.recomendacionSemanal
+            esMovil: ->
+                _ = @$store.state.datos.resizeEvent
+                window.innerWidth <= 650
+
         props:
             terminarCarga:
                 type: Function
@@ -147,15 +143,23 @@
 <style scoped lang="sass">
     @import "../../sass/variables"
 
+    .malla-recomendacion
+        display: grid
+        grid-template-columns: 50% 50%
+
+
     .contenedor--rec
         max-width: 1068px
+
 
     .rec
         padding: 48px 0
         text-align: center
 
+
     .pad
         padding: 20px
+
 
     .img
         @extend %imgFlotantes
@@ -163,6 +167,7 @@
         border-radius: 5px
         max-width: 50%
         box-shadow: 0 0 10px 0 rgba(0,0,0,.5)
+
 
     .temporizador2
         color: var(--texto2)
@@ -177,6 +182,7 @@
                 line-height: 1
             .countdown__label
                 font-size: var(--tamano-textos)
+
 
     .leyenda
         text-transform: uppercase
@@ -216,6 +222,15 @@
                 transform: scale(1.1)
                 color: #0cbc00
 
+    .titulo-recomendacion-movil
+        padding: 15px 0 !important
+
+
+    .txt-recomendacion-movil
+        padding: 8px 0 !important
+
+
+
     @media only screen and (max-width: 800px)
         .leyenda .txt
             font-size: 36px
@@ -227,6 +242,11 @@
             padding: 20px 0
 
     @media only screen and (max-width: 650px)
+
+        .malla-recomendacion
+            grid-template-columns: 100%
+
+
         .leyenda .txt
             font-size: var(--tamano-titulos)
 
