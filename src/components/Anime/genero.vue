@@ -22,7 +22,7 @@
                 res = @$store.state.datos.listaGeneros.find (x) => x.genero_id == @generoId
                 res ? {}
             ###
-            codigoIcono: -> "&##{ parseInt @gen.icono, 16 };"
+            codigoIcono: -> "&#x#{ @gen.icono };"
         methods:
             cargarGenero: ->
                 vm = this
