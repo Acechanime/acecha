@@ -18,7 +18,7 @@
                 div
                     article.sinopsis
                         div.tit Sinopsis
-                        p.txt {{ animeObj.info.sinopsis }}
+                        p.txt(v-html="animeObj.info.sinopsis")
                         generos(:generos="animeObj.info.generos")
                         // span.generos(v-for="g in animeObj.generos")  {{ $store.state.listaGeneros.find(x => x.genero_id === g).nombre }}
 
