@@ -90,7 +90,7 @@ moduloDatos =
         paginaLista: no
         modoColor: (localStorage.getItem "modo-color") ? "claro"
         modoColorAutomatico: ((localStorage.getItem "modo-color-automatico") == "si" ) ? false
-        mostrarVersion: ((localStorage.getItem "mostrar-version") ? "true") is "true"
+        mostrarVersion: ((localStorage.getItem "mostrar-version") ? "false") is "true"
 
         resizeEvent: {}
 

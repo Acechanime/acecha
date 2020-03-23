@@ -39,6 +39,13 @@
     <h3></h3>
 </noscript>
 
+<script>
+    const fixVersion = localStorage.getItem("fix-version") === "true";
+    if (!fixVersion) {
+        localStorage.setItem("fix-version", "true");
+        localStorage.setItem("mostrar-version", "false");
+    }
+</script>
 <div id="app"></div>
 <!-- built files will be auto injected -->
 </body>
