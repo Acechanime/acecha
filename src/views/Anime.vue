@@ -159,6 +159,7 @@
 
     .contImg
         position: relative
+        text-align: center
         .imagen
             width: 100%
 
@@ -213,6 +214,12 @@
         .cont
             grid-template-columns: initial
             grid-gap: 0
+
+        .contImg .imagen
+            width: 75%
+
+        .estado
+            width: 85%
 
     //
 </style>
