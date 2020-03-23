@@ -4,7 +4,8 @@ node_modules
 /ssl
 
 # Recursos
-/resources
+/assets
+/assets/*.*
 
 # local env files
 .env.local

@@ -16,12 +16,7 @@
                         br
                         br
                 div
-                    article.sinopsis
-                        div.tit Sinopsis
-                        p.txt {{ animeObj.info.sinopsis }}
-                        generos(:generos="animeObj.info.generos")
-                        // span.generos(v-for="g in animeObj.generos")  {{ $store.state.listaGeneros.find(x => x.genero_id === g).nombre }}
-
+                    sinopsis(:sinopsis="animeObj.info.sinopsis" :generos="animeObj.info.generos")
                     temporadas(:anime="animeObj")
                     lista-de-episodios(:anime="animeObj")
 
@@ -44,6 +39,7 @@
     import info from "../components/Anime/info.vue"
     import mal from "../components/Anime/mal.vue"
     import twitter from "../components/Anime/twitter.vue"
+    import sinopsis from "../components/Anime/sinopsis.vue"
     import generos from "../components/Anime/generos.vue"
     import temporadas from "../components/Anime/temporadas.vue"
     import listaDeEpisodios from "../components/Anime/lista-de-episodios.vue"
@@ -57,17 +53,19 @@
         name: "Anime"
         metaInfo: ->
             title: if @animeObj?.info?.nombre? then @animeObj.info.nombre else "404"
-        components:
-            "imagen-anime": imagenAnime
-            "redes-sociales": redesSociales
-            "info": info
-            "mal": mal
-            "twitter": twitter
-            "temporadas": temporadas
-            "lista-de-episodios": listaDeEpisodios
-            "comentarios": comentarios
-            "generos": generos
-            "en-construccion": EnConstruccion
+        components: {
+            imagenAnime
+            redesSociales
+            info
+            mal
+            twitter
+            sinopsis
+            temporadas
+            listaDeEpisodios
+            comentarios
+            generos
+            EnConstruccion
+        }
         data: ->
             animeProv: {imagenes: {}}
             animeExiste: false
@@ -159,6 +157,7 @@
 
     .contImg
         position: relative
+        text-align: center
         .imagen
             width: 100%
 
@@ -186,23 +185,7 @@
         &:hover
             opacity: 0.9
 
-    .sinopsis
-        @extend %caja-textos
-        background-color: var(--fondo2)
-        .tit
-            line-height: 1.3
-            font:
-                weight: 600
-                family: $titulos
-                size: 1.8rem
-            color: var(--texto1)
-            padding-bottom: .3em
-        .txt
-            @extend %textosGris
-            margin-bottom: 1.25rem
-            line-height: 1.6
-        .generos
-            color: var(--texto1)
+
 
     @media only screen and (max-width: 850px)
         .contenedor_comentarios
@@ -213,6 +196,12 @@
         .cont
             grid-template-columns: initial
             grid-gap: 0
+
+        .contImg .imagen
+            width: 75%
+
+        .estado
+            width: 85%
 
     //
 </style>

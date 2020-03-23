@@ -4,7 +4,7 @@
             img.imagen(:src="anime.imagenes.nuevo_ep"
                 :alt="'Episodio ' + ep.num_ep + ' de ' + anime.info.nombre"
                 :style="'height: ' + alto + 'px'")
-            h3.nombre {{ anime.info.nombre }} {{ ep.num_ep }}
+            h3.nombre {{ anime.info.nombre }} {{ ep.es_ova? 'OVA': '' }} {{ ep.num_ep }}
 
     //
 </template>

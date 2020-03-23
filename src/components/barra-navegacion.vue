@@ -1,6 +1,6 @@
 <template lang="pug">
     div
-        nav.navegacion.barra-pc(:class="barraMinClase" )
+        nav.navegacion.barra-pc(:class="barraMinClase" v-if="!esMovil")
             div.contenedor.wrap_barra
                 div.izq
                     router-link(to="/")
@@ -17,7 +17,7 @@
                 router-link.imagen_usuario(to="/mi-cuenta/")
                     img(src="/favicon.png")
 
-        barra-navegacion-movil.barra-movil
+        barra-navegacion-movil.barra-movil(v-if="esMovil")
     //
 </template>
 
@@ -49,7 +49,9 @@
                 if @$route.path is "/"
                     if @barraMin then "navegacion--min" else "navegacion--no-min"
                 else "navegacion--min"
-            esMovil: -> window.innerWidth < 769
+            esMovil: ->
+                @$store.state.datos.resizeEvent
+                window.innerWidth <= 850
         created: ->
             vm = this
             window.addEventListener "scroll", () ->
@@ -199,19 +201,6 @@
             display: list-item
             text-transform: none
 
-    .barra-pc
-        display: block
-
-    .barra-movil
-        display: block
-
-    @media only screen and (max-width: 850px)
-        .barra-pc
-            display: none
-
-    @media only screen and (min-width: 851px)
-        .barra-movil
-            display: none
 
     //
 </style>

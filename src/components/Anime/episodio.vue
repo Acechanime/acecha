@@ -1,6 +1,6 @@
 <template lang="pug">
     a.ep(:href="link" @click.prevent="irAlEp")
-        | Ver {{ nombre }} {{ episodio.es_ova? "ova": "capítulo" }} {{ episodio.num_ep }}
+        | {{ nombre }} {{ episodio.es_ova? "ova": "capítulo" }} {{ episodio.num_ep }}
     //
 </template>
 

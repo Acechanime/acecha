@@ -42,9 +42,9 @@ export removerCaracteresArr = (palabras, claves) =>
 export filtroNombre = (vm, a) ->
     if vm.nombre.length is 0 then return 1
 
-    palabras = removerCaracteresArr [a.info.otros_nombres..., a.info.nombre], "-:"
+    palabras = removerCaracteresArr [a.info.otros_nombres..., a.info.nombre], "-"
     # palabras = removerCaracteres a.info.nombre, "-:"
-    nombre = removerCaracteres vm.nombre, "-:"
+    nombre = removerCaracteres vm.nombre, "-"
 
     if nombre.length is 0 then return 1
 

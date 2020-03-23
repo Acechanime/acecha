@@ -33,8 +33,12 @@
 
         computed:
             estilos: ->
-                res = "width: #{@anchoBuscador}px; top: #{@altoBuscador}px;"
-                if @tieneNombre then res += "display: block"
+                res =
+                    width: "#{@anchoBuscador}px"
+                    top: "#{@altoBuscador}px"
+
+                if @tieneNombre
+                    res.display = "block"
                 res
             listaAnimes: -> @$store.state.datos.listaAnimes
             listaAnimesFiltrada: ->
