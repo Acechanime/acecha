@@ -101,18 +101,18 @@
                                 <h3 class="helpers__title">SoAnime Site HD</h3>
                             </div>
                             <div class="helpers__item">
-                                <div class="helpers__image">
+                                <div class="helpers__image" style="background-color: #1F212B">
                                     <img
-                                            src="https://legacy.acechanime.com/wp-content/uploads/2019/05/51176061_780176512340986_6342168160627589120_n.png"
+                                            src="https://2.bp.blogspot.com/-PIL8rHgu9FA/XcNW7YiTI4I/AAAAAAAADVE/tP3NWe8UurYnBirlwQjSIxWW1ZMhag5XwCLcBGAsYHQ/s1600/logo_evaecv6.png"
                                             alt="AnimeFlasho"
                                     />
                                 </div>
-                                <h3 class="helpers__title">AnimeFlasho</h3>
+                                <h3 class="helpers__title">Evangelion-EC</h3>
                             </div>
                             <div class="helpers__item">
                                 <div class="helpers__image">
                                     <img
-                                            src="https://legacy.acechanime.com/wp-content/uploads/2019/05/logo-1.png"
+                                            src="https://monoschinos.com/assets/img/logo.png"
                                             alt="MonosChinos"
                                     />
                                 </div>
@@ -128,32 +128,10 @@
                                 <h3 class="helpers__title">Puya Subs</h3>
                             </div>
 
-                            <div class="helpers__item">
-                                <div class="helpers__image">
-                                    <img
-                                            src="https://legacy.acechanime.com/wp-content/themes/anime/img/dw-anime.png"
-                                            alt="Dw Anime"
-                                    />
-                                </div>
-                                <h3 class="helpers__title">Dw Anime</h3>
-                            </div>
                         </div>
                     </div>
                 </div>
             </main>
-            <div class="section step step--mark">
-                <div class="step__inner wrap">
-                    <div class="step__text">
-                        <h2>Nuestra marca de agua</h2>
-                    </div>
-                    <figure class="step__image">
-                        <img
-                                src="https://legacy.acechanime.com/wp-content/themes/anime/img/acechatv.png"
-                                alt="Nuestra marca de agua"
-                        />
-                    </figure>
-                </div>
-            </div>
             <div class="section--separator"></div>
         </section>
     </div>
