@@ -125,6 +125,16 @@ const router = new Router({
             component: () => import("./views/PaginasSecundarias/AcechaTv.vue")
         },
         {
+            path: "/dmca/",
+            name: "DMCA",
+            component: () => import("./views/PaginasSecundarias/DMCA.vue")
+        },
+        {
+            path: "/politica-privacidad/",
+            name: "PoliticaPrivacidad",
+            component: () => import("./views/PaginasSecundarias/PoliticaPrivacidad.vue")
+        },
+        {
             path: '/animes/',
             name: 'Animes',
             component: () => import("./views/Animes.vue")
@@ -159,3 +169,4 @@ const router = new Router({
 
 export default router;
 
+export const paginasLegacy = ["Nosotros", "Creadores", "Premium", "AcechaTV", "DMCA", "PoliticaPrivacidad"];
