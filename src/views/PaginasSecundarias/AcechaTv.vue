@@ -71,63 +71,85 @@
                     <div class="section__header">
                         <h2 class="section__title">¿Realmente son esos pasos?</h2>
                         <p class="section__description">
-                            Estas páginas nos ayudan a que nuestro sitio adelante, muchas veces no nos da
-                            tiempo a subir tantos animes como nos gustaría, lo cual recurrimos a estas páginas.
-                            <br />Ellos tienen animes
-                            sin marca de agua, que quede claro que nosotros no subimos episodios de anime con nuestra marca de agua si
-                            es cogido de estas páginas.
-                            <br />Nuestra marca de agua solo estará en aquellos animes que sean traducidos por
-                            nosotros.
+                            Estas páginas nos ayudan a que nuestro sitio adelante, muchas veces no
+                            nos da tiempo a subir tantos animes como nos gustaría, lo cual
+                            recurrimos a estas páginas.<br>
+                            Ellos tienen animes sin marca de agua, pero que quede claro que
+                            nosotros no subimos episodios de anime con nuestra marca de agua si es
+                            cogido de estas páginas a excepción de varias de ellas que nos dieron
+                            permiso de colocar nuestra marca en sus fansubs. Nuestra marca de agua
+                            solo estará en aquellos animes que sean traducidos por nosotros, y en
+                            fansubs que nos dieron permiso de colocarla.
                         </p>
                     </div>
                     <div class="section__content">
                         <div class="helpers">
-                            <div class="helpers__item">
-                                <div class="helpers__image">
-                                    <img
-                                            src="https://legacy.acechanime.com/wp-content/themes/anime/img/pseudosubs.jpg"
-                                            alt="PseudoSubs"
-                                    />
+                            <a href="https://puya.moe">
+                                <div class="helpers__item">
+                                    <div class="helpers__image">
+                                        <img
+                                                src="https://legacy.acechanime.com/wp-content/themes/anime/img/puyasubs.png"
+                                                alt="Puya Subs"
+                                        />
+                                    </div>
+                                    <h3 class="helpers__title">Puya Subs</h3>
                                 </div>
-                                <h3 class="helpers__title">PseudoSubs</h3>
-                            </div>
-                            <div class="helpers__item">
-                                <div class="helpers__image">
-                                    <img
-                                            src="https://legacy.acechanime.com/wp-content/uploads/2019/05/soanime.jpg"
-                                            alt="SoAnime Site HD"
-                                    />
+                            </a>
+                            <a href="https://dw-anime.net/">
+                                <div class="helpers__item">
+                                    <div class="helpers__image">
+                                        <img
+                                                src="https://dw-anime.net/wp-content/uploads/2018/11/11111000.png"
+                                                alt="DW Anime"
+                                        />
+                                    </div>
+                                    <h3 class="helpers__title">DW Anime</h3>
                                 </div>
-                                <h3 class="helpers__title">SoAnime Site HD</h3>
-                            </div>
-                            <div class="helpers__item">
-                                <div class="helpers__image" style="background-color: #1F212B">
-                                    <img
-                                            src="https://2.bp.blogspot.com/-PIL8rHgu9FA/XcNW7YiTI4I/AAAAAAAADVE/tP3NWe8UurYnBirlwQjSIxWW1ZMhag5XwCLcBGAsYHQ/s1600/logo_evaecv6.png"
-                                            alt="AnimeFlasho"
-                                    />
+                            </a>
+                            <a href="https://unfansubmas.fansub.co/">
+                                <div class="helpers__item">
+                                    <div class="helpers__image">
+                                        <img
+                                                src="https://unfansubmas.fansub.co/wp-content/uploads/2017/01/cropped-favicon.png"
+                                                alt="Otro Fansub Más"
+                                        />
+                                    </div>
+                                    <h3 class="helpers__title">Otro Fansub Más</h3>
                                 </div>
-                                <h3 class="helpers__title">Evangelion-EC</h3>
-                            </div>
-                            <div class="helpers__item">
-                                <div class="helpers__image">
-                                    <img
-                                            src="https://monoschinos.com/assets/img/logo.png"
-                                            alt="MonosChinos"
-                                    />
+                            </a>
+                            <a href="https://magicallovefansub.blogspot.com/">
+                                <div class="helpers__item">
+                                    <div class="helpers__image">
+                                        <img
+                                                src="@/assets/img/magical-love-fansub.png"
+                                                alt="Magical Love"
+                                        />
+                                    </div>
+                                    <h3 class="helpers__title">Magical Love</h3>
                                 </div>
-                                <h3 class="helpers__title">MonosChinos</h3>
-                            </div>
-                            <div class="helpers__item">
-                                <div class="helpers__image">
-                                    <img
-                                            src="https://legacy.acechanime.com/wp-content/themes/anime/img/puyasubs.png"
-                                            alt="Puya Subs"
-                                    />
+                            </a>
+                            <a href="https://ninjinanime.com/">
+                                <div class="helpers__item">
+                                    <div class="helpers__image">
+                                        <img
+                                                src="https://ninjinanime.com/wp-content/uploads/2019/07/cropped-Sin-títulsdsddsdsdsdsdsdo-1-192x192.png"
+                                                alt="ninjinanime"
+                                        />
+                                    </div>
+                                    <h3 class="helpers__title">ninjinanime</h3>
                                 </div>
-                                <h3 class="helpers__title">Puya Subs</h3>
-                            </div>
-
+                            </a>
+                            <a href="http://rebootsubs.com/">
+                                <div class="helpers__item">
+                                    <div class="helpers__image">
+                                        <img
+                                                src="https://i0.wp.com/rebootsubs.com/wp-content/uploads/2020/01/cropped-82163023_2608782209446111_6748718299635104743_n.jpg"
+                                                alt="reboot subs"
+                                        />
+                                    </div>
+                                    <h3 class="helpers__title">reboot subs</h3>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
