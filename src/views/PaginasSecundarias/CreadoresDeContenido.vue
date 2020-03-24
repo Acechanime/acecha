@@ -147,6 +147,7 @@
 </template>
 
 <script lang="coffee">
+    import { paginasLegacy as nombres } from "../../router"
 
     contenedorCssPromesa = new Promise (resolve) =>
         intervalo = setInterval (=>
@@ -160,7 +161,6 @@
     export default
         name: "Creadores"
         beforeRouteEnter: (to, from, next) ->
-            nombres = ["Nosotros", "Creadores", "Premium", "AcechaTV"]
 
             unless (nombres.find (x) => x is from.name)?
                 contenedorCss = await contenedorCssPromesa
@@ -170,7 +170,6 @@
 
             next()
         beforeRouteLeave: (to, from, next) ->
-            nombres = ["Nosotros", "Creadores", "Premium", "AcechaTV"]
             contenedorCss = await contenedorCssPromesa
 
             unless (nombres.find (x) => x is to.name)?
