@@ -3,7 +3,7 @@
         div.tit Sinopsis
         p.txt
             span(v-html="sinopsisCambiada")
-            span.leer-mas(v-if="!leerMas && largoSinopsis > 250" @click="mostrarTodaSinopsis") leer mas
+            span.leer-mas(v-if="esMovil && !leerMas && largoSinopsis > 250" @click="mostrarTodaSinopsis") leer mas
         generos(:generos="generos")
         // span.generos(v-for="g in animeObj.generos")  {{ $store.state.listaGeneros.find(x => x.genero_id === g).nombre }}
 
