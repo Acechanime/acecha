@@ -3,9 +3,17 @@
         div.contenido(:style="estiloAlto")
             div.m-contenedor
                 div.txt
-                    div.titulo {{ titulo }}
+                    h1.titulo {{ titulo }}
+                    span.motto(v-if="mostrarExtra")
+                        | Te damos el amor que no te da él/ella
+                        // span(style="font-family: icomoon !important;") &#xE9DA;
                     br
-                    span.motto(v-if="mostrarExtra") Te damos el amor que no te da él/ella
+                    br
+                    br
+                    div.botones-cuenta
+                        router-link.boton-inicio-sesion(to="/login/") Inicia Sesión
+                        router-link.boton-registro(to="/login/") Regístrate
+
                     // br
                     // br
                     // br
@@ -79,6 +87,24 @@
 <style scoped lang="sass">
 
     $altoImg: 40rem
+
+    .botones-cuenta
+        a
+            margin: 0.5rem 1rem
+            padding: 0.5rem 0.75rem
+            border-radius: 3px
+            border: none
+            background-color: white
+            user-select: none
+            text-decoration: none
+            font-family: "Product Sans", sans-serif
+        .boton-registro
+            background-color: var(--first-color)
+            color: white
+        .boton-inicio-sesion
+            color: #3a3a3a
+            background-color: white
+
 
     .imgPrin
         position: relative

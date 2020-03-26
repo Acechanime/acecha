@@ -39,7 +39,7 @@
         computed:
             estilos: ->
                 vm = this
-                listaBlanca = ["/mi-cuenta", "/mi-cuenta/", "/en-construccion/"]
+                listaBlanca = ["/mi-cuenta", "/mi-cuenta/", "/en-construccion/", "/login/"]
                 estilos = {}
                 if (listaBlanca.find (x) => x is vm.$route.path)?
                     estilos.display = "none"
