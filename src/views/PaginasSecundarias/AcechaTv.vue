@@ -132,7 +132,7 @@
                                 <div class="helpers__item">
                                     <div class="helpers__image">
                                         <img
-                                                src="https://ninjinanime.com/wp-content/uploads/2019/07/cropped-Sin-títulsdsddsdsdsdsdsdo-1-192x192.png"
+                                                src="@/assets/img/ninjianime.png"
                                                 alt="ninjinanime"
                                         />
                                     </div>

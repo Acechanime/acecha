@@ -58,7 +58,8 @@
                 document.head.appendChild contenedor_codigo
 
         mounted: ->
-            @cargarFbSdk()
+            vm = this
+            setTimeout (=> vm.cargarFbSdk()), 250
 
 
 
