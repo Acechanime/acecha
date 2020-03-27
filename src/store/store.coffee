@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { servidor, impr } from "../variables"
 import { moduloVerAnime } from "./verAnime.coffee"
+import { moduloUsuario } from "./usuario.coffee"
 
 Vue.use Vuex
 
@@ -131,6 +132,7 @@ store = new Vuex.Store
     modules:
         verAnime: moduloVerAnime
         datos: moduloDatos
+        usuario: moduloUsuario
 
 export default store
 
