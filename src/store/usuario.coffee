@@ -12,4 +12,8 @@ export moduloUsuario =
             state.usuarioActual = usuario
             localStorage.setItem "usuario", JSON.stringify usuario
 
+        cerrarSesionUsuario: (state) ->
+            state.usuarioActual = {}
+            localStorage.removeItem "usuario"
+
     actions: {}

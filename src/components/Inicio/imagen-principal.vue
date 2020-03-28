@@ -10,7 +10,7 @@
                     br
                     br
                     br
-                    div.botones-cuenta(v-if="$route.path === '/'")
+                    div.botones-cuenta(v-if="mostrarBotonesLogin")
                         router-link.boton-inicio-sesion(to="/login/") Inicia Sesión
                         router-link.boton-registro(to="/registro/") Regístrate
 
@@ -41,6 +41,8 @@
             estiloAlto: -> {height: "#{ @alto }rem"}
             estiloCabecera: -> { background: "url('#{ @cabecera }') center center" }
             mostrarExtra: -> @titulo is "AcechaAnime"
+            mostrarBotonesLogin: ->
+                (@$route.path == "/") && !@$store.state.usuario.usuarioActual?.id?
 
 
 #

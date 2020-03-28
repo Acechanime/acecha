@@ -1,6 +1,7 @@
 <template lang="pug">
     div.ajustes.contenedor
         div.separador
+        ajustes-usuario
         h1.titulo Ajustes
         div.contenedor-ajuste
             div.modo-color(@click="cambiarColor")
@@ -32,6 +33,7 @@
     import modoColorAutomatico from "../components/Ajustes/modo-color-automatico.vue"
     import mostrarVersion from "../components/Ajustes/mostrar-version.vue"
     import credito from "../components/Ajustes/credito.vue"
+    import ajustesUsuario from "../components/Ajustes/ajustes-usuario.vue"
     import { cambiarColor } from "../components/App/ModoColor.coffee"
     import "../sass/clean-switch.css"
 
@@ -39,7 +41,13 @@
         name: "Ajustes"
         metaInfo:
             title: "Ajustes"
-        components: { modoColorOscuro, modoColorAutomatico, credito, mostrarVersion }
+        components: {
+            ajustesUsuario
+            modoColorOscuro
+            modoColorAutomatico
+            credito
+            mostrarVersion
+        }
         data: ->
             esBeta: (window.location.hostname.search "beta") != -1
         computed:
