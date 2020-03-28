@@ -1,5 +1,5 @@
 <template lang="pug">
-    footer.pie(:style="estilos")
+    footer.pie(v-if="mostrarPag" :style="estilos")
         div.cont-foot
             div.logo
                 h3.titulo Sobre Nosotros
@@ -37,12 +37,14 @@
     export default
         name: "pie-pagina"
         computed:
-            estilos: ->
+            mostrarPag: ->
                 vm = this
-                listaBlanca = ["/mi-cuenta", "/mi-cuenta/", "/en-construccion/", "/login/"]
-                estilos = {}
+                listaBlanca = ["/mi-cuenta", "/mi-cuenta/", "/en-construccion/", "/login/", "/registro/"]
                 if (listaBlanca.find (x) => x is vm.$route.path)?
-                    estilos.display = "none"
+                    false
+                else true
+            estilos: ->
+                estilos = {}
 
                 estilos.backgroundImage =
                     if Math.random() < 0.01 then "url('/img/portada/you-kei.webp')"

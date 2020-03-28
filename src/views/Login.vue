@@ -5,7 +5,7 @@
                 inicio-sesion(v-if="esLogin" :cambiarARegistro="cambiarARegistro")
                 registro(v-else :cambiarALogin="cambiarALogin")
 
-        div.img
+        div.img(:style="estiloCabecera")
 
     //
 </template>
@@ -13,12 +13,19 @@
 <script lang="coffee">
     import inicioSesion from "../components/Login/inicio-sesion.vue"
     import registro from "../components/Login/registro.vue"
+    import { escogerImg } from "../components/App/imagen-principal.coffee"
+
 
     export default
         name: "Login"
         components: { inicioSesion, registro }
         data: ->
-            esLogin: true
+            esLogin: @$route.path == "/login/"
+            cabecera: escogerImg()
+        computed:
+            estiloCabecera: ->
+                background: "url('#{ @cabecera }') center center"
+                height: "100%"
         methods:
             cambiarALogin: -> @esLogin = true
             cambiarARegistro: -> @esLogin = false
@@ -40,17 +47,10 @@
     .contenido
         position: relative
         z-index: 2
+        height: 100%
+        width: 100%
+        display: table
         // height: $altoImg
-        .m-contenedor
-            padding: 120px 0
-            height: 100%
-            width: 100%
-            display: inline-table
-        .txt
-            display: table-cell
-            vertical-align: middle
-            text-align: center
-            color: white
 
 
     .img
@@ -77,8 +77,9 @@
 
     .contenedor-login
         text-align: center
-        padding-top: 5rem
         color: var(--texto1)
+        display: table-cell
+        vertical-align: middle
 
 
     .titulo-login

@@ -129,6 +129,7 @@
         border: solid 1px var(--texto1)
         border-radius: 3px
         text-align: center
+        background-color: var(--fondo1)
 
 
     .form-login label
