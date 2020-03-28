@@ -86,5 +86,10 @@
         font-family: "Product Sans", sans-serif
 
 
+    @media only screen and (max-width: 600px)
+        .login
+            font-size: 14px
+
+
     //
 </style>

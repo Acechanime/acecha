@@ -25,8 +25,7 @@
                     label#label-contrasena.label-login(for="login-contrasena") Contraseña
                 p.aviso(v-html="aviso")
                 input.boton-login(type="submit" :value="textoBoton" :disabled="botonDesactivado")
-            br
-            br
+            div.mini-separador
             p ¿Aun no tienes una cuenta?
             p.cambio-registro(@click="cambiarARegistro") Regístrate
 
@@ -104,15 +103,15 @@
 
 
     .boton-login
-        margin: 0.5rem 1rem
-        padding: 0.5rem 0.75rem
+        margin: 0.5em 1em
+        padding: 0.5em 0.75em
         border-radius: 3px
         border: none
         user-select: none
         text-decoration: none
         font:
             family: "Product Sans", sans-serif
-            size: 1rem
+            size: 1em
         background-color: var(--first-color)
         color: white
         cursor: pointer
@@ -124,12 +123,13 @@
 
 
     .login
-        padding: 2rem
+        padding: 2em
         display: inline-block
         border: solid 1px var(--texto1)
         border-radius: 3px
         text-align: center
         background-color: var(--fondo1)
+        font-size: 1em
 
 
     .form-login label
@@ -138,7 +138,7 @@
 
 
     .campo
-        padding: 1.5rem 0
+        padding: 1.5em 0
         position: relative
 
 
@@ -147,15 +147,15 @@
         transition: top 250ms, left 250ms, font-size 250ms, color 250ms
         user-select: none
         position: absolute
-        top: 2.5rem
-        left: 1rem
+        top: 2.5em
+        left: 1em
 
 
     .entrada-login
-        width: 20rem
+        width: 20em
         border: solid 2px var(--texto2)
         border-radius: 3px
-        padding: 1rem
+        padding: 1em
         background-color: var(--fondo1)
         font-size: large
         color: var(--texto1)
@@ -173,16 +173,46 @@
 
         &:focus + label
             color: var(--first-color)
-            top: 0.25rem
-            left: 0.5rem
-            font-size: 0.8rem
+            top: 0.25em
+            left: 0.5em
+            font-size: 0.8em
 
         &:not(:placeholder-shown) + label
-            top: 0.25rem !important
-            left: 0.5rem !important
-            font-size: 0.8rem !important
+            top: 0.25em !important
+            left: 0.5em !important
+            font-size: 0.8em !important
 
 
-    
+    .mini-separador
+        height: 2em
+
+
+    @media only screen and (max-width: 600px)
+        .login
+            padding: 1em
+
+        .campo
+            padding: 0.75em 0
+
+        .entrada-login
+            width: 100%
+            padding: 0.75em
+            font-size: 1em
+            &:focus + label
+                top: -0.5em
+                left: 0.5em
+
+        .label-login
+            cursor: text
+            transition: top 250ms, left 250ms, font-size 250ms, color 250ms
+            user-select: none
+            position: absolute
+            top: 1.65em
+            left: 1em
+
+        .mini-separador
+            height: 0.75em
+
+
     //
 </style>

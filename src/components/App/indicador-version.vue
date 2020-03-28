@@ -1,6 +1,7 @@
 <template lang="pug">
     div.beta(v-if="mostrarVersion || esBeta")
-        span v 3.14.0{{ esBeta? '-beta': '' }}
+        span v 3.14.5{{ esBeta? '-beta': '' }}
+
     //
 </template>
 
@@ -26,12 +27,10 @@
         background-color: rgba(0, 0, 0, 0.5)
         padding: 0.25rem
 
-
         a, span
             color: white
             font:
                 family: "Product Sans", Roboto, sans-serif
-
 
 
     //

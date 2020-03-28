@@ -31,8 +31,10 @@
             ]
         else []
 
+
     export default
         name: "VerAnimeLegacy"
+        metaInfo: ->
 
         components: { reproductor, descarga, comentarios, publicidad }
         computed:
@@ -60,8 +62,9 @@
 
         beforeDestroy: ->
             @$store.commit "desactivarVerAnime"
-    #
-    
+
+
+#
 </script>
 
 <style scoped lang="sass">
