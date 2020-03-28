@@ -4,9 +4,8 @@
             div.contenedor.wrap_barra
                 div.izq
                     router-link(to="/")
-                        img.logo(:src="linkLogo"
-                             alt="Logo AcechaAnime")
-                
+                        img.logo(:src="linkLogo" alt="Logo AcechaAnime")
+
                 ul.items
                     anime
                     // tips
@@ -15,7 +14,7 @@
                     buscador
 
                 router-link.imagen_usuario(to="/mi-cuenta/")
-                    img(src="/favicon.png")
+                    img(:src="imgUsuario")
 
         barra-navegacion-movil.barra-movil(v-if="esMovil")
     //
@@ -52,6 +51,11 @@
             esMovil: ->
                 @$store.state.datos.resizeEvent
                 window.innerWidth <= 850
+            usuarioActual: -> @$store.state.usuario.usuarioActual
+            imgUsuario: ->
+                if @usuarioActual?.id?
+                    @usuarioActual.avatar
+                else "/favicon.png"
         created: ->
             vm = this
             window.addEventListener "scroll", () ->

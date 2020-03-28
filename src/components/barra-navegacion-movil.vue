@@ -7,7 +7,7 @@
             div.superior(:class="navOculta? 'superior--oculto': ''")
                 router-link.usuario(to="/mi-cuenta/")
                     // img(src="https://png.icons8.com/windows/1600/0063B1/user")
-                    img(src="/favicon.png")
+                    img(:src="imgUsuario")
                 // Si, uso un @input en vez de v-model, porque solo así funciona en movil.
                 input.busqueda(placeholder="Buscar animes" :style="anchoInput" @input="registrar" :value="query")
                 span.material-icons.icono-menu(@click="cambiarEstadoMenu") menu
@@ -47,6 +47,11 @@
             esPagInicio: -> @$route.path is "/"
             esPagAnimes: -> @$route.path is "/animes/"
             esPagBugs: -> @$route.path is "/bugs/"
+            usuarioActual: -> @$store.state.usuario.usuarioActual
+            imgUsuario: ->
+                if @usuarioActual?.id?
+                    @usuarioActual.avatar
+                else "/favicon.png"
         methods:
             registrar: (ev) ->
                 @query = ev.target.value
