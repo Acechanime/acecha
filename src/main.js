@@ -4,6 +4,9 @@ import router from './router'
 import store from './store/store.coffee'
 import './registerServiceWorker'
 import "./sass/global.sass"
+import "typeface-open-sans"
+import "typeface-roboto"
+
 import VueGtag from "vue-gtag"
 import VueMeta from "vue-meta"
 

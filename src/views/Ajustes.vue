@@ -33,6 +33,7 @@
     import mostrarVersion from "../components/Ajustes/mostrar-version.vue"
     import credito from "../components/Ajustes/credito.vue"
     import { cambiarColor } from "../components/App/ModoColor.coffee"
+    import "../sass/clean-switch.css"
 
     export default
         name: "Ajustes"
