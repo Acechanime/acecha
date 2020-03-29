@@ -59,16 +59,28 @@
                     @cargarEpisodios()
         methods:
             cargarEpisodios: ->
-                if @anime.info.anime_id?
-                    # datosRaw = await fetch "#{servidor}/episodios?anime_id=#{@anime.info.anime_id}"
-                    datosRaw = await fetch "#{servidor}/animes/#{@anime.info.anime_id}/episodios"
-                    datos = await datosRaw.json()
-                    @estadoCarga =
-                        if datos.exito? && datos.exito
-                            @episodios = datos.payload
-                            @$store.commit "cambiarListaEpisodios", datos.payload
-                            1
-                        else -1
+
+                unless @anime.info.anime_id? then return
+
+                try
+                    resRaw = await fetch "#{servidor}/animes/#{@anime.id}/episodios"
+
+                    if resRaw.ok is true
+
+                        datos = await resRaw.json()
+                        @episodios = datos
+                        @$store.commit "cambiarListaEpisodios", datos
+                        @estadoCarga = 1
+
+                    else
+                        console.error resRaw
+                        throw new Error "Error al recuperar lista de episodios."
+
+                catch e
+                    console.error e
+                    @estadoCarga = -1
+
+
         created: ->
             @cargarEpisodios()
 

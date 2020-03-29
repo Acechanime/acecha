@@ -18,6 +18,7 @@
     import { manejarError } from "./manejo-errores.coffee"
     import {servidor} from "../../variables";
 
+    # TODO: Habilitar la API, y refactorizar esto.
     export default
         name: "video-recomendado"
         data: ->

@@ -6,18 +6,25 @@ import { moduloVerAnime } from "./verAnime.coffee"
 Vue.use Vuex
 
 actualizarAnimes = () =>
-    res =
-        try
-            resRaw = await fetch "#{servidor}/animes"
-            await resRaw.json()
-        catch e
-            {exito: false, err: e}
-    if res?.exito
-        intervalo = setInterval (=>
-            if store.commit?
-                store.commit "cambiarListaAnimes", res.payload
-                clearInterval intervalo
-        ), 150
+    try
+        resRaw = await fetch "#{servidor}/animes"
+
+        if resRaw.ok is true
+
+            datos = await resRaw.json()
+            intervalo = setInterval (=>
+                if store.commit?
+                    store.commit "cambiarListaAnimes", datos
+                    clearInterval intervalo
+            ), 150
+
+        else
+            console.error "Error al recuperar animes desde el servidor."
+            console.error resRaw
+
+    catch e
+        console.error "Error al recuperar animes desde el servidor."
+        console.error e
 
 
 #: () -> (Txt | undefined)
@@ -35,20 +42,24 @@ guardarListaAnimes = (data) =>
     localStorage?.setItem "lista-animes", dataJSON
 
 
-
+# TODO: Refactorizar
 cargarRecursoDesdeRed = (nombre, url) => new Promise (resolve, reject) =>
-    res =
-        try
-            resRaw = await fetch "#{servidor}#{url}"
-            json = await resRaw.json()
-            json
-        catch e
-            {exito: false, err: e}
-    if res?.exito is true
-        localStorage?.setItem nombre, JSON.stringify res.payload
-        resolve [res.payload, false]
-    else
-        reject new Error "Error al obtener recurso #{nombre} desde #{url}.\n#{res.err}"
+    try
+        resRaw = await fetch "#{servidor}#{url}"
+
+        if resRaw.ok is true
+
+            datos = await resRaw.json()
+            localStorage.setItem nombre, JSON.stringify datos
+            resolve [datos, false]
+
+        else
+            console.error resRaw
+            throw new Error("")
+    catch e
+        console.error "Error al obtener recurso #{nombre} desde #{url}.\n#{res.err}"
+        console.error e
+        reject e
 
 
 ###: (nombre: Txt, url: Txt) -> Promise ({}, Bool) Error
@@ -83,8 +94,7 @@ moduloDatos =
         ###: Promise (Txt, Bool) Error
         Promesa que se recupera desde localStorage. Bool indica si se sacó de localStorage.
         ###
-        recomendacionSemanal: cargarRecurso "recomendacion-semanal",
-            "/recomendacion/"
+        recomendacionSemanal: cargarRecurso "recomendacion-semanal", "/animes/semanal"
 
         # Indica si la pagina termino de cargar sus recursos. En desuso.
         paginaLista: no
