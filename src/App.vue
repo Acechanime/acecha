@@ -5,12 +5,14 @@
         pie-pagina
         // ver-anime
         modo-color
+        aviso-global
         indicador-version
     //
 </template>
 
 <script lang="coffee">
     import BarraNavegacion from "./components/barra-navegacion.vue"
+    import avisoGlobal from "./components/App/aviso-global.vue"
     import PiePagina from "./components/pie-pagina.vue"
     import pantallaCarga from "./components/App/pantalla-carga.vue"
     import modoColor from "./components/App/modo-color.vue"
@@ -32,13 +34,15 @@
         metaInfo:
             title: "Anime online HD sub español"
             titleTemplate: "%s | Acechanime"
-        components:
-            "pie-pagina": PiePagina
-            "barra-navegacion": BarraNavegacion
-            "pantalla-carga": pantallaCarga
-            "ver-anime": VerAnime
-            "modo-color": modoColor
-            "indicador-version": indicadorVersion
+        components: {
+            PiePagina
+            BarraNavegacion
+            avisoGlobal
+            pantallaCarga
+            VerAnime
+            modoColor
+            indicadorVersion
+        }
         computed:
             esPagPrin: ->
                 this.$route.path is "/"
