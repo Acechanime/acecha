@@ -42,9 +42,25 @@
                 if @componentesCargando is 0 then @$store.commit "terminarCargaPagina"
         created: ->
             # Carga los datos
+
+            try
+                resRaw = await fetch "#{servidor}/animes/episodios/reciente"
+                if resRaw.ok is true
+
+                    [epRecientePrincipal, epsRecientes...] = await resRaw.json()
+                    @epRecientePrincipal = epRecientePrincipal
+                    @epsRecientes = epsRecientes
+
+                else
+                    console.error resRaw
+                    throw new Error "Error al recuperar episodios recientes."
+            catch e
+                console.error e
+
+
             epsRecientes =
                 try
-                    epsRecientesRaw = await fetch "#{servidor}/episodios/reciente"
+                    epsRecientesRaw = await fetch "#{servidor}/animes/episodios/reciente"
                     await epsRecientesRaw.json()
                 catch e
                     console.log "Error al recuperar los episodios recientes.\n#{e}"
