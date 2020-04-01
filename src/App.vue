@@ -5,7 +5,7 @@
         pie-pagina
         // ver-anime
         modo-color
-        // aviso-global
+        aviso-global
         indicador-version
     //
 </template>

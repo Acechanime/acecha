@@ -58,23 +58,6 @@
                 console.error e
 
 
-            epsRecientes =
-                try
-                    epsRecientesRaw = await fetch "#{servidor}/animes/episodios/reciente"
-                    await epsRecientesRaw.json()
-                catch e
-                    console.log "Error al recuperar los episodios recientes.\n#{e}"
-                    { exito: no, err: e, status: epsRecientesRaw?.status }
-            if epsRecientes.exito? && epsRecientes.exito
-                epRecientePrincipal = epsRecientes.payload.reduce (acc, nuevo) =>
-                    if nuevo["nivel_prioridad"] > acc["nivel_prioridad"] then nuevo else acc
-                @epRecientePrincipal = epRecientePrincipal
-                @epsRecientes = epsRecientes.payload.filter (x) =>
-                    x.episodio_id != epRecientePrincipal.episodio_id
-            else
-                console.log "Error al obtener los episodios recientes. " +
-                    "Código #{epsRecientes.status}.\n#{epsRecientes.err}"
-
             @terminarCarga()
 
 #

@@ -79,6 +79,7 @@ cargarRecurso = (nombre, url) =>
     else
         promesaRed
 
+
 moduloDatos =
     state:
         # TODO: Hacer que la lista de animes en si sea una Promesa.

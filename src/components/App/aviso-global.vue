@@ -1,6 +1,6 @@
 <template lang="pug">
     div.aviso-global(v-if="mostrar" @click="desaparecerMensaje")
-        | En unas horas estaremos en mantenimiento, y la página se deshabilitará.
+        | En unas horas estaremos en mantenimiento, y la página se deshabilitará.&nbsp;&nbsp;X
 
     //
 </template>
