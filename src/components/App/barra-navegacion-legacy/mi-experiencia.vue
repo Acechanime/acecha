@@ -46,7 +46,6 @@
 </script>
 
 <style scoped lang="sass">
-    @import "../../sass/variables"
-    
+
     //
 </style>

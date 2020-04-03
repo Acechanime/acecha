@@ -3,12 +3,13 @@
         // p {{ numeroDeAnimes }}
         div.gridIn
             anime(v-for="anime in listaAnimesFiltrada2" :key="anime.anime_id" :anime="anime")
+
     //
 </template>
 
 <script lang="coffee">
     import anime from "./anime.vue"
-    import { comp, filtrar } from "./buscador.coffee"
+    import { comp, filtrar } from "../../coffee/buscador.coffee"
 
     numeroDeFilas = 4
 
@@ -27,17 +28,19 @@
                 type: Function
                 required: true
         computed:
-            listaAnimes: ->
-                if @$store.state.datos.listaAnimes isnt undefined
-                    @$store.state.datos.listaAnimes
-                else []
+            listaAnimes: -> @$store.state.datos.animes
+
             listaAnimesFiltrada2: ->
-                @terminarCargaFn()
+                # @terminarCargaFn()
                 primerRes = filtrar @, @listaAnimes, @filtro
                 primerRes.sort @funOrden
+
             anchoPantalla: ->
+                if process.client == false then return 501
+
                 @$store.state.datos.resizeEvent
                 window.innerWidth
+
             numeroDeAnimes: ->
                 ancho = @anchoPantalla
                 numeroDeColumnas = do ->
@@ -45,6 +48,7 @@
                     else if ancho > 500 then 4
                     else 2
                 numeroDeFilas * numeroDeColumnas
+
             listaAnimesFiltrada3: -> @listaAnimesFiltrada2.slice 0, @numeroDeAnimes
 
 

@@ -5,20 +5,20 @@
             :epRecientePrincipal="epRecientePrincipal")
         episodios(:terminarCarga="terminarCarga" :ultimosEpisodios="epsRecientes")
         recomendacion-semanal(:terminarCarga="terminarCarga")
-        // video-recomendado(:terminarCarga="terminarCarga")
         comentarios
 
     //
 </template>
 
 <script lang="coffee">
-    import Comentarios from "../components/Inicio/comentarios.vue";
-    import RecomendacionSemanal from "../components/Inicio/recomendacion-semanal.vue";
-    import Episodios from "../components/Inicio/episodios.vue";
-    import UltimosEpisodios from "../components/Inicio/ultimos-episodios.vue";
-    import ImagenPrincipal from "../components/Inicio/imagen-principal.vue";
+    import Comentarios from "../components/Inicio/comentarios.vue"
+    import RecomendacionSemanal from "../components/Inicio/recomendacion-semanal.vue"
+    import Episodios from "../components/Inicio/episodios.vue"
+    import UltimosEpisodios from "../components/Inicio/ultimos-episodios.vue"
+    import ImagenPrincipal from "../components/Inicio/imagen-principal.vue"
     import VideoRecomendado from "../components/Inicio/video-recomendado.vue"
-    import {servidor} from "../variables";
+    import { servidor } from "../coffee/variables.coffee"
+
 
     export default
         name: "Inicio"
@@ -39,12 +39,11 @@
         methods:
             terminarCarga: () ->
                 @componentesCargando--
-                if @componentesCargando is 0 then @$store.commit "terminarCargaPagina"
-        created: ->
+                if @componentesCargando is 0 then @$store.commit "datos/terminarCargaPagina"
+        mounted: ->
             # Carga los datos
-
             try
-                resRaw = await fetch "#{servidor}/animes/episodios/reciente"
+                resRaw = await fetch "#{servidor}/animes/episodios/recientes"
                 if resRaw.ok is true
 
                     [epRecientePrincipal, epsRecientes...] = await resRaw.json()
@@ -57,19 +56,17 @@
             catch e
                 console.error e
 
-
             @terminarCarga()
+
 
 #
 </script>
 
-<style scoped lang="sass">
-    @import "../sass/variables"
+<style lang="sass">
 
     .inicio
         background-color: var(--fondo1)
         width: 100%
 
     //
-
 </style>

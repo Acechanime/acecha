@@ -10,12 +10,12 @@
                 div.ajuste-switch
                     div
                         label.cl-switch.cl-switch-red
-                            input(type="checkbox" :checked="$store.state.datos.modoColor !== 'claro'")
+                            input(type="checkbox" :checked="$store.state.color.color !== 'color-claro'")
                             span.switcher(@click.prevent.stop="cambiarColor")
             div.adicional Al cambiar el modo se reinician los comentarios de Facebook.
 
-        modo-color-oscuro
-        modo-color-automatico
+        // modo-color-oscuro
+        // modo-color-automatico
         mostrar-version(v-if="!esBeta")
 
         // div.contenedor-ajuste
@@ -32,7 +32,7 @@
     import modoColorAutomatico from "../components/Ajustes/modo-color-automatico.vue"
     import mostrarVersion from "../components/Ajustes/mostrar-version.vue"
     import credito from "../components/Ajustes/credito.vue"
-    import { cambiarColor } from "../components/App/ModoColor.coffee"
+    import "../components/Ajustes/clean-switch.css"
 
     export default
         name: "Ajustes"
@@ -40,15 +40,16 @@
             title: "Ajustes"
         components: { modoColorOscuro, modoColorAutomatico, credito, mostrarVersion }
         data: ->
-            esBeta: (window.location.hostname.search "beta") != -1
+            esBeta: false
         computed:
             mmodoColor: -> @$store.state.datos.modoColor
             etiquetaModoColor: -> if @mmodoColor is "claro" then "des" else ""
         methods:
             cambiarColor: ->
-                storeFn = @$store.commit
-                cambiarColor { storeFn }
-    
+                @$store.commit "color/cambiarModoColor"
+        mounted: ->
+            @esBeta = (window.location.hostname.search "beta") != -1
+
 #
 </script>
 

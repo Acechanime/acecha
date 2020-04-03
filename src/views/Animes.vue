@@ -7,6 +7,7 @@
                 animes(:filtro="filtro" :funOrden="funOrden" :terminarCargaFn="terminarCarga")
             div.publicidad
                 publicidad
+
     //
 </template>
 
@@ -30,13 +31,14 @@
                 @filtro = f
             cambiarFunOrden: (f) ->
                 @funOrden = f
-            
+
             terminarCarga: -> @$store.commit "terminarCargaPagina"
 
 #
 </script>
 
 <style scoped lang="sass">
+    @import "../sass/variables"
 
     .animes
         background-color: var(--fondo1)
@@ -47,13 +49,13 @@
         grid-template-columns: 1fr auto
         grid-gap: 2rem
 
-    @media only screen and (max-width: 500px)
+    @media only screen and (max-width: $anchoMovil)
         .publicidad
             display: none
 
         .grid
             display: block
-            // grid-template-columns: repeat(1, 1fr)
+    // grid-template-columns: repeat(1, 1fr)
 
     //
 </style>

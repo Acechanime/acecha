@@ -1,6 +1,7 @@
 <template lang="pug">
     div.beta(v-if="mostrarVersion || esBeta")
-        span v 3.12.22{{ esBeta? '-beta': '' }}
+        span v 4.1.0{{ esBeta? '-beta': '' }}
+
     //
 </template>
 
@@ -9,9 +10,11 @@
     export default
         name: "indicador-version"
         data: ->
-            esBeta: (window.location.hostname.search "beta") != -1
+            esBeta: false
         computed:
             mostrarVersion: -> @$store.state.datos.mostrarVersion
+        mounted: ->
+            @esBeta = (window.location.hostname.search "beta") != -1
 
 #
 </script>

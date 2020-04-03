@@ -2,18 +2,18 @@
     div.capitulos
         template(v-if="tieneOvas")
             h2.titulo Lista de Ovas
-            p.label Todas las OVAs de {{ anime.info.nombre }}
+            p.label Todas las OVAs de {{ anime.nombre }}
             div.eps
                 episodio(v-for="(ep, i) in ovas_filtradas" :key="i"
-                    :episodio="ep" :nombre="anime.info.nombre")
+                    :episodio="ep" :nombre="anime.nombre")
             br
             br
         template(v-if="episodios_filtrados.length > 0")
             h2.titulo Lista de Capítulos
-            p.label Todos los capítulos de {{ anime.info.nombre }}
+            p.label Todos los capítulos de {{ anime.nombre }}
             div.eps
                 episodio(v-for="(ep, i) in episodios_filtrados" :key="i"
-                    :episodio="ep" :nombre="anime.info.nombre")
+                    :episodio="ep" :nombre="anime.nombre")
         div.no-caps(v-else-if="estadoCarga === 0")
             p Cargando episodios...
         div.no-caps(v-else)
@@ -24,7 +24,7 @@
 
 <script lang="coffee">
     import episodio from "./episodio.vue"
-    import {servidor} from "../../variables";
+    import { servidor } from "../../coffee/variables.coffee"
 
     export default
         name: "lista-de-episodios"
@@ -41,26 +41,26 @@
             episodios_filtrados: ->
                 epsFiltrados = @episodios.filter (x) -> x.es_ova is no
                 epsFiltrados.sort (x, y) =>
-                    if x.num_ep > y.num_ep then -1
+                    if x.numero > y.numero then -1
                     else 1
 
 
             ovas_filtradas: ->
                 epsFiltrados = @episodios.filter (x) -> x.es_ova is yes
                 epsFiltrados.sort (x, y) =>
-                    if x.num_ep > y.num_ep then -1
+                    if x.numero > y.numero then -1
                     else 1
 
 
             tieneOvas: -> @ovas_filtradas.length > 0
         watch:
             anime: (n, v) ->
-                if n.info.anime_id isnt v.info.anime_id
+                if n.id isnt v.id
                     @cargarEpisodios()
         methods:
             cargarEpisodios: ->
 
-                unless @anime.info.anime_id? then return
+                unless @anime.id? then return
 
                 try
                     resRaw = await fetch "#{servidor}/animes/#{@anime.id}/episodios"
@@ -69,7 +69,7 @@
 
                         datos = await resRaw.json()
                         @episodios = datos
-                        @$store.commit "cambiarListaEpisodios", datos
+                        @$store.commit "reproductor/setEpisodios", datos
                         @estadoCarga = 1
 
                     else
@@ -81,7 +81,7 @@
                     @estadoCarga = -1
 
 
-        created: ->
+        mounted: ->
             @cargarEpisodios()
 
 
@@ -104,7 +104,7 @@
     .titulo
         color: var(--texto1)
         font:
-            family: $titulos
+            family: var(--fuenteTitulos)
             size: 1.75rem
         padding: 0.75rem 0
 

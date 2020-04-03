@@ -11,6 +11,7 @@
                     // br
                     // div.boton Compatible para
         div.img(:style="[estiloAlto, estiloCabecera]")
+
     //
 </template>
 
@@ -100,9 +101,12 @@
             text-align: center
             color: white
             .titulo
+                color: inherit
                 font:
                     size: 67px
                     weight: 700
+            .motto
+                color: inherit
             .boton
                 display: inline-block
                 border-radius: 50px
@@ -112,6 +116,7 @@
                 font-size: 12px
                 cursor: pointer
                 user-select: none
+
 
     .img
         position: absolute
@@ -133,6 +138,7 @@
             width: 100%
             height: 100%
             content: ""
+
 
     @media only screen and (max-width: 500px)
         .titulo

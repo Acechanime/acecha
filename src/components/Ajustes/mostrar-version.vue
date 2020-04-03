@@ -19,12 +19,12 @@
             mostrarVersion: -> @$store.state.datos.mostrarVersion
         methods:
             alternarMostrarVersion: ->
-                @$store.commit "cambiarMostrarVersion", !@mostrarVersion
+                @$store.commit "datos/setMostrarVersion", !@mostrarVersion
 
 #
 </script>
 
 <style scoped lang="sass">
-    
+
     //
 </style>

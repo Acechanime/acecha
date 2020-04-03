@@ -19,12 +19,11 @@
             generosFiltrados: -> new Set @generos
 
 
-
 #
 </script>
 
 <style scoped lang="sass">
 
-    
+
     //
 </style>

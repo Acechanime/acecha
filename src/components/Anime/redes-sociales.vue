@@ -24,9 +24,12 @@
     export default
         name: "redes-sociales"
         data: ->
-            urlActual: window.location.href
-    #
-    
+            urlActual: ""
+        mounted: ->
+            @urlActual = window.location.href
+
+
+#
 </script>
 
 <style scoped lang="sass">
@@ -44,7 +47,7 @@
 
     .the-post__social__link
         --size: 2.5rem
-        color: var(--white-color)
+        color: white
         font-size: 1.125rem
         width: var(--size)
         height: var(--size)

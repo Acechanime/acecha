@@ -1,8 +1,8 @@
 <template lang="pug">
     li.item_buscador
-        a(:href="anime.info.ruta" @click.prevent="irAlAnime" :title="anime.info.nombre")
-            img(:src="anime.imagenes.portada")
-            span.nombre_anime {{ anime.info.nombre }}
+        a(:href="anime.ruta" @click.prevent="irAlAnime" :title="anime.nombre")
+            img(:src="anime.portada" :alt="anime.nombre")
+            span.nombre_anime {{ anime.nombre }}
 
     //
 </template>
@@ -23,7 +23,7 @@
                 @limpiarBuscador()
                 anime = @anime
                 @$router.push
-                    path: anime.info.ruta
+                    path: anime.ruta
                     params:
                         animeObj: anime
 
@@ -31,7 +31,6 @@
 </script>
 
 <style scoped lang="sass">
-    @import "../../sass/variables"
 
 
     .item_buscador

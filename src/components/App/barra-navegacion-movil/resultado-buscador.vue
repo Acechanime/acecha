@@ -6,7 +6,7 @@
 </template>
 
 <script lang="coffee">
-    import { filtrar, filtroNombre } from "../Animes/buscador.coffee"
+    import { filtrar, filtroNombre } from "../../../coffee/buscador.coffee"
     import itemBuscador from "../barra-navegacion-legacy/item-buscador.vue"
 
     export default
@@ -19,10 +19,13 @@
             limpiarBuscador:
                 type: Function
                 required: true
-        data: ->
-            maxAlto: parseInt((window.innerHeight - 100) * 0.9)
         computed:
-            listaAnimes: -> @$store.state.datos.listaAnimes
+            maxAlto: ->
+                if !process.client then return 500
+
+                @$store.state.datos.resizeEvent
+                parseInt((window.innerHeight - 100) * 0.9)
+            listaAnimes: -> @$store.state.datos.animes
             listaAnimesFiltrada2: ->
                 vm = this
                 if @listaAnimes isnt undefined
@@ -38,6 +41,6 @@
         list-style-type: none
         overflow-y: scroll
         transition: max-height 250ms ease-in-out
-    
+
     //
 </style>

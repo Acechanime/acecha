@@ -1,20 +1,20 @@
 <template lang="pug">
     ul.lista#menu-barrra-movil(:style="ancho")
-        div#menu-cont
-            div.ltitulo Comunidad
-            li(:class="pagNosotros" @click="irA('/nosotros/')") Nosotros
-            li(:class="pagCreadoresDeContenido" @click="irA('/creadores-de-contenido/')") Creadores de contenido
-            // div.ltitulo Acecha Tips
-            // li(:class="pagComprarDesdeJapon" @click="irA('/comprar-desde-japon/')") Comprar desde Japón
-            // li(:class="pagComprarAnime" @click="irA('/comprar-anime/')") Comprar anime
-            // li(:class="pagLeerManga" @click="irA('/leer-manga/')") Leer Manga
-            div.ltitulo Mi experiencia
-            li(:class="pagAcechaTv" @click="irA('/acecha-tv/')") Acecha TV
-            li(:class="pagAcechaPremium" @click="irA('/acecha-premium/')") Acecha Premium
-            li(:class="pagCalendario" @click="irA('/calendario/')") Calendario
-            div.ltitulo Yo
-            // li(:class="pagMiCuenta" @click="irA('/mi-cuenta/')") Mi cuenta
-            li(:class="pagAjustes" @click="irA('/mi-cuenta/')") Ajustes
+
+        span.ltitulo Comunidad
+        li(:class="pagNosotros" @click="irA('/nosotros/')") Nosotros
+        li(:class="pagCreadoresDeContenido" @click="irA('/creadores-de-contenido/')") Creadores de contenido
+        // div.ltitulo Acecha Tips
+        // li(:class="pagComprarDesdeJapon" @click="irA('/comprar-desde-japon/')") Comprar desde Japón
+        // li(:class="pagComprarAnime" @click="irA('/comprar-anime/')") Comprar anime
+        // li(:class="pagLeerManga" @click="irA('/leer-manga/')") Leer Manga
+        span.ltitulo Mi experiencia
+        li(:class="pagAcechaTv" @click="irA('/acecha-tv/')") Acecha TV
+        li(:class="pagAcechaPremium" @click="irA('/acecha-premium/')") Acecha Premium
+        li(:class="pagCalendario" @click="irA('/calendario/')") Calendario
+        span.ltitulo Yo
+        // li(:class="pagMiCuenta" @click="irA('/mi-cuenta/')") Mi cuenta
+        li(:class="pagAjustes" @click="irA('/mi-cuenta/')") Ajustes
 
     //
 </template>
@@ -66,14 +66,13 @@
 </script>
 
 <style scoped lang="sass">
-    @import "../../sass/variables"
 
     #menu-barrra-movil
         max-height: 0
 
 
     .item-activo
-        color: $colorPrincipal
+        color: var(--colorPrincipal)
         background-color: rgba(233, 30, 99, 0.25)
         border-radius: 0 17px 17px 0
 
@@ -82,12 +81,12 @@
         overflow-y: scroll
         transition: max-height 250ms ease-in-out
 
-    #menu-cont li
-        padding: 7px 15px
-        margin-right: 5px
+        li
+            padding: 7px 15px
+            margin-right: 5px
 
     .ltitulo
-        // text-transform: uppercase
+        display: inline-block
         opacity: 0.6
         font:
             family: "Product Sans", Roboto, sans-serif

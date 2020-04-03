@@ -21,7 +21,7 @@
                 "background-image: url(\"#{@img}\");"
 
     #
-    
+
 </script>
 
 <style scoped lang="sass">
@@ -43,6 +43,7 @@
         padding: 8rem 0 // 155px 0
         text-align: center
 
+
     .cover
         z-index: 1
         background-position: center
@@ -62,9 +63,10 @@
             height: 100%
             background: rgba(0, 0, 0, 0.6)
 
-    @media only screen and (max-width: 500px)
+
+    @media only screen and (max-width: $anchoMovil)
         .nombre
-            font-size: var(--tamano-titulos-grande)
+            font-size: 2rem
             padding: 55px 0
 
     //

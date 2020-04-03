@@ -29,6 +29,7 @@
             esMovil: ->
                 @$store.state.datos.resizeEvent
                 window.innerWidth <= 500
+
             largoSinopsis: -> @sinopsis.length
             sinopsisCambiada: ->
                 if @esMovil and @largoSinopsis > 250
@@ -40,7 +41,6 @@
                 @leerMas = true
 
 
-    
 #
 </script>
 
@@ -61,7 +61,7 @@
             line-height: 1.3
             font:
                 weight: 600
-                family: $titulos
+                family: var(--fuenteTitulos)
                 size: 1.8rem
             color: var(--texto1)
             padding-bottom: .3em
@@ -71,6 +71,6 @@
             line-height: 1.6
         .generos
             color: var(--texto1)
-    
+
     //
 </style>

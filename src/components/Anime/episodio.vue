@@ -1,6 +1,6 @@
 <template lang="pug">
     a.ep(:href="link" @click.prevent="irAlEp")
-        | {{ nombre }} {{ episodio.es_ova? "ova": "capítulo" }} {{ episodio.num_ep }}
+        | {{ nombre }} {{ episodio.es_ova? "ova": "capítulo" }} {{ episodio.numero }}
     //
 </template>
 
@@ -16,29 +16,16 @@
                 type: String
                 required: true
         computed:
-            link: -> "./" + (if @episodio.es_ova then "ova" else "ep") + @episodio.num_ep
+            link: -> "./" + (if @episodio.es_ova then "ova" else "ep") + @episodio.numero
         methods:
             irAlEp: ->
-                ep = @episodio
-                @$store.commit "cambiarDatosVerAnime",
-                    nombre: @nombre
-                    esOva: @episodio.es_ova
-                    ep: @episodio.num_ep
-                    ruta: null
-                @$store.commit "cambiarAnimeVerAnime",
-                    mega: ep.mega
-                    rapidvideo: ep.rapidvideo
-                    mango: ep.mango
-                    mp4upload: ep.mp4upload
-                    okru: ep.okru
+                @$store.commit "reproductor/setEpActual", @episodio
                 @$router.push @link
 
-    #
-    
+#
 </script>
 
 <style scoped lang="sass">
-    @import "../../sass/variables"
 
     .ep
         display: block
@@ -54,7 +41,7 @@
         &::before
             content: "\e90d"
             font-family: icomoon !important
-            color: var(--blue-color)
+            color: var(--colorSecundario)
             font-size: 1.5rem
             margin-right: 1rem
             vertical-align: middle

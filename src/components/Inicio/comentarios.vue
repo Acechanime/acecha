@@ -1,11 +1,11 @@
 <template lang="pug">
     div.comentarios
         div.contenedor
-            img(src="https://image.flaticon.com/icons/svg/179/179319.svg" height="60px")
+            img(src="https://image.flaticon.com/icons/svg/179/179319.svg" height="60px" alt="Logo_fb")
             br
             br
             p.txt.
-                Reporta errores y pregunta todo lo que quieras, tus preguntas 
+                Reporta errores y pregunta todo lo que quieras, tus preguntas
                 serán respondidas antes de 24h.
             br
             fb-comments(path="/")
@@ -20,8 +20,7 @@
         name: "comentarios"
         components: { fbComments }
 
-    #
-
+#
 </script>
 
 <style scoped lang="sass">

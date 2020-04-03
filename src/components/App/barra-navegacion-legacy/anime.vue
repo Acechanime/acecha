@@ -1,14 +1,14 @@
 <template lang="pug">
     li.item(@mouseover="mostrarSubMenu" @mouseout="ocultarSubMenu")
-        a.item_label Comunidad
-            img.emoji(draggable="false" alt="👨‍👨‍👧‍👧" width="12px" src="/img/bicons/family.svg")
-        ul#sub-menu-comunidad.sub-menu-barra(:style="estilosLista")
+        router-link.item_label(to="/animes/") Anime
+            img.emoji( draggable="false" alt="📂" src="/img/bicons/folder.svg")
+        ul#sub-menu-animes.sub-menu-barra(:style="estilosLista")
             li.menu-item
-                router-link(to="/nosotros/") Nosotros
-                    img.emoji(draggable="false" alt="📂" width="12px" src="/img/bicons/family.svg")
+                router-link(to="/animes/") Ver Anime
+                    img.emoji( draggable="false" alt="📂" src="/img/bicons/folder.svg")
             li.menu-item
-                router-link(to="/creadores-de-contenido/") Creadores de Contenido
-                    img.emoji(draggable="false" alt="📂" width="12px" src="/img/bicons/play-button.svg")
+                router-link(to="/calendario/") Calendario
+                    img.emoji( draggable="false" alt="📂" src="/img/bicons/calendar.svg")
 
     //
 </template>
@@ -16,7 +16,7 @@
 <script lang="coffee">
 
     export default
-        name: "comunidad"
+        name: "anime"
         data: ->
             hover: no
         computed:
@@ -40,8 +40,9 @@
 </script>
 
 <style scoped lang="sass">
-    @import "../../sass/variables"
 
+    .emoji
+        width: 1rem
 
     //
 </style>

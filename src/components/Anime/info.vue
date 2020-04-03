@@ -4,19 +4,20 @@
             span.material-icons(v-if="esMovil") {{ textoIcono }}
         template(v-if="!esMovil || (esMovil && mostrarDetalles)")
             div.eps Numero de episodios
-            p {{ animeObj.emision.episodios === -1? "??": animeObj.emision.episodios }}
+            p {{ animeObj.episodios === -1? "??": animeObj.episodios }}
             div.temp Temporada
-            p {{ animeObj.emision.temporada }} {{ animeObj.emision.anio }}
+            p {{ animeObj.temporada }} {{ animeObj.anio }}
             div.estudio Estudio
-            p {{ animeObj.info.estudio }}
+            p {{ animeObj.estudio }}
             div.fuente ¿De donde viene el anime?
-            p {{ animeObj.info.fuente }}
+            p {{ animeObj.fuente }}
             div.emision Fecha de emision
-            p {{ animeObj.emision.inicio_emision }}
+            p {{ animeObj.inicio_emision }}
             div.culminacion Fecha de culminacion
-            p {{ animeObj.emision.culminacion }}
+            p {{ animeObj.culminacion }}
             div.otrosNombres Otros nombres
-                p(v-for="n in animeObj.info.otros_nombres") {{ n }}
+                p(v-for="n in animeObj.otros_nombres") {{ n }}
+
     //
 </template>
 
@@ -49,7 +50,7 @@
 
 
     #
-    
+
 </script>
 
 <style scoped lang="sass">
@@ -61,9 +62,9 @@
         padding: 1rem
         .tit
             font:
-                family: $titulos
+                family: var(--fuenteTitulos)
                 size: 1.3rem
-            color: $colorPrincipal
+            color: var(--colorPrincipal)
             padding-bottom: 1rem
             position: relative
             span
@@ -81,7 +82,7 @@
         p
             padding-bottom: 0.5rem
             padding-top: 0.25rem
-            color: $colorPrincipal
+            color: var(--colorPrincipal)
             font-size: 0.75rem
 
         .otrosNombres p

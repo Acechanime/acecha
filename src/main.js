@@ -4,6 +4,7 @@ import router from './router'
 import store from './store/store.coffee'
 import './registerServiceWorker'
 import "./sass/global.sass"
+import "./sass/colores.sass"
 import VueGtag from "vue-gtag"
 import VueMeta from "vue-meta"
 

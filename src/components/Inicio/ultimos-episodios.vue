@@ -1,12 +1,12 @@
 <template lang="pug">
-    div.ultimos-eps.contenedor.contenedor-rec
-        div.row(v-if="anime !== undefined")
-            div.col.l6.s12.leyenda
+    div.ultimos-eps.contenedor
+        div.contenedor-ultimos-eps(v-if="anime !== undefined")
+            div.leyenda
                 div.titulo acechanime
                 h2.txt Últimos episodios
                 hr.divisor
-                div.boton ¡Activa las notificaciones abajo a la izquierda!
-            div.col.l6.s12
+                // div.boton ¡Activa las notificaciones abajo a la izquierda!
+            div
                 episodio(:ep="epRecientePrincipal")
         div.err(v-if="cargaFallida")
             span.
@@ -22,10 +22,10 @@
 
     export default
         name: "ultimos-episodios"
+        components: { episodio }
         data: ->
             cargaFallida: no
             codigoDeError: ""
-        components: { episodio }
         props:
             terminarCarga:
                 type: Function
@@ -34,15 +34,14 @@
                 type: Object
                 required: true
         computed:
-            listaAnimes: -> @$store.state.listaAnimes
+            listaAnimes: -> @$store.state.datos.animes
             anime: ->
-                lista = @listaAnimes
+                lista = await @listaAnimes
                 if lista isnt undefined
                     ep = @epRecientePrincipal
                     unless ep.anime_id?
-                        animes = @$store.state.listaAnimes.filter (x) =>
-                            x.info.anime_id == ep.anime_id
-                        animes[0]
+                        animes = lista.find (x) => x.id == ep.anime_id
+                        animes
                     else {}
                 else {}
         watch:
@@ -60,12 +59,15 @@
 <style scoped lang="sass">
     @import "../../sass/variables"
 
-    .contenedor--rec
-        max-width: 1068px
+    .contenedor-ultimos-eps
+        display: grid
+        grid-template-columns: 50% 50%
+
 
     .ultimos-eps
         text-align: center
         padding: 48px 0
+
 
     .leyenda
         text-transform: uppercase
@@ -114,14 +116,20 @@
         font:
             size: 18px
             weight: 700
-            family: $titulos
+            family: var(--fuenteTitulos)
         line-height: .9rem
         letter-spacing: 0
         color: var(--texto1)
 
-    @media only screen and (max-width: 500px)
+
+    @media only screen and (max-width: $anchoMovil)
         .leyenda .txt
             font-size: var(--tamano-titulos)
+
+        .contenedor-ultimos-eps
+            grid-template-columns: 100%
+            grid-row-gap: 2rem
+
 
     //
 </style>

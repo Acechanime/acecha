@@ -1,12 +1,13 @@
 <template lang="pug">
     article.link
-        a.link(:href="anime.info.ruta" @click.prevent="irAPagAnime(anime)")
+        router-link.link(:to="anime.ruta")
             div.img
-                img(:src="anime.imagenes.portada"
+                img(:src="anime.portada"
                     sizes="(max-width: 247px) 100vw, 247px"
                     width="247" height="350"
                 )
-            h2.nombre {{ anime.info.nombre }}
+            h2.nombre {{ anime.nombre }}
+
     //
 </template>
 
@@ -17,15 +18,9 @@
         props:
             anime: Object
             required: true
-        methods:
-            irAPagAnime: (anime) ->
-                @$router.push
-                    path: anime.info.ruta
-                    params:
-                        animeObj: anime
 
     #
-    
+
 </script>
 
 <style scoped lang="sass">
@@ -52,7 +47,7 @@
         color: var(--texto2)
         font:
             size: 1rem
-            family: $titulos
+            family: var(--fuenteTitulos)
             weight: 600
         margin-top: .35rem
         text-align: center

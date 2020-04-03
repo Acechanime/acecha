@@ -1,22 +1,22 @@
 <template lang="pug">
     div.an
-        template(v-if="animeExiste")
-            imagen-anime(:nombre="animeObj.info.nombre || ''" :img="animeObj.imagenes.fondo || ''")
-            main.cont.contenedor(v-show="!$store.state.verAnime.verAnimeActivo")
+        template(v-if="animeObj.id")
+            imagen-anime(:nombre="animeObj.nombre || ''" :img="animeObj.fondo || ''")
+            main.cont.contenedor(v-show="!$store.state.reproductor.activo")
                 div
                     div.contImg
-                        img.imagen(:src="animeObj.imagenes.portada")
-                        figcaption.estado(:style="colorEtiqueta") {{ animeObj.emision.en_emision? 'en emision': 'finalizado' }}
+                        img.imagen(:src="animeObj.portada")
+                        figcaption.estado(:style="colorEtiqueta") {{ animeObj.en_emision? 'en emision': 'finalizado' }}
                             span.icon-check-box
                     redes-sociales
                     info(:animeObj="animeObj")
-                    mal(:url="animeObj.info.mal? animeObj.info.mal: 'err'" v-if="!esMovil")
+                    mal(:url="animeObj.mal? animeObj.mal: 'err'" v-if="!esMovil")
                     twitter(v-if="!esMovil")
                     template(v-if="esMovil")
                         br
                         br
                 div
-                    sinopsis(:sinopsis="animeObj.info.sinopsis" :generos="animeObj.info.generos")
+                    sinopsis(:sinopsis="animeObj.sinopsis" :generos="animeObj.generos")
                     temporadas(:anime="animeObj")
                     lista-de-episodios(:anime="animeObj")
 
@@ -24,7 +24,10 @@
             div.contenedor.contenedor_comentarios
                 comentarios
             br
-        div(v-else)
+        template(v-else-if="!$store.state.datos.animeActualCargado")
+            div.separador
+            p Cargando...
+        template(v-else)
             div.separador
             en-construccion(titulo="Esta página no existe"
                 texto="Vuelve al inicio para ver nuestros animes disponibles."
@@ -45,14 +48,15 @@
     import listaDeEpisodios from "../components/Anime/lista-de-episodios.vue"
     import comentarios from "../components/Anime/comentarios.vue"
     import redesSociales from "../components/Anime/redes-sociales.vue"
-    import store, { listaAnimesCargada } from "../store/store.coffee"
-    import EnConstruccion from "./EnConstruccion.vue"
-    import {impr} from "../variables"
+    import EnConstruccion from "./mantenimiento.vue"
+    import store from "../store/store.coffee"
+
 
     export default
         name: "Anime"
+        scrollToTop: true
         metaInfo: ->
-            title: if @animeObj?.info?.nombre? then @animeObj.info.nombre else "404"
+            title: if @animeObj?.nombre? then @animeObj.nombre else "404"
         components: {
             imagenAnime
             redesSociales
@@ -66,75 +70,64 @@
             generos
             EnConstruccion
         }
-        data: ->
-            animeProv: {imagenes: {}}
-            animeExiste: false
-            esMovil: window.innerWidth < 600
         computed:
             colorEtiqueta: ->
-                if @animeObj.emision.en_emision then "background: #01bc59" else "background: #ff0241"
-            animeAdmin: ->
-                @$store.state.animeAdmin.animeAdmin
-            animeObj:
-                get: -> @animeProv
-                set: (a) -> @animeProv = a
-        methods:
-            inicializarAnimeObj: (animeExiste = false) ->
-                @$store.commit "terminarCargaPagina"
-                @animeExiste = animeExiste
+                if @animeObj.en_emision then "background: #01bc59" else "background: #ff0241"
 
+            animeActualCargado: -> @$store.state.datos.animeActualCargado
+            animeObj: -> @$store.state.datos.animeActual
+
+            esMovil: ->
+                if process.client == false then return true
+
+                @$store.state.datos.resizeEvent
+                window.innerWidth < 600
+
+        methods:
             cambiarAnime: (obj) ->
                 @animeObj = obj
 
-        beforeRouteEnter: (to, from, next) ->
-            ruta =
-                if /\/(ep|ova)\d+$/.test to.path
-                    partes = to.path.split "/"
-                    if partes[0] is "" then partes[1]
-                    else partes[0]
-                else (to.path.split "/")[1]
-
-            if to.params.animeObj?
-                next (vm) -> vm.inicializarAnimeObj true
-            else
-                nombreRuta = "/#{ruta}/"
-                await listaAnimesCargada
-                anime = store.state.datos.listaAnimes?.find (a) -> a.info.ruta == nombreRuta
-                if anime?
-                    to.params.animeObj = anime
-                    next (vm) -> vm.inicializarAnimeObj true
-                else
-                    console.error "No se encontró un anime con ruta `#{nombreRuta}`"
-                    next (vm) -> vm.inicializarAnimeObj false
         beforeRouteUpdate: (to, from, next) ->
-            if /\/(ep|ova)\d+$/.test to.path
-                next()
-            else if to.params.animeObj?
-                @cambiarAnime to.params.animeObj
-                next()
-            else
-                nombreRuta = to.path
-                await listaAnimesCargada
-                anime = store.state.datos.listaAnimes?.find (a) -> a.info.ruta == nombreRuta
-                if anime?
-                    @cambiarAnime anime
-                    next()
-                else
-                    console.error "No se encontró un anime con ruta `#{nombreRuta}``"
-                    @inicializarAnimeObj true
-                    next()
+            console.log "Actualizando?"
+            if process.client == false then next()
+            if to.params.anime == from.params.anime then next()
 
-        created: ->
-            unless @$route?.params?.animeObj?
-                nombreRuta = @$route.path
-                await listaAnimesCargada
-                anime = store.state.listaAnimes?.find (a) -> a.info.ruta == nombreRuta
-                unless anime?
-                    @animeExiste = no
-            else
-                @animeObj = @$route.params.animeObj
+            new Promise (resolve, reject) =>
+                store.dispatch "datos/cargarAnime", "/#{to.params.anime}/"
 
-    #
+                intervalo = setInterval (=>
+                    if store.state.datos.animeActualCargado == true && store.state.datos.animeActualCargando == false
+                        clearInterval intervalo
+
+                        if store.state.datos.animeActual.id?
+                            next()
+                        else
+                            next()
+
+                ), 100
+
+        beforeRouteEnter: (to, from, next) ->
+            if process.client == false then next()
+
+            new Promise (resolve, reject) =>
+                store.dispatch "datos/cargarAnime", "/#{to.params.anime}/"
+
+                intervalo = setInterval (=>
+                    if store.state.datos.animeActualCargado == true && store.state.datos.animeActualCargando == false
+                        clearInterval intervalo
+
+                        if store.state.datos.animeActual.id?
+                            next()
+                        else
+                            next()
+
+                ), 100
+
+        mounted: ->
+            if !@$store.state.datos.animeActualCargado && !@$store.state.datos.animeActualCargando
+                @$store.dispatch "datos/cargarAnime", "/#{ @$route.params.anime }/"
+
+#
 </script>
 
 <style scoped lang="sass">
@@ -170,7 +163,7 @@
         font:
             size: 1.1rem
             weight: 700
-            family: $titulos
+            family: var(--fuenteTitulos)
         padding: .5rem 0
         position: absolute
         top: calc(100% - 22px)

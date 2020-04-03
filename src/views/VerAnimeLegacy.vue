@@ -7,61 +7,71 @@
                 descarga
             // comentarios.fondo
         div.fondo(v-if="!esMovil")
-            publicidad
+            // publicidad
+            p hola
         br
+
     //
 </template>
 
 <script lang="coffee">
     import reproductor from "../components/VerAnime/reproductor.vue"
     import descarga from "../components/VerAnime/descarga.vue"
-    import comentarios from "../components/VerAnime/comentarios.vue"
     import publicidad from "../components/publicidad.vue"
-    import {impr} from "../variables"
+    import { impr } from "../coffee/variables.coffee"
 
-    extraerDatos = =>
-        url = (new URL window.location.href).pathname.toString()
-        patron = /\/(ep|ova)(\d+)$/
+    extraerDatos = (url) =>
+        patron = /(ep|ova)(\d+)$/
         res = patron.exec url
 
         if res?
             [
                 if res[1] is "ova" then true else false
-                res[2]
+                parseInt res[2]
             ]
         else []
 
-    export default
-        name: "VerAnimeLegacy"
 
-        components: { reproductor, descarga, comentarios, publicidad }
+    export default
+        name: "VerAnime"
+        scrollToTop: true
+        validate: ({ params }) ->
+            /(ep|ova)(\d+)/.test params.id
+
+        components: { reproductor, descarga, publicidad }
         computed:
+            ep: -> @$store.state.reproductor.epActual
             anchoPantalla: ->
+                if process.client == false then return 501
+
                 ev = @$store.state.datos.resizeEvent
                 window.innerWidth
-            esMovil: -> @anchoPantalla < 780
+
+            esMovil: ->@anchoPantalla < 780
+
             etiqueta: ->
-                (if @$store.state.verAnime.esOva is true then "Ova" else "Episodio") + " " +
-                    @$store.state.verAnime.ep
+                (if @ep.es_ova is true then "Ova" else "Episodio") + " " +
+                        @ep.numero
+
         beforeRouteUpdate: (to, from, next) ->
-            @$store.commit "cambiarNumEp", parseInt to.params.ep
+            [esOva, num] = extraerDatos to.params.id
+            @$store.dispatch "reproductor/cambiarEpActual", { num, esOva }
+
             next()
+
         mounted: ->
-            @$store.commit "activarVerAnime"
-            res = extraerDatos()
-            if res.length isnt 0
-                [esOva, numEp] = res
-                @$store.commit "cambiarDatosVerAnime",
-                    nombre: ""
-                    esOva: esOva
-                    ep: parseInt numEp
-                    ruta: ""
-            else
+            @$store.commit "reproductor/activar"
+
+            unless @ep.id?
+
+                [esOva, num] = extraerDatos @$route.params.id
+                @$store.dispatch "reproductor/cambiarEpActual", { num, esOva }
 
         beforeDestroy: ->
-            @$store.commit "desactivarVerAnime"
-    #
-    
+            @$store.commit "reproductor/desactivar"
+
+
+#
 </script>
 
 <style scoped lang="sass">
@@ -78,7 +88,8 @@
 
 
     .cont
-        grid-template-columns: 1fr 250px !important
+        display: grid
+        grid-template-columns: auto 250px !important
 
 
     .fondo

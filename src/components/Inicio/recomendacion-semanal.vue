@@ -7,27 +7,26 @@
 
             div.pad
                 div.cont-img
-                    router-link(:to="recomendacion.info.ruta")
-                        img.img(:src="recomendacion.imagenes.portada"
-                             alt="Img anime" )
+                    router-link(:to="recomendacion.ruta")
+                        img.img(:src="recomendacion.portada" alt="Img anime" )
 
             div.pad.leyenda(v-if="!esMovil")
                 div.titulo acechanime
                 div.txt Recomendación Semanal
                 hr.divisor
-                router-link.boton(:to="recomendacion.info.ruta") Click para verlo
+                router-link.boton(:to="recomendacion.ruta") Click para verlo
 
         div.err(v-if="error")
             span.
                 Hubo un error al cargar la recomendación semanal.<br>
                 Vuelve en unos minutos, o escribenos en Discord.<br>
             p.tech Código de error: 0x{{ codigoDeError }}
+
     //
 </template>
 
 <script lang="coffee">
-    import {servidor, impr} from "../../variables";
-    import store, {listaAnimesCargada} from "../../store/store.coffee"
+    import {servidor, impr} from "../../coffee/variables.coffee"
 
     export default
         name: "recomendacion-semanal"
@@ -35,43 +34,28 @@
             segundos: 0,
             intervaloSegundos: ''
             error: no
-            cargado: no
+            cargado: true
             cache: no
             codigoDeError: "00"
-            recomendacion:
-                info: 
-                    ruta: "."
-                emision: {}
-                temporada: {}
-                imagenes: {}
+        props:
+            terminarCarga:
+                type: Function
+                required: true
         computed:
             dias: -> Math.floor(this.segundos / 60 / 60 / 24)
             horas: -> Math.floor(this.segundos / 60 / 60) % 24
             minutos: -> Math.floor(this.segundos / 60) % 60
             segundosF: -> this.segundos % 60
             listaAnimes: -> @$store.state.datos.listaAnimes
-            recomendacionRaw: -> @$store.state.datos.recomendacionSemanal
+            recomendacion: -> @$store.state.datos.recomendacionSemanal
             esMovil: ->
+                if process.client == false then return true
+
                 _ = @$store.state.datos.resizeEvent
                 window.innerWidth <= 650
 
-        props:
-            terminarCarga:
-                type: Function
-                required: true
         methods:
-            cargarRecomendacion: ->
-                vm = this
-                recRaw = await fetch "#{servidor}/recomendacion"
-                rec = await recRaw.json()
-                await listaAnimesCargada
-                if rec.exito
-                    rec.payload
-                else
-                    throw new Error rec.error.razon
-
             inicializarRecomendacion: (animeId) ->
-                await listaAnimesCargada
                 res = @listaAnimes.find (n) => n.info.anime_id == animeId
                 if res?
                     @recomendacion = res
@@ -81,9 +65,11 @@
                     console.log "La recomendacion semanal tiene un anime_id invalido."
                     impr "anime_id -> #{animeId}"
                 @cargado = yes
-            inicializarRecomendacion2: (anime) ->
-                @recomendacion = anime
-                @cargado = yes
+
+            inicializarRecomendacion2: () ->
+                @cargado = true
+                @error = false
+
             inicializarTemporizador: (hora) ->
                 horaLimite = Math.floor (hora / 1000)
                 horaActual = Math.floor (new Date().getTime() / 1000)
@@ -94,7 +80,7 @@
                         0
                     else segundos
 
-        created: ->
+        _mounted: ->
             vm = this
             vm.intervaloSegundos = setInterval (() =>
                 if !vm.segundos <= 0
@@ -120,7 +106,7 @@
                             vm.inicializarRecomendacion2 mres
                             # Deprecado
                             # vm.inicializarTemporizador mres.hora
-                            store.commit "cambiarRecomendacionSemanal",
+                            vm.$store.commit "cambiarRecomendacionSemanal",
                                 anime_id: mres.info.anime_id
                                 hora: 0
                         catch e

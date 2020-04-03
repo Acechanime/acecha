@@ -7,17 +7,25 @@
 
         template(v-if="opciones.length !== 0")
             div#contenedor-anime.contenedor-video(v-show="posActiva !== 0")
-            // video.reproductor(v-if="posActiva === 0 && links.episodio_id"
+
+            // video.reproductor(v-if="posActiva === 0 && epActual.id"
             //     controls
-            //     :key="links.episodio_id"
+            //     :key="epActual.id"
             // )
             //     source(:src="opciones[0][1]" type="video/mp4")
-            video-player.reproductor(v-if="posActiva === 0 && links.episodio_id" 
-                :options="opcionesVideoJs" :key="links.episodio_id"
+
+            video-player.reproductor(v-if="posActiva === 0 && epActual.id"
+                :options="opcionesVideoJs" :key="epActual.id"
             )
 
+            // div.video-player-box(
+            //     v-if="posActiva === 0 && epActual.id"
+            //     :playsinline="true"
+            //     v-video-player:myVideoPlayer="opcionesVideoJs"
+            // )
+
             br
-        template(v-else-if="opciones.length === 0 && !links.anime_id")
+        template(v-else-if="opciones.length === 0 && !epActual.id")
             br
             p Recuperando los servidores...
             br
@@ -48,10 +56,8 @@
 
 <script lang="coffee">
     import opcion from "./opcion.vue"
-    import {impr} from "../../variables"
-
     import 'video.js/dist/video-js.css'
-    # import "./estilo.scss"
+    import { impr, servidor } from "../../coffee/variables.coffee"
     import { videoPlayer } from 'vue-video-player'
 
     obtenerIframe = => new Promise (resolve) =>
@@ -73,10 +79,10 @@
                 unless n is 0
                     ifr = document.getElementById "iframe-anime"
                     ifr.contentWindow.location.replace @linkActivo
-            links: ->
+            epActual: ->
                 vm = this
                 @posActiva = 0
-                intervalo = setInterval((=>
+                intervalo = setInterval (=>
                     if (document.getElementById "contenedor-anime")?
                         cont = document.getElementById "contenedor-anime"
                         try
@@ -94,59 +100,59 @@
                             ifr.style.opacity = "1"
                         ), 150
                         clearInterval intervalo
-                ), 50)
+                ), 50
 
         computed:
-            listaEps: -> @$store.state.verAnime.listaEpisodios
-            numEp: -> @$store.state.verAnime.ep
-            esOva: ->
-                ruta = @$route.path
-                posInicioIndicador = ruta.substr(1).indexOf("/")
-                indicador = ruta.substr (1 + posInicioIndicador)
-                (indicador.search "ova") isnt -1
-
-            links: ->
-                res =
-                    if @listaEps.length isnt 0 and @numEp? and @numEp isnt -1
-                        vm = this
-                        esOva = @esOva
-                        (@listaEps.find (a) -> (a.num_ep is vm.numEp) and (a.es_ova is esOva)) ? {}
-                    else {}
-                res
+            listaEps: -> @$store.state.reproductor.episodios
+            epActual: -> @$store.state.reproductor.epActual
+            numEp:    -> @epActual.numero
+            esOva:    -> @epActual.es_ova
 
             epTexto: -> "./#{if @esOva then 'ova' else 'ep'}"
             epSiguiente: ->
-                numEpActual = @links.num_ep
+                numEpActual = @numEp
                 esOva = @esOva
-                existeEpSiguiente = @listaEps.find (anime) =>
-                    (anime.num_ep is (numEpActual + 1)) and (anime.es_ova is esOva)
+
+                existeEpSiguiente = @listaEps.find (a) =>
+                    (a.numero == numEpActual + 1) && (a.es_ova == esOva)
+
                 if existeEpSiguiente?
                     @epTexto + "#{numEpActual + 1}"
                 else
                     ""
+
             epAnterior: ->
-                numEpActual = @links.num_ep
-                esOva = @$store.state.verAnime.esOva
-                existeEpAnterior = @listaEps.find (anime) =>
-                    (anime.num_ep is (numEpActual - 1)) and (anime.es_ova is esOva)
+                numEpActual = @numEp
+                esOva = @esOva
+
+                existeEpAnterior = @listaEps.find (a) =>
+                    (a.numero == numEpActual - 1) && (a.es_ova == esOva)
+
                 if existeEpAnterior?
                     @epTexto + "#{numEpActual - 1}"
                 else
                     ""
+
             opciones: ->
                 opciones = []
 
-                opciones.push ["acecha", "https://api.acechanime.com/stream?id=#{@links.episodio_id}"]
-                if @links?.fembed? and @links.fembed isnt ""
-                    opciones.push ["fembed", @links.fembed]
-                if @links?.yourupload? and @links.yourupload isnt ""
-                    opciones.push ["yourupload", @links.yourupload]
-                if @links?.mp4upload? and @links.mp4upload isnt ""
-                    opciones.push ["mp4upload", @links.mp4upload]
+                idAnimeActual = @$store.state.datos.animeActual.id
+                if @epActual.id?
+                    opciones.push [
+                        "acecha"
+                        "#{servidor}/animes/#{idAnimeActual}/episodios/#{@epActual.id}/stream"
+                    ]
+
+                if @epActual?.fembed? and @epActual.fembed isnt ""
+                    opciones.push ["fembed", @epActual.fembed]
+                if @epActual?.yourupload? and @epActual.yourupload isnt ""
+                    opciones.push ["yourupload", @epActual.yourupload]
+                if @epActual?.mp4upload? and @epActual.mp4upload isnt ""
+                    opciones.push ["mp4upload", @epActual.mp4upload]
 
                 opciones
             opcionesVideoJs: ->
-                if @links.episodio_id?
+                if @epActual.id?
                     controls: true
                     preload: "auto"
                     sources: [{
@@ -156,7 +162,7 @@
                     fluid: true
                     language: "es"
                     notSupportedMessage: "Este episodio no está soportado. Escribenos a nuestro Discord."
-                    
+
                 else {}
             linkActivo: -> @opciones?[@posActiva]?[1]?.replace "mega.nz/", "mega.nz/embed"
 
@@ -189,7 +195,6 @@
 </script>
 
 <style scoped lang="sass">
-    @import "../../sass/variables"
 
     .reproductor
         width: 100%

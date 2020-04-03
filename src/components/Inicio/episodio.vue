@@ -1,17 +1,16 @@
 <template lang="pug">
-    article.ep(v-if="ep.anime_id && anime.info && anime.info.nombre")
+    article.ep(v-if="ep.anime_id && anime.nombre")
         a.link(:href="obtenerLink" @click.prevent="irAlEp")
-            img.imagen(:src="anime.imagenes.nuevo_ep"
-                :alt="'Episodio ' + ep.num_ep + ' de ' + anime.info.nombre"
+            img.imagen(:src="anime.nuevo_ep"
+                :alt="'Episodio ' + ep.numero + ' de ' + anime.nombre"
                 :style="'height: ' + alto + 'px'")
-            h3.nombre {{ anime.info.nombre }} {{ ep.es_ova? 'OVA': '' }} {{ ep.num_ep }}
+            h3.nombre {{ anime.nombre }} {{ ep.es_ova? 'OVA': '' }} {{ ep.numero }}
 
     //
 </template>
 
 <script lang="coffee">
-    import { listaAnimesCargada } from "../../store/store.coffee"
-    import { impr } from "../../variables"
+    import { impr } from "../../coffee/variables.coffee"
 
     export default
         name: "episodio"
@@ -22,12 +21,13 @@
         data: ->
             alto: 0
         computed:
-            listaAnimes: -> @$store.state.datos.listaAnimes
+            listaAnimes: -> @$store.state.datos.animes
             anime: ->
                 lista = @listaAnimes
                 anime_id = @ep.anime_id
+
                 if lista isnt undefined and @ep? and anime_id?
-                    anime = lista.find (x) => x.info.anime_id == anime_id
+                    anime = lista.find (x) => x.id == anime_id
                     anime ? {}
 
                 else if lista isnt undefined
@@ -37,11 +37,12 @@
                 else
                     console.log "Lista vacia."
                     {}
+
             obtenerLink: ->
                 anime = @anime
-                if anime.info.ruta?
+                if anime.ruta?
                     ep = @ep
-                    anime.info.ruta + (if ep.es_ova then "ova" else "ep") + ep.num_ep
+                    anime.ruta + (if ep.es_ova then "ova" else "ep") + ep.numero
                 else "./#"
             resizeEvent: -> @$store.state.datos.resizeEvent
         watch:
@@ -49,18 +50,7 @@
                 @ajustarTamanoElem()
         methods:
             irAlEp: ->
-                ep = @ep
-                @$store.commit "cambiarDatosVerAnime",
-                    nombre: @anime.info.nombre
-                    esOva: @ep.es_ova
-                    ep: @ep.num_ep
-                    ruta: @anime.info.ruta
-                @$store.commit "cambiarAnimeVerAnime",
-                    mega: ep.mega
-                    rapidvideo: ep.rapidvideo
-                    mango: ep.mango
-                    mp4upload: ep.mp4upload
-                    okru: ep.okru
+                @$store.commit "reproductor/setEpActual", @ep
                 @$router.push @obtenerLink
             ajustarTamanoElem: ->
                 vm = this

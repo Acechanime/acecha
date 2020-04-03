@@ -4,6 +4,7 @@
             img(src="../../assets/img/myanimelist.png"
                 alt="My Anime List")
         p Actores, Personajes, Staff y más aquí.
+
     //
 </template>
 
@@ -16,7 +17,7 @@
                 type: String
                 required: true
     #
-    
+
 </script>
 
 <style scoped lang="sass">
@@ -29,6 +30,6 @@
         a
             display: inline-block
             width: 100%
-    
+
     //
 </style>

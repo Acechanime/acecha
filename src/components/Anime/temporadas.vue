@@ -27,9 +27,9 @@
             obtTempAnteriores: ->
                 anterior = []
                 animeActual = @anime
-                while animeActual?.temporada?.id_temporada_ant? and animeActual.temporada.id_temporada_ant isnt -1
-                    animeAnt = @$store.state.datos.listaAnimes.filter (a) ->
-                        a.info.anime_id == animeActual.temporada.id_temporada_ant
+                while animeActual?.temporada_ant? and animeActual.temporada_ant isnt -1
+                    animeAnt = @$store.state.datos.animes.filter (a) ->
+                        a.id == animeActual.temporada_ant
                     if animeAnt[0]?
                         anterior.unshift animeAnt[0]
                     animeActual = animeAnt[0]
@@ -38,9 +38,9 @@
             obtTempSiguientes: ->
                 siguiente = []
                 animeActual = @anime
-                while animeActual?.temporada?.id_temporada_sig? and animeActual.temporada.id_temporada_sig isnt -1
-                    animeSig = @$store.state.datos.listaAnimes.filter (a) ->
-                        a.info.anime_id == animeActual.temporada.id_temporada_sig
+                while animeActual?.temporada_sig? and animeActual.temporada_sig isnt -1
+                    animeSig = @$store.state.datos.animes.filter (a) ->
+                        a.id == animeActual.temporada_sig
                     if animeSig[0]?
                         siguiente.push animeSig[0]
                     animeActual = animeSig[0]
@@ -59,7 +59,7 @@
     .titulo
         color: var(--texto1)
         font:
-            family: $titulos
+            family: var(--fuenteTitulos)
             size: 1.75rem
 
     .label

@@ -16,9 +16,8 @@
 
 <script lang="coffee">
     import { manejarError } from "./manejo-errores.coffee"
-    import {servidor} from "../../variables";
+    import {servidor} from "../../coffee/variables.coffee"
 
-    # TODO: Habilitar la API, y refactorizar esto.
     export default
         name: "video-recomendado"
         data: ->
@@ -47,7 +46,7 @@
                 manejarError e, "F3", vm
             @terminarCarga()
     #
-    
+
 </script>
 
 <style scoped lang="sass">
@@ -63,7 +62,7 @@
         font:
             weight: 900
             size: 43px
-            family: $texto
+            family: var(--fuenteTexto)
         color: var(--texto1)
         margin: 32px 0
         text-transform: uppercase

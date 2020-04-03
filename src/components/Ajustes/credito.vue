@@ -1,9 +1,10 @@
 <template lang="pug">
     div.credito
-        span Hecho con 💖,
-        img.logo_vue(src="https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg")
-        span , y
-        img.logo_csharp(src="../../assets/img/c_sharp.svg")
+        div
+            span Hecho con 💖,
+            img.logo_vue(src="https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg")
+            span , y
+            img.logo_csharp(src="../../assets/img/c_sharp.svg")
 
     //
 </template>
@@ -32,7 +33,7 @@
 
     .logo_vue
         height: 2rem
-    
+
     .logo_csharp
         height: 2.5rem
 

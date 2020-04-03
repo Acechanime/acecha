@@ -6,12 +6,14 @@
                 Hubo un error al cargar los animes recientes.<br>
                 Vuelve en unos minutos, o escribenos en Discord.<br>
             p.tech Código de error: 0x{{ codigoDeError }}
+
     //
 </template>
 
 <script lang="coffee">
-    import Episodio from "../../components/Inicio/episodio";
+    import Episodio from "./episodio.vue";
     import { manejarError } from "./manejo-errores.coffee"
+
 
     export default
         name: "episodios"
@@ -48,10 +50,12 @@
     .eps
         padding: 48px 0
 
+
     .grid
         display: grid
         grid-template-columns: repeat(4, 1fr)
         grid-gap: 1rem
+
 
     @media only screen and (max-width: 800px)
         .grid

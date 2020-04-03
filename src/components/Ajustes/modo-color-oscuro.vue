@@ -30,7 +30,6 @@
 </template>
 
 <script lang="coffee">
-    import { cambiarModoColorOscuro, cambiarEsquema } from "../App/ModoColor.coffee"
 
     export default
         name: "modo-color-oscuro"

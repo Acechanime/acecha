@@ -146,9 +146,8 @@ const router = new Router({
             props: true,
             children: [
                 {
-                    path: "ep:ep(\\d+)",
-                    alias: "ova:ep(\\d+)",
-                    name: "VerAnimeLegacy",
+                    path: ":id/",
+                    name: "VerAnime",
                     component: VerAnimeLegacy
                 }
             ]

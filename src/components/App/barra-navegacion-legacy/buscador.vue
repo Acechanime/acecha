@@ -2,7 +2,12 @@
     li.barra_li
         div#buscador_barra
             form(@submit.prevent="buscarAnime")
-                input(placeholder="Buscar anime" @input="cambiarNombre($event)" :value="nombre")
+                label(for="input-busqueda-pc" style="display: none") Buscar anime
+                input#input-busqueda-pc(
+                    placeholder="Buscar anime"
+                    @input="cambiarNombre($event)"
+                    :value="nombre"
+                )
                 i.material-icons(@click="buscarAnime") search
         ul.autocompletar(:style="estilos")
             template(v-if="listaAnimesFiltrada2.length !== 0")
@@ -16,7 +21,7 @@
 </template>
 
 <script lang="coffee">
-    import { filtroNombre, filtrar } from "../Animes/buscador.coffee"
+    import { filtroNombre, filtrar } from "../../../coffee/buscador.coffee"
     import itemBuscador from "./item-buscador.vue"
 
     export default
@@ -29,7 +34,7 @@
             tieneNombre: no
         watch:
             nombre: (nuevo) ->
-                @tieneNombre = (nuevo isnt "")
+                @tieneNombre = nuevo.length > 1
 
         computed:
             estilos: ->
@@ -40,16 +45,19 @@
                 if @tieneNombre
                     res.display = "block"
                 res
-            listaAnimes: -> @$store.state.datos.listaAnimes
+            listaAnimes: -> @$store.state.datos.animes
+
             listaAnimesFiltrada: ->
                 if @listaAnimes isnt undefined
-                    (@listaAnimes.filter @filtroNombre).slice 0, 5
+                    (@listaAnimes.filter filtroNombre).slice 0, 5
                 else []
+
             listaAnimesFiltrada2: ->
                 vm = this
                 if @listaAnimes isnt undefined
-                    filtrar @, @listaAnimes, filtroNombre, 5
+                    filtrar vm, @listaAnimes, filtroNombre, 5
                 else []
+
         methods:
             cambiarNombre: (element) ->
                 @nombre = element.target.value
@@ -76,7 +84,6 @@
 </script>
 
 <style scoped lang="sass">
-    @import "../../sass/variables"
 
     .barra_li
         position: relative
@@ -122,7 +129,7 @@
             width: 15rem
             vertical-align: middle
             font:
-                family: $titulos
+                family: var(--fuenteTitulos)
                 size: 15px
             outline: none
             // transition: width 250ms ease-in-out

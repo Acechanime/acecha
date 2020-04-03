@@ -37,16 +37,13 @@
                     "background: #01bc59; opacity: 0"
                 else "background: #ff0241"
             nombreArreglado: ->
-                nombre = @anime.info.nombre
+                nombre = @anime.nombre
                 if nombre?.length > 40 and window.innerWidth < 500
                     extraerNombreCorto nombre, 40
                 else nombre
         methods:
             esRutaActual: () ->
-                if @$store.state.modoAdmin
-                    true
-                else
-                    @anime.info.ruta == @$route.path
+                @anime.info.ruta == @$route.path
 
 
 #

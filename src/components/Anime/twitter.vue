@@ -6,6 +6,7 @@
         p.
             Aquí anunciamos los ÚLTIMOS episodios y las actualizaciones más recientes
             de AcechaAnime
+
     //
 </template>
 
@@ -14,7 +15,7 @@
     export default
         name: "twitter.vue"
     #
-    
+
 </script>
 
 <style scoped lang="sass">

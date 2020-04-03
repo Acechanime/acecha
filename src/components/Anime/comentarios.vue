@@ -14,8 +14,7 @@
         name: "comentarios"
         components: { fbComments }
 
-    #
-    
+#
 </script>
 
 <style scoped lang="sass">
@@ -28,7 +27,7 @@
     .titulo
         color: var(--texto1)
         font:
-            family: $titulos
+            family: var(--fuenteTitulos)
             size: 1.75rem
 
     .label

@@ -1,14 +1,10 @@
 <template lang="pug">
     div
-        div.boton-cont(v-if="linkPasfox")
-            a.boton(:href="linkPasfox" target="_blank")
+        div.boton-cont(v-if="epActual.descargas")
+            div.boton(@click="abrirEps()")
                 | Descargar
                 br
                 span.pequeno capitulo
-            // div.boton(@click="abrirCarpetas()" style="margin-left: 10px")
-                | Descargar
-                br
-                span.pequeno anime completo
 
         div.cont--tabla(:class="(panelLinks || panelCarpetas)? '': 'cont--tabla--oculto'")
             table.panel(v-show="panelLinks || panelCarpetas")
@@ -17,14 +13,16 @@
                         td Servidor
                         td Descarga
                 tbody.panel--cuerpo
+
                     template(v-if="panelLinks")
-                        tr(v-for="(opcion, pos) in listaLinks")
-                            td {{ pos + 1 }}. {{ opcion.nombre }}
+                        tr(v-for="([nombre, url], num) in links")
+                            td {{ nombre }}
                             td
-                                a(:href="opcion.link" target="_blank") Descargar
-                        tr(v-if="listaLinks.length === 0")
+                                a(:href="url" target="_blank") Descargar
+                        tr(v-if="links.length === 0")
                             td No hay links disponibles
-                    template(v-if="panelCarpetas")
+
+                    // template(v-if="panelCarpetas")
                         tr(v-for="(opcion, pos) in listaCarpetas")
                             td {{ pos + 1 }}. {{ opcion.nombre }}
                             td
@@ -44,39 +42,13 @@
             panelLinks: false
             panelCarpetas: false
         computed:
-            listaEps: -> @$store.state.verAnime.listaEpisodios
-            numEp: -> @$store.state.verAnime.ep
-            linkPasfox: -> @links.pasfox
-            links: ->
-                res =
-                    if @listaEps.length isnt 0 and @numEp? and @numEp isnt -1
-                        vm = this
-                        (@listaEps.find (a) -> a.num_ep is vm.numEp) ? {}
-                    else {}
-                res
-            listaLinks: ->
-                lista = []
-                if @links?.pasfox? and @links.pasfox isnt ""
-                    lista.push
-                        nombre: "PassFox",
-                        link: @links.pasfox
-                    
-                lista
-            listaCarpetas: ->
-                carpetas = []
-                if @links.carpeta_mega?
-                    carpetas.push
-                    nombre: "Carpeta Mega",
-                    link: @links.carpeta_mega
-                
-                carpetas
+            epActual: -> @$store.state.reproductor.epActual
+            links: -> Object.entries(@epActual.descargas).filter ([nombre, url]) => url?
+
         methods:
             abrirEps: ->
                 @panelLinks = !@panelLinks
                 @panelCarpetas = false
-            abrirCarpetas: ->
-                @panelCarpetas = !@panelCarpetas
-                @panelLinks = false
             
         
             
@@ -114,10 +86,10 @@
 
         .pequeno
             font-size: 11px
-    // font-weight: normal
+            // font-weight: normal
 
     .cont--tabla
-        height: 310px
+        height: 210px
         overflow: hidden
         transition: height 250ms ease-out
         background-color: var(--fondo1)

@@ -39,15 +39,15 @@
             dias: ["Todos los dias", "Lunes", "Martes", "Miercoles",
                 "Jueves", "Viernes", "Sábado", "Domingo"]
         computed:
-            listaAnimes: -> @$store.state.datos.listaAnimes
-            listaAnimesEmision: -> @listaAnimes.filter (x) => x.emision.en_emision is true
+            listaAnimes: -> @$store.state.datos.animes
+            listaAnimesEmision: -> @listaAnimes.filter (x) => x.en_emision is true
             animesFiltrados: ->
                 listaAnimes = @listaAnimesEmision
                 diaActual = @diaActual - 1
 
                 if listaAnimes? and diaActual isnt -1
                     listaAnimes.filter (x) =>
-                        (obtenerDia x.emision.inicio_emision) is diaActual
+                        (obtenerDia x.inicio_emision) is diaActual
 
                 else listaAnimes
 
