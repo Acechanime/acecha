@@ -5,6 +5,10 @@ module.exports = {
                 {
                     test: /\.coffee$/,
                     loader: 'coffee-loader',
+                },
+                {
+                    test: /\.ls$/,
+                    loader: "6du-livescript-loader"
                 }
             ]
         },

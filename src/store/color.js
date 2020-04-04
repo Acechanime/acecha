@@ -25,7 +25,7 @@ const cambiarEsquemaColor = color => {
 
 
 const obtenerLocalStorage = (clave, defecto) => {
-    if (!process.client) return defecto;
+    if (process.client === false) return defecto;
 
     const valor = localStorage.getItem(clave);
     return valor? valor: defecto;
@@ -38,6 +38,12 @@ export const color = {
         color: "init"
     },
     mutations: {
+        cambiarAModoOscuro (state) {
+            let modoOscuro = obtenerLocalStorage("modo-color-oscuro", "color-oscuro");
+            state.color = modoOscuro;
+            localStorage.setItem("modo-color", modoOscuro);
+            cambiarEsquemaColor(modoOscuro);
+        },
         cambiarModoColor (state) {
             const colorActual = state.color;
             let modoOscuro = obtenerLocalStorage("modo-color-oscuro", "color-oscuro");
@@ -65,6 +71,12 @@ export const color = {
             cambiarEsquemaColor(color);
             state.color = color;
         }
+    },
+    actions: {
+        cambiarModoColorOscuro ({state, commit}, valor) {
+            localStorage.setItem("modo-color-oscuro", valor);
+            commit("cambiarAModoOscuro");
+        },
     }
 };
 

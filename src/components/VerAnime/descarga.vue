@@ -1,6 +1,6 @@
 <template lang="pug">
     div
-        div.boton-cont(v-if="epActual.descargas")
+        div.boton-cont(v-if="links.length !== 0")
             div.boton(@click="abrirEps()")
                 | Descargar
                 br

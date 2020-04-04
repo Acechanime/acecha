@@ -9,19 +9,19 @@
         div.selector(v-if="selectorAbierto")
 
             div#color_oscuro.color_demo(:class="modoOscuroActivo? 'color_activo': ''"
-                @click="establecerEsquema('oscuro')")
+                @click="establecerEsquema('color-oscuro')")
                 | Normal
 
             div#color_gris.color_demo(:class="modoGrisActivo? 'color_activo': ''"
-                @click="establecerEsquema('gris')")
+                @click="establecerEsquema('color-gris')")
                 | Gris
 
             div#color_negro.color_demo(:class="modoNegroActivo? 'color_activo': ''"
-                @click="establecerEsquema('negro')")
+                @click="establecerEsquema('color-negro')")
                 | Amoled
 
             div#color_azul_oscuro.color_demo(:class="modoAzulOscuroActivo? 'color_activo': ''"
-                @click="establecerEsquema('azulOscuro')")
+                @click="establecerEsquema('color-azul-oscuro')")
                 | Azul oscuro
 
         // div.adicional Este tono se guarda solo en este navegador.
@@ -29,25 +29,23 @@
     //
 </template>
 
-<script lang="coffee">
+<script lang="ls">
 
-    export default
+    module.exports =
         name: "modo-color-oscuro"
         data: ->
             modoColorOscuro: localStorage?.getItem "modo-color-oscuro"
             selectorAbierto: false
             textoIconoSelector: "keyboard_arrow_down"
         computed:
-            modoOscuroActivo: -> @modoColorOscuro is "oscuro"
-            modoGrisActivo: -> @modoColorOscuro is "gris"
-            modoNegroActivo: -> @modoColorOscuro is "negro"
-            modoAzulOscuroActivo: -> @modoColorOscuro is "azulOscuro"
+            modoOscuroActivo: -> @modoColorOscuro == "oscuro"
+            modoGrisActivo: -> @modoColorOscuro == "gris"
+            modoNegroActivo: -> @modoColorOscuro == "negro"
+            modoAzulOscuroActivo: -> @modoColorOscuro == "azulOscuro"
             estiloSelector: -> if @selectorAbierto then "display: block;" else ""
         methods:
             establecerEsquema: (modo) ->
-                cambiarEsquema modo, @$store.commit
-                cambiarModoColorOscuro modo
-                @modoColorOscuro = modo
+                @$store.dispatch "color/cambiarModoColorOscuro", modo
 
             alternarSelector: ->
                 [@selectorAbierto, @textoIconoSelector] =

@@ -14,7 +14,7 @@
                             span.switcher(@click.prevent.stop="cambiarColor")
             div.adicional Al cambiar el modo se reinician los comentarios de Facebook.
 
-        // modo-color-oscuro
+        modo-color-oscuro
         // modo-color-automatico
         mostrar-version(v-if="!esBeta")
 
@@ -42,7 +42,7 @@
         data: ->
             esBeta: false
         computed:
-            mmodoColor: -> @$store.state.datos.modoColor
+            modoColor: -> @$store.state.datos.modoColor
             etiquetaModoColor: -> if @mmodoColor is "claro" then "des" else ""
         methods:
             cambiarColor: ->
