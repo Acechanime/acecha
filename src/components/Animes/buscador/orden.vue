@@ -14,7 +14,7 @@
     Toma 2 animes y los ordena
     ###
     ordenarPorNombre = (x, y) =>
-        if x.info.nombre > y.info.nombre then 1 else -1
+        if x.nombre > y.nombre then 1 else -1
 
 
     obtenerMs = (fecha) =>
@@ -31,16 +31,16 @@
 
     ordenarPorEmision = (x, y) =>
 
-        emisionX = obtenerMs x.emision.inicio_emision
+        emisionX = obtenerMs x.inicio_emision
         if Number.isNaN emisionX
-            console.log "#{x.info.nombre} tiene inicio `#{x.emision.inicio_emision}`"
-            console.log new Date x.emision.inicio_emision
+            console.log "#{x.nombre} tiene inicio `#{x.inicio_emision}`"
+            console.log new Date x.inicio_emision
             emisionX = 0
 
-        emisionY = obtenerMs y.emision.inicio_emision
+        emisionY = obtenerMs y.inicio_emision
         if Number.isNaN emisionY
-            console.log "#{y.info.nombre} tiene inicio ´#{y.emision.inicio_emision}´"
-            console.log new Date y.emision.inicio_emision
+            console.log "#{y.info.nombre} tiene inicio ´#{y.inicio_emision}´"
+            console.log new Date y.inicio_emision
             emisionY = 0
 
         if emisionX < emisionY then 1 else -1

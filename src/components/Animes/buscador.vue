@@ -2,9 +2,9 @@
     div.busc
         input#nombre(placeholder="Nombre del anime" @input="cambiarNombre($event)" :value="nombre")
 
-        select#generos(v-model.number="genero")
+        select#generos(v-model="genero")
             option(value="-1" selected) Cualquier género
-            option(v-for="gen in listaGeneros" :value="gen.genero_id") {{ gen.nombre }}
+            option(v-for="gen in listaGeneros" :value="gen.id") {{ gen.nombre }}
 
         select#emision(v-model.number="estado")
             option(value="-1" selected) Cualquier estado
@@ -29,7 +29,7 @@
         components: { orden }
         data: ->
             nombre: ""
-            genero: -1
+            genero: "-1"
             estado: -1
             anyo: -1
             orden: -1
@@ -75,7 +75,7 @@
             recuperarFiltros: ->
                 q = @$route.query
                 @nombre = q.nombre || ""
-                @genero = parseInt (q.genero || "-1")
+                @genero = q.genero || "-1"
                 @estado = parseInt (q.estado || "-1")
                 @orden  = parseInt (q.orden  || "-1")
 
@@ -94,7 +94,7 @@
             filtroNombre2 = (_, anime) -> filtroNombre vm, anime
 
             filtroGenero = (a) ->
-                if vm.genero is -1 then true
+                if vm.genero is "-1" then true
                 else
                     res = a.generos?.find (g) -> g == vm.genero
                     res?

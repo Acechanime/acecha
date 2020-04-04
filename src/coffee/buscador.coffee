@@ -79,11 +79,11 @@ export filtroEstado = (vm, a) ->
     # Cualquier estado
     if vm.estado is -1 then true
     # Finalizado
-    else if vm.estado is 0
-        a.en_emision is false or a.en_emision is null
+    else if vm.estado == 0
+        a.en_emision == false || a.en_emision == null
     # En emision
     else if vm.estado is 1
-        a.en_emision is true
+        a.en_emision == true
     # Edge case (?)
     else true
 
@@ -91,7 +91,7 @@ export filtroEstado = (vm, a) ->
 
 #: (Contexto, Anime) -> Bool
 export filtroGenero = (vm, a) ->
-    if vm.genero is -1 then true
+    if vm.genero is "-1" then true
     else
         res = a.generos?.find (g) -> g == vm.genero
         res?
