@@ -1,12 +1,12 @@
 <template lang="pug">
-    div.reproductor
-        ul.opciones(v-if="opciones.length > 1")
+    div.reproductor-repifr
+        ul.opciones-repifr(v-if="opciones.length > 1")
             opcion(v-for="(op, i) in opciones" :opcion="op" :pos="i" :key="i"
                 :largo="opciones.length" :posActiva="posActiva"
                 :cambiarOpcion="cambiarOpcion")
 
         template(v-if="opciones.length !== 0")
-            div#contenedor-anime.contenedor-video(v-show="posActiva !== 0")
+            div#contenedor-anime.contenedor-video-repifr(v-show="posActiva !== 0")
 
             // video.reproductor(v-if="posActiva === 0 && epActual.id"
             //     controls
@@ -14,7 +14,7 @@
             // )
             //     source(:src="opciones[0][1]" type="video/mp4")
 
-            video-player.reproductor(v-if="posActiva === 0 && epActual.id"
+            video-player.reproductor-repifr(v-if="posActiva === 0 && epActual.id"
                 :options="opcionesVideoJs" :key="epActual.id"
             )
 
@@ -34,21 +34,21 @@
             p No hay servidores disponibles.
             br
 
-        div.controles2
-            div.mizq
-                router-link.boton.boton--eps(:to="epAnterior"
+        div.controles2-repifr
+            div.mizq-repifr
+                router-link.boton-repifr.boton-repifr--eps(:to="epAnterior"
                     :class="epAnterior === ''? 'boton--desactivado': ''"
                 )
                     i.material-icons chevron_left
-                    span.ocultarMovil Anterior
-            div.mcentro
-                router-link.boton.boton--ir(to="./")
+                    span.ocultarMovil-repifr Anterior
+            div.mcentro-repifr
+                router-link.boton-repifr.boton-repifr--ir(to="./")
                     span Ver capítulos
-            div.mder
-                router-link.boton.boton--eps(:to="epSiguiente"
+            div.mder-repifr
+                router-link.boton-repifr.boton-repifr--eps(:to="epSiguiente"
                     :class="epSiguiente === ''? 'boton--desactivado': ''"
                 )
-                    span.ocultarMovil Siguiente
+                    span.ocultarMovil-repifr Siguiente
                     i.material-icons chevron_right
 
     //
@@ -88,7 +88,7 @@
                         try
                             cont.removeChild cont.childNodes[0]
                         ifr = document.createElement "iframe"
-                        ifr.className = "video"
+                        ifr.className = "video-iframe-acecha"
                         ifr.id = "iframe-anime"
                         ifr.src = @linkActivo
                         ifr.allowFullscreen = yes
@@ -177,7 +177,7 @@
                     try
                         cont.removeChild cont.childNodes[0]
                     ifr = document.createElement "iframe"
-                    ifr.className = "video"
+                    ifr.className = "video-iframe-acecha"
                     ifr.id = "iframe-anime"
                     ifr.src = @linkActivo
                     ifr.allowFullscreen = yes
@@ -194,26 +194,26 @@
 #
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 
-    .reproductor
+    .reproductor-repifr
         width: 100%
 
 
     #contenedor-anime
         border-radius: 0 5px 5px 5px
 
-    .controles2
+    .controles2-repifr
         display: grid
         grid-template-columns: auto auto auto
-        .mizq
+        .mizq-repifr
             text-align: left
-        .mcentro
+        .mcentro-repifr
             text-align: center
-        .mder
+        .mder-repifr
             text-align: right
 
-    .boton
+    .boton-repifr
         display: inline-table
         background-color: #2e3437
         padding: 0 10px
@@ -232,49 +232,45 @@
             vertical-align: middle
             font-size: 15px
 
-    .boton--desactivado
+    .boton--desactivado-repifr
         background-color: #dbdbdb !important
         color: #767676
 
 
 
-    .boton--eps
+    .boton-repifr--eps
         width: auto
         background-color: #e46a69
         text-decoration: none
         &:hover
             background-color: #c75857
 
-    .boton--ir
+    .boton-repifr--ir
         background-color: #d93e3c
         &:hover
             background-color: #b62f2d
 
-    .izq
-        float: left
 
-    // .der
-        float: right
-
-    .contenedor-video
+    .contenedor-video-repifr
         position: relative
         padding-bottom: 56.25%
         height: 0
         overflow: hidden
         background-color: black
 
-        .video
+        .video-iframe-acecha
             position: absolute
             top: 0
             left: 0
             width: 100%
             height: 100%
 
-    .opciones
+    .opciones-repifr
         list-style-type: none
 
+
     @media only screen and (max-width: 500px)
-        .ocultarMovil
+        .ocultarMovil-repifr
             display: none !important
 
     //

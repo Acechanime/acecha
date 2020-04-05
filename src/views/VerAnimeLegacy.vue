@@ -7,8 +7,7 @@
                 descarga
             // comentarios.fondo
         div.fondo(v-if="!esMovil")
-            // publicidad
-            p hola
+            publicidad
         br
 
     //

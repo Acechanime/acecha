@@ -18,7 +18,7 @@
                         tr(v-for="([nombre, url], num) in links")
                             td {{ nombre }}
                             td
-                                a(:href="url" target="_blank") Descargar
+                                a(:href="url" target="_blank" @click="registrarClickDescarga") Descargar
                         tr(v-if="links.length === 0")
                             td No hay links disponibles
 
@@ -49,9 +49,12 @@
             abrirEps: ->
                 @panelLinks = !@panelLinks
                 @panelCarpetas = false
-            
-        
-            
+            registrarClickDescarga: ->
+                @$gtag.event "click-descarga",
+                    'event_category': "reproductor"
+                    'event_label': "Click a un link de descarga"
+
+
 #
 
 </script>
