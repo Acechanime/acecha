@@ -117,6 +117,17 @@
                                     <h3 class="helpers__title">Otro Fansub Más</h3>
                                 </div>
                             </a>
+                            <a href="https://www.animeflash.xyz/">
+                                <div class="helpers__item">
+                                    <div class="helpers__image">
+                                        <img
+                                                src="https://legacy.acechanime.com/wp-content/uploads/2019/05/51176061_780176512340986_6342168160627589120_n.png"
+                                                alt="AnimeFlasho"
+                                        />
+                                    </div>
+                                    <h3 class="helpers__title">AnimeFlash</h3>
+                                </div>
+                            </a>
                             <a href="https://magicallovefansub.blogspot.com/">
                                 <div class="helpers__item">
                                     <div class="helpers__image">
