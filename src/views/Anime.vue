@@ -185,7 +185,7 @@
             padding: 0.5rem
 
 
-    @media only screen and (max-width: 500px)
+    @media only screen and (max-width: $anchoMovil)
         .cont
             grid-template-columns: initial
             grid-gap: 0
@@ -195,6 +195,9 @@
 
         .estado
             width: 85%
+
+        .contenedor_comentarios
+            width: 100%
 
     //
 </style>

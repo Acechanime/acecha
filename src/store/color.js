@@ -51,15 +51,11 @@ export const color = {
                 modoOscuro = "color-oscuro";
             }
 
-            console.log(`${colorActual} -> ${modoOscuro}`);
-
             if (colorActual === "color-claro") {
-                console.log(`Cambiando a oscuro...`);
                 state.color = modoOscuro;
                 localStorage.setItem("modo-color", modoOscuro);
                 cambiarEsquemaColor(modoOscuro);
             } else {
-                console.log(`Cambiando a claro...`);
                 state.color = "color-claro";
                 localStorage.setItem("modo-color", "color-claro");
                 cambiarEsquemaColor("color-claro");
