@@ -107,6 +107,12 @@
                     weight: 700
             .motto
                 color: inherit
+                &::after
+                    padding-left: 0.5rem
+                    content: "favorite"
+                    color: #f44336
+                    font-family: "Material Icons" !important
+
             .boton
                 display: inline-block
                 border-radius: 50px
