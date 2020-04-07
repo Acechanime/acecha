@@ -147,6 +147,18 @@
 
 <style scoped lang="sass">
 
+    .subheader
+        margin: 0
+
+
+    .section__title, .section__description
+        color: var(--texto1)
+
+
+    .social__item, .section
+        background-color: var(--fondo0)
+
+
     .subheader__cover:before
         background: rgba(0, 0, 0, 0.85) !important
 

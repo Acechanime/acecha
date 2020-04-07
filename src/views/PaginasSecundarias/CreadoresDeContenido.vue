@@ -183,6 +183,14 @@
 
 <style scoped lang="sass">
 
+    .subheader
+        margin: 0
+
+
+    .cdc__name
+        color: var(--texto1)
+
+
     .subheader__cover:before
         background: rgba(0, 0, 0, 0.85) !important
 

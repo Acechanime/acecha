@@ -151,12 +151,27 @@
 
 <style scoped lang="sass">
 
+    .subheader
+        margin: 0
+
+
+    .section__title
+        color: var(--texto1)
+
+
     .faqs__content
         display: block
 
 
     .subheader__cover:before
         background: rgba(0, 0, 0, 0.85) !important
+
+
+    .faqs__item
+        background-color: var(--fondo0)
+
+    .faqs__content p
+        color: var(--texto1)
 
 
     //

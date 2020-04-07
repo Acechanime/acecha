@@ -154,7 +154,6 @@
                     </div>
                 </div>
             </main>
-            <div class="section--separator"></div>
         </section>
     </div>
 </template>
@@ -195,6 +194,14 @@
 </script>
 
 <style scoped lang="sass">
+
+    .subheader
+        margin: 0
+
+
+    .section__title, .section__description
+        color: var(--texto1)
+
 
     .subheader__cover:before
         // background: rgba(0, 0, 0, 0.85) !important
