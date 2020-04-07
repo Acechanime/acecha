@@ -36,9 +36,14 @@
                 clases
         methods:
             cambiar: ->
+                nombre = @opcion[0]
+                @$gtag.event "cambio-reproductor",
+                    'event_category': "reproductor"
+                    'event_label': "Reproductor secundario #{nombre}"
+
                 @cambiarOpcion @pos
-    #
-    
+
+#
 </script>
 
 <style scoped lang="sass">

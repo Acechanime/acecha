@@ -14,9 +14,12 @@
             // )
             //     source(:src="opciones[0][1]" type="video/mp4")
 
-            video-player.reproductor-repifr(v-if="posActiva === 0 && epActual.id"
+            video-player.reproductor-repifr-js(v-if="posActiva === 0 && epActual.id"
                 :options="opcionesVideoJs" :key="epActual.id"
+                @play="registrarVista($event)"
             )
+
+            // acecha-reproductor
 
             // div.video-player-box(
             //     v-if="posActiva === 0 && epActual.id"
@@ -56,6 +59,7 @@
 
 <script lang="coffee">
     import opcion from "./opcion.vue"
+    import acechaReproductor from "./acecha-reproductor.vue"
     import 'video.js/dist/video-js.css'
     import { impr, servidor } from "../../coffee/variables.coffee"
     import { videoPlayer } from 'vue-video-player'
@@ -71,9 +75,10 @@
 
     export default
         name: "reproductor"
-        components: { opcion, videoPlayer }
+        components: { opcion, videoPlayer, acechaReproductor }
         data: ->
             posActiva: 0
+            videoIniciado: false
         watch:
             posActiva: (n) ->
                 unless n is 0
@@ -170,6 +175,14 @@
             cambiarOpcion: (num) ->
                 @posActiva = num
 
+            registrarVista: (reproductor) ->
+                unless @videoIniciado
+                    @videoIniciado = true
+                    nombre = @$store.state.datos.animeActual?.nombre ? "-"
+                    @$gtag.event "reproducción",
+                        'event_category': "reproductor"
+                        'event_label': "Reproducción de #{ nombre }"
+
         mounted: ->
             intervalo = setInterval((() =>
                 if (document.getElementById "contenedor-anime")?
@@ -195,6 +208,7 @@
 </script>
 
 <style lang="sass">
+    @import "../../sass/variables"
 
     .reproductor-repifr
         width: 100%
@@ -269,9 +283,13 @@
         list-style-type: none
 
 
-    @media only screen and (max-width: 500px)
+    @media only screen and (max-width: $anchoMovil)
         .ocultarMovil-repifr
             display: none !important
+
+        // .reproductor-repifr-js
+        //     position: sticky
+        //     top: 0
 
     //
 </style>

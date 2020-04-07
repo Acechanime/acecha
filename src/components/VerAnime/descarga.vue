@@ -1,6 +1,6 @@
 <template lang="pug">
-    div
-        div.boton-cont(v-if="links.length !== 0")
+    div(v-if="links.length !== 0")
+        div.boton-cont
             div.boton(@click="abrirEps()")
                 | Descargar
                 br
@@ -43,7 +43,7 @@
             panelCarpetas: false
         computed:
             epActual: -> @$store.state.reproductor.epActual
-            links: -> Object.entries(@epActual.descargas).filter ([nombre, url]) => url?
+            links: -> Object.entries(@epActual.descargas ? {}).filter ([nombre, url]) => url?
 
         methods:
             abrirEps: ->

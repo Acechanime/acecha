@@ -46,7 +46,7 @@
                 ev = @$store.state.datos.resizeEvent
                 window.innerWidth
 
-            esMovil: ->@anchoPantalla < 780
+            esMovil: -> @anchoPantalla < 780
 
             etiqueta: ->
                 (if @ep.es_ova is true then "Ova" else "Episodio") + " " +
@@ -103,9 +103,13 @@
             grid-template-columns: none !important
 
 
-    @media only screen and (max-width: 450px)
+    @media only screen and (max-width: $anchoMovil)
         .contenedor
-            width: 96%
+            width: 100%
+
+        .fondo
+            padding-left: 0
+            padding-right: 0
 
     //
 </style>
