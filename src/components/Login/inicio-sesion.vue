@@ -34,7 +34,7 @@
 </template>
 
 <script lang="coffee">
-    import { servidorv3 } from "../../variables"
+    import { servidor } from "../../coffee/variables.coffee"
 
     export default
         name: "inicio-sesion"
@@ -54,7 +54,7 @@
                 @botonDesactivado = false
             manejarOk: (respuesta) ->
                 datos = await respuesta.json()
-                @$store.commit "registrarUsuarioActual", datos.payload
+                @$store.commit "usuario/registrarUsuarioActual", datos
                 @reiniciarBoton()
                 @$router.push "/"
 
@@ -71,7 +71,7 @@
                 vm = this
 
                 try
-                    respuesta = await fetch "#{servidorv3}/usuarios/login",
+                    respuesta = await fetch "#{servidor}/usuarios/login",
                         method: "POST"
                         headers:
                             "Content-Type": "application/json"
@@ -112,7 +112,7 @@
         font:
             family: "Product Sans", sans-serif
             size: 1em
-        background-color: var(--first-color)
+        background-color: var(--colorPrincipal)
         color: white
         cursor: pointer
 
@@ -166,13 +166,13 @@
 
         &:focus
             outline: none
-            border-color: var(--first-color)
+            border-color: var(--colorPrincipal)
 
         &:invalid:not(:focus):not(:placeholder-shown)
             border-color: #ff2c31
 
         &:focus + label
-            color: var(--first-color)
+            color: var(--colorPrincipal)
             top: 0.25em
             left: 0.5em
             font-size: 0.8em
@@ -201,6 +201,9 @@
             &:focus + label
                 top: -0.5em
                 left: 0.5em
+            &:not(:placeholder-shown) + label
+                top: -0.5em !important
+
 
         .label-login
             cursor: text

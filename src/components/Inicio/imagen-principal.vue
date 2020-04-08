@@ -7,8 +7,8 @@
                     span.motto(v-if="mostrarExtra")
                         | Te damos el amor que no te da él/ella
                         // span(style="font-family: icomoon !important;") &#xE9DA;
-                    // br
-                    // br
+                    br
+                    br
                     br
                     div.botones-cuenta(v-if="mostrarBotonesLogin")
                         router-link.boton-inicio-sesion(to="/login/") Inicia Sesión
@@ -63,7 +63,7 @@
             text-decoration: none
             font-family: "Product Sans", sans-serif
         .boton-registro
-            background-color: var(--first-color)
+            background-color: var(--colorPrincipal)
             color: white
         .boton-inicio-sesion
             color: #3a3a3a

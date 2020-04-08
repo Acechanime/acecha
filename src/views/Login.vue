@@ -1,9 +1,10 @@
 <template lang="pug">
     div.login
-        div.contenido
-            div.contenedor-login
-                inicio-sesion(v-if="esLogin" :cambiarARegistro="cambiarARegistro")
-                registro(v-else :cambiarALogin="cambiarALogin")
+        div.wrap-a
+            div.contenido
+                div.contenedor-login
+                    inicio-sesion(v-if="esLogin" :cambiarARegistro="cambiarARegistro")
+                    registro(v-else :cambiarALogin="cambiarALogin")
 
         div.img(:style="estiloCabecera")
 
@@ -43,6 +44,15 @@
         height: 100%
         width: 100%
 
+    .wrap-a
+        position: fixed
+        top: 0
+        left: 0
+        height: 100%
+        width: 100%
+        overflow-y: auto
+        z-index: 2
+
 
     .contenido
         position: relative
@@ -80,6 +90,7 @@
         color: var(--texto1)
         display: table-cell
         vertical-align: middle
+        padding: 5rem 0
 
 
     .titulo-login

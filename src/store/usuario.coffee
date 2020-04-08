@@ -5,6 +5,7 @@ recuperarUsuario = =>
 
 
 export moduloUsuario =
+    namespaced: true
     state:
         usuarioActual: recuperarUsuario()
     mutations:
