@@ -7,9 +7,8 @@
             label(for="input-busqueda-movil" style="display: none;") Buscar animes
             div.superior(:class="navOculta? 'superior--oculto': ''")
                 router-link.usuario(to="/mi-cuenta/")
-                    div
-                        img(src="/favicon.png" alt="usuario")
-
+                    // img(src="https://png.icons8.com/windows/1600/0063B1/user")
+                    img(:src="imgUsuario")
                 // Si, uso un @input en vez de v-model, porque solo así funciona en movil.
                 input#input-busqueda-movil.busqueda(
                     placeholder="Buscar animes"
@@ -18,8 +17,7 @@
                 )
 
                 span.material-icons.icono-menu(@click="cambiarEstadoMenu") menu
-
-            div.separador
+                div.separador
 
             div.iconos
                 a(@click="cerrarMenu('/')" title="Inicio" :class="esPagInicio? 'resaltado': ''")
@@ -35,6 +33,7 @@
 <script lang="coffee">
     import listaItems from "./barra-navegacion-movil/lista-items"
     import resultadoBuscador from "./barra-navegacion-movil/resultado-buscador.vue"
+    import { cambiarColor } from "./App/ModoColor.coffee"
 
     export default
         name: "barra-navegacion-movil"
@@ -50,6 +49,12 @@
         computed:
             esPagInicio: -> @$route.path is "/"
             esPagAnimes: -> @$route.path is "/animes/"
+            esPagBugs: -> @$route.path is "/bugs/"
+            usuarioActual: -> @$store.state.usuario.usuarioActual
+            imgUsuario: ->
+                if @usuarioActual?.id?
+                    @usuarioActual.avatar
+                else "/favicon.png"
 
         methods:
             registrar: (ev) ->

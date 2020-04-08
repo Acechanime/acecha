@@ -25,6 +25,8 @@ devDependencies:
   sass: 1.25.0
   sass-loader: 8.0.2_sass@1.25.0
   supertest: 4.0.2
+  typeface-open-sans: 0.0.75
+  typeface-roboto: 0.0.75
   video.js: 6.13.0
   vue-gtag: 1.6.2
   vue-meta: 2.3.3
@@ -8983,6 +8985,14 @@ packages:
     dev: true
     resolution:
       integrity: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+  /typeface-open-sans/0.0.75:
+    dev: true
+    resolution:
+      integrity: sha512-0lLmB7pfj113OP4T78SbpSmC4OCdFQ0vUxdSXQccsSb6qF76F92iEuC/DghFgmPswTyidk8+Hwf+PS/htiJoRQ==
+  /typeface-roboto/0.0.75:
+    dev: true
+    resolution:
+      integrity: sha512-VrR/IiH00Z1tFP4vDGfwZ1esNqTiDMchBEXYY9kilT6wRGgFoCAlgkEUMHb1E3mB0FsfZhv756IF0+R+SFPfdg==
   /uglify-js/2.8.29:
     dependencies:
       source-map: 0.5.7
@@ -9939,6 +9949,8 @@ specifiers:
   sass: ^1.18.0
   sass-loader: ^8.0.0
   supertest: ^4.0.2
+  typeface-open-sans: ^0.0.75
+  typeface-roboto: ^0.0.75
   video.js: 6.13.0
   vue: ^2.6.10
   vue-gtag: ^1.6.2

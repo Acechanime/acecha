@@ -87,6 +87,16 @@ const router = new Router({
             component: () => import("./views/404.vue")
         },
         {
+            path: "/login/",
+            name: "Login",
+            component: () => import("./views/Login.vue")
+        },
+        {
+            path: "/registro/",
+            name: "Registro",
+            component: () => import("./views/Login.vue")
+        },
+        {
             path: "/mi-cuenta/",
             name: "Cuenta",
             component: () => import("./views/Ajustes.vue")
