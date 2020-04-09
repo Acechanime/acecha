@@ -17,6 +17,7 @@
     import pantallaCarga from "./components/App/pantalla-carga.vue"
     import modoColor from "./components/App/modo-color.vue"
     import indicadorVersion from "./components/App/indicador-version.vue"
+    import localforage from "localforage"
 
     export default
         metaInfo:
@@ -37,6 +38,10 @@
             )
             @$store.commit "color/iniciarModoColor"
             @$store.dispatch "datos/inicializar"
+
+            console.log localforage
+            localforage.setItem "d2", [1, [2, [3]]]
+
 
 
 #

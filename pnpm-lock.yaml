@@ -1,6 +1,7 @@
 dependencies:
   6du-livescript-loader: 0.0.3_livescript@1.6.0
   livescript: 1.6.0
+  localforage: 1.7.3
   regenerator-runtime: 0.13.5
   register-service-worker: 1.6.2
   roboto: 0.8.2
@@ -4724,6 +4725,10 @@ packages:
       node: '>= 4'
     resolution:
       integrity: sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==
+  /immediate/3.0.6:
+    dev: false
+    resolution:
+      integrity: sha1-nbHb0Pr43m++D13V5Wu2BigN5ps=
   /import-cwd/2.1.0:
     dependencies:
       import-from: 2.1.0
@@ -5483,6 +5488,12 @@ packages:
       node: '>= 0.8.0'
     resolution:
       integrity: sha1-OwmSTt+fCDwEkP3UwLxEIeBHZO4=
+  /lie/3.1.1:
+    dependencies:
+      immediate: 3.0.6
+    dev: false
+    resolution:
+      integrity: sha1-mkNrLMd0bKWd56QfpGmz77dr2H4=
   /lines-and-columns/1.1.6:
     dev: true
     resolution:
@@ -5567,6 +5578,12 @@ packages:
       node: '>=4.0.0'
     resolution:
       integrity: sha512-fkpz8ejdnEMG3s37wGL07iSBDg99O9D5yflE9RGNH3hRdx9SOwYfnGYdZOUIZitN8E+E2vkq3MUMYMvPYl5ZZA==
+  /localforage/1.7.3:
+    dependencies:
+      lie: 3.1.1
+    dev: false
+    resolution:
+      integrity: sha512-1TulyYfc4udS7ECSBT2vwJksWbkwwTX8BzeUIiq8Y07Riy7bDAAnxDaPU/tWyOVmQAcWJIEIFP9lPfBGqVoPgQ==
   /locate-path/2.0.0:
     dependencies:
       p-locate: 2.0.0
@@ -9941,6 +9958,7 @@ specifiers:
   coffeescript: ^2.4.1
   core-js: ^3.6.4
   livescript: ^1.6.0
+  localforage: ^1.7.3
   pug: ^2.0.3
   pug-plain-loader: ^1.0.0
   regenerator-runtime: ^0.13.5
