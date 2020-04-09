@@ -32,6 +32,17 @@ const obtenerLocalStorage = (clave, defecto) => {
 };
 
 
+const formatearColorAntiguo = color => {
+    const v = (color.indexOf("color-") !== 0)
+        ? "color-" + color.split("").map(x => x.toUpperCase() === x ? "-" + x.toLowerCase() : x ).join("")
+        : color;
+
+    console.log(color, v);
+
+    return v;
+};
+
+
 export const color = {
     namespaced: true,
     state: {
@@ -63,7 +74,9 @@ export const color = {
 
         },
         iniciarModoColor (state) {
-            const color = obtenerLocalStorage("modo-color", "color-oscuro");
+            const color = obtenerLocalStorage("modo-color", "color-oscuro")
+                |> formatearColorAntiguo;
+
             cambiarEsquemaColor(color);
             state.color = color;
         }
