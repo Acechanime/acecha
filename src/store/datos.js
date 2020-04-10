@@ -1,3 +1,5 @@
+import localforage from "localforage";
+import md5 from "md5";
 import { servidor } from "../coffee/variables.coffee"
 
 const cargarRecursoDesdeRed = (nombre, url) => new Promise(async (resolve, reject) =>{
@@ -55,10 +57,89 @@ const inicializar = async ({ commit }) => {
         } catch (e) {}
     };
 
+
+    const inicializarAnimes = async () => {
+
+        const obtenerAnimes = animeData => {
+            let animes = [];
+            for (const id in animeData) if (animeData.hasOwnProperty(id)) {
+                animes.push(datos[id].datos);
+            }
+            return animes;
+        };
+
+        /*
+        reg AnimeData = {
+            [id: Txt]: {
+                hash: Txt
+                datos: Anime
+            }
+        }
+        */
+
+        //: AnimeData
+        let datos = await localforage.getItem("animes");
+
+        let bodyPeticion = "";
+        if (datos === null) {
+            datos = {};
+            bodyPeticion = `{"Hashes": [{"id": "-1", "hash": "-1"}]}`;
+            commit("actualizarValores", { clave: "animes", valor: [] });
+        } else {
+            let animes = [];
+            let esPrimer = true;
+            bodyPeticion += `{"Hashes": [`;
+            for (const id in datos) if (datos.hasOwnProperty(id)) {
+                const datosAnime = datos[id];
+                bodyPeticion += (esPrimer? "": ",") + `{"id": "${id}", "hash": "${datosAnime.hash}"}`;
+                animes.push(datosAnime.datos);
+                esPrimer = false;
+            }
+            bodyPeticion += "]}";
+
+            commit("actualizarValores", { clave: "animes", valor: animes });
+        }
+
+        const respuesta = await fetch(`${servidor}/animes/get`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: bodyPeticion
+        });
+
+        if (respuesta.ok) {
+
+            const datosNuevos = await respuesta.json();
+
+            for (const anime of datosNuevos) {
+
+                const hash = JSON.stringify(anime) |> md5;
+
+                datos[anime.id] = {
+                    hash,
+                    datos: anime
+                };
+
+            }
+
+            commit("actualizarValores", { clave: "animes", valor: obtenerAnimes(datos) });
+
+            localforage.setItem("animes", datos)
+                .then(() => {
+                    console.log("Almacenado exitosamente.");
+                });
+
+        }
+
+    };
+
+
     // RecomendacionSemanal
     inicializarYActualizar("recomendacionSemanal", "recomendacion-semanal", "/animes/semanal");
     inicializarYActualizar("generos", "generos", "/generos");
-    inicializarYActualizar("animes", "animes", "/animes")
+    // inicializarYActualizar("animes", "animes", "/animes")
+    inicializarAnimes();
 
 };
 
@@ -66,6 +147,7 @@ const inicializar = async ({ commit }) => {
 export const datos = {
     namespaced: true,
     state: {
+        //: [AnimeData]
         animes: [],
         generos: [],
         recomendacionSemanal: {

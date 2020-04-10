@@ -8,7 +8,10 @@
   },
   "dependencies": {
     "6du-livescript-loader": "^0.0.3",
+    "@babel/plugin-proposal-pipeline-operator": "^7.8.3",
     "livescript": "^1.6.0",
+    "localforage": "^1.7.3",
+    "md5": "^2.2.1",
     "regenerator-runtime": "^0.13.5",
     "register-service-worker": "^1.6.2",
     "roboto": "^0.8.2",
