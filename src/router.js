@@ -87,6 +87,16 @@ const router = new Router({
             component: () => import("./views/404.vue")
         },
         {
+            path: "/login/",
+            name: "Login",
+            component: () => import("./views/Login.vue")
+        },
+        {
+            path: "/registro/",
+            name: "Registro",
+            component: () => import("./views/Login.vue")
+        },
+        {
             path: "/mi-cuenta/",
             name: "Cuenta",
             component: () => import("./views/Ajustes.vue")
@@ -99,18 +109,18 @@ const router = new Router({
         { path: "/leer-manga/", redirect: "/en-construccion/" },
         { path: "/comprar-anime/", redirect: "/en-construccion/" },
         { path: "/comprar-desde-japon/", redirect: "/en-construccion/" },
-        { 
-            path: "/nosotros/", 
+        {
+            path: "/nosotros/",
             name: "Nosotros",
             component: () => import("./views/PaginasSecundarias/Nosotros.vue")
         },
-        { 
-            path: "/creadores-de-contenido/", 
+        {
+            path: "/creadores-de-contenido/",
             name: "Creadores",
             component: () => import("./views/PaginasSecundarias/CreadoresDeContenido.vue")
         },
-        { 
-            path: "/acecha-premium/", 
+        {
+            path: "/acecha-premium/",
             name: "Premium",
             component: () => import("./views/PaginasSecundarias/AcechaPremium.vue")
         },
