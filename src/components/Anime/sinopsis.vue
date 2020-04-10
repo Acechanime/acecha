@@ -56,7 +56,7 @@
 
     .sinopsis
         @extend %caja-textos
-        background-color: var(--fondo2)
+        background-color: var(--fondo0)
         .tit
             line-height: 1.3
             font:

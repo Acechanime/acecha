@@ -52,7 +52,7 @@
             usuarioActual: -> @$store.state.usuario.usuarioActual
             imgUsuario: ->
                 if @usuarioActual?.id?
-                    @usuarioActual.avatar
+                    @usuarioActual.avatar ? "/img/user.svg"
                 else "/favicon.png"
 
         methods:
@@ -113,7 +113,7 @@
         border-radius: 10px
         border: 1px solid rgba(209, 209, 209, 0.51)
         color: var(--texto1)
-        background-color: var(--fondo2)
+        background-color: var(--fondo0)
         box-sizing: border-box
         box-shadow: 0 0 5px 0 var(--sombra1)
 

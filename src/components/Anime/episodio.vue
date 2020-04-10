@@ -37,7 +37,7 @@
         color: var(--texto1)
         text-decoration: none
         &:hover
-            background-color: var(--fondo3)
+            background-color: var(--fondo0)
         &::before
             content: "\e90d"
             font-family: icomoon !important
