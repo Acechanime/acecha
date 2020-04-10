@@ -81,7 +81,7 @@ const inicializar = async ({ commit }) => {
         let datos = await localforage.getItem("animes");
 
         let bodyPeticion = "";
-        if (datos === null || Object.fromEntries(datos).length === 0) {
+        if (datos === null) {
             datos = {};
             bodyPeticion = `{"Hashes": [{"id": "-1", "hash": "-1"}]}`;
             commit("actualizarValores", { clave: "animes", valor: [] });
@@ -93,6 +93,7 @@ const inicializar = async ({ commit }) => {
                 const datosAnime = datos[id];
                 bodyPeticion += (esPrimer? "": ",") + `{"id": "${id}", "hash": "${datosAnime.hash}"}`;
                 animes.push(datosAnime.datos);
+                esPrimer = false;
             }
             bodyPeticion += "]}";
 
@@ -123,6 +124,11 @@ const inicializar = async ({ commit }) => {
             }
 
             commit("actualizarValores", { clave: "animes", valor: obtenerAnimes(datos) });
+
+            localforage.setItem("animes", datos)
+                .then(() => {
+                    console.log("Almacenado exitosamente.");
+                });
 
         }
 
