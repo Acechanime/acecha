@@ -3,6 +3,7 @@ dependencies:
   '@babel/plugin-proposal-pipeline-operator': 7.8.3_@babel+core@7.8.3
   livescript: 1.6.0
   localforage: 1.7.3
+  md5: 2.2.1
   regenerator-runtime: 0.13.5
   register-service-worker: 1.6.2
   roboto: 0.8.2
@@ -2444,6 +2445,10 @@ packages:
     dev: true
     resolution:
       integrity: sha1-x84o821LzZdE5f/CxfzeHHMmH8A=
+  /charenc/0.0.2:
+    dev: false
+    resolution:
+      integrity: sha1-wKHS86cJLgN3S/qD8UwPxXkKhmc=
   /check-types/8.0.3:
     dev: true
     resolution:
@@ -2959,6 +2964,10 @@ packages:
       node: '>= 8'
     resolution:
       integrity: sha512-u7v4o84SwFpD32Z8IIcPZ6z1/ie24O6RU3RbtL5Y316l3KuHVPx9ItBgWQ6VlfAFnRnTtMUrsQ9MUUTuEZjogg==
+  /crypt/0.0.2:
+    dev: false
+    resolution:
+      integrity: sha1-iNf/fsDfuG9xPch7u0LQRNPmxBs=
   /cryptiles/0.2.2:
     dependencies:
       boom: 0.4.2
@@ -5768,6 +5777,14 @@ packages:
     dev: true
     resolution:
       integrity: sha512-xitP+WxNPcTTOgnTJcrhM0xvdPepipPSf3I8EIpGKeFLjt3PlJLIDG3u8EX53ZIubkb+5U2+3rELYpEhHhzdkg==
+  /md5/2.2.1:
+    dependencies:
+      charenc: 0.0.2
+      crypt: 0.0.2
+      is-buffer: 1.1.6
+    dev: false
+    resolution:
+      integrity: sha1-U6s41f48iJG6RlMp6iP6wFQBJvk=
   /mdn-data/2.0.4:
     dev: true
     resolution:
@@ -9945,6 +9962,7 @@ specifiers:
   core-js: ^3.6.4
   livescript: ^1.6.0
   localforage: ^1.7.3
+  md5: ^2.2.1
   pug: ^2.0.3
   pug-plain-loader: ^1.0.0
   regenerator-runtime: ^0.13.5
