@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Inicio from './views/Inicio.vue'
 import EnConstruccion from "./views/EnConstruccion.vue"
+import mantenimiento from "./views/mantenimiento.vue"
 import VerAnimeLegacy from "./views/VerAnimeLegacy.vue"
 import Calendario from "./views/Calendario.vue"
 
@@ -76,93 +77,7 @@ const scrollToY = (scrollTargetY, speed, easing) => {
 const router = new Router({
     mode: "history",
     routes: [
-        {
-            path: '/',
-            name: 'Inicio',
-            component: Inicio
-        },
-        {
-            path: "/404",
-            name: "NotFound",
-            component: () => import("./views/404.vue")
-        },
-        {
-            path: "/login/",
-            name: "Login",
-            component: () => import("./views/Login.vue")
-        },
-        {
-            path: "/registro/",
-            name: "Registro",
-            component: () => import("./views/Login.vue")
-        },
-        {
-            path: "/mi-cuenta/",
-            name: "Cuenta",
-            component: () => import("./views/Ajustes.vue")
-        },
-        {
-            path: "/calendario/",
-            name: "Calendario",
-            component: () => import("./views/Calendario.vue")
-        },
-        { path: "/leer-manga/", redirect: "/en-construccion/" },
-        { path: "/comprar-anime/", redirect: "/en-construccion/" },
-        { path: "/comprar-desde-japon/", redirect: "/en-construccion/" },
-        { 
-            path: "/nosotros/", 
-            name: "Nosotros",
-            component: () => import("./views/PaginasSecundarias/Nosotros.vue")
-        },
-        { 
-            path: "/creadores-de-contenido/", 
-            name: "Creadores",
-            component: () => import("./views/PaginasSecundarias/CreadoresDeContenido.vue")
-        },
-        { 
-            path: "/acecha-premium/", 
-            name: "Premium",
-            component: () => import("./views/PaginasSecundarias/AcechaPremium.vue")
-        },
-        {
-            path: "/en-construccion/",
-            name: "EnConstruccion",
-            component: () => import("./views/EnConstruccion.vue")
-        },
-        {
-            path: "/acecha-tv/",
-            name: "AcechaTV",
-            component: () => import("./views/PaginasSecundarias/AcechaTv.vue")
-        },
-        {
-            path: "/dmca/",
-            name: "DMCA",
-            component: () => import("./views/PaginasSecundarias/DMCA.vue")
-        },
-        {
-            path: "/politica-privacidad/",
-            name: "PoliticaPrivacidad",
-            component: () => import("./views/PaginasSecundarias/PoliticaPrivacidad.vue")
-        },
-        {
-            path: '/animes/',
-            name: 'Animes',
-            component: () => import("./views/Animes.vue")
-        },
-        {
-            path: "/:anime/",
-            name: "Anime",
-            component: () => import("./views/Anime.vue"),
-            props: true,
-            children: [
-                {
-                    path: ":id/",
-                    name: "VerAnime",
-                    component: VerAnimeLegacy
-                }
-            ]
-        },
-        { path: '*', redirect: "/404" }
+        { path: '*', component: mantenimiento }
     ],
     scrollBehavior (to, from, savedPosition) {
         if (to.name === "VerAnimeLegacy" && from.name === "Anime") {
