@@ -81,8 +81,8 @@
     .titulo-ajuste
         padding: 0.5rem 0
         font:
-            family: "Product Sans", Roboto, sans-serif
-            weight: bold
+            family: Roboto, sans-serif
+            weight: 700
             size: 1rem
 
 

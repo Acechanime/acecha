@@ -8,21 +8,11 @@
 
         div.selector(v-if="selectorAbierto")
 
-            div#color_oscuro.color_demo(:class="modoOscuroActivo? 'color_activo': ''"
-                @click="establecerEsquema('color-oscuro')")
-                | Normal
-
-            div#color_gris.color_demo(:class="modoGrisActivo? 'color_activo': ''"
-                @click="establecerEsquema('color-gris')")
-                | Gris
-
-            div#color_negro.color_demo(:class="modoNegroActivo? 'color_activo': ''"
-                @click="establecerEsquema('color-negro')")
-                | Amoled
-
-            div#color_azul_oscuro.color_demo(:class="modoAzulOscuroActivo? 'color_activo': ''"
-                @click="establecerEsquema('color-azul-oscuro')")
-                | Azul oscuro
+            muestra-color(titulo="Darker" clase="color-oscuro")
+            muestra-color(titulo="Deep Palenight" clase="color-azul-oscuro")
+            muestra-color(titulo="One Dark" clase="color-gris")
+            muestra-color(titulo="Dracula at Night" clase="color-dracula-at-night")
+            muestra-color(titulo="Amoled" clase="color-negro")
 
         // div.adicional Este tono se guarda solo en este navegador.
 
@@ -30,23 +20,18 @@
 </template>
 
 <script lang="ls">
+    ``import muestraColor from "./muestra-color.vue";``
 
-    module.exports =
+    obj =
         name: "modo-color-oscuro"
+        components: { muestraColor }
         data: ->
             modoColorOscuro: localStorage?.getItem "modo-color-oscuro"
             selectorAbierto: false
             textoIconoSelector: "keyboard_arrow_down"
         computed:
-            modoOscuroActivo: -> @modoColorOscuro == "oscuro"
-            modoGrisActivo: -> @modoColorOscuro == "gris"
-            modoNegroActivo: -> @modoColorOscuro == "negro"
-            modoAzulOscuroActivo: -> @modoColorOscuro == "azulOscuro"
             estiloSelector: -> if @selectorAbierto then "display: block;" else ""
         methods:
-            establecerEsquema: (modo) ->
-                @$store.dispatch "color/cambiarModoColorOscuro", modo
-
             alternarSelector: ->
                 [@selectorAbierto, @textoIconoSelector] =
                     if @selectorAbierto
@@ -54,7 +39,9 @@
                     else
                         [true, "keyboard_arrow_up"]
 
-#
+    ``export default obj;``
+
+
 </script>
 
 <style scoped lang="sass">

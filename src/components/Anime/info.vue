@@ -58,7 +58,7 @@
 
     .info
         @extend %caja-textos
-        background-color: var(--fondo2)
+        background-color: var(--fondo0)
         padding: 1rem
         .tit
             font:

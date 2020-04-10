@@ -95,7 +95,7 @@
         @extend %caja-textos
         padding-left: 5px
         padding-right: 5px
-        background-color: var(--fondo2)
+        background-color: var(--fondo0)
 
 
     @media only screen and (max-width: 780px)

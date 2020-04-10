@@ -115,7 +115,7 @@
     .eps
         @extend %caja-textos
         padding: 0
-        background-color: var(--fondo2)
+        background-color: var(--fondo0)
         color: var(--texto1)
         max-height: 35rem
         overflow-y: scroll

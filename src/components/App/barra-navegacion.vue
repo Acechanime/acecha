@@ -57,7 +57,7 @@
             usuarioActual: -> @$store.state.usuario.usuarioActual
             imgUsuario: ->
                 if @usuarioActual?.id?
-                    @usuarioActual.avatar
+                    @usuarioActual.avatar ? "/img/user.svg"
                 else "/favicon.png"
         mounted: ->
             vm = this

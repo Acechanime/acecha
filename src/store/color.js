@@ -11,6 +11,7 @@ const cambiarEsquemaColor = color => {
                 case "color-azul-oscuro":
                 case "color-negro":
                 case "color-oscuro":
+                case "color-dracula-at-night":
                 case "color-gris": {
                     clases.remove(clase);
                     break bucle;
