@@ -3,6 +3,8 @@
 * */
 
 self.addEventListener("install", (event) => {
+    self.skipWaiting();
+
     event.waitUntil(
         caches.open("cache-imagenes").then((cache) => {
             console.log("Cacheando imagen.");
