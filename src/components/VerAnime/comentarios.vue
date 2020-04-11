@@ -1,24 +1,39 @@
 <template lang="pug">
-    div.comentarios
-        fb-comments(:path="$router.currentRoute.path")
+    div.comentarios-cont.contenedor
+        h2 Comentarios
+        div Comentario 1
+
     //
 </template>
 
-<script lang="coffee">
-    import fbComments from "../fb-comments.vue"
+<script lang="ls">
 
-    export default
+    module.exports =
         name: "comentarios"
-        components: { fbComments }
-    #
-    
+        data: ->
+            comentarios: []
+        computed:
+            animeActual: -> @$store.state.datos.animeActual
+            epActual:    -> @$store.state.reproductor.epActual
+        methods:
+            cargarComentarios: ->
+                console.log "Cargando :c (#{@animeActual.id}) (#{@epActual.id})"
+        mounted: ->
+            @cargarComentarios()
+
+#
 </script>
 
 <style scoped lang="sass">
     @import "../../sass/variables"
 
-    .comentarios
+    .comentarios-cont
+        @extend %caja-textos
         color: var(--texto1)
+        font-family: "JetBrains Mono", Roboto, sans-serif
+        margin-top: 2rem
+        margin-bottom: 2rem
+
 
     //
 </style>

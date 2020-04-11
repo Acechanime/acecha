@@ -1,14 +1,16 @@
 <template lang="pug">
-    main.cont.contenedor
-        div
-            div.fondo
-                h3.label_episodio {{ etiqueta }}
-                reproductor
-                descarga
-            // comentarios.fondo
-        div.fondo(v-if="!esMovil")
-            publicidad
-        br
+    div.cont-ver-anime
+        main.cont-anime-inner.contenedor
+            div
+                div.fondo
+                    h3.label_episodio {{ etiqueta }}
+                    reproductor
+                    descarga
+                // comentarios.fondo
+            div.fondo(v-if="!esMovil")
+                p publicidad
+
+        comentarios
 
     //
 </template>
@@ -17,6 +19,7 @@
     import reproductor from "../components/VerAnime/reproductor.vue"
     import descarga from "../components/VerAnime/descarga.vue"
     import publicidad from "../components/publicidad.vue"
+    import comentarios from "../components/VerAnime/comentarios.vue"
     import { impr } from "../coffee/variables.coffee"
 
     extraerDatos = (url) =>
@@ -37,7 +40,7 @@
         validate: ({ params }) ->
             /(ep|ova)(\d+)/.test params.id
 
-        components: { reproductor, descarga, publicidad }
+        components: { reproductor, descarga, publicidad, comentarios }
         computed:
             ep: -> @$store.state.reproductor.epActual
             anchoPantalla: ->
@@ -76,6 +79,11 @@
 <style scoped lang="sass">
     @import "../sass/variables"
 
+    .cont-ver-anime
+        margin-top: -150px
+        position: relative
+
+
     .label_episodio
         color: var(--texto1)
         font:
@@ -86,9 +94,10 @@
         padding-left: 15px
 
 
-    .cont
+    .cont-anime-inner
         display: grid
         grid-template-columns: auto 250px !important
+        grid-gap: 2.5rem !important
 
 
     .fondo
