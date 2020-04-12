@@ -212,6 +212,7 @@
 
     .reproductor-repifr
         width: 100%
+        text-decoration: none !important
 
 
     #contenedor-anime

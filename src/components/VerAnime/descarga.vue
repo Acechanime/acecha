@@ -99,7 +99,7 @@
         border-radius: 5px
         margin: 15px
 
-        box-shadow: 0 0 5px 2px var(--fondo2)
+        box-shadow: 0 0 5px 2px var(--fondo0)
 
 
     .cont--tabla--oculto
