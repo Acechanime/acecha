@@ -225,6 +225,8 @@
             text-align: left
         .mcentro-repifr
             text-align: center
+            a
+                text-decoration: none !important
         .mder-repifr
             text-align: right
 

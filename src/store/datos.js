@@ -159,7 +159,7 @@ export const datos = {
         animeActual: {},
         animeActualCargando: false,
         animeActualCargado: false,
-        mostrarVersion: false
+        mostrarVersion: localStorage.getItem("mostrar-version") === "true"
     },
     mutations: {
         actualizarResizeEvent (state, valor) {

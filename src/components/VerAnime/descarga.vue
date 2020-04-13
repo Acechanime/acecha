@@ -116,7 +116,7 @@
         border-spacing: 0
 
         thead
-            background-color: var(--fondo3)
+            background-color: var(--fondo1)
             display: table-header-group
             vertical-align: middle
             border-color: inherit
