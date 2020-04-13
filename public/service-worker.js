@@ -3,7 +3,7 @@
 * */
 
 self.addEventListener("install", (event) => {
-    self.skipWaiting();
+    // self.skipWaiting();
 
     event.waitUntil(
         caches.open("cache-imagenes").then((cache) => {
