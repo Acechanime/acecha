@@ -157,9 +157,12 @@
 
                 opciones
             opcionesVideoJs: ->
+                precargarVideo =
+                    if @$store.state.datos.precargarVideo == true then "auto"
+                    else "metadata"
                 if @epActual.id?
                     controls: true
-                    preload: "auto"
+                    preload: precargarVideo
                     sources: [{
                         type: "video/mp4"
                         src: @opciones[0][1]

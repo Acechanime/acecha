@@ -12,7 +12,7 @@
                 input(type="checkbox" :checked="precargarVideo")
                 span.switcher(@click.prevent.stop="alternarMostrar")
 
-
+        // div.adicional hola
 
     //
 </template>
