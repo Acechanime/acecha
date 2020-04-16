@@ -2,8 +2,7 @@
     div.modo-color(@click="alternarMostrarVersion")
         div.ajuste
             div.titulo-ajuste Mostrar la versión de Acechanime
-            // div.etiqueta-ajuste Cambia al modo oscuro/claro en ciertas horas del dia.
-            // br
+
         label.cl-switch.cl-switch-red
             input(type="checkbox" :checked="mostrarVersion")
             span.switcher(@click.prevent.stop="alternarMostrarVersion")

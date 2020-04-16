@@ -16,6 +16,7 @@
 
         modo-color-oscuro
         // modo-color-automatico
+        precargar-video
         mostrar-version(v-if="!esBeta")
 
         // div.contenedor-ajuste
@@ -31,6 +32,7 @@
     import modoColorOscuro from "../components/Ajustes/modo-color-oscuro.vue"
     import modoColorAutomatico from "../components/Ajustes/modo-color-automatico.vue"
     import mostrarVersion from "../components/Ajustes/mostrar-version.vue"
+    import precargarVideo from "../components/Ajustes/precargar-video.vue"
     import credito from "../components/Ajustes/credito.vue"
     import "../components/Ajustes/clean-switch.css"
 
@@ -38,7 +40,13 @@
         name: "Ajustes"
         metaInfo:
             title: "Ajustes"
-        components: { modoColorOscuro, modoColorAutomatico, credito, mostrarVersion }
+        components: {
+            modoColorOscuro
+            modoColorAutomatico
+            credito
+            mostrarVersion
+            precargarVideo
+        }
         data: ->
             esBeta: false
         computed:

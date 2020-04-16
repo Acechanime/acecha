@@ -159,7 +159,8 @@ export const datos = {
         animeActual: {},
         animeActualCargando: false,
         animeActualCargado: false,
-        mostrarVersion: localStorage.getItem("mostrar-version") === "true"
+        mostrarVersion: localStorage.getItem("mostrar-version") === "true",
+	precargarVideo: localStorage.getItem("precargar-video") === "true"
     },
     mutations: {
         actualizarResizeEvent (state, valor) {
@@ -186,7 +187,11 @@ export const datos = {
         setMostrarVersion (state, valor) {
             localStorage.setItem("mostrar-version", valor);
             state.mostrarVersion = valor;
-        }
+        },
+	setPrecargarVideo (state, valor) {
+	    localStorage.setItem("precargar-video", valor.toString());
+	    state.precargarVideo = valor;
+	}
     },
     actions: {
         inicializar,
