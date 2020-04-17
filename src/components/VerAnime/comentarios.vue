@@ -6,20 +6,35 @@
     //
 </template>
 
-<script lang="ls">
+<script lang="coffee">
+    import { servidor } from "../../coffee/variables.coffee"
 
-    module.exports =
+    export default
         name: "comentarios"
         data: ->
             comentarios: []
         computed:
             animeActual: -> @$store.state.datos.animeActual
             epActual:    -> @$store.state.reproductor.epActual
-        methods:
-            cargarComentarios: ->
-                console.log "Cargando :c (#{@animeActual.id}) (#{@epActual.id})"
-        mounted: ->
-            @cargarComentarios()
+        watch:
+            epActual: (nuevo) ->
+                anime_id = nuevo.id
+                ep_id = nuevo.id
+                if anime_id? && ep_id?
+                    console.log "Cargando :c (#{anime_id}) (#{ep_id})"
+                    url = "#{servidor}/animes/#{anime_id}/episodios/#{ep_id}/comentarios"
+                    try
+                        resRaw = await fetch url
+                        if resRaw.ok == true
+                            @comentarios = await resRaw.json()
+                        else
+                            console.error resRaw
+                            throw new Error "Error en la peticion."
+                    catch e
+                        console.error e
+                else
+                    console.log "Aun cargando... #{anime_id} #{ep_id}"
+
 
 #
 </script>
