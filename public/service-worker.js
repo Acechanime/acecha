@@ -1,13 +1,9 @@
-/*
-* Mi propio service worker we v':
-* */
 
 self.addEventListener("install", (event) => {
     // self.skipWaiting();
 
     event.waitUntil(
         caches.open("cache-imagenes").then((cache) => {
-            console.log("Cacheando imagen.");
             return cache.addAll(
                 [
                     "/wp-content/uploads/2019/05/subheader.jpg",
