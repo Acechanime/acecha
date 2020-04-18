@@ -2,15 +2,13 @@
     div.contenedor-ajuste
         div.modo-color(@click="alternarMostrar")
             div.ajuste
-                div.titulo-ajuste Precargar los episodios de los animes
+                div.titulo-ajuste Activar reproductor experimental
                 div.etiqueta-ajuste
-                    span Cuando estés en el reproductor, el episodio
-                    b  {{ precargarVideo? '': 'no' }} se cargará
-                    span  antes de que le des 'play'.
+                    span Puede arreglar errores en Opera Mini, Edge y Firefox.
 
             div.cont-switch
                 label.cl-switch.cl-switch-red
-                    input(type="checkbox" :checked="precargarVideo")
+                    input(type="checkbox" :checked="mostrar")
                     span.switcher(@click.prevent.stop="alternarMostrar")
 
         // div.adicional hola
@@ -21,17 +19,19 @@
 <script lang="coffee">
 
     export default
-        name: "precargar-video"
+        name: "activar-reproductor-experimental"
         computed:
-            precargarVideo: -> @$store.state.datos.precargarVideo
+            mostrar: -> @$store.state.datos.mostrarReproductorExp
         methods:
             alternarMostrar: ->
-                @$store.commit "datos/setPrecargarVideo", !@precargarVideo
+                @$store.commit "datos/setMostrarReproductorExp", !@precargarVideo
 
 #
 </script>
 
 <style scoped lang="sass">
+
+
 
     //
 </style>
