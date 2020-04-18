@@ -6,18 +6,18 @@
                 :cambiarOpcion="cambiarOpcion")
 
         template(v-if="opciones.length !== 0")
-            div#contenedor-anime.contenedor-video-repifr(v-show="posActiva !== 0")
+            video-player.reproductor-repifr-js(v-if="posActiva === 0 && epActual.id && !mostrarReproductorExp"
+                :options="opcionesVideoJs" :key="epActual.id"
+                @play="registrarVista($event)"
+            )
+            acecha-reproductor(v-if="posActiva === 0 && mostrarReproductorExp" :urlVideo="urlVideoEp")
+            div#contenedor-anime.contenedor-video-repifr(v-show="mostrarReproductoresSecundarios")
 
             // video.reproductor(v-if="posActiva === 0 && epActual.id"
             //     controls
             //     :key="epActual.id"
             // )
             //     source(:src="opciones[0][1]" type="video/mp4")
-
-            video-player.reproductor-repifr-js(v-if="posActiva === 0 && epActual.id"
-                :options="opcionesVideoJs" :key="epActual.id"
-                @play="registrarVista($event)"
-            )
 
             // acecha-reproductor
 
@@ -106,12 +106,17 @@
                         ), 150
                         clearInterval intervalo
                 ), 50
-
         computed:
+            mostrarReproductorExp: -> @$store.state.datos.mostrarReproductorExp
+            mostrarReproductoresSecundarios: ->
+                if @mostrarReproductorExp then @posActiva != 0 && @posActiva != 1
+                else @posActiva != 0
             listaEps: -> @$store.state.reproductor.episodios
             epActual: -> @$store.state.reproductor.epActual
-            numEp:    -> @epActual.numero
-            esOva:    -> @epActual.es_ova
+            numEp: -> @epActual.numero
+            esOva: -> @epActual.es_ova
+            idAnimeActual: -> @$store.state.datos.animeActual.id
+            urlVideoEp: -> "#{servidor}/animes/#{@idAnimeActual}/episodios/#{@epActual.id}/stream"
 
             epTexto: -> "./#{if @esOva then 'ova' else 'ep'}"
             epSiguiente: ->
@@ -141,12 +146,17 @@
             opciones: ->
                 opciones = []
 
-                idAnimeActual = @$store.state.datos.animeActual.id
                 if @epActual.id?
-                    opciones.push [
-                        "acecha"
-                        "#{servidor}/animes/#{idAnimeActual}/episodios/#{@epActual.id}/stream"
-                    ]
+                    if @mostrarReproductorExp == true
+                        opciones.push [
+                            "acechaexp"
+                            @urlVideoEp
+                        ]
+                    else
+                        opciones.push [
+                            "acecha"
+                            @urlVideoEp
+                        ]
 
                 if @epActual?.fembed? and @epActual.fembed isnt ""
                     opciones.push ["fembed", @epActual.fembed]

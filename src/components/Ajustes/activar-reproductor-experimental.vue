@@ -2,7 +2,7 @@
     div.contenedor-ajuste
         div.modo-color(@click="alternarMostrar")
             div.ajuste
-                div.titulo-ajuste Activar reproductor experimental
+                div.titulo-ajuste Activar reproductor HTML5
                 div.etiqueta-ajuste
                     span Puede arreglar errores en Opera Mini, Edge y Firefox.
 
@@ -24,7 +24,7 @@
             mostrar: -> @$store.state.datos.mostrarReproductorExp
         methods:
             alternarMostrar: ->
-                @$store.commit "datos/setMostrarReproductorExp", !@precargarVideo
+                @$store.commit "datos/setMostrarReproductorExp", !@mostrar
 
 #
 </script>
