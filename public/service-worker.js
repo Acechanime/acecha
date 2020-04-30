@@ -1,4 +1,8 @@
 
 self.addEventListener("install", () => {
-    console.log("Nuevo service worker -> " + process.env.VUE_APP_VERSION_ACTUAL);
+    console.log("Nuevo service worker -> " + "v4.6.1");
+});
+
+self.addEventListener("fetch", () => {
+    // Requisito para instalar app como pwa.
 });

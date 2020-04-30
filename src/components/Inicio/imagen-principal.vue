@@ -13,7 +13,8 @@
                     div.botones-cuenta(v-if="mostrarBotonesLogin")
                         router-link.boton-inicio-sesion(to="/login/") Inicia Sesión
                         router-link.boton-registro(to="/registro/") Regístrate
-
+                    div.cont-boton-instalacion
+                        button.boton-instalacion Instalar
                     // br
                     // br
                     // br
@@ -51,6 +52,24 @@
 <style scoped lang="sass">
 
     $altoImg: 40rem
+
+    .cont-boton-instalacion
+        margin-top: 1rem
+
+    .boton-instalacion
+        color: var(--texto1)
+        background-color: var(--fondo0)
+        margin: 0.5rem 1rem
+        padding: 0.5rem 0.75rem
+        border-radius: 3px
+        border: none
+        user-select: none
+        text-decoration: none
+        cursor: pointer
+        font:
+            family: "Product Sans", sans-serif
+            size: 1rem
+
 
     .botones-cuenta
         a
