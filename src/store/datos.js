@@ -125,10 +125,7 @@ const inicializar = async ({ commit }) => {
 
             commit("actualizarValores", { clave: "animes", valor: obtenerAnimes(datos) });
 
-            localforage.setItem("animes", datos)
-                .then(() => {
-                    console.log("Almacenado exitosamente.");
-                });
+            localforage.setItem("animes", datos);
 
         }
 
