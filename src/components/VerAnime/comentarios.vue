@@ -1,16 +1,33 @@
 <template lang="pug">
     div.comentarios-cont.contenedor
         h2 Comentarios
-        div Comentario 1
+        div
+            div(v-if="$store.state.usuario.usuarioActual.id")
+                entrada-comentario(
+                    :animeId="animeActual.id? animeActual.id: '-1'"
+                    :epId="epActual.id? epActual.id: '-1'"
+                    :fnAgregarComentario="agregarComentario"
+                )
+            div(v-else)
+                p
+                    router-link(to="/login/") Inicia sesión
+                    |  para comentar.
+        div(v-if="comentarios.length === 0")
+            p No hay comentarios
+        div(v-else)
+            comentario(v-for="(comentario, pos) in comentarios" :key="pos" :comentario="comentario")
 
     //
 </template>
 
 <script lang="coffee">
     import { servidor } from "../../coffee/variables.coffee"
+    import entradaComentario from "./comentarios/entrada-comentario.vue"
+    import comentario from "./comentarios/comentario.vue"
 
     export default
         name: "comentarios"
+        components: { entradaComentario, comentario }
         data: ->
             comentarios: []
         computed:
@@ -21,7 +38,6 @@
                 anime_id = nuevo.id
                 ep_id = nuevo.id
                 if anime_id? && ep_id?
-                    console.log "Cargando :c (#{anime_id}) (#{ep_id})"
                     url = "#{servidor}/animes/#{anime_id}/episodios/#{ep_id}/comentarios"
                     try
                         resRaw = await fetch url
@@ -34,7 +50,9 @@
                         console.error e
                 else
                     console.log "Aun cargando... #{anime_id} #{ep_id}"
-
+        methods:
+            agregarComentario: (comentario) ->
+                @comentarios.push comentario
 
 #
 </script>

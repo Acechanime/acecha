@@ -8,7 +8,7 @@
                     descarga
                 // comentarios.fondo
             div.fondo(v-if="!esMovil")
-                p publicidad
+                publicidad
 
         comentarios
 
