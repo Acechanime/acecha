@@ -57,7 +57,7 @@
                                             alt="Acechanime"
                                     />
                                     <a
-                                            href="https://legacy.acechanime.com/comprar-acecha-premium"
+                                            href="https://www.patreon.com/acechanime"
                                             class="btn btn-primary btn-lg mt-2"
                                     >
                                         Obtener

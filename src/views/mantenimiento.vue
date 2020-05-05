@@ -16,7 +16,7 @@
     export default
         name: "EnConstruccion"
         metaInfo:
-            title: "404"
+            title: "Mantenimiento"
         props:
             titulo:
                 type: String

@@ -125,10 +125,7 @@ const inicializar = async ({ commit }) => {
 
             commit("actualizarValores", { clave: "animes", valor: obtenerAnimes(datos) });
 
-            localforage.setItem("animes", datos)
-                .then(() => {
-                    console.log("Almacenado exitosamente.");
-                });
+            localforage.setItem("animes", datos);
 
         }
 
@@ -159,7 +156,9 @@ export const datos = {
         animeActual: {},
         animeActualCargando: false,
         animeActualCargado: false,
-        mostrarVersion: false
+        mostrarVersion: localStorage.getItem("mostrar-version") === "true",
+        precargarVideo: localStorage.getItem("precargar-video") === "true",
+        mostrarReproductorExp: localStorage.getItem("mostrar-reproductor-exp") === "true"
     },
     mutations: {
         actualizarResizeEvent (state, valor) {
@@ -184,8 +183,16 @@ export const datos = {
             state.animeActualCargado = !!valor
         },
         setMostrarVersion (state, valor) {
-            localStorage.setItem("mostrar-version", valor);
+            localStorage.setItem("mostrar-version", valor.toString());
             state.mostrarVersion = valor;
+        },
+        setPrecargarVideo (state, valor) {
+            localStorage.setItem("precargar-video", valor.toString());
+            state.precargarVideo = valor;
+        },
+        setMostrarReproductorExp (state, valor) {
+            localStorage.setItem("mostrar-reproductor-exp", valor.toString());
+            state.mostrarReproductorExp = valor;
         }
     },
     actions: {

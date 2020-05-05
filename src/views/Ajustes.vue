@@ -6,16 +6,19 @@
             div.modo-color(@click="cambiarColor")
                 div.ajuste
                     div.titulo-ajuste Modo Oscuro
+                    div.adicional Al cambiar el modo se reinician los comentarios de Facebook.
                     // div.etiqueta-ajuste El modo oscuro está {{ etiquetaModoColor }}activado
-                div.ajuste-switch
-                    div
-                        label.cl-switch.cl-switch-red
-                            input(type="checkbox" :checked="$store.state.color.color !== 'color-claro'")
-                            span.switcher(@click.prevent.stop="cambiarColor")
-            div.adicional Al cambiar el modo se reinician los comentarios de Facebook.
+
+                div.cont-switch
+                    label.cl-switch.cl-switch-red
+                        input(type="checkbox" :checked="$store.state.color.color !== 'color-claro'")
+                        span.switcher(@click.prevent.stop="cambiarColor")
+
 
         modo-color-oscuro
         // modo-color-automatico
+        precargar-video
+        activar-reproductor-experimental
         mostrar-version(v-if="!esBeta")
 
         // div.contenedor-ajuste
@@ -31,6 +34,8 @@
     import modoColorOscuro from "../components/Ajustes/modo-color-oscuro.vue"
     import modoColorAutomatico from "../components/Ajustes/modo-color-automatico.vue"
     import mostrarVersion from "../components/Ajustes/mostrar-version.vue"
+    import precargarVideo from "../components/Ajustes/precargar-video.vue"
+    import activarReproductorExperimental from "../components/Ajustes/activar-reproductor-experimental.vue"
     import credito from "../components/Ajustes/credito.vue"
     import "../components/Ajustes/clean-switch.css"
 
@@ -38,7 +43,14 @@
         name: "Ajustes"
         metaInfo:
             title: "Ajustes"
-        components: { modoColorOscuro, modoColorAutomatico, credito, mostrarVersion }
+        components: {
+            modoColorOscuro
+            modoColorAutomatico
+            credito
+            mostrarVersion
+            precargarVideo
+            activarReproductorExperimental
+        }
         data: ->
             esBeta: false
         computed:
@@ -68,34 +80,38 @@
 
 
     .contenedor-ajuste
-        padding: 0.65rem 0
+        padding: 0.8rem 0.25rem
+        // border-bottom: solid 1px rgba(127, 127, 127, 0.58)
 
 
     .modo-color
         display: grid
-        grid-template-columns: auto 40px
+        grid-template-columns: auto 60px
         cursor: pointer
         user-select: none
 
 
+    .cont-switch
+        display: inline-table
+        width: 100%
+        height: 100%
+        text-align: center
+        label
+            display: table-cell
+            vertical-align: middle
+
+
     .titulo-ajuste
-        padding: 0.5rem 0
+        padding-top: 0.5rem
+        padding-bottom: 0.25rem
         font:
             family: Roboto, sans-serif
-            weight: 700
             size: 1rem
 
 
     .etiqueta-ajuste
-        font-size: 0.9rem
-
-
-    .ajuste-switch
-        display: table
-        height: 100%
-        div
-            display: table-cell
-            vertical-align: middle
+        font-size: 0.8rem
+        opacity: 0.75
 
 
     .ajustes

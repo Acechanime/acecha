@@ -42,6 +42,12 @@
         localStorage.setItem("fix-version", "true");
         localStorage.setItem("mostrar-version", "false");
     }
+    const fixLocalStorage = localStorage.getItem("fix-local-storage") === "true";
+    if (!fixLocalStorage) {
+        localStorage.removeItem("animes");
+        localStorage.removeItem("lista-animes");
+        localStorage.setItem("fix-local-storage", "true");
+    }
 </script>
 <div id="app"></div>
 <!-- built files will be auto injected -->
