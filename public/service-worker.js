@@ -1,5 +1,6 @@
 
 self.addEventListener("install", (event) => {
+    console.log("| Service worker version 4.6.3 |");
 
     event.waitUntil(
         caches.open("cache-imagenes").then((cache) => {
