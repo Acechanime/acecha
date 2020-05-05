@@ -45,9 +45,11 @@
                 listaAnimes = @listaAnimesEmision
                 diaActual = @diaActual - 1
 
-                if listaAnimes? and diaActual isnt -1
+                if listaAnimes? && diaActual != -1
                     listaAnimes.filter (x) =>
-                        (obtenerDia x.inicio_emision) is diaActual
+                        if x.inicio_emision?
+                            (obtenerDia x.inicio_emision) == diaActual
+                        else false
 
                 else listaAnimes
 
