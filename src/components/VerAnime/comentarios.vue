@@ -54,7 +54,7 @@
                 else
                     console.log "Aun cargando... #{anime_id} #{ep_id}"
             agregarComentario: (comentario) ->
-                @comentarios.push comentario
+                @comentarios.unshift comentario
         mounted: ->
             @cargarComentarios()
 

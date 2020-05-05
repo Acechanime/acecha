@@ -21,7 +21,9 @@
 
                 minutos = Math.round(diferencia / 60000)
 
-                if minutos < 60
+                if minutos <= 1
+                    "Ahora mismo"
+                else if minutos < 60
                     "Hace #{ minutos } minutos"
                 else if minutos < 1440
                     "Hace #{ Math.round(minutos / 60) } horas"

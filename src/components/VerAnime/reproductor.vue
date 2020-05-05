@@ -39,20 +39,18 @@
 
         div.controles2-repifr
             div.mizq-repifr
-                router-link.boton-repifr.boton-repifr--eps(:to="epAnterior"
-                    :class="epAnterior === ''? 'boton--desactivado': ''"
-                )
+                router-link.boton-repifr.boton-repifr--eps(:to="epAnterior" v-if="epAnterior !== ''")
                     i.material-icons chevron_left
                     span.ocultarMovil-repifr Anterior
+                span(v-else)
             div.mcentro-repifr
                 router-link.boton-repifr.boton-repifr--ir(to="./")
                     span Ver capítulos
             div.mder-repifr
-                router-link.boton-repifr.boton-repifr--eps(:to="epSiguiente"
-                    :class="epSiguiente === ''? 'boton--desactivado': ''"
-                )
+                router-link.boton-repifr.boton-repifr--eps(:to="epSiguiente" v-if="epSiguiente !== ''")
                     span.ocultarMovil-repifr Siguiente
                     i.material-icons chevron_right
+                span(v-else)
 
     //
 </template>
@@ -231,9 +229,10 @@
     #contenedor-anime
         border-radius: 0 5px 5px 5px
 
+
     .controles2-repifr
         display: grid
-        grid-template-columns: auto auto auto
+        grid-template-columns: calc((100% - 9rem) / 2) 9rem calc((100% - 9rem) / 2)
         .mizq-repifr
             text-align: left
         .mcentro-repifr
@@ -242,6 +241,7 @@
                 text-decoration: none !important
         .mder-repifr
             text-align: right
+
 
     .boton-repifr
         display: inline-table
@@ -262,10 +262,10 @@
             vertical-align: middle
             font-size: 15px
 
-    .boton--desactivado-repifr
+
+    .boton--desactivado
         background-color: #dbdbdb !important
         color: #767676
-
 
 
     .boton-repifr--eps
@@ -274,6 +274,7 @@
         text-decoration: none
         &:hover
             background-color: #c75857
+
 
     .boton-repifr--ir
         background-color: #d93e3c
@@ -294,6 +295,7 @@
             left: 0
             width: 100%
             height: 100%
+
 
     .opciones-repifr
         list-style-type: none
