@@ -34,9 +34,12 @@
             animeActual: -> @$store.state.datos.animeActual
             epActual:    -> @$store.state.reproductor.epActual
         watch:
-            epActual: (nuevo) ->
-                anime_id = nuevo.id
-                ep_id = nuevo.id
+            epActual: ->
+                @cargarComentarios()
+        methods:
+            cargarComentarios: ->
+                anime_id = @animeActual.id
+                ep_id = @epActual.id
                 if anime_id? && ep_id?
                     url = "#{servidor}/animes/#{anime_id}/episodios/#{ep_id}/comentarios"
                     try
@@ -50,9 +53,11 @@
                         console.error e
                 else
                     console.log "Aun cargando... #{anime_id} #{ep_id}"
-        methods:
             agregarComentario: (comentario) ->
                 @comentarios.push comentario
+        mounted: ->
+            @cargarComentarios()
+
 
 #
 </script>
@@ -63,7 +68,7 @@
     .comentarios-cont
         @extend %caja-textos
         color: var(--texto1)
-        font-family: "JetBrains Mono", monospace
+        font-family: Roboto, sans-serif
         margin-top: 2rem
         margin-bottom: 2rem
 
