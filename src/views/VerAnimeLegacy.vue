@@ -108,7 +108,7 @@
 
 
     @media only screen and (max-width: 780px)
-        .cont
+        .cont-anime-inner
             grid-template-columns: none !important
 
 

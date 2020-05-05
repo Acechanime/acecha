@@ -63,7 +63,7 @@
     .comentarios-cont
         @extend %caja-textos
         color: var(--texto1)
-        font-family: "JetBrains Mono", Roboto, sans-serif
+        font-family: "JetBrains Mono", monospace
         margin-top: 2rem
         margin-bottom: 2rem
 
