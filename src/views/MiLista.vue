@@ -1,7 +1,7 @@
 <template lang="pug">
     div
         div.separador
-        h2 Aquí algun dia habrá una lista de animes...
+        h2 En construcción...
 
 
     //

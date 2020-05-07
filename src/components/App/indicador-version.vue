@@ -1,6 +1,6 @@
 <template lang="pug">
     div.beta(v-if="mostrarVersion || esBeta")
-        span v 4.7.3{{ esBeta? '-beta': '' }}
+        span v 4.8.0{{ esBeta? '-beta': '' }}
 
     //
 </template>
