@@ -150,6 +150,11 @@ const router = new Router({
             component: () => import("./views/Animes.vue")
         },
         {
+            path: "/mi-lista/",
+            name: "MiLista",
+            component: () => import("./views/MiLista.vue")
+        },
+        {
             path: "/:anime/",
             name: "Anime",
             component: () => import("./views/Anime.vue"),

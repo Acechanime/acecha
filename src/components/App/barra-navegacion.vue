@@ -9,8 +9,8 @@
                 ul.items
                     anime
                     // tips
-                    comunidad
                     mi-experiencia
+                    comunidad
                     buscador
 
                 router-link.imagen_usuario(to="/mi-cuenta/")
