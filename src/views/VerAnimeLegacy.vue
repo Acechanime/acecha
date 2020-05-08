@@ -5,7 +5,7 @@
                 div.fondo
                     h3.label_episodio {{ etiqueta }}
                     reproductor
-                    descarga
+                    // descarga
                 // comentarios.fondo
             div.fondo(v-if="!esMovil")
                 publicidad

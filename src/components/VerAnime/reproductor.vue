@@ -27,7 +27,6 @@
             //     v-video-player:myVideoPlayer="opcionesVideoJs"
             // )
 
-            br
         template(v-else-if="opciones.length === 0 && !epActual.id")
             br
             p Recuperando los servidores...
@@ -37,7 +36,13 @@
             p No hay servidores disponibles.
             br
 
-        div.controles2-repifr
+        controles(
+            :listaEps="listaEps"
+            :epActual="epActual"
+            :numEp="numEp? numEp: -1"
+            :esOva="!!esOva"
+        )
+        // div.controles2-repifr
             div.mizq-repifr
                 router-link.boton-repifr.boton-repifr--eps(:to="epAnterior" v-if="epAnterior !== ''")
                     i.material-icons chevron_left
@@ -58,6 +63,7 @@
 <script lang="coffee">
     import opcion from "./opcion.vue"
     import acechaReproductor from "./acecha-reproductor.vue"
+    import controles from "./reproductor/controles.vue"
     import 'video.js/dist/video-js.css'
     import { impr, servidor } from "../../coffee/variables.coffee"
     import { videoPlayer } from 'vue-video-player'
@@ -73,7 +79,7 @@
 
     export default
         name: "reproductor"
-        components: { opcion, videoPlayer, acechaReproductor }
+        components: { opcion, videoPlayer, acechaReproductor, controles }
         data: ->
             posActiva: 0
             videoIniciado: false
@@ -115,32 +121,6 @@
             esOva: -> @epActual.es_ova
             idAnimeActual: -> @$store.state.datos.animeActual.id
             urlVideoEp: -> "#{servidor}/animes/#{@idAnimeActual}/episodios/#{@epActual.id}/stream"
-
-            epTexto: -> "./#{if @esOva then 'ova' else 'ep'}"
-            epSiguiente: ->
-                numEpActual = @numEp
-                esOva = @esOva
-
-                existeEpSiguiente = @listaEps.find (a) =>
-                    (a.numero == numEpActual + 1) && (a.es_ova == esOva)
-
-                if existeEpSiguiente?
-                    @epTexto + "#{numEpActual + 1}"
-                else
-                    ""
-
-            epAnterior: ->
-                numEpActual = @numEp
-                esOva = @esOva
-
-                existeEpAnterior = @listaEps.find (a) =>
-                    (a.numero == numEpActual - 1) && (a.es_ova == esOva)
-
-                if existeEpAnterior?
-                    @epTexto + "#{numEpActual - 1}"
-                else
-                    ""
-
             opciones: ->
                 opciones = []
 

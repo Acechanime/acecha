@@ -1,21 +1,22 @@
 <template lang="pug">
-    div.comentarios-cont.contenedor
-        h2 Comentarios
-        div
-            div(v-if="$store.state.usuario.usuarioActual.id")
-                entrada-comentario(
-                    :animeId="animeActual.id? animeActual.id: '-1'"
-                    :epId="epActual.id? epActual.id: '-1'"
-                    :fnAgregarComentario="agregarComentario"
-                )
+    div.top-cont
+        div.comentarios-cont.contenedor
+            h2 Comentarios
+            div
+                div(v-if="$store.state.usuario.usuarioActual.id")
+                    entrada-comentario(
+                        :animeId="animeActual.id? animeActual.id: '-1'"
+                        :epId="epActual.id? epActual.id: '-1'"
+                        :fnAgregarComentario="agregarComentario"
+                    )
+                div(v-else)
+                    p
+                        router-link(to="/login/") Inicia sesión
+                        |  para comentar.
+            div(v-if="comentarios.length === 0")
+                p No hay comentarios
             div(v-else)
-                p
-                    router-link(to="/login/") Inicia sesión
-                    |  para comentar.
-        div(v-if="comentarios.length === 0")
-            p No hay comentarios
-        div(v-else)
-            comentario(v-for="(comentario, pos) in comentarios" :key="pos" :comentario="comentario")
+                comentario(v-for="(comentario, pos) in comentarios" :key="pos" :comentario="comentario")
 
     //
 </template>
@@ -53,6 +54,7 @@
                         console.error e
                 else
                     console.log "Aun cargando... #{anime_id} #{ep_id}"
+
             agregarComentario: (comentario) ->
                 @comentarios.unshift comentario
         mounted: ->
@@ -65,12 +67,13 @@
 <style scoped lang="sass">
     @import "../../sass/variables"
 
+    .top-cont
+        padding: 2rem 0
+
     .comentarios-cont
         @extend %caja-textos
         color: var(--texto1)
         font-family: Roboto, sans-serif
-        margin-top: 2rem
-        margin-bottom: 2rem
 
 
     //
