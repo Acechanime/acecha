@@ -10,8 +10,8 @@
                     br
                     | Soporte 24/7.
                 div.info-vinculos
-                    router-link(to="/") DMCA
-                    router-link(to="/") Politica de privacidad
+                    router-link(to="/dmca/") DMCA
+                    router-link(to="/politica-privacidad") Politica de privacidad
                 p.info-descripcion
                     | Copyright &copy; 2018 - {{ new Date().getUTCFullYear() }}
             div

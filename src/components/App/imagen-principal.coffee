@@ -11,7 +11,6 @@ comparar = (valores) =>
 
 
 export escogerImg = =>
-    num = Math.random()
     valores = [
         [0.001, "you-kei"]
         [0.01, "gate"]
