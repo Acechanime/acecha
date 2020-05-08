@@ -22,6 +22,9 @@
             epId:
                 type: String
                 required: true
+            parentId:
+                type: String
+                default: ""
             fnAgregarComentario:
                 type: Function
                 required: true
@@ -29,12 +32,15 @@
             tokenUsuarioActual: -> @$store.state.usuario.usuarioActual.token
         methods:
             comentar: ->
+                txtParentId =
+                    if @parentId != "" then ", parent: \"#{ @parentId }\""
+                    else ""
                 resRaw = await fetch "#{servidor}/animes/#{@animeId}/episodios/#{@epId}/comentarios", {
                     method: "POST"
                     headers:
                         Authorization: @tokenUsuarioActual
                         "Content-Type": "application/json"
-                    body: "{ contenido: \"#{@valor}\"}"
+                    body: "{ contenido: \"#{@valor}\"#{ txtParentId }}"
                 }
 
                 if resRaw.ok
