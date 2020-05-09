@@ -3,21 +3,16 @@
         div.comentarios-cont.contenedor
             h2 Comentarios
             div
-                div(v-if="$store.state.usuario.usuarioActual.id")
-                    entrada-comentario(
-                        :animeId="animeActual.id? animeActual.id: '-1'"
-                        :epId="epActual.id? epActual.id: '-1'"
-                        :fnAgregarComentario="agregarComentario"
-                    )
-                div(v-else)
-                    p
-                        router-link(to="/login/") Inicia sesión
-                        |  para comentar.
+                entrada-comentario(
+                    :animeId="animeActual.id? animeActual.id: '-1'"
+                    :epId="epActual.id? epActual.id: '-1'"
+                    :fnAgregarComentario="agregarComentario"
+                )
             div(v-if="comentarios.length === 0")
                 p No hay comentarios
             div(v-else)
-                comentario(v-for="(comentario, pos) in comentarios"
-                    :key="pos"
+                comentario(v-for="(comentario, id) in comentarios"
+                    :key="id"
                     :comentario="comentario"
                     :animeId="animeActual.id? animeActual.id: '-1'"
                     :epId="epActual.id? epActual.id: '-1'"
@@ -35,7 +30,7 @@
         name: "comentarios"
         components: { entradaComentario, comentario }
         data: ->
-            comentarios: []
+            comentarios: {}
         computed:
             animeActual: -> @$store.state.datos.animeActual
             epActual:    -> @$store.state.reproductor.epActual
@@ -52,9 +47,13 @@
 
                 objRes = {}
 
+                console.log comentarios
+                console.log objMaestro
+
                 for id, coment of comentarios
-                    if coment.parent?
+                    if coment.parent? && objMaestro[coment.parent]?
                         objPadre = objMaestro[coment.parent]
+
                         if objPadre.children?
                             objPadre.children.push coment
                         else
@@ -62,10 +61,7 @@
                     else
                         objRes[id] = coment
 
-                # TODO: Transformar este obj en arr y asignarlo.
-                console.log objRes
-
-                @comentarios = comentarios
+                @comentarios = objRes
             cargarComentarios: ->
                 anime_id = @animeActual.id
                 ep_id = @epActual.id

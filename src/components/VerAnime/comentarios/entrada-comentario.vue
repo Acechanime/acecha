@@ -1,7 +1,12 @@
 <template lang="pug">
-    div.cont-entrada-comentario
-        textarea-auto(placeholder="Ingresa un comentario" v-model="valor")
-        button.boton-comentar(@click="comentar") Comentar
+    div
+        div.cont-entrada-comentario(v-if="$store.state.usuario.usuarioActual.id")
+            textarea-auto(placeholder="Ingresa un comentario" v-model="valor")
+            button.boton-comentar(@click="comentar") Comentar
+        div(v-else)
+            p
+                router-link(to="/login/") Inicia sesión
+                |  para comentar.
 
     //
 </template>

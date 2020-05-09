@@ -5,12 +5,25 @@
         div.botones
             i.material-icons.boton-reply(title="Responder" @click="cambiarEstadoMostrarPanelRespuesta")
                 | reply
-        div(v-if="mostrarPanelRespuesta")
-            entrada-comentario(
+        div.anidado
+            div(v-if="mostrarPanelRespuesta")
+                entrada-comentario(
+                    :animeId="animeId"
+                    :epId="epId"
+                    :parentId="comentarioId"
+                    :fnAgregarComentario="agregarComentario"
+                )
+            comentario(v-for="(subcomentario, pos) in comentariosAdicionales"
+                :key="subcomentario.id"
+                :comentario="subcomentario"
                 :animeId="animeId"
                 :epId="epId"
-                :parentId="comentarioId"
-                :fnAgregarComentario="metodoVacio"
+            )
+            comentario(v-for="(subcomentario, pos) in comentario.children"
+                :key="subcomentario.id"
+                :comentario="subcomentario"
+                :animeId="animeId"
+                :epId="epId"
             )
 
     //
@@ -24,6 +37,7 @@
         components: { entradaComentario }
         data: ->
             mostrarPanelRespuesta: false
+            comentariosAdicionales: []
         props:
             comentario:
                 type: Object
@@ -50,16 +64,24 @@
                     "Hace #{ Math.round(minutos / 60) } horas"
                 else
                     "Hace #{ Math.round(minutos / 24 / 60) } dias"
+            establecerChildren: ->
+                @children = @comentario.children ? []
         methods:
             cambiarEstadoMostrarPanelRespuesta: -> @mostrarPanelRespuesta = !@mostrarPanelRespuesta
-            metodoVacio: (comentario) ->
-                console.log comentario
+            agregarComentario: (comentario) ->
+                @comentariosAdicionales.unshift comentario
+                @mostrarPanelRespuesta = false
 
 
 #
 </script>
 
 <style scoped lang="sass">
+
+    .anidado
+        padding-left: 1rem
+        border-left: solid 1px var(--borde)
+
 
     .boton-reply
         display: inline-block
