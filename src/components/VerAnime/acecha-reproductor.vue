@@ -1,5 +1,8 @@
 <template lang="pug">
-    div.acecha-reproductor
+    video-player#content_video(
+        :options="opciones"
+        @ready="playerReady"
+    )
         // video.acecha-rep(:preload="precargarVideo" controls)
             source(:src="urlVideo" type="video/mp4")
             p Tu navegador no soporta videos HTML. Usa un navegador actualizado, por favor.
@@ -14,9 +17,7 @@
 </template>
 
 <script lang="coffee">
-    import videojs from "video.js"
     import { cargarAds } from "../../assets/ads/ads.js"
-    import "../../assets/ads/videojs.ima.css"
 
     export default
         name: "acecha-reproductor"
@@ -26,6 +27,16 @@
                 required: true
         computed:
             precargarVideo: -> if @$store.state.datos.precargarVideo then "auto" else "metadata"
+            opciones: ->
+                controls: true
+                preload: @precargarVideo
+                sources: [{
+                    type: "video/mp4"
+                    src: @urlVideo
+                }]
+                fluid: true
+                language: "es"
+                notSupportedMessage: "Este episodio no está soportado. Escribenos a nuestro Discord."
         methods:
             montarElemVideo: ->
                 elemVideo = document.createElement "video"
@@ -41,9 +52,11 @@
 
                 elemVideo.appendChild sourceElem
                 @$el.appendChild elemVideo
+            playerReady: (player) ->
+                cargarAds player
         mounted: ->
-            @montarElemVideo()
-            cargarAds videojs
+            # @montarElemVideo()
+            # cargarAds videojs
 
 
 #

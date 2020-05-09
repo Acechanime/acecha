@@ -66,7 +66,6 @@
     import controles from "./reproductor/controles.vue"
     import 'video.js/dist/video-js.css'
     import { impr, servidor } from "../../coffee/variables.coffee"
-    import { videoPlayer } from 'vue-video-player'
 
     obtenerIframe = => new Promise (resolve) =>
         intervalo = setInterval (=>
@@ -79,7 +78,7 @@
 
     export default
         name: "reproductor"
-        components: { opcion, videoPlayer, acechaReproductor, controles }
+        components: { opcion, acechaReproductor, controles }
         data: ->
             posActiva: 0
             videoIniciado: false

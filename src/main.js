@@ -8,8 +8,17 @@ import "./sass/colores.sass"
 import VueGtag from "vue-gtag"
 import VueMeta from "vue-meta"
 
+// Video.js y publicidad para video.js
+import VueVideoPlayer from "vue-video-player";
+import 'videojs-contrib-ads';
+import "video.js/dist/video-js.min.css"
+import "videojs-ima/dist/videojs.ima.css"
+import 'videojs-ima';
+
+
 Vue.config.productionTip = false;
 
+Vue.use(VueVideoPlayer);
 
 Vue.use(VueGtag, {
     config: {
