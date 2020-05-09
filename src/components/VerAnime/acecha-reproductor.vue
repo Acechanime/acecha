@@ -1,5 +1,6 @@
 <template lang="pug">
     video-player#content_video(
+        v-show="mostrarReproductor"
         :options="opciones"
         @ready="playerReady"
     )
@@ -21,6 +22,8 @@
 
     export default
         name: "acecha-reproductor"
+        data: ->
+            mostrarReproductor: false
         props:
             urlVideo:
                 type: String
@@ -37,6 +40,7 @@
                 fluid: true
                 language: "es"
                 notSupportedMessage: "Este episodio no está soportado. Escribenos a nuestro Discord."
+            estiloRep: -> if @ocultarReproductor then "display: none;" else ""
         methods:
             montarElemVideo: ->
                 elemVideo = document.createElement "video"
@@ -53,7 +57,11 @@
                 elemVideo.appendChild sourceElem
                 @$el.appendChild elemVideo
             playerReady: (player) ->
+                vm = this
                 cargarAds player
+                setTimeout (=>
+                    vm.mostrarReproductor = true
+                ), 1000
         mounted: ->
             # @montarElemVideo()
             # cargarAds videojs
