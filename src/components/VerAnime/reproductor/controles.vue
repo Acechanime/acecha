@@ -8,7 +8,7 @@
                     i.material-icons.sep list
                 router-link(:to="epSiguiente" v-if="epSiguiente !== ''")
                     i.material-icons.sep skip_next
-                i.material-icons.sep done
+                // i.material-icons.sep done
                 i.material-icons.sep(@click="cambiarEstadoPanelDescarga") get_app
 
         div.descarga

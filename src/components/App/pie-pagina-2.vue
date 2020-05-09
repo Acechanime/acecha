@@ -14,12 +14,6 @@
                     router-link(to="/politica-privacidad") Politica de privacidad
                 p.info-descripcion
                     | Copyright &copy; 2018 - {{ new Date().getUTCFullYear() }}
-            div
-                a(href="https://twitter.com/Acechanime" target="_blank")
-                    img.img-contacto(
-                        src="https://legacy.acechanime.com/wp-content/uploads/2019/05/twitter-300x264.png"
-                        alt="Contacto"
-                    )
 
     //
 </template>
@@ -44,7 +38,7 @@
 
     .cont-pie-pagina-dos
         display: grid
-        grid-template-columns: 5rem auto 5rem
+        grid-template-columns: 5rem auto
         grid-column-gap: 3rem
 
 

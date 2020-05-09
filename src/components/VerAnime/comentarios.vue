@@ -43,6 +43,29 @@
             epActual: ->
                 @cargarComentarios()
         methods:
+            organizarComentarios: (comentarios) ->
+
+                objMaestro = {}
+
+                for coment in comentarios
+                    objMaestro[coment.id] = coment
+
+                objRes = {}
+
+                for id, coment of comentarios
+                    if coment.parent?
+                        objPadre = objMaestro[coment.parent]
+                        if objPadre.children?
+                            objPadre.children.push coment
+                        else
+                            objPadre.children = [coment]
+                    else
+                        objRes[id] = coment
+
+                # TODO: Transformar este obj en arr y asignarlo.
+                console.log objRes
+
+                @comentarios = comentarios
             cargarComentarios: ->
                 anime_id = @animeActual.id
                 ep_id = @epActual.id
@@ -51,7 +74,7 @@
                     try
                         resRaw = await fetch url
                         if resRaw.ok == true
-                            @comentarios = await resRaw.json()
+                            @organizarComentarios (await resRaw.json())
                         else
                             console.error resRaw
                             throw new Error "Error en la peticion."

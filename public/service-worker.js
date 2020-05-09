@@ -1,20 +1,6 @@
 
 self.addEventListener("install", (event) => {
 
-    event.waitUntil(
-        caches.open("cache-imagenes").then((cache) => {
-            return cache.addAll(
-                [
-                    "/wp-content/uploads/2019/05/subheader.jpg",
-                    "https://fonts.googleapis.com/icon?family=Material+Icons",
-                    "/fonts/ProductSansBold.ttf",
-                    "/fonts/ProductSansBoldItalic.ttf",
-                    "/fonts/ProductSansItalic.ttf",
-                    "/fonts/ProductSansRegular.ttf"
-                ]
-            );
-        })
-    );
 });
 
 
