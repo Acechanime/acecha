@@ -6,11 +6,11 @@
                 :cambiarOpcion="cambiarOpcion")
 
         template(v-if="opciones.length !== 0")
-            video-player.reproductor-repifr-js(v-if="posActiva === 0 && epActual.id && !mostrarReproductorExp"
+            video-player.reproductor-repifr-js(v-if="posActiva === 0 && epActual.id"
                 :options="opcionesVideoJs" :key="epActual.id"
                 @play="registrarVista($event)"
             )
-            acecha-reproductor(v-if="posActiva === 0 && mostrarReproductorExp" :urlVideo="urlVideoEp")
+            acecha-reproductor(v-if="posActiva === 1 && mostrarReproductorExp" :urlVideo="urlVideoEp")
             div#contenedor-anime.contenedor-video-repifr(v-show="mostrarReproductoresSecundarios")
 
             // video.reproductor(v-if="posActiva === 0 && epActual.id"
@@ -125,12 +125,12 @@
                 opciones = []
 
                 if @epActual.id?
-                    if @mostrarReproductorExp == true
-                        opciones.push [
-                            "acechaexp"
-                            @urlVideoEp
-                        ]
-                    else
+                    opciones.push [
+                        "acechaexp"
+                        @urlVideoEp
+                    ]
+
+                    if @mostrarReproductorExp
                         opciones.push [
                             "acecha"
                             @urlVideoEp

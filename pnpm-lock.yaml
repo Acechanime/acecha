@@ -31,6 +31,7 @@ devDependencies:
   typeface-open-sans: 0.0.75
   typeface-roboto: 0.0.75
   video.js: 6.13.0
+  videojs-contrib-ads: 6.6.5
   vue-gtag: 1.6.2
   vue-meta: 2.3.3
   vue-template-compiler: 2.6.11
@@ -3419,10 +3420,10 @@ packages:
       entities: 2.0.0
     resolution:
       integrity: sha512-2/xPb3ORsQ42nHYiSunXkDjPLBaEj/xTwUO4B7XCZQTRk7EBtTOPaygh10YAAh2OI1Qrp6NWfpAhzswj0ydt9g==
-  /dom-walk/0.1.1:
+  /dom-walk/0.1.2:
     dev: true
     resolution:
-      integrity: sha1-ZyIm3HTI95mtNTB9+TaroRrNYBg=
+      integrity: sha512-6QvTW9mrGeIegrFXdtQi9pk7O/nSK6lSdXW2eqUspN5LWD7UTji2Fqw5V2YLjBpHEoU9Xl/eUWNpDeZvoyOv2w==
   /domain-browser/1.2.0:
     dev: true
     engines:
@@ -5946,7 +5947,7 @@ packages:
       integrity: sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==
   /min-document/2.19.0:
     dependencies:
-      dom-walk: 0.1.1
+      dom-walk: 0.1.2
     dev: true
     resolution:
       integrity: sha1-e9KC4/WELtKVu3SM3Z8f+iyCRoU=
@@ -9282,6 +9283,16 @@ packages:
     dev: true
     resolution:
       integrity: sha512-AXzHwymhvMpS7c7rF29u0j0/3tSs+v2gIk5UY8OkiDHSEHL7T0+t3hid4JHW7aGvTruUUgwyf4C74cX2RDL1Pw==
+  /videojs-contrib-ads/6.6.5:
+    dependencies:
+      global: 4.4.0
+      video.js: 6.13.0
+    dev: true
+    engines:
+      node: '>=8'
+      npm: '>=5'
+    resolution:
+      integrity: sha512-ONKzojNIxDwaNgUW0/uJuMWmcpENyg8LQP4zwyWe5ca8ImR30Bs7PCy3T9K5EqTX5kq29YlfMppV1u+CayV6HQ==
   /videojs-contrib-hls/5.15.0:
     dependencies:
       aes-decrypter: 1.0.3
@@ -9974,6 +9985,7 @@ specifiers:
   typeface-open-sans: ^0.0.75
   typeface-roboto: ^0.0.75
   video.js: 6.13.0
+  videojs-contrib-ads: ^6.6.5
   vue: ^2.6.10
   vue-gtag: ^1.6.2
   vue-meta: ^2.3.3
