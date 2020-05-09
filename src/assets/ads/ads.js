@@ -9,6 +9,7 @@ export const cargarAds = player => {
     const contentPlayer =  document.getElementById('content_video_html5_api');
     if ((navigator.userAgent.match(/iPad/i) ||
         navigator.userAgent.match(/Android/i)) &&
+        contentPlayer &&
         contentPlayer.hasAttribute('controls')) {
         contentPlayer.removeAttribute('controls');
     }

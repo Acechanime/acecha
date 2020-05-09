@@ -18,10 +18,10 @@ module.exports = {
         }
     },
     pluginOptions: {
-      express: {
-        shouldServeApp: true,
-        serverDir: './srv'
-      }
+        express: {
+            shouldServeApp: true,
+            serverDir: './srv'
+        }
     },
     productionSourceMap: false,
     pwa: {
