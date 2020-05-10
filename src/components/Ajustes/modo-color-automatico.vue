@@ -19,10 +19,10 @@
     //
 </template>
 
-<script lang="ls">
-    VueTimePicker = require "vue2-timepicker/src/vue-timepicker.vue"
+<script lang="coffee">
+    import VueTimePicker from "vue2-timepicker/src/vue-timepicker.vue"
 
-    strASegundos = (horaStr) ~>
+    strASegundos = (horaStr) =>
         [_, horas, minutos, ampm] = /(\d\d):(\d\d)\s(\w\w)/.exec horaStr
         segundosHoras =
             if horas is "12" then 0
@@ -33,7 +33,7 @@
         segundosHoras + segundosMinutos + (if ampm is "pm" then 43200 else 0)
 
 
-    segundosAStr = (segundos) ~>
+    segundosAStr = (segundos) =>
         ampm = "am"
         if segundos >= 43200
             ampm = "pm"
@@ -52,7 +52,7 @@
         "#{horas}:#{minutos} #{ampm}"
 
 
-    module.exports =
+    export default
         name: "modo-color-automatico"
         components: { VueTimePicker }
         data: ->

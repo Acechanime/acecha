@@ -86,9 +86,6 @@
 
 <style scoped lang="sass">
 
-    .controles
-
-
 
     .cont-controles
         display: inline-block

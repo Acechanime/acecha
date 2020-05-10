@@ -5,10 +5,6 @@ module.exports = {
                 {
                     test: /\.coffee$/,
                     loader: 'coffee-loader',
-                },
-                {
-                    test: /\.ls$/,
-                    loader: "6du-livescript-loader"
                 }
             ]
         },
@@ -17,17 +13,5 @@ module.exports = {
             disableHostCheck: true
         }
     },
-    pluginOptions: {
-        express: {
-            shouldServeApp: true,
-            serverDir: './srv'
-        }
-    },
-    productionSourceMap: false,
-    pwa: {
-        workboxPluginMode: "InjectManifest",
-        workboxOptions: {
-            swSrc: __dirname + "/public/service-worker.js"
-        }
-    }
+    productionSourceMap: false
 };
