@@ -1,6 +1,6 @@
 
 const cambiarEsquemaColor = color => {
-    const clases = document.body.classList;
+    const clases = document.documentElement.classList;
 
     bucle: for (const pos in clases) {
         if (clases.hasOwnProperty(pos)) {

@@ -6,6 +6,12 @@
                 width="12px")
         ul#sub-menu-experiencia.sub-menu-barra(:style="estilosLista")
             li.menu-item
+                router-link(to="/mi-lista/") Mi lista
+                    img.emoji(draggable="false"
+                        alt="🔱"
+                        src="/img/bicons/heart.svg"
+                        width="12px")
+            li.menu-item
                 router-link(to="/acecha-premium/") Acecha premium
                     img.emoji(draggable="false"
                         alt="🔱"

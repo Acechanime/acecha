@@ -5,10 +5,10 @@
                 div.fondo
                     h3.label_episodio {{ etiqueta }}
                     reproductor
-                    descarga
+                    // descarga
                 // comentarios.fondo
             div.fondo(v-if="!esMovil")
-                p publicidad
+                publicidad
 
         comentarios
 
@@ -108,7 +108,7 @@
 
 
     @media only screen and (max-width: 780px)
-        .cont
+        .cont-anime-inner
             grid-template-columns: none !important
 
 

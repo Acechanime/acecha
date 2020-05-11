@@ -1,15 +1,18 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
+import router from './router/index.js'
 import store from './store/store.coffee'
-import './registerServiceWorker'
 import "./sass/global.sass"
 import "./sass/colores.sass"
 import VueGtag from "vue-gtag"
 import VueMeta from "vue-meta"
 
+// Video.js
+import VueVideoPlayer from "vue-video-player";
+
 Vue.config.productionTip = false;
 
+Vue.use(VueVideoPlayer);
 
 Vue.use(VueGtag, {
     config: {
