@@ -1,5 +1,6 @@
 <template>
     <section class="content">
+        <div class="separador"></div>
         <main class="main section the-page">
             <div class="main__inner wrap">
                 <div class="essence loop loop--page">
