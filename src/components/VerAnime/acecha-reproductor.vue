@@ -1,18 +1,6 @@
 <template lang="pug">
-    video-player#content_video(
-        v-show="mostrarReproductor"
-        :options="opciones"
-        @ready="playerReady"
-    )
-        // video.acecha-rep(:preload="precargarVideo" controls)
-            source(:src="urlVideo" type="video/mp4")
-            p Tu navegador no soporta videos HTML. Usa un navegador actualizado, por favor.
-        // video#content_video.video-js.acecha-rep(controls preload="auto" data-setup="{}")
-            source(:src="urlVideo" type='video/mp4')
-            p.vjs-no-js
-                | To view this video please enable JavaScript, and consider upgrading to a web browser that
-                a(href="http://videojs.com/html5-video-support/" target="_blank") supports HTML5 video
-
+    div
+        p Cargando... {{ anchoContenedor }}
 
     //
 </template>
@@ -23,14 +11,14 @@
     export default
         name: "acecha-reproductor"
         data: ->
-            mostrarReproductor: false
+            anchoContenedor: -1
         props:
             urlVideo:
                 type: String
                 required: true
         computed:
             precargarVideo: -> if @$store.state.datos.precargarVideo then "auto" else "metadata"
-            opciones: ->
+            opciones: -> JSON.stringify
                 controls: true
                 preload: @precargarVideo
                 sources: [{
@@ -40,31 +28,43 @@
                 fluid: true
                 language: "es"
                 notSupportedMessage: "Este episodio no está soportado. Escribenos a nuestro Discord."
-            estiloRep: -> if @ocultarReproductor then "display: none;" else ""
+            anchoContenedorG: ->
+                _ = @$store.state.datos.resizeEvent
+                @calcularAnchoContenedor()
+                0
         methods:
             montarElemVideo: ->
                 elemVideo = document.createElement "video"
-                elemVideo.className = "video-js acecha-rep"
+                elemVideo.className = "video-js acecha-rep vjs-default-skin vjs-fluid"
                 elemVideo.id = "content_video"
                 elemVideo.controls = true
                 elemVideo.preload = @precargarVideo
-                elemVideo["data-setup"] = "{}"
+                elemVideo["data-setup"] = "#{ @opciones }"
 
                 sourceElem = document.createElement "source"
                 sourceElem.src = @urlVideo
                 sourceElem.type = "video/mp4"
 
                 elemVideo.appendChild sourceElem
+                @$el.removeChild @$el.firstChild
                 @$el.appendChild elemVideo
-            playerReady: (player) ->
+
+                reproductor = videojs elemVideo
+                cargarAds reproductor
+
+            esperarCargaVideoJs: ->
                 vm = this
-                cargarAds player
-                setTimeout (=>
-                    vm.mostrarReproductor = true
-                ), 1000
+                intervalo = setInterval (=>
+                    if window.videojs? && vm.anchoContenedor != -1
+                        clearInterval intervalo
+                        @montarElemVideo()
+
+                ), 250
+            calcularAnchoContenedor: ->
+                @anchoContenedor = @$el.offsetWidth
         mounted: ->
-            # @montarElemVideo()
-            # cargarAds videojs
+            @calcularAnchoContenedor()
+            @esperarCargaVideoJs()
 
 
 #
@@ -78,9 +78,7 @@
 
     .acecha-rep
         width: 100%
-        height: auto
-        video
-            width: 100% !important
+        .video-js
             height: auto !important
 
     

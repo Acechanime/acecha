@@ -23,7 +23,7 @@ export const cargarAds = player => {
     player.one(startEvent, function() {
         player.ima.initializeAdDisplayContainer();
         player.ima.requestAds();
-        player.play();
+        // player.play();
     });
 };
 
