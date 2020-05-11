@@ -50,6 +50,9 @@
                 @$el.appendChild elemVideo
 
                 reproductor = videojs elemVideo
+                reproductor.one "readyforpreroll", () =>
+                    console.log "Listo para el pre-roll"
+
                 cargarAds reproductor
 
             esperarCargaVideoJs: ->
