@@ -38,6 +38,7 @@
             epActual: ->
                 @cargarComentarios()
         methods:
+            # TODO: Arreglar posibles comentarios desordenados debido a usar objetos.
             organizarComentarios: (comentarios) ->
 
                 objMaestro = {}
@@ -45,10 +46,7 @@
                 for coment in comentarios
                     objMaestro[coment.id] = coment
 
-                objRes = {}
-
-                console.log comentarios
-                console.log objMaestro
+                objRes = []
 
                 for id, coment of comentarios
                     if coment.parent? && objMaestro[coment.parent]?
@@ -59,7 +57,7 @@
                         else
                             objPadre.children = [coment]
                     else
-                        objRes[id] = coment
+                        objRes.push coment
 
                 @comentarios = objRes
             cargarComentarios: ->
