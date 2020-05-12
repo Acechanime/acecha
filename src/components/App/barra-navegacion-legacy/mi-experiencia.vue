@@ -5,7 +5,7 @@
                 src="/img/bicons/heart.svg"
                 width="12px")
         ul#sub-menu-experiencia.sub-menu-barra(:style="estilosLista")
-            li.menu-item
+            // li.menu-item
                 router-link(to="/mi-lista/") Mi lista
                     img.emoji(draggable="false"
                         alt="🔱"

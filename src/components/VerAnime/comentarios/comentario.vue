@@ -2,7 +2,7 @@
     div.comentario
         div.autor {{ comentario.autor.nombre }} | {{ fechaDelComentario }}
         div.contenido {{ comentario.contenido }}
-        div.botones
+        // div.botones
             i.material-icons.boton-reply(title="Responder" @click="cambiarEstadoMostrarPanelRespuesta")
                 | reply
         div.anidado
