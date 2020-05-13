@@ -1,5 +1,5 @@
 <template lang="pug">
-    select(:value="value" @input="$emit('input', parseInt($event.target.value))")
+    select#orden(:value="value" @input="$emit('input', parseInt($event.target.value))")
         option(value="-1" selected) Agregado recientemente
         option(value="1") Odenar por nombre
         option(value="2") Ordenar por emision
