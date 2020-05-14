@@ -1,6 +1,6 @@
 <template lang="pug">
     div
-        p Cargando... {{ anchoContenedor }}
+        p Cargando...
 
     //
 </template>
@@ -10,8 +10,6 @@
 
     export default
         name: "acecha-reproductor"
-        data: ->
-            anchoContenedor: -1
         props:
             urlVideo:
                 type: String
@@ -58,15 +56,12 @@
             esperarCargaVideoJs: ->
                 vm = this
                 intervalo = setInterval (=>
-                    if window.videojs? && vm.anchoContenedor != -1
+                    if window.videojs?
                         clearInterval intervalo
                         @montarElemVideo()
 
                 ), 250
-            calcularAnchoContenedor: ->
-                @anchoContenedor = @$el.offsetWidth
         mounted: ->
-            @calcularAnchoContenedor()
             @esperarCargaVideoJs()
 
 

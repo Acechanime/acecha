@@ -6,26 +6,8 @@
                 :cambiarOpcion="cambiarOpcion")
 
         template(v-if="opciones.length !== 0")
-            video-player.reproductor-repifr-js(v-if="posActiva === 0 && epActual.id"
-                :options="opcionesVideoJs" :key="epActual.id"
-                @play="registrarVista($event)"
-            )
-            acecha-reproductor(v-if="posActiva === 1 && mostrarReproductorExp" :urlVideo="urlVideoEp")
+            acecha-reproductor(v-if="posActiva === 0 && epActual.id" :urlVideo="urlVideoEp")
             div#contenedor-anime.contenedor-video-repifr(v-show="mostrarReproductoresSecundarios")
-
-            // video.reproductor(v-if="posActiva === 0 && epActual.id"
-            //     controls
-            //     :key="epActual.id"
-            // )
-            //     source(:src="opciones[0][1]" type="video/mp4")
-
-            // acecha-reproductor
-
-            // div.video-player-box(
-            //     v-if="posActiva === 0 && epActual.id"
-            //     :playsinline="true"
-            //     v-video-player:myVideoPlayer="opcionesVideoJs"
-            // )
 
         template(v-else-if="opciones.length === 0 && !epActual.id")
             br
@@ -42,20 +24,6 @@
             :numEp="numEp? numEp: -1"
             :esOva="!!esOva"
         )
-        // div.controles2-repifr
-            div.mizq-repifr
-                router-link.boton-repifr.boton-repifr--eps(:to="epAnterior" v-if="epAnterior !== ''")
-                    i.material-icons chevron_left
-                    span.ocultarMovil-repifr Anterior
-                span(v-else)
-            div.mcentro-repifr
-                router-link.boton-repifr.boton-repifr--ir(to="./")
-                    span Ver capítulos
-            div.mder-repifr
-                router-link.boton-repifr.boton-repifr--eps(:to="epSiguiente" v-if="epSiguiente !== ''")
-                    span.ocultarMovil-repifr Siguiente
-                    i.material-icons chevron_right
-                span(v-else)
 
     //
 </template>
@@ -125,15 +93,9 @@
 
                 if @epActual.id?
                     opciones.push [
-                        "acechaexp"
+                        "acecha"
                         @urlVideoEp
                     ]
-
-                    if @mostrarReproductorExp
-                        opciones.push [
-                            "acecha"
-                            @urlVideoEp
-                        ]
 
                 if @epActual?.fembed? and @epActual.fembed isnt ""
                     opciones.push ["fembed", @epActual.fembed]
