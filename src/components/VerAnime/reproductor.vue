@@ -6,7 +6,7 @@
                 :cambiarOpcion="cambiarOpcion")
 
         template(v-if="opciones.length !== 0")
-            acecha-reproductor(v-if="posActiva === 0 && epActual.id" :urlVideo="urlVideoEp")
+            acecha-reproductor(v-if="posActiva === 0 && epActual.id" :urlVideo="urlVideoEp" :key="epActual.id")
             video-player.reproductor-repifr-js(v-if="posActiva === 1 && epActual.id"
                 :options="opcionesVideoJs" :key="epActual.id"
                 @play="registrarVista($event)"
