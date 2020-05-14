@@ -74,8 +74,6 @@
                             throw new Error "Error en la peticion."
                     catch e
                         console.error e
-                else
-                    console.log "Aun cargando... #{anime_id} #{ep_id}"
 
             agregarComentario: (comentario) ->
                 @comentarios.unshift comentario

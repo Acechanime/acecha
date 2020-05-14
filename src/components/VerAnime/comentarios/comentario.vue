@@ -1,10 +1,15 @@
 <template lang="pug">
-    div.comentario
+    div.comentario(v-if="!eliminado")
         div.autor {{ comentario.autor.nombre }} | {{ fechaDelComentario }}
         div.contenido {{ comentario.contenido }}
-        // div.botones
+        div.botones
             i.material-icons.boton-reply(title="Responder" @click="cambiarEstadoMostrarPanelRespuesta")
                 | reply
+            i.material-icons.boton-reply(
+                v-if="usuarioActualEsAutor"
+                title="Eliminar" @click="eliminarComentario"
+            )
+                | delete
         div.anidado
             div(v-if="mostrarPanelRespuesta")
                 entrada-comentario(
@@ -31,6 +36,7 @@
 
 <script lang="coffee">
     import entradaComentario from "./entrada-comentario.vue"
+    import { servidor } from "../../../coffee/variables.coffee"
 
     export default
         name: "comentario"
@@ -38,6 +44,7 @@
         data: ->
             mostrarPanelRespuesta: false
             comentariosAdicionales: []
+            eliminado: false
         props:
             comentario:
                 type: Object
@@ -49,6 +56,9 @@
                 type: String
                 required: true
         computed:
+            usuarioActual: -> @$store.state.usuario.usuarioActual
+            usuarioActualEsAutor: -> @comentario?.autor?.id == @usuarioActual?.id
+            tokenUsuarioActual: -> @$store.state.usuario.usuarioActual?.token
             comentarioId: -> @comentario.id
             fechaDelComentario: ->
                 horaActual = new Date().getTime()
@@ -71,6 +81,20 @@
             agregarComentario: (comentario) ->
                 @comentariosAdicionales.unshift comentario
                 @mostrarPanelRespuesta = false
+            eliminarComentario: ->
+                resultado = await fetch "#{servidor}/animes/#{@animeId}/episodios/#{@epId}/comentarios/#{@comentario.id}/",
+                    method: "DELETE"
+                    headers:
+                        "Authorization": @tokenUsuarioActual
+
+                if resultado.ok
+                    console.log "Eliminado."
+                    @eliminado = true
+                else
+                    console.log "Un error..."
+        mounted: ->
+            @eliminado = !(@comentario?.autor?.id?)
+
 
 
 #

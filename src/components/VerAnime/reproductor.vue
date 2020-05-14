@@ -6,7 +6,7 @@
                 :cambiarOpcion="cambiarOpcion")
 
         template(v-if="opciones.length !== 0")
-            acecha-reproductor(v-if="posActiva === 0 && epActual.id" :urlVideo="urlVideoEp")
+            acecha-reproductor(v-if="posActiva === 0 && epActual.id" :urlVideo="urlVideoEp" :key="epActual.id")
             div#contenedor-anime.contenedor-video-repifr(v-show="mostrarReproductoresSecundarios")
 
         template(v-else-if="opciones.length === 0 && !epActual.id")

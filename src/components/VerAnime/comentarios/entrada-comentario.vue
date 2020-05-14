@@ -34,7 +34,7 @@
                 type: Function
                 required: true
         computed:
-            tokenUsuarioActual: -> @$store.state.usuario.usuarioActual.token
+            tokenUsuarioActual: -> @$store.state.usuario.usuarioActual?.token
         methods:
             comentar: ->
                 txtParentId =
