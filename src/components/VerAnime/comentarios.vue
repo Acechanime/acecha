@@ -12,7 +12,7 @@
                 p No hay comentarios
             div(v-else)
                 comentario(v-for="(comentario, id) in comentarios"
-                    :key="id"
+                    :key="comentario.id"
                     :comentario="comentario"
                     :animeId="animeActual.id? animeActual.id: '-1'"
                     :epId="epActual.id? epActual.id: '-1'"
