@@ -1,15 +1,25 @@
 <template lang="pug">
-    div.comentario(v-if="!eliminado")
-        div.autor {{ comentario.autor.nombre }} | {{ fechaDelComentario }}
+    div.comentario
+        div.autor
+            span {{ !eliminado? comentario.autor.nombre: "eliminado" }}
+            span &nbsp;|&nbsp;
+            span {{ fechaDelComentario }}
         div.contenido {{ comentario.contenido }}
         div.botones
-            i.material-icons.boton-reply(title="Responder" @click="cambiarEstadoMostrarPanelRespuesta")
-                | reply
-            i.material-icons.boton-reply(
+            span.texto-opciones.boton-opcion-comentario(@click="cambiarEstadoRespuestas")
+                | {{ !respuestasCargadas? "Ver ": "Ocultar " }} respuestas
+            span.boton-opcion-comentario(v-if="!eliminado" @click="cambiarEstadoMostrarPanelRespuesta")
+                i.material-icons.icono-reply-comentario(title="Responder")
+                    | reply
+                span.texto-opciones Responder
+            span.boton-opcion-comentario(
                 v-if="usuarioActualEsAutor"
-                title="Eliminar" @click="eliminarComentario"
+                @click="eliminarComentario"
             )
-                | delete
+                i.material-icons.icono-reply-comentario(title="Eliminar")
+                    | delete
+                span.texto-opciones Eliminar
+
         div.anidado
             div(v-if="mostrarPanelRespuesta")
                 entrada-comentario(
@@ -18,18 +28,25 @@
                     :parentId="comentarioId"
                     :fnAgregarComentario="agregarComentario"
                 )
-            comentario(v-for="(subcomentario, pos) in comentariosAdicionales"
-                :key="subcomentario.id"
-                :comentario="subcomentario"
-                :animeId="animeId"
-                :epId="epId"
-            )
-            comentario(v-for="(subcomentario, pos) in comentario.children"
-                :key="subcomentario.id"
-                :comentario="subcomentario"
-                :animeId="animeId"
-                :epId="epId"
-            )
+
+            div(v-if="respuestasCargadas")
+                p(v-if="comentariosAdicionales.length === 0")
+                    | No hay respuestas
+
+                template(v-else)
+                    comentario(v-for="subcomentario in comentariosAdicionales"
+                        :key="subcomentario.id"
+                        :comentario="subcomentario"
+                        :animeId="animeId"
+                        :epId="epId"
+                    )
+
+                // comentario(v-for="subcomentario in comentario.children"
+                //     :key="subcomentario.id"
+                //     :comentario="subcomentario"
+                //     :animeId="animeId"
+                //     :epId="epId"
+                // )
 
     //
 </template>
@@ -45,6 +62,7 @@
             mostrarPanelRespuesta: false
             comentariosAdicionales: []
             eliminado: false
+            respuestasCargadas: false
         props:
             comentario:
                 type: Object
@@ -92,6 +110,24 @@
                     @eliminado = true
                 else
                     console.log "Un error..."
+            cambiarEstadoRespuestas: ->
+                vm = this
+                if vm.respuestasCargadas == false
+                    try
+                        rutaPeticios = "#{servidor}/animes/#{vm.animeId}/episodios/#{vm.epId}/comentarios/" +
+                            "#{vm.comentario.id}/respuestas"
+                        respuesta = await fetch rutaPeticios
+                        if respuesta.ok
+                            @comentariosAdicionales = await respuesta.json()
+                        else
+                            console.log ":c"
+                    catch e
+                        console.log "Error al recuperar respuestas:"
+                        console.log e
+                    vm.respuestasCargadas = true
+                else
+                    vm.respuestasCargadas = false
+
         mounted: ->
             @eliminado = !(@comentario?.autor?.id?)
 
@@ -102,15 +138,29 @@
 
 <style scoped lang="sass">
 
+    .texto-opciones
+        font-size: 0.8rem
+
+
     .anidado
         padding-left: 1rem
         border-left: solid 1px var(--borde)
 
 
-    .boton-reply
-        display: inline-block
+    .boton-opcion-comentario
         cursor: pointer
+        margin-right: 1rem
+        color: var(--colorPrincipal)
+        font-weight: bold
+        &:hover
+            text-decoration: underline
+
+
+    .icono-reply-comentario
+        display: inline-block
         font-size: 1rem
+        vertical-align: middle
+        padding-right: 0.25rem
 
 
     .comentario
