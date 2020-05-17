@@ -169,6 +169,7 @@
         margin-right: 1rem
         color: var(--texto1)
         font-weight: bold
+        user-select: none
         opacity: 0.75
         &:hover
             text-decoration: underline
