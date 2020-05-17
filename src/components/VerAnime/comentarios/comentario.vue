@@ -11,7 +11,7 @@
             span.boton-opcion-comentario(v-if="!eliminado" @click="cambiarEstadoMostrarPanelRespuesta")
                 i.material-icons.icono-reply-comentario(title="Responder")
                     | reply
-                span.texto-opciones Responder
+                span.texto-opciones-comentario Responder
             span.boton-opcion-comentario(
                 v-if="usuarioActualEsAutor"
                 @click="eliminarComentario"
@@ -195,6 +195,5 @@
 
         img
             max-height: 8rem
-
     //
 </style>

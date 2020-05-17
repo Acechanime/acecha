@@ -2,7 +2,11 @@
     div
         div.cont-entrada-comentario(v-if="$store.state.usuario.usuarioActual.id")
             textarea-auto(placeholder="Ingresa un comentario" v-model="valor")
-            button.boton-comentar(@click="comentar") Comentar
+
+            button.boton-comentar(@click="comentar" title="Los comentarios soportan formato MD")
+                | Comentar
+                img.img-logo-md(src="@/assets/icons/logo_md.svg")
+
         div(v-else)
             p
                 router-link(to="/login/") Inicia sesión
@@ -64,13 +68,19 @@
 
 <style scoped lang="sass">
 
+    .img-logo-md
+        padding-left: 10px
+        height: 1rem
+        vertical-align: bottom
+
+
     .cont-entrada-comentario
         padding: 1rem 0
 
 
     .boton-comentar
-        background-color: var(--texto1)
-        color: var(--fondo0)
+        background-color: var(--colorPrincipal)
+        color: white
         font:
             family: "Product Sans", Roboto, sans-serif
         border: none
