@@ -1,12 +1,12 @@
 <template lang="pug">
     div.comentario
-        div.autor
+        div.cont-autor-comentario
             span {{ !eliminado? comentario.autor.nombre: "eliminado" }}
             span &nbsp;|&nbsp;
             span {{ fechaDelComentario }}
-        div.contenido {{ comentario.contenido }}
+        div.contenido-comentario-md(v-html="comentarioFormateado")
         div.botones
-            span.texto-opciones.boton-opcion-comentario(@click="cambiarEstadoRespuestas")
+            span.texto-opciones-comentario.boton-opcion-comentario(@click="cambiarEstadoRespuestas")
                 | {{ !respuestasCargadas? "Ver ": "Ocultar " }} respuestas
             span.boton-opcion-comentario(v-if="!eliminado" @click="cambiarEstadoMostrarPanelRespuesta")
                 i.material-icons.icono-reply-comentario(title="Responder")
@@ -18,9 +18,9 @@
             )
                 i.material-icons.icono-reply-comentario(title="Eliminar")
                     | delete
-                span.texto-opciones Eliminar
+                span.texto-opciones-comentario Eliminar
 
-        div.anidado
+        div.anidado-comentario
             div(v-if="mostrarPanelRespuesta")
                 entrada-comentario(
                     :animeId="animeId"
@@ -48,12 +48,16 @@
                 //     :epId="epId"
                 // )
 
+        div.separador-comentario
+
     //
 </template>
 
 <script lang="coffee">
     import entradaComentario from "./entrada-comentario.vue"
     import { servidor } from "../../../coffee/variables.coffee"
+    import DOMPurify from "dompurify"
+    import marked from "marked"
 
     export default
         name: "comentario"
@@ -78,6 +82,11 @@
             usuarioActualEsAutor: -> @comentario?.autor?.id == @usuarioActual?.id
             tokenUsuarioActual: -> @$store.state.usuario.usuarioActual?.token
             comentarioId: -> @comentario.id
+            comentarioFormateado: ->
+                comentario = @comentario.contenido
+                html = marked comentario
+                DOMPurify.sanitize html
+
             fechaDelComentario: ->
                 horaActual = new Date().getTime()
                 diferencia = horaActual - @comentario.creacion
@@ -136,22 +145,31 @@
 #
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 
-    .texto-opciones
+    .separador-comentario
+        height: 1px
+        width: 100%
+        background-color: var(--texto1)
+        opacity: 0.25
+
+
+    .texto-opciones-comentario
         font-size: 0.8rem
 
 
-    .anidado
+    .anidado-comentario
         padding-left: 1rem
         border-left: solid 1px var(--borde)
+        margin-bottom: 0.5rem
 
 
     .boton-opcion-comentario
         cursor: pointer
         margin-right: 1rem
-        color: var(--colorPrincipal)
+        color: var(--texto1)
         font-weight: bold
+        opacity: 0.75
         &:hover
             text-decoration: underline
 
@@ -167,14 +185,16 @@
         margin: 1rem 0
 
 
-    .autor
+    .cont-autor-comentario
         font-size: 0.7rem
-        padding-bottom: 0.5rem
         opacity: 0.8
 
 
-    .contenido
+    .contenido-comentario-md
         font-size: 1rem
+
+        img
+            max-height: 8rem
 
     //
 </style>
