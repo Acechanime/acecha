@@ -2,18 +2,27 @@
     div.busc
         input#nombre(placeholder="Nombre del anime" @input="cambiarNombre($event)" :value="nombre")
 
-        select#generos(v-model="genero")
-            option(value="-1" selected) Cualquier género
-            option(v-for="gen in listaGeneros" :value="gen.id") {{ gen.nombre }}
+        div.contenedor-selector
+            label(for="generos") Género
+            br
+            select#generos(v-model="genero")
+                option(value="-1" selected) Cualquier género
+                option(v-for="gen in listaGeneros" :value="gen.id") {{ gen.nombre }}
 
-        select#emision(v-model.number="estado")
-            option(value="-1" selected) Cualquier estado
-            option(value="0") Terminado
-            option(value="1") En emisión
+        div.contenedor-selector
+            label(for="emision") Estado
+            br
+            select#emision(v-model.number="estado")
+                option(value="-1" selected) Cualquier estado
+                option(value="0") Terminado
+                option(value="1") En emisión
         // select(v-model.number="anyo")
             option(value="-1" selected) Cualquier año
 
-        orden(:cambiarFunOrden="cambiarFunOrden" v-model="orden")
+        div.contenedor-selector
+            label(for="orden") Orden
+            br
+            orden(:cambiarFunOrden="cambiarFunOrden" v-model="orden")
 
     //
 </template>
@@ -110,6 +119,12 @@
 
 <style scoped lang="sass">
     @import "../../sass/variables"
+
+    .contenedor-selector
+        display: inline-block
+        label
+            color: var(--texto1)
+            font-family: "Product Sans", Roboto, sans-serif
 
 
     .busc

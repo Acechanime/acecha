@@ -9,9 +9,9 @@
     //
 </template>
 
-<script lang="ls">
+<script lang="coffee">
 
-    module.exports =
+    export default
         name: "muestra-color"
         props:
             titulo:
@@ -27,6 +27,7 @@
                 @$store.dispatch "color/cambiarModoColorOscuro", @clase
 
 
+#
 </script>
 
 <style scoped lang="sass">

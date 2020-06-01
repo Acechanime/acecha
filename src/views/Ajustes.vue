@@ -18,7 +18,7 @@
         modo-color-oscuro
         // modo-color-automatico
         precargar-video
-        activar-reproductor-experimental
+        // activar-reproductor-experimental
         mostrar-version(v-if="!esBeta")
 
         // div.contenedor-ajuste

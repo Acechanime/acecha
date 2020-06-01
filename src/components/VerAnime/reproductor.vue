@@ -6,28 +6,13 @@
                 :cambiarOpcion="cambiarOpcion")
 
         template(v-if="opciones.length !== 0")
-            video-player.reproductor-repifr-js(v-if="posActiva === 0 && epActual.id && !mostrarReproductorExp"
+            acecha-reproductor(v-if="posActiva === 0 && epActual.id" :urlVideo="urlVideoEp" :key="epActual.id")
+            video-player.reproductor-repifr-js(v-if="posActiva === 1 && epActual.id"
                 :options="opcionesVideoJs" :key="epActual.id"
                 @play="registrarVista($event)"
             )
-            acecha-reproductor(v-if="posActiva === 0 && mostrarReproductorExp" :urlVideo="urlVideoEp")
             div#contenedor-anime.contenedor-video-repifr(v-show="mostrarReproductoresSecundarios")
 
-            // video.reproductor(v-if="posActiva === 0 && epActual.id"
-            //     controls
-            //     :key="epActual.id"
-            // )
-            //     source(:src="opciones[0][1]" type="video/mp4")
-
-            // acecha-reproductor
-
-            // div.video-player-box(
-            //     v-if="posActiva === 0 && epActual.id"
-            //     :playsinline="true"
-            //     v-video-player:myVideoPlayer="opcionesVideoJs"
-            // )
-
-            br
         template(v-else-if="opciones.length === 0 && !epActual.id")
             br
             p Recuperando los servidores...
@@ -37,22 +22,12 @@
             p No hay servidores disponibles.
             br
 
-        div.controles2-repifr
-            div.mizq-repifr
-                router-link.boton-repifr.boton-repifr--eps(:to="epAnterior"
-                    :class="epAnterior === ''? 'boton--desactivado': ''"
-                )
-                    i.material-icons chevron_left
-                    span.ocultarMovil-repifr Anterior
-            div.mcentro-repifr
-                router-link.boton-repifr.boton-repifr--ir(to="./")
-                    span Ver capítulos
-            div.mder-repifr
-                router-link.boton-repifr.boton-repifr--eps(:to="epSiguiente"
-                    :class="epSiguiente === ''? 'boton--desactivado': ''"
-                )
-                    span.ocultarMovil-repifr Siguiente
-                    i.material-icons chevron_right
+        controles(
+            :listaEps="listaEps"
+            :epActual="epActual"
+            :numEp="numEp? numEp: -1"
+            :esOva="!!esOva"
+        )
 
     //
 </template>
@@ -60,9 +35,9 @@
 <script lang="coffee">
     import opcion from "./opcion.vue"
     import acechaReproductor from "./acecha-reproductor.vue"
+    import controles from "./reproductor/controles.vue"
     import 'video.js/dist/video-js.css'
     import { impr, servidor } from "../../coffee/variables.coffee"
-    import { videoPlayer } from 'vue-video-player'
 
     obtenerIframe = => new Promise (resolve) =>
         intervalo = setInterval (=>
@@ -75,7 +50,7 @@
 
     export default
         name: "reproductor"
-        components: { opcion, videoPlayer, acechaReproductor }
+        components: { opcion, acechaReproductor, controles }
         data: ->
             posActiva: 0
             videoIniciado: false
@@ -117,46 +92,19 @@
             esOva: -> @epActual.es_ova
             idAnimeActual: -> @$store.state.datos.animeActual.id
             urlVideoEp: -> "#{servidor}/animes/#{@idAnimeActual}/episodios/#{@epActual.id}/stream"
-
-            epTexto: -> "./#{if @esOva then 'ova' else 'ep'}"
-            epSiguiente: ->
-                numEpActual = @numEp
-                esOva = @esOva
-
-                existeEpSiguiente = @listaEps.find (a) =>
-                    (a.numero == numEpActual + 1) && (a.es_ova == esOva)
-
-                if existeEpSiguiente?
-                    @epTexto + "#{numEpActual + 1}"
-                else
-                    ""
-
-            epAnterior: ->
-                numEpActual = @numEp
-                esOva = @esOva
-
-                existeEpAnterior = @listaEps.find (a) =>
-                    (a.numero == numEpActual - 1) && (a.es_ova == esOva)
-
-                if existeEpAnterior?
-                    @epTexto + "#{numEpActual - 1}"
-                else
-                    ""
-
             opciones: ->
                 opciones = []
 
                 if @epActual.id?
-                    if @mostrarReproductorExp == true
-                        opciones.push [
-                            "acechaexp"
-                            @urlVideoEp
-                        ]
-                    else
-                        opciones.push [
-                            "acecha"
-                            @urlVideoEp
-                        ]
+                    opciones.push [
+                        "acecha1"
+                        @urlVideoEp
+                    ]
+
+                    opciones.push [
+                        "acecha2"
+                        @urlVideoEp
+                    ]
 
                 if @epActual?.fembed? and @epActual.fembed isnt ""
                     opciones.push ["fembed", @epActual.fembed]
@@ -231,9 +179,10 @@
     #contenedor-anime
         border-radius: 0 5px 5px 5px
 
+
     .controles2-repifr
         display: grid
-        grid-template-columns: auto auto auto
+        grid-template-columns: calc((100% - 9rem) / 2) 9rem calc((100% - 9rem) / 2)
         .mizq-repifr
             text-align: left
         .mcentro-repifr
@@ -242,6 +191,7 @@
                 text-decoration: none !important
         .mder-repifr
             text-align: right
+
 
     .boton-repifr
         display: inline-table
@@ -262,10 +212,10 @@
             vertical-align: middle
             font-size: 15px
 
-    .boton--desactivado-repifr
+
+    .boton--desactivado
         background-color: #dbdbdb !important
         color: #767676
-
 
 
     .boton-repifr--eps
@@ -274,6 +224,7 @@
         text-decoration: none
         &:hover
             background-color: #c75857
+
 
     .boton-repifr--ir
         background-color: #d93e3c
@@ -294,6 +245,7 @@
             left: 0
             width: 100%
             height: 100%
+
 
     .opciones-repifr
         list-style-type: none

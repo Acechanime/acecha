@@ -19,10 +19,10 @@
     //
 </template>
 
-<script lang="ls">
-    ``import muestraColor from "./muestra-color.vue";``
+<script lang="coffee">
+    import muestraColor from "./muestra-color.vue"
 
-    obj =
+    export default
         name: "modo-color-oscuro"
         components: { muestraColor }
         data: ->
@@ -39,9 +39,8 @@
                     else
                         [true, "keyboard_arrow_up"]
 
-    ``export default obj;``
 
-
+#
 </script>
 
 <style scoped lang="sass">

@@ -16,14 +16,14 @@
     export default
         name: "EnConstruccion"
         metaInfo:
-            title: "Mantenimiento"
+            title: "404"
         props:
             titulo:
                 type: String
-                default: "La página está en mantenimiento"
+                default: "Esta página no existe."
             texto:
                 type: String
-                default: "Acechadores, estamos en mantenimiento para arreglar los nuevos problemas de la versión que añadimos, la web se pondrá operativa hoy mismo en cuanto se arreglen los problemas ocasionados, disculpen las molestias, ¡gracias por visitarnos!"
+                default: ""
 
 
 #

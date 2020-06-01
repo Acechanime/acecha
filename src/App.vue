@@ -1,7 +1,8 @@
 <template lang="pug">
     div#app
         barra-navegacion
-        router-view
+        div#contenedor-contenido
+            router-view
         pie-pagina
         // ver-anime
         modo-color
@@ -13,7 +14,7 @@
 <script lang="coffee">
     import BarraNavegacion from "./components/App/barra-navegacion.vue"
     import avisoGlobal from "./components/App/aviso-global.vue"
-    import PiePagina from "./components/App/pie-pagina.vue"
+    import PiePagina from "./components/App/pie-pagina-2.vue"
     import pantallaCarga from "./components/App/pantalla-carga.vue"
     import modoColor from "./components/App/modo-color.vue"
     import indicadorVersion from "./components/App/indicador-version.vue"
@@ -47,6 +48,12 @@
 
     #app
         background-color: var(--fondo1)
+
+    #contenedor-contenido
+        position: relative
+        z-index: 2
+        box-shadow: 0 1px 10px -6px rgba(0, 0, 0, 0.42), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 4px 5px -2px rgba(0, 0, 0, 0.1)
+
 
     //
 </style>

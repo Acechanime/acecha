@@ -2,28 +2,29 @@
     div.an
         template(v-if="animeObj.id")
             imagen-anime(:nombre="animeObj.nombre || ''" :img="animeObj.fondo || ''")
-            main.cont.contenedor(v-show="!$store.state.reproductor.activo")
-                div
-                    div.contImg
-                        img.imagen(:src="animeObj.portada")
-                        figcaption.estado(:style="colorEtiqueta") {{ animeObj.en_emision? 'en emision': 'finalizado' }}
-                            span.icon-check-box
-                    redes-sociales
-                    info(:animeObj="animeObj")
-                    mal(:url="animeObj.mal? animeObj.mal: 'err'" v-if="!esMovil")
-                    twitter(v-if="!esMovil")
-                    template(v-if="esMovil")
-                        br
-                        br
-                div
-                    sinopsis(:sinopsis="animeObj.sinopsis" :generos="animeObj.generos")
-                    temporadas(:anime="animeObj")
-                    lista-de-episodios(:anime="animeObj")
+            div(v-show="!$store.state.reproductor.activo")
+                main.cont.contenedor
+                    div
+                        div.contImg
+                            img.imagen(:src="animeObj.portada")
+                            figcaption.estado(:style="colorEtiqueta") {{ animeObj.en_emision? 'en emision': 'finalizado' }}
+                                span.icon-check-box
+                        redes-sociales
+                        info(:animeObj="animeObj")
+                        mal(:url="animeObj.mal? animeObj.mal: 'err'" v-if="!esMovil")
+                        twitter(v-if="!esMovil")
+                        template(v-if="esMovil")
+                            br
+                            br
+                    div
+                        sinopsis(:sinopsis="animeObj.sinopsis" :generos="animeObj.generos")
+                        temporadas(:anime="animeObj")
+                        lista-de-episodios(:anime="animeObj")
 
+                div.contenedor.contenedor_comentarios
+                    comentarios
+                br
             router-view
-            div.contenedor.contenedor_comentarios
-                comentarios
-            br
         template(v-else-if="!$store.state.datos.animeActualCargado")
             div.separador
             p Cargando...
@@ -88,7 +89,6 @@
                 @animeObj = obj
 
         beforeRouteUpdate: (to, from, next) ->
-            console.log "Actualizando?"
             if process.client == false then next()
             if to.params.anime == from.params.anime then next()
 
