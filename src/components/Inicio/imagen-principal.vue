@@ -13,8 +13,6 @@
                     div.botones-cuenta(v-if="mostrarBotonesLogin")
                         router-link.boton-inicio-sesion(to="/login/") Inicia Sesión
                         router-link.boton-registro(to="/registro/") Regístrate
-                    div.cont-boton-instalacion
-                        button.boton-instalacion Instalar
                     // br
                     // br
                     // br

@@ -4,7 +4,7 @@
             img.imagen(:src="anime.nuevo_ep"
                 :alt="'Episodio ' + ep.numero + ' de ' + anime.nombre"
                 :style="'height: ' + alto + 'px'")
-            h3.nombre {{ anime.nombre }} {{ ep.es_ova? 'OVA': '' }} {{ ep.numero }}
+            h3.nombre {{ nombreAnimeCortado }} {{ ep.es_ova? 'OVA': '' }} {{ ep.numero }}
 
     //
 </template>
@@ -44,6 +44,12 @@
                     ep = @ep
                     anime.ruta + (if ep.es_ova then "ova" else "ep") + ep.numero
                 else "./#"
+            nombreAnimeCortado: ->
+                nombre = @anime.nombre
+                if nombre.length > 30
+                    (nombre.substring 0, 30) + "..."
+                else
+                    nombre
             resizeEvent: -> @$store.state.datos.resizeEvent
         watch:
             resizeEvent: ->
@@ -81,8 +87,8 @@
 
     .imagen
         @extend  %imgFlotantes
-        border-radius: 5px
-        box-shadow: 0 0 10px 0 rgba(0,0,0,.5)
+        border-radius: 2px
+        box-shadow: 0 0 5px 0 rgba(0,0,0,.5)
         cursor: pointer
         width: 95%
         height: auto

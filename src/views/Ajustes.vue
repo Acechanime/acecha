@@ -25,7 +25,7 @@
             div.titulo-ajuste Mas ajustes
             div.etiqueta-ajuste Muy pronto...
 
-        credito
+        br
 
     //
 </template>

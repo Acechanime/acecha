@@ -60,6 +60,12 @@
     @media only screen and (max-width: 800px)
         .grid
             grid-template-columns: repeat(2, 1fr)
+            grid-column-gap: 0.5rem
+
+
+    @media only screen and (max-width: 400px)
+        .grid
+            grid-column-gap: 0.25rem
 
     //
 </style>
