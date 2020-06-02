@@ -1,0 +1,7 @@
+4.11.1: |
+  - Ya no se pueden resaltar los números de la paginación en /animes/.
+  - Agregada esta página.
+
+4.11.0: |
+  - Agregada paginación a la lista de animes.
+  - Mejorados los estilos de los episodios de la página principal en movil.

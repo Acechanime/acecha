@@ -10,6 +10,7 @@ dependencies:
   vue-router: 3.1.6
   vuex: 3.3.0_vue@2.6.11
   yaml: 1.9.2
+  yaml-loader: 0.6.0
 devDependencies:
   '@babel/core': 7.9.6
   '@babel/preset-env': 7.9.6_@babel+core@7.9.6
@@ -1861,7 +1862,6 @@ packages:
     resolution:
       integrity: sha512-+hN/Zh2D08Mx65pZ/4g5bsmNiZUuChDiQfTUQ7qJr4/kuopCr88xZsAXv6mBoZEsUI4OuGHlX59qE94K2mMW8Q==
   /big.js/5.2.2:
-    dev: true
     resolution:
       integrity: sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==
   /binary-extensions/1.13.1:
@@ -3295,7 +3295,6 @@ packages:
     resolution:
       integrity: sha1-TapNnbAPmBmIDHn6RXrlsJof04k=
   /emojis-list/3.0.0:
-    dev: true
     engines:
       node: '>= 4'
     resolution:
@@ -4872,7 +4871,6 @@ packages:
   /json5/1.0.1:
     dependencies:
       minimist: 1.2.5
-    dev: true
     hasBin: true
     resolution:
       integrity: sha512-aKS4WQjPenRxiQsC93MNfjx+nbF4PAdYzmd/1JIj8HYzqfbu86beTuNgXDzPknWk0n0uARlyewZo4s++ES36Ow==
@@ -5003,7 +5001,6 @@ packages:
       big.js: 5.2.2
       emojis-list: 3.0.0
       json5: 1.0.1
-    dev: true
     engines:
       node: '>=4.0.0'
     resolution:
@@ -8760,6 +8757,21 @@ packages:
     dev: true
     resolution:
       integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
+  /yaml-loader/0.6.0:
+    dependencies:
+      loader-utils: 1.4.0
+      yaml: 1.10.0
+    dev: false
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha512-1bNiLelumURyj+zvVHOv8Y3dpCri0F2S+DCcmps0pA1zWRLjS+FhZQg4o3aUUDYESh73+pKZNI18bj7stpReow==
+  /yaml/1.10.0:
+    dev: false
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha512-yr2icI4glYaNG+KWONODapy2/jDdMSDnrONSjblABjD9B4Z5LgiircSt8m8sRZFNi08kG9Sm0uSHtEmP3zaEGg==
   /yaml/1.9.2:
     dependencies:
       '@babel/runtime': 7.9.6
@@ -8858,3 +8870,4 @@ specifiers:
   vuejs-datepicker: ^1.6.2
   vuex: ^3.0.1
   yaml: ^1.6.0
+  yaml-loader: ^0.6.0

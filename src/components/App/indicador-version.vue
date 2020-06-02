@@ -1,6 +1,6 @@
 <template lang="pug">
-    div.beta(v-if="mostrarVersion || esBeta")
-        span v 4.11.0{{ esBeta? '-beta': '' }}
+    div.beta(v-if="mostrarVersion || esBeta" @click="irAVersiones")
+        span v 4.11.1{{ esBeta? '-beta': '' }}
 
     //
 </template>
@@ -15,6 +15,9 @@
             mostrarVersion: -> @$store.state.datos.mostrarVersion
         mounted: ->
             @esBeta = (window.location.hostname.search "beta") != -1
+        methods:
+            irAVersiones: ->
+                @$router.push "/versiones/"
 
 #
 </script>
@@ -28,7 +31,7 @@
         z-index: 999
         background-color: rgba(0, 0, 0, 0.5)
         padding: 0.25rem
-
+        cursor: pointer
 
         a, span
             color: white

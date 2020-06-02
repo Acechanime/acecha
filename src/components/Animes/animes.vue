@@ -110,6 +110,7 @@
             text-align: center
             width: 2rem
             cursor: pointer
+            user-select: none
             &.rango
                 cursor: default
             &.activo
