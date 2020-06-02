@@ -5,9 +5,9 @@
 
         p Historial de cambios de Acechanime, a partir de la versión 4.11.0
 
-        div.version(v-for="(txt, numVersion) in versiones")
-            h2 {{ numVersion }}
-            div.notas-version(v-html="procesar(txt)")
+        div.version(v-for="versionData in versiones")
+            h2 {{ versionData.version }}
+            div.notas-version(v-html="procesar(versionData.msg)")
 
         br
         br

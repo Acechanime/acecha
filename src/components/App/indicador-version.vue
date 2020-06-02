@@ -1,16 +1,18 @@
 <template lang="pug">
     div.beta(v-if="mostrarVersion || esBeta" @click="irAVersiones")
-        span v 4.11.1{{ esBeta? '-beta': '' }}
+        span v {{ versiones[0].version }}{{ esBeta? '-beta': '' }}
 
     //
 </template>
 
 <script lang="coffee">
+    import versiones from "../../versiones.yaml"
 
     export default
         name: "indicador-version"
         data: ->
             esBeta: false
+            versiones: versiones
         computed:
             mostrarVersion: -> @$store.state.datos.mostrarVersion
         mounted: ->

@@ -1,7 +1,16 @@
-4.11.1: |
-  - Ya no se pueden resaltar los números de la paginación en /animes/.
-  - Agregada esta página.
+- version: 4.11.2
+  msg: |
+    - Cambiada la forma en la que se almacenan las versiones para centralizar las mismas.
+    - Agregada lógica a /mi-lista/ para que verifique si el usuario ha iniciado sesión.
+    - Agregada lógica al router para que los usuarios que ya iniciaron sesión no puedan ingresar a
+      /login/ o /registro/
 
-4.11.0: |
-  - Agregada paginación a la lista de animes.
-  - Mejorados los estilos de los episodios de la página principal en movil.
+- version: 4.11.1
+  msg: |
+    - Ya no se pueden resaltar los números de la paginación en /animes/.
+    - Agregada esta página.
+
+- version: 4.11.0
+  msg: |
+    - Agregada paginación a la lista de animes.
+    - Mejorados los estilos de los episodios de la página principal en movil.
