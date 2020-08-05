@@ -1,6 +1,6 @@
 <template lang="pug">
     div.aviso-global(v-if="mostrar" @click="desaparecerMensaje")
-        | En unas horas estaremos en mantenimiento, y la página se deshabilitará.
+        | No se subirán animes/episodios nuevos.
 
     //
 </template>
@@ -25,7 +25,7 @@
         bottom: 0
         left: 0
         width: 100%
-        background-color: var(--first-color)
+        background-color: var(--colorPrincipal)
         color: white
         text-align: center
         z-index: 11
